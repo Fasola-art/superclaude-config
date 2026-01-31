@@ -1,0 +1,203 @@
+/**
+ * Claude API 연동 모듈
+ */
+
+import Anthropic from '@anthropic-ai/sdk';
+import { SYSTEM_PROMPT, getPromptForTemplate } from '../core/prompts.js';
+import type { SummaryTemplate, LessonSummary } from '../types/index.js';
+
+// Claude 클라이언트 싱글톤
+let client: Anthropic | null = null;
+
+function getClient(): Anthropic {
+  if (!client) {
+    const apiKey = process.env['ANTHROPIC_API_KEY'];
+    if (!apiKey) {
+      throw new Error(
+        'ANTHROPIC_API_KEY 환경 변수가 설정되지 않았습니다.\n' +
+        '.env 파일에 ANTHROPIC_API_KEY=sk-ant-xxx 형식으로 추가하세요.'
+      );
+    }
+    client = new Anthropic({ apiKey });
+  }
+  return client;
+}
+
+/**
+ * 수업 전사본 요약
+ */
+export async function summarizeLesson(
+  transcript: string,
+  template: SummaryTemplate
+): Promise<string> {
+  const claude = getClient();
+  const prompt = getPromptForTemplate(template).replace('{transcript}', transcript);
+
+  const response = await claude.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 4096,
+    system: SYSTEM_PROMPT,
+    messages: [
+      {
+        role: 'user',
+        content: prompt,
+      },
+    ],
+  });
+
+  // 텍스트 응답 추출
+  const textBlock = response.content.find((block) => block.type === 'text');
+  if (!textBlock || textBlock.type !== 'text') {
+    throw new Error('Claude 응답에서 텍스트를 찾을 수 없습니다.');
+  }
+
+  return textBlock.text;
+}
+
+/**
+ * 전체 요약 (JSON 형식)
+ */
+export async function getFullSummary(transcript: string): Promise<LessonSummary> {
+  const claude = getClient();
+  const prompt = getPromptForTemplate('full').replace('{transcript}', transcript);
+
+  const response = await claude.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 4096,
+    system: SYSTEM_PROMPT,
+    messages: [
+      {
+        role: 'user',
+        content: prompt,
+      },
+    ],
+  });
+
+  const textBlock = response.content.find((block) => block.type === 'text');
+  if (!textBlock || textBlock.type !== 'text') {
+    throw new Error('Claude 응답에서 텍스트를 찾을 수 없습니다.');
+  }
+
+  // JSON 파싱
+  const jsonMatch = textBlock.text.match(/```json\n([\s\S]*?)\n```/);
+  if (!jsonMatch?.[1]) {
+    throw new Error('JSON 형식 응답을 파싱할 수 없습니다.');
+  }
+
+  const parsed = JSON.parse(jsonMatch[1]) as Partial<LessonSummary>;
+
+  return {
+    title: parsed.title ?? '음악 레슨',
+    date: parsed.date ?? new Date().toISOString().split('T')[0] ?? '',
+    overview: parsed.overview ?? '',
+    topics: parsed.topics ?? [],
+    practiceTasks: parsed.practiceTasks ?? [],
+    keyPoints: parsed.keyPoints ?? [],
+    musicTheory: parsed.musicTheory ?? {
+      chords: [],
+      scales: [],
+      progressions: [],
+    },
+    nextLesson: parsed.nextLesson ?? {
+      goals: [],
+      preparation: [],
+    },
+    rawText: transcript,
+  };
+}
+
+/**
+ * 수업 내용에 대해 질문하기
+ */
+export async function askAboutLesson(
+  transcript: string,
+  question: string
+): Promise<string> {
+  const claude = getClient();
+
+  const prompt = `## 컨텍스트
+다음은 음악 수업 녹음 전사본입니다.
+
+## 수업 전사본
+${transcript}
+
+## 질문
+${question}
+
+## 규칙
+- 전사본에 있는 내용만 기반으로 답변
+- 추측하지 말고 "전사본에서 확인되지 않습니다"라고 답변
+- 관련 인용구가 있으면 포함
+- 한국어로 간결하게 답변`;
+
+  const response = await claude.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 1024,
+    system: SYSTEM_PROMPT,
+    messages: [
+      {
+        role: 'user',
+        content: prompt,
+      },
+    ],
+  });
+
+  const textBlock = response.content.find((block) => block.type === 'text');
+  if (!textBlock || textBlock.type !== 'text') {
+    throw new Error('Claude 응답에서 텍스트를 찾을 수 없습니다.');
+  }
+
+  return textBlock.text;
+}
+
+/**
+ * 마인드맵 생성
+ */
+export async function generateMindmap(transcript: string): Promise<string> {
+  const claude = getClient();
+
+  const prompt = `## 작업
+다음 음악 수업 내용을 **Mermaid 마인드맵**으로 변환하세요.
+
+## 출력 형식
+\`\`\`mermaid
+mindmap
+  root((오늘 수업))
+    기본기
+      항목1
+      항목2
+    곡 분석
+      파트1
+      파트2
+    숙제
+      과제1
+\`\`\`
+
+## 규칙
+- 최대 3단계 깊이
+- 각 노드는 간결하게 (5단어 이내)
+
+## 수업 전사본
+${transcript}`;
+
+  const response = await claude.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 1024,
+    system: SYSTEM_PROMPT,
+    messages: [
+      {
+        role: 'user',
+        content: prompt,
+      },
+    ],
+  });
+
+  const textBlock = response.content.find((block) => block.type === 'text');
+  if (!textBlock || textBlock.type !== 'text') {
+    throw new Error('Claude 응답에서 텍스트를 찾을 수 없습니다.');
+  }
+
+  // mermaid 코드 블록 추출
+  const mermaidMatch = textBlock.text.match(/```mermaid\n([\s\S]*?)\n```/);
+  return mermaidMatch?.[1] ?? textBlock.text;
+}

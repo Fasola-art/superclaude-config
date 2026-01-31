@@ -1,0 +1,30 @@
+{
+  "module": "trading",
+  "version": "1.0.0",
+  "enabled": true,
+  "dataSource": {
+    "provider": "yahoo",
+    "apiKey": null,
+    "rateLimit": 5
+  },
+  "defaultTimeframe": "1d",
+  "defaultPeriod": "1y",
+  "indicators": {
+    "sma": { "periods": [20, 50, 200] },
+    "ema": { "periods": [12, 26] },
+    "rsi": { "period": 14 },
+    "macd": { "fast": 12, "slow": 26, "signal": 9 },
+    "bollinger": { "period": 20, "stdDev": 2 }
+  },
+  "backtesting": {
+    "initialCapital": 10000,
+    "commission": 0.001,
+    "slippage": 0.001,
+    "parallelWorkers": 24
+  },
+  "alerts": {
+    "enabled": true,
+    "channels": ["desktop"],
+    "cooldownSeconds": 300
+  }
+}

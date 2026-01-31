@@ -1,0 +1,208 @@
+{
+  "$schema": "https://claude.ai/schemas/mcp.json",
+  "version": "1.0.0",
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/reim/Documents", "/Users/reim/.claude", "/Users/reim/Desktop"],
+      "description": "파일시스템 접근",
+      "enabled": true,
+      "priority": 10
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "description": "지식 그래프 메모리",
+      "enabled": true,
+      "priority": 8
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"],
+      "description": "웹 페이지 가져오기",
+      "enabled": true,
+      "priority": 7,
+      "timeout": 60000,
+      "notes": "타임아웃 해결: npx 캐시 준비 완료, 60초 타임아웃 설정"
+    },
+    "time": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-time"],
+      "description": "시간/타임존 유틸리티",
+      "enabled": true,
+      "priority": 5,
+      "timeout": 30000,
+      "notes": "타임아웃 해결: 경량 서버로 30초 타임아웃 충분"
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "description": "단계별 사고 프로세스",
+      "enabled": true,
+      "priority": 6
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "description": "브라우저 자동화 (Puppeteer)",
+      "enabled": false,
+      "priority": 4,
+      "timeout": 120000,
+      "notes": "비활성 유지: Chromium 다운로드 필요, 필요시 수동 설치 후 활성화. 대안: WebFetch 도구 사용"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "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"
+      },
+      "description": "GitHub 연동",
+      "enabled": true,
+      "priority": 9
+    },
+    "slack": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {
+        "SLACK_BOT_TOKEN": "xoxb-10382355262791-10394831205045-MlIs7EylLrlqg8NHCYYBeeZc",
+        "SLACK_TEAM_ID": "T0AB8AF7QP9"
+      },
+      "description": "Slack 연동 (Fasola-Art)",
+      "enabled": true,
+      "priority": 6
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://reim@localhost:5432/claude_mcp"],
+      "description": "PostgreSQL 연동 (claude_mcp DB)",
+      "enabled": true,
+      "priority": 7
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "BSABwW53C-tFFnpMHO3VYQOWVRVass4"
+      },
+      "description": "Brave 검색",
+      "enabled": true,
+      "priority": 8
+    },
+    "gdrive": {
+      "command": "npx",
+      "args": ["-y", "@isaacphi/mcp-gdrive"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "/Users/reim/.claude/credentials/gcp-oauth.keys.json"
+      },
+      "description": "Google Drive 연동",
+      "enabled": true,
+      "priority": 7
+    },
+    "sentry": {
+      "command": "npx",
+      "args": ["-y", "@sentry/mcp-server"],
+      "env": {
+        "SENTRY_ACCESS_TOKEN": "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"
+      },
+      "description": "Sentry 에러 트래킹",
+      "enabled": true,
+      "priority": 5
+    },
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "mcp-linear"],
+      "env": {
+        "LINEAR_API_KEY": "lin_api_6q87SQZ9eYlCiecpmcByKy8XjGRQt9P861LGCN8z"
+      },
+      "description": "Linear 이슈 트래킹",
+      "enabled": true,
+      "priority": 5
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": {
+        "OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer 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\", \"Notion-Version\": \"2022-06-28\"}"
+      },
+      "description": "Notion 연동",
+      "enabled": true,
+      "priority": 5
+    },
+    "exa": {
+      "command": "npx",
+      "args": ["-y", "exa-mcp-server"],
+      "env": {
+        "EXA_API_KEY": "f60c9a09-3ad0-422c-b6d8-5954eea6c808"
+      },
+      "description": "Exa AI 검색 (의미론적 웹 검색, 논문/연구 특화)",
+      "enabled": true,
+      "priority": 9,
+      "timeout": 60000
+    }
+  },
+  "routing": {
+    "default": "filesystem",
+    "rules": [
+      {
+        "pattern": "file|read|write|directory|path|folder",
+        "server": "filesystem"
+      },
+      {
+        "pattern": "memory|remember|recall|knowledge|entity|relation",
+        "server": "memory"
+      },
+      {
+        "pattern": "fetch|url|web|http|download",
+        "server": "fetch"
+      },
+      {
+        "pattern": "time|date|timezone|clock",
+        "server": "time"
+      },
+      {
+        "pattern": "think|reason|step|analyze",
+        "server": "sequential-thinking"
+      },
+      {
+        "pattern": "browser|screenshot|click|navigate",
+        "server": "puppeteer"
+      },
+      {
+        "pattern": "github|repo|issue|pull|commit",
+        "server": "github"
+      },
+      {
+        "pattern": "slack|message|channel",
+        "server": "slack"
+      },
+      {
+        "pattern": "sql|query|database|postgres",
+        "server": "postgres"
+      },
+      {
+        "pattern": "search|brave|find",
+        "server": "brave-search"
+      },
+      {
+        "pattern": "gdrive|google|drive|docs|sheets",
+        "server": "gdrive"
+      },
+      {
+        "pattern": "sentry|error|exception|crash",
+        "server": "sentry"
+      },
+      {
+        "pattern": "linear|issue|task|ticket",
+        "server": "linear"
+      },
+      {
+        "pattern": "notion|page|database|block",
+        "server": "notion"
+      },
+      {
+        "pattern": "exa|research|paper|study|academic|linkedin|semantic",
+        "server": "exa"
+      }
+    ]
+  }
+}

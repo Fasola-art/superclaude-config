@@ -1,0 +1,149 @@
+{
+  "timestamp": "2026-01-31T00:54:38.567213",
+  "date": "2026-01-31",
+  "quotes": [
+    {
+      "symbol": "VIX",
+      "name": "VIX (공포지수)",
+      "price": 17.01,
+      "change": 0.13,
+      "change_pct": 0.77,
+      "timestamp": "2026-01-31T00:54:35.873192",
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "MOVE",
+      "name": "MOVE Index (채권 변동성)",
+      "price": 60.73,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "timestamp": "2026-01-31T00:54:36.201265",
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "GOLD",
+      "name": "Gold (금)",
+      "price": 5067.5,
+      "change": -287.3,
+      "change_pct": -5.37,
+      "timestamp": "2026-01-31T00:54:36.498720",
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "EUR_USD",
+      "name": "EUR/USD (유로/달러)",
+      "price": 1.19,
+      "change": -0.01,
+      "change_pct": -0.68,
+      "timestamp": "2026-01-31T00:54:36.805596",
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "USD_JPY",
+      "name": "USD/JPY (달러/엔)",
+      "price": 154.73,
+      "change": 1.71,
+      "change_pct": 1.12,
+      "timestamp": "2026-01-31T00:54:37.111922",
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "NASDAQ",
+      "name": "NASDAQ (NQ)",
+      "price": 25859.25,
+      "change": -140.0,
+      "change_pct": -0.54,
+      "timestamp": "2026-01-31T00:54:37.400546",
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "SP500",
+      "name": "S&P 500 (ES)",
+      "price": 6975.5,
+      "change": -17.25,
+      "change_pct": -0.25,
+      "timestamp": "2026-01-31T00:54:37.711193",
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin (BTC/USD)",
+      "price": 82983,
+      "change": null,
+      "change_pct": -1.63,
+      "timestamp": "2026-01-31T00:54:38.021875",
+      "source": "CoinGecko"
+    }
+  ],
+  "sofr_current": 3.65,
+  "sofr_trend": [
+    {
+      "date": "2026-01-21",
+      "rate": 3.63,
+      "source": "NY Fed"
+    },
+    {
+      "date": "2026-01-22",
+      "rate": 3.64,
+      "source": "NY Fed"
+    },
+    {
+      "date": "2026-01-23",
+      "rate": 3.65,
+      "source": "NY Fed"
+    },
+    {
+      "date": "2026-01-26",
+      "rate": 3.66,
+      "source": "NY Fed"
+    },
+    {
+      "date": "2026-01-27",
+      "rate": 3.66,
+      "source": "NY Fed"
+    },
+    {
+      "date": "2026-01-28",
+      "rate": 3.64,
+      "source": "NY Fed"
+    },
+    {
+      "date": "2026-01-29",
+      "rate": 3.65,
+      "source": "NY Fed"
+    }
+  ],
+  "move_current": 60.73,
+  "move_trend": [
+    {
+      "date": "2026-01-22",
+      "value": 56.5,
+      "source": "Yahoo Finance (ICE BofAML)"
+    },
+    {
+      "date": "2026-01-23",
+      "value": 56.25,
+      "source": "Yahoo Finance (ICE BofAML)"
+    },
+    {
+      "date": "2026-01-26",
+      "value": 55.77,
+      "source": "Yahoo Finance (ICE BofAML)"
+    },
+    {
+      "date": "2026-01-27",
+      "value": 56.12,
+      "source": "Yahoo Finance (ICE BofAML)"
+    },
+    {
+      "date": "2026-01-28",
+      "value": 57.43,
+      "source": "Yahoo Finance (ICE BofAML)"
+    },
+    {
+      "date": "2026-01-30",
+      "value": 60.73,
+      "source": "Yahoo Finance (ICE BofAML)"
+    }
+  ]
+}

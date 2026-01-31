@@ -1,0 +1,17 @@
+export PATH="$HOME/.local/bin:$PATH"
+
+# opencode
+export PATH=/Users/reim/.opencode/bin:$PATH
+
+# Added by Antigravity
+export PATH="/Users/reim/.antigravity/antigravity/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+
+# Claude Code API Keys - 별칭으로 사용
+# 기본 API 키는 비활성화 (병렬 사용을 위해)
+# export ANTHROPIC_API_KEY="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"
+
+# Claude Code 별칭 - 각각 다른 API 키 사용
+alias claude1='ANTHROPIC_API_KEY="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" claude'
+alias claude2='ANTHROPIC_API_KEY="여기에_두번째_API_키_입력" claude'
+alias claude3='ANTHROPIC_API_KEY="여기에_세번째_API_키_입력" claude'

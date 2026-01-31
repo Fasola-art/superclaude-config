@@ -1,0 +1,216 @@
+#!/usr/bin/env python3
+"""
+경제 시황 및 전망 자동 생성
+- Claude Haiku API + WebSearch 사용
+- 매일 저녁 10시 자동 생성
+
+API 키 설정:
+    export ANTHROPIC_API_KEY="your-api-key"
+"""
+
+import os
+import json
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, Optional
+
+REPORTS_DIR = Path.home() / ".claude" / "modules" / "trading" / "reports" / "daily"
+
+
+def generate_market_outlook(report_data: Dict) -> Dict:
+    """
+    Claude Haiku API를 사용하여 경제 시황 생성
+
+    Args:
+        report_data: 시세, 지표 등 보고서 데이터
+
+    Returns:
+        시황 및 전망 딕셔너리
+    """
+    api_key = os.environ.get('ANTHROPIC_API_KEY')
+
+    if not api_key:
+        print("[경고] ANTHROPIC_API_KEY 미설정 - 기본 시황 사용")
+        return generate_default_outlook(report_data)
+
+    try:
+        from anthropic import Anthropic
+
+        client = Anthropic(api_key=api_key)
+
+        # 데이터 요약
+        quotes_summary = "\n".join([
+            f"- {q['name']}: {q['price']:.2f} ({q.get('change_pct', 0):+.2f}%)"
+            for q in report_data.get('quotes', [])
+        ])
+
+        indicators_summary = "\n".join([
+            f"- {i['name']}: {i['value']:.2f}% ({i['date']})"
+            for i in report_data.get('economic_indicators', [])
+        ])
+
+        tomorrow_events = "\n".join([
+            f"- {e['time']}: {e['name']} ({e['importance']})"
+            for e in report_data.get('tomorrow_events', [])
+        ])
+
+        prompt = f"""오늘 날짜: {report_data.get('date', datetime.now().strftime('%Y-%m-%d'))}
+
+## 현재 시세
+{quotes_summary}
+
+## SOFR/MOVE
+- SOFR: {report_data.get('sofr_current', 0):.2f}% - {report_data.get('sofr_analysis', '')}
+- MOVE Index: {report_data.get('move_current', 0):.1f} - {report_data.get('move_analysis', '')}
+
+## 주요 경제 지표
+{indicators_summary}
+
+## 내일 예정 이벤트
+{tomorrow_events}
+
+위 데이터를 바탕으로 다음을 작성해주세요:
+
+1. **시장 현황** (3-4문장): 오늘 시장 상황 요약
+2. **주요 포인트** (3개): 투자자가 주목해야 할 핵심 사항
+3. **내일 전망** (2-3문장): 내일 시장 예상 및 주의사항
+
+간결하고 객관적으로 작성하세요. 투자 추천은 하지 마세요."""
+
+        message = client.messages.create(
+            model="claude-3-5-haiku-latest",
+            max_tokens=1000,
+            messages=[
+                {"role": "user", "content": prompt}
+            ]
+        )
+
+        outlook_text = message.content[0].text
+
+        # 토큰 사용량 로깅
+        input_tokens = message.usage.input_tokens
+        output_tokens = message.usage.output_tokens
+        cost = (input_tokens * 0.8 / 1_000_000) + (output_tokens * 4.0 / 1_000_000)
+        print(f"[API] Haiku 사용: {input_tokens} + {output_tokens} tokens = ${cost:.4f}")
+
+        return {
+            'generated': True,
+            'model': 'claude-3-5-haiku',
+            'text': outlook_text,
+            'tokens': {'input': input_tokens, 'output': output_tokens},
+            'cost': cost,
+            'timestamp': datetime.now().isoformat()
+        }
+
+    except Exception as e:
+        print(f"[에러] API 호출 실패: {e}")
+        return generate_default_outlook(report_data)
+
+
+def generate_default_outlook(report_data: Dict) -> Dict:
+    """API 없이 기본 시황 생성 (데이터 기반)"""
+
+    quotes = {q['symbol']: q for q in report_data.get('quotes', [])}
+
+    # VIX 분석
+    vix = quotes.get('VIX', {}).get('price', 0)
+    if vix < 15:
+        vix_comment = "VIX가 15 미만으로 시장 안정세"
+    elif vix < 20:
+        vix_comment = "VIX가 보통 수준으로 경계 필요"
+    else:
+        vix_comment = "VIX 상승으로 변동성 확대 주의"
+
+    # MOVE 분석
+    move = report_data.get('move_current', 0)
+    if move < 80:
+        move_comment = "채권시장 안정"
+    elif move < 120:
+        move_comment = "채권시장 보통 변동성"
+    else:
+        move_comment = "채권시장 변동성 확대"
+
+    # 비트코인
+    btc = quotes.get('BTC', {})
+    btc_change = btc.get('change_pct', 0)
+    if btc_change > 3:
+        btc_comment = "비트코인 강세"
+    elif btc_change < -3:
+        btc_comment = "비트코인 약세"
+    else:
+        btc_comment = "비트코인 횡보"
+
+    # 내일 이벤트
+    tomorrow = report_data.get('tomorrow_events', [])
+    critical_events = [e for e in tomorrow if e.get('importance') == 'critical']
+
+    if critical_events:
+        event_warning = f"내일 중요 지표 {len(critical_events)}개 발표 예정으로 변동성 확대 가능"
+    else:
+        event_warning = "내일 특별한 주요 이벤트 없음"
+
+    text = f"""## 시장 현황
+{vix_comment}. {move_comment}. {btc_comment}.
+
+## 주요 포인트
+1. VIX {vix:.1f} - {'안정적' if vix < 20 else '주의 필요'}
+2. MOVE Index {move:.1f} - {report_data.get('move_analysis', '')}
+3. SOFR {report_data.get('sofr_current', 0):.2f}% - {report_data.get('sofr_analysis', '')}
+
+## 내일 전망
+{event_warning}. 주요 경제 지표 발표에 따른 시장 반응에 주목."""
+
+    return {
+        'generated': False,
+        'model': 'rule-based',
+        'text': text,
+        'tokens': {'input': 0, 'output': 0},
+        'cost': 0,
+        'timestamp': datetime.now().isoformat()
+    }
+
+
+def save_outlook(outlook: Dict, date: str = None):
+    """시황 저장"""
+    if date is None:
+        date = datetime.now().strftime('%Y-%m-%d')
+
+    outlook_file = REPORTS_DIR / f"outlook_{date}.json"
+    with open(outlook_file, 'w', encoding='utf-8') as f:
+        json.dump(outlook, f, ensure_ascii=False, indent=2)
+
+    print(f"[저장] 시황: {outlook_file}")
+    return str(outlook_file)
+
+
+def load_outlook(date: str = None) -> Optional[Dict]:
+    """시황 로드"""
+    if date is None:
+        date = datetime.now().strftime('%Y-%m-%d')
+
+    outlook_file = REPORTS_DIR / f"outlook_{date}.json"
+    if outlook_file.exists():
+        with open(outlook_file, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return None
+
+
+# CLI
+if __name__ == "__main__":
+    import sys
+    sys.path.insert(0, str(Path.home() / ".claude" / "modules" / "trading"))
+
+    from reports.export_report import load_report_json
+
+    date = sys.argv[1] if len(sys.argv) > 1 else None
+    report = load_report_json(date)
+
+    if report:
+        outlook = generate_market_outlook(report)
+        print("\n" + "="*50)
+        print(outlook['text'])
+        print("="*50)
+        print(f"\n모델: {outlook['model']}, 비용: ${outlook['cost']:.4f}")
+        save_outlook(outlook, report.get('date'))
+    else:
+        print("보고서 데이터 없음")

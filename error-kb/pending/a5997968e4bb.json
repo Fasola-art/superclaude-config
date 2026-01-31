@@ -1,0 +1,11 @@
+{
+  "id": "a5997968e4bb",
+  "type": "mcp-protocol",
+  "message": "서버 시작 실패: time",
+  "timestamp": "2026-01-30 11:50:57,272",
+  "raw_log": "2026-01-30 11:50:57,272 [ERROR] mcp-protocol: 서버 시작 실패: time",
+  "created_at": "2026-01-30T11:54:46.272612",
+  "resolved": false,
+  "resolution": null,
+  "context": {}
+}

@@ -1,0 +1,60 @@
+{
+  "name": "SuperClaude",
+  "version": "2.0.9",
+  "platform": "macOS",
+  "targetHardware": "Mac Studio Ultra M2",
+  "installedAt": "2026-01-29T12:00:00.000Z",
+  "lastUpdated": "2026-01-29T12:00:00.000Z",
+  "components": {
+    "writerReviewer": {
+      "version": "2.0",
+      "enabled": true
+    },
+    "errorKB": {
+      "version": "4.4",
+      "enabled": true
+    },
+    "contextManager": {
+      "version": "4.1",
+      "enabled": true
+    },
+    "planMode": {
+      "version": "1.0",
+      "enabled": true
+    },
+    "hooks": {
+      "count": 17,
+      "enabled": true
+    },
+    "personas": {
+      "development": 14,
+      "ideation": 27,
+      "total": 41
+    },
+    "vibeKeywords": 13,
+    "modeKeywords": 4,
+    "vercelRules": 49
+  },
+  "modules": {
+    "trading": {
+      "status": "planned",
+      "version": null
+    },
+    "newsCollector": {
+      "status": "planned",
+      "version": null
+    },
+    "realtimeAnalysis": {
+      "status": "planned",
+      "version": null
+    }
+  },
+  "paths": {
+    "root": "~/.claude",
+    "hooks": "~/.claude/hooks",
+    "personas": "~/.claude/personas",
+    "skills": "~/.claude/skills",
+    "errorKB": "~/.claude/error-kb",
+    "modules": "~/.claude/modules"
+  }
+}

@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+"""
+Vibe/Mode 키워드 감지 Hook
+- 13개 Vibe Keywords 감지
+- 4개 Mode Keywords 감지
+- 해당 동작 트리거
+"""
+
+import sys
+import json
+import re
+
+# Vibe Keywords (13개)
+VIBE_KEYWORDS = {
+    # 실행 제어
+    "빠르게": {"aliases": ["qk", "quick"], "action": "skip_validation"},
+    "실험": {"aliases": ["exp"], "action": "snapshot_experiment"},
+    "동시에": {"aliases": ["para"], "action": "parallel_agents"},
+    # 수정/복구
+    "고쳐": {"aliases": ["fix"], "action": "error_kb_healing"},
+    "되돌려": {"aliases": ["undo"], "action": "rollback_snapshot"},
+    "계속": {"aliases": ["cont"], "action": "continue_state"},
+    # 검증
+    "확인해": {"aliases": ["chk"], "action": "full_validation"},
+    "테스트해": {"aliases": ["tst"], "action": "run_tests"},
+    # 배포/정리
+    "배포해": {"aliases": ["dep"], "action": "deploy_checklist"},
+    "정리해": {"aliases": ["clean"], "action": "code_cleanup"},
+    # 분석/계획
+    "성능": {"aliases": ["perf"], "action": "performance_analysis"},
+    "계획": {"aliases": ["plan"], "action": "planning_docs"},
+    "분석": {"aliases": ["map"], "action": "codebase_analysis"},
+}
+
+# Mode Keywords (4개)
+MODE_KEYWORDS = {
+    "ultrawork": {"aliases": ["ulw"], "personas": ["explorer", "librarian", "analyzer"]},
+    "deepsearch": {"aliases": ["ds"], "personas": ["explorer"]},
+    "strategic": {"aliases": ["str"], "personas": ["architect"]},
+    "visual": {"aliases": ["vis"], "personas": ["multimodal", "frontend"]},
+}
+
+def detect_keywords(prompt: str) -> dict:
+    """프롬프트에서 키워드 감지"""
+    prompt_lower = prompt.lower()
+    result = {
+        "vibe": [],
+        "mode": [],
+        "actions": [],
+        "personas": []
+    }
+
+    # Vibe 키워드 검사
+    for keyword, config in VIBE_KEYWORDS.items():
+        all_forms = [keyword] + config.get("aliases", [])
+        for form in all_forms:
+            if form in prompt_lower:
+                result["vibe"].append(keyword)
+                result["actions"].append(config["action"])
+                break
+
+    # Mode 키워드 검사
+    for keyword, config in MODE_KEYWORDS.items():
+        all_forms = [keyword] + config.get("aliases", [])
+        for form in all_forms:
+            if form in prompt_lower:
+                result["mode"].append(keyword)
+                result["personas"].extend(config["personas"])
+                break
+
+    # 중복 제거
+    result["personas"] = list(set(result["personas"]))
+
+    return result
+
+def main():
+    # 환경 변수에서 프롬프트 가져오기
+    import os
+    prompt = os.environ.get("PROMPT", "")
+
+    if not prompt:
+        # stdin에서 읽기 시도
+        if not sys.stdin.isatty():
+            prompt = sys.stdin.read()
+
+    if not prompt:
+        return
+
+    detected = detect_keywords(prompt)
+
+    if detected["vibe"] or detected["mode"]:
+        parts = []
+        if detected["vibe"]:
+            parts.append(f"vibe:{','.join(detected['vibe'])}")
+        if detected["mode"]:
+            parts.append(f"mode:{','.join(detected['mode'])}")
+        print(f"🎯 {' | '.join(parts)}")
+
+if __name__ == "__main__":
+    main()

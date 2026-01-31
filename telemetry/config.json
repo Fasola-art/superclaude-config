@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "description": "SuperClaude 텔레메트리 설정",
+
+  "enabled": true,
+  "anonymous": true,
+  "local_only": true,
+
+  "retention": {
+    "daily_days": 30,
+    "weekly_weeks": 12,
+    "performance_days": 7
+  },
+
+  "collect": {
+    "usage_stats": true,
+    "performance_metrics": true,
+    "error_counts": true,
+    "keyword_frequency": true,
+    "tool_usage": true
+  },
+
+  "exclude": {
+    "file_contents": true,
+    "user_inputs": true,
+    "api_keys": true,
+    "file_paths": false,
+    "error_messages": false
+  },
+
+  "aggregation": {
+    "daily_summary": "00:00",
+    "weekly_summary": "sunday"
+  },
+
+  "alerts": {
+    "high_error_rate": {
+      "enabled": true,
+      "threshold_percent": 10
+    },
+    "high_context_usage": {
+      "enabled": true,
+      "threshold_percent": 85
+    },
+    "slow_response": {
+      "enabled": false,
+      "threshold_ms": 5000
+    }
+  }
+}

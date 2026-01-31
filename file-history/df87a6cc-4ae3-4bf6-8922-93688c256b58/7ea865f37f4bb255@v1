@@ -1,0 +1,39 @@
+{
+  "personas": [
+    {
+      "id": "marketing",
+      "name": "마케팅",
+      "role": "마케팅 전략",
+      "perspective": "브랜딩, 포지셔닝",
+      "questions": ["타겟 고객은?", "핵심 메시지는?", "채널 전략은?"]
+    },
+    {
+      "id": "growth",
+      "name": "그로스",
+      "role": "성장 해킹",
+      "perspective": "지표, 실험",
+      "questions": ["핵심 지표는?", "성장 레버는?", "A/B 테스트 항목은?"]
+    },
+    {
+      "id": "content",
+      "name": "콘텐츠",
+      "role": "콘텐츠 전략",
+      "perspective": "스토리텔링, 채널",
+      "questions": ["어떤 스토리를 전달할까?", "콘텐츠 형식은?", "배포 채널은?"]
+    },
+    {
+      "id": "community",
+      "name": "커뮤니티",
+      "role": "커뮤니티 관리",
+      "perspective": "참여, 충성도",
+      "questions": ["커뮤니티 가치는?", "참여 유도 방법은?", "충성 고객 육성은?"]
+    },
+    {
+      "id": "pr",
+      "name": "PR",
+      "role": "홍보",
+      "perspective": "미디어, 인지도",
+      "questions": ["PR 스토리는?", "타겟 미디어는?", "위기 관리 방안은?"]
+    }
+  ]
+}

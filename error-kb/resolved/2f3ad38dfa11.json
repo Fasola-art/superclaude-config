@@ -1,0 +1,12 @@
+{
+  "id": "2f3ad38dfa11",
+  "type": "mcp-protocol",
+  "message": "서버 시작 실패: slack",
+  "timestamp": "2026-01-29 19:01:23,918",
+  "raw_log": "2026-01-29 19:01:23,918 [ERROR] mcp-protocol: 서버 시작 실패: slack",
+  "created_at": "2026-01-29T20:09:55.659286",
+  "resolved": true,
+  "resolution": "SLACK_TEAM_ID 환경변수 추가",
+  "context": {},
+  "resolved_at": "2026-01-29T20:10:08.578091"
+}

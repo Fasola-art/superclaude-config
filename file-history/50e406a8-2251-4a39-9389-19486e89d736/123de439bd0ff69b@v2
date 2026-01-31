@@ -1,0 +1,33 @@
+{
+  "name": "sns-automation",
+  "version": "1.0.0",
+  "description": "SNS 자동화 워크플로우 설계 및 구현 가이드",
+  "triggers": [
+    "/sns",
+    "sns 자동화",
+    "인플루언서 자동화",
+    "콘텐츠 자동화",
+    "소셜미디어 자동화"
+  ],
+  "category": "automation",
+  "author": "SuperClaude",
+  "created": "2026-01-30",
+  "keywords": [
+    "sns",
+    "automation",
+    "workflow",
+    "n8n",
+    "instagram",
+    "tiktok",
+    "youtube",
+    "content",
+    "influencer"
+  ],
+  "files": [
+    "SKILL.md"
+  ],
+  "dependencies": {
+    "tools": ["n8n", "buffer", "notion"],
+    "apis": ["openai", "instagram", "youtube", "tiktok", "telegram"]
+  }
+}

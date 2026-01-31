@@ -1,0 +1,68 @@
+{
+  "$schema": "SuperClaude Configuration v2.0.9",
+  "version": "2.0.9",
+  "platform": "macOS M2 Ultra",
+
+  "parallelExecution": {
+    "enabled": true,
+    "adaptive": true,
+    "initial": 10,
+    "minimum": 3,
+    "maximum": 24,
+    "scaleUp": {
+      "increment": 5,
+      "condition": "3 consecutive successes"
+    },
+    "scaleDown": {
+      "decrement": 3,
+      "condition": "1 failure"
+    },
+    "optimization": "M2 Ultra CPU cores (24 cores)"
+  },
+
+  "personas": {
+    "maxConcurrent": 3,
+    "priority": ["security", "architect", "analyzer"],
+    "autoActivate": true
+  },
+
+  "writerReviewer": {
+    "enabled": true,
+    "targetScore": 0.85,
+    "maxIterations": 10,
+    "convergenceThreshold": 0.015,
+    "agents": {
+      "quality": 0.30,
+      "security": 0.30,
+      "performance": 0.20,
+      "accessibility": 0.20
+    }
+  },
+
+  "errorKB": {
+    "enabled": true,
+    "similarityThreshold": 0.70,
+    "maxRalphRetries": 10,
+    "autoLearn": true
+  },
+
+  "contextManager": {
+    "thresholds": {
+      "warning": 0.75,
+      "critical": 0.90,
+      "emergency": 0.95
+    },
+    "autoCompress": true
+  },
+
+  "keywords": {
+    "vibe": ["빠르게", "실험", "동시에", "고쳐", "되돌려", "계속", "확인해", "테스트해", "배포해", "정리해", "성능", "계획", "분석"],
+    "mode": ["ultrawork", "deepsearch", "strategic", "visual"]
+  },
+
+  "language": {
+    "response": "ko",
+    "codeComments": "ko",
+    "variableNames": "en"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs -I {} sh -c 'echo \"\"=== {} ===\"\" && head -5 {}')",
+      "Bash(find:*)",
+      "Bash(# 모든 commands 파일 찾기 echo \"\"=== Commands ===\"\" find /Users/reim/.claude -path \"\"*/commands/*.md\"\" -type f)",
+      "Bash(# Agents 파일 목록 확인 echo \"\"=== Agents 파일 위치 ===\"\" find /Users/reim/.claude -path \"\"*/agents/*.md\"\" -type f)",
+      "Bash(head -40 echo -e \"\\\\n=== 영어로 남은 Commands \\(stripe 플러그인\\) ===\" find /Users/reim/.claude/plugins -path \"*/commands/*.md\" -name \"*.md\")",
+      "Bash(xargs -I {} sh -c 'echo \"\"$\\(basename {} .md\\)\"\"')",
+      "Bash(done)",
+      "Bash(__NEW_LINE_671f592cec560d34__ echo -e \"\\\\n--- 수정 불가 \\(내장\\) ---\")",
+      "Bash(pdftk:*)",
+      "Bash(tree:*)",
+      "Bash(du:*)",
+      "Bash(for dir in agents commands jarvis)",
+      "Bash(do echo \"=== $dir ===\" find /Users/reim/.claude/$dir -type f)",
+      "Bash(wc:*)",
+      "Bash(test:*)",
+      "Bash(while read f)",
+      "Bash(brew search:*)",
+      "Bash(pkill:*)",
+      "Bash(pandoc:*)",
+      "Bash(pmset:*)",
+      "Bash(uv --version:*)",
+      "Bash(grep:*)",
+      "Bash(python3:*)",
+      "Bash(xargs -I {} sh -c 'echo \"\"=== {} ===\"\" && head -3 {}')",
+      "Bash(crontab:*)",
+      "Bash(pip3 show:*)",
+      "Bash(env)",
+      "Bash(claude usage)",
+      "Bash(pnpm install:*)",
+      "Bash(/Users/reim/Library/Python/3.9/bin/whisper:*)",
+      "Bash(mdfind:*)",
+      "Bash(git init:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}

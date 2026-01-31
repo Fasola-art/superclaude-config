@@ -1,0 +1,170 @@
+{
+  "name": "03-Trend-Analyzer",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "cronExpression", "expression": "0 6 * * *" }]
+        }
+      },
+      "id": "daily-trigger",
+      "name": "Daily 6AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://trends.google.com/trends/api/dailytrends?geo=KR",
+        "options": {}
+      },
+      "id": "fetch-google-trends",
+      "name": "Google Trends",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [450, 200]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://graph.facebook.com/v18.0/ig_hashtag_search",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "user_id", "value": "={{ $env.INSTAGRAM_BUSINESS_ID }}" },
+            { "name": "q", "value": "trending" },
+            { "name": "access_token", "value": "={{ $env.INSTAGRAM_ACCESS_TOKEN }}" }
+          ]
+        }
+      },
+      "id": "fetch-ig-trends",
+      "name": "Instagram Trends",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [450, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 트렌드 데이터 통합\nconst googleTrends = $('Google Trends').first()?.json || {};\nconst igTrends = $('Instagram Trends').first()?.json || {};\n\n// Google Trends 파싱\nlet googleKeywords = [];\ntry {\n  const data = JSON.parse(googleTrends.replace(')]}\\',\\n', ''));\n  googleKeywords = data.default?.trendingSearchesDays?.[0]?.trendingSearches?.map(t => t.title.query) || [];\n} catch (e) {\n  googleKeywords = [];\n}\n\n// Instagram 해시태그 파싱\nconst igHashtags = igTrends.data?.map(h => h.name) || [];\n\nreturn {\n  json: {\n    date: new Date().toISOString().split('T')[0],\n    googleTrends: googleKeywords.slice(0, 10),\n    instagramHashtags: igHashtags.slice(0, 10),\n    timestamp: new Date().toISOString()\n  }\n};"
+      },
+      "id": "merge-trends",
+      "name": "Merge Trends",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4",
+        "messages": {
+          "values": [
+            {
+              "content": "=오늘의 트렌드 데이터를 분석하고 콘텐츠 아이디어를 제안해주세요.\n\n## Google 트렌드 (한국)\n{{ $json.googleTrends.join(', ') }}\n\n## Instagram 인기 해시태그\n{{ $json.instagramHashtags.join(', ') }}\n\n다음 형식으로 응답해주세요:\n\n## 📊 오늘의 트렌드 요약\n[핵심 트렌드 3줄 요약]\n\n## 💡 콘텐츠 아이디어 (3개)\n1. [아이디어 1] - 예상 반응: 높음/보통\n2. [아이디어 2] - 예상 반응: 높음/보통\n3. [아이디어 3] - 예상 반응: 높음/보통\n\n## 🏷️ 추천 해시태그\n[오늘 사용하면 좋을 해시태그 10개]"
+            }
+          ]
+        }
+      },
+      "id": "ai-analyze",
+      "name": "AI Analysis",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 최종 브리핑 포맷팅\nconst aiResponse = $input.first().json;\nconst trendData = $('Merge Trends').first().json;\n\nconst briefing = aiResponse.message?.content || '분석 실패';\n\nreturn {\n  json: {\n    date: trendData.date,\n    briefing: briefing,\n    rawData: {\n      googleTrends: trendData.googleTrends,\n      instagramHashtags: trendData.instagramHashtags\n    },\n    generatedAt: new Date().toISOString()\n  }\n};"
+      },
+      "id": "format-briefing",
+      "name": "Format Briefing",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $env.TELEGRAM_CHAT_ID }}",
+        "text": "=🌅 {{ $json.date }} 트렌드 브리핑\n\n{{ $json.briefing }}\n\n---\n생성: {{ $json.generatedAt }}"
+      },
+      "id": "send-telegram",
+      "name": "Send Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [1250, 200],
+      "credentials": {
+        "telegramApi": {
+          "id": "TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "value": "={{ $env.GOOGLE_SHEET_ID }}", "mode": "id" },
+        "sheetName": "Trends",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date": "={{ $json.date }}",
+            "Google Trends": "={{ $json.rawData.googleTrends.join(', ') }}",
+            "Instagram Hashtags": "={{ $json.rawData.instagramHashtags.join(', ') }}",
+            "Briefing": "={{ $json.briefing }}",
+            "Generated At": "={{ $json.generatedAt }}"
+          }
+        }
+      },
+      "id": "log-trends",
+      "name": "Log to Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [1250, 400],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GOOGLE_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Daily 6AM": {
+      "main": [
+        [
+          { "node": "Google Trends", "type": "main", "index": 0 },
+          { "node": "Instagram Trends", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Google Trends": {
+      "main": [[{ "node": "Merge Trends", "type": "main", "index": 0 }]]
+    },
+    "Instagram Trends": {
+      "main": [[{ "node": "Merge Trends", "type": "main", "index": 0 }]]
+    },
+    "Merge Trends": {
+      "main": [[{ "node": "AI Analysis", "type": "main", "index": 0 }]]
+    },
+    "AI Analysis": {
+      "main": [[{ "node": "Format Briefing", "type": "main", "index": 0 }]]
+    },
+    "Format Briefing": {
+      "main": [
+        [
+          { "node": "Send Telegram", "type": "main", "index": 0 },
+          { "node": "Log to Sheet", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": ["sns-automation", "trends"],
+  "versionId": "1.0.0"
+}

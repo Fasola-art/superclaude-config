@@ -1,0 +1,28 @@
+{
+  "lastUpdated": "2026-01-29T12:00:00.000Z",
+  "sessions": {
+    "total": 0,
+    "completed": 0,
+    "active": 0
+  },
+  "tasks": {
+    "total": 0,
+    "completed": 0,
+    "failed": 0
+  },
+  "errors": {
+    "resolved": 0,
+    "pending": 0,
+    "autoFixed": 0
+  },
+  "writerReviewer": {
+    "runs": 0,
+    "averageScore": 0,
+    "averageIterations": 0
+  },
+  "parallelExecution": {
+    "maxConcurrent": 0,
+    "totalTasks": 0,
+    "successRate": 0
+  }
+}

@@ -1,0 +1,79 @@
+# CLOVA Speech API 설정 가이드
+
+> 네이버 클라우드 플랫폼에서 CLOVA Speech API 발급받기
+
+---
+
+## 1. 네이버 클라우드 플랫폼 가입
+
+1. https://www.ncloud.com 접속
+2. 회원가입 또는 네이버 계정으로 로그인
+3. 결제 수단 등록 (신용카드)
+
+---
+
+## 2. CLOVA Speech 서비스 신청
+
+1. 콘솔 접속: https://console.ncloud.com
+2. **Services** → **AI·NAVER API** → **CLOVA Speech**
+3. **이용 신청** 클릭
+4. 약관 동의 후 신청 완료
+
+---
+
+## 3. 인증 정보 발급
+
+### Application 등록
+1. 콘솔 → **AI·NAVER API** → **Application**
+2. **Application 등록** 클릭
+3. 정보 입력:
+   - **Application 이름**: `music-lesson-summarizer`
+   - **Service 선택**: `CLOVA Speech` 체크
+4. **등록** 클릭
+
+### 인증 키 확인
+1. 등록된 Application 클릭
+2. **인증 정보** 탭에서 확인:
+   - **Client ID**: `xxxxxxxxxx`
+   - **Client Secret**: `xxxxxxxxxx`
+
+---
+
+## 4. 환경 변수 설정
+
+`.env` 파일에 추가:
+
+```env
+CLOVA_CLIENT_ID=your_client_id
+CLOVA_CLIENT_SECRET=your_client_secret
+```
+
+---
+
+## 5. 요금 안내
+
+| 구간 | 단가 |
+|------|------|
+| 0~10초 | 5원 |
+| 10~30초 | 15원 |
+| 30초~1분 | 30원 |
+| 1분~3분 | 90원 |
+| 3분 이상 | 분당 30원 |
+
+**예시**: 1시간 수업 녹음 ≈ 1,800원
+
+---
+
+## 6. API 제한사항
+
+- **최대 파일 크기**: 100MB
+- **최대 길이**: 180분
+- **지원 포맷**: mp3, aac, ac3, ogg, flac, wav, m4a
+
+---
+
+## 참고 링크
+
+- [CLOVA Speech 소개](https://www.ncloud.com/product/aiService/clovaSpeech)
+- [API 문서](https://api.ncloud-docs.com/docs/ai-application-service-clovaspeech)
+- [요금 계산기](https://www.ncloud.com/charge/calc)

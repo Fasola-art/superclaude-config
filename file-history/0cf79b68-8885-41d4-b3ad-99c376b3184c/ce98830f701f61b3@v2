@@ -1,0 +1,116 @@
+#!/usr/bin/env node
+/**
+ * todo-continuation-enforcer.js
+ * Todo 지속성 검증 훅
+ *
+ * 트리거: UserPromptSubmit, Stop
+ * 타임아웃: 1000ms
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const CLAUDE_DIR = path.join(process.env.HOME, '.claude');
+const TODOS_DIR = path.join(CLAUDE_DIR, 'todos');
+const STATE_FILE = path.join(CLAUDE_DIR, 'cache', 'todo-state.json');
+
+function loadTodoState() {
+  try {
+    if (fs.existsSync(STATE_FILE)) {
+      return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
+    }
+  } catch (e) {
+    // 파일 없으면 빈 상태
+  }
+  return { todos: [], lastUpdated: null };
+}
+
+function saveTodoState(state) {
+  const dir = path.dirname(STATE_FILE);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  state.lastUpdated = new Date().toISOString();
+  fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
+}
+
+function getIncompleteTodos(state) {
+  return state.todos.filter(todo =>
+    todo.status !== 'completed' && todo.status !== 'cancelled'
+  );
+}
+
+function checkContinuity(prompt, state) {
+  const result = {
+    hasIncompleteTodos: false,
+    incompleteTodos: [],
+    continuationDetected: false,
+    warning: null
+  };
+
+  const incomplete = getIncompleteTodos(state);
+  result.incompleteTodos = incomplete;
+  result.hasIncompleteTodos = incomplete.length > 0;
+
+  // "계속" 키워드 감지
+  const continueKeywords = ['계속', 'cont', 'continue', '이어서'];
+  result.continuationDetected = continueKeywords.some(kw =>
+    prompt.toLowerCase().includes(kw.toLowerCase())
+  );
+
+  // 미완료 태스크가 있고 새 작업을 시작하려는 경우 경고
+  if (result.hasIncompleteTodos && !result.continuationDetected) {
+    const todoList = incomplete.map(t => `- [${t.status}] ${t.subject}`).join('\n');
+    result.warning = `⚠️ 미완료 태스크 ${incomplete.length}개:\n${todoList}`;
+  }
+
+  return result;
+}
+
+async function main() {
+  try {
+    let input = '';
+    process.stdin.setEncoding('utf8');
+
+    for await (const chunk of process.stdin) {
+      input += chunk;
+    }
+
+    const data = JSON.parse(input);
+    const prompt = data.prompt || data.message || '';
+    const eventType = data.eventType || 'UserPromptSubmit';
+
+    const state = loadTodoState();
+
+    // Stop 이벤트: 상태 저장
+    if (eventType === 'Stop') {
+      saveTodoState(state);
+      console.log(JSON.stringify({
+        status: 'saved',
+        message: 'Todo 상태 저장 완료',
+        incompleteTodos: getIncompleteTodos(state).length
+      }));
+      process.exit(0);
+    }
+
+    // UserPromptSubmit: 지속성 검사
+    const check = checkContinuity(prompt, state);
+
+    const output = {
+      status: check.hasIncompleteTodos ? 'warning' : 'ok',
+      hasIncompleteTodos: check.hasIncompleteTodos,
+      incompleteTodosCount: check.incompleteTodos.length,
+      continuationDetected: check.continuationDetected,
+      message: check.warning || 'Todo 상태 정상'
+    };
+
+    console.log(JSON.stringify(output));
+    process.exit(0);
+
+  } catch (error) {
+    console.error(JSON.stringify({ status: 'error', message: error.message }));
+    process.exit(1);
+  }
+}
+
+main();

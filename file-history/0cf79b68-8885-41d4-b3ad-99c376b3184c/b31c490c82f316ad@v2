@@ -1,0 +1,341 @@
+#!/usr/bin/env node
+/**
+ * quality-gate.js
+ * 8단계 품질 검증 게이트 훅
+ *
+ * 트리거: PostToolUse
+ * 매처: Edit|Write|MultiEdit
+ * 타임아웃: 10000ms
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const CLAUDE_DIR = path.join(process.env.HOME, '.claude');
+const QUALITY_LOG_DIR = path.join(CLAUDE_DIR, 'logs', 'quality');
+
+// 8단계 품질 게이트 정의
+const QUALITY_GATES = [
+  {
+    id: 'syntax',
+    name: '문법 검증',
+    weight: 0.15,
+    checks: ['bracket_balance', 'quote_balance', 'semicolon']
+  },
+  {
+    id: 'security',
+    name: '보안 검증',
+    weight: 0.20,
+    checks: ['no_hardcoded_secrets', 'no_eval', 'no_innerHTML']
+  },
+  {
+    id: 'imports',
+    name: '의존성 검증',
+    weight: 0.10,
+    checks: ['no_circular', 'valid_imports']
+  },
+  {
+    id: 'types',
+    name: '타입 검증',
+    weight: 0.15,
+    checks: ['type_annotations', 'no_any']
+  },
+  {
+    id: 'patterns',
+    name: '패턴 검증',
+    weight: 0.10,
+    checks: ['naming_conventions', 'file_structure']
+  },
+  {
+    id: 'performance',
+    name: '성능 검증',
+    weight: 0.10,
+    checks: ['no_memory_leaks', 'efficient_loops']
+  },
+  {
+    id: 'accessibility',
+    name: '접근성 검증',
+    weight: 0.10,
+    checks: ['aria_labels', 'semantic_html']
+  },
+  {
+    id: 'documentation',
+    name: '문서화 검증',
+    weight: 0.10,
+    checks: ['jsdoc', 'comments']
+  }
+];
+
+function ensureDir() {
+  if (!fs.existsSync(QUALITY_LOG_DIR)) {
+    fs.mkdirSync(QUALITY_LOG_DIR, { recursive: true });
+  }
+}
+
+// 괄호 균형 검사
+function checkBracketBalance(content) {
+  const pairs = { '(': ')', '[': ']', '{': '}' };
+  const stack = [];
+
+  for (const char of content) {
+    if (pairs[char]) {
+      stack.push(pairs[char]);
+    } else if (Object.values(pairs).includes(char)) {
+      if (stack.pop() !== char) return false;
+    }
+  }
+
+  return stack.length === 0;
+}
+
+// 따옴표 균형 검사
+function checkQuoteBalance(content) {
+  // 문자열 리터럴 제외한 간단한 검사
+  const singleQuotes = (content.match(/'/g) || []).length;
+  const doubleQuotes = (content.match(/"/g) || []).length;
+  const backticks = (content.match(/`/g) || []).length;
+
+  return singleQuotes % 2 === 0 && doubleQuotes % 2 === 0 && backticks % 2 === 0;
+}
+
+// 보안 검사
+function checkSecurity(content) {
+  const issues = [];
+
+  // 하드코딩된 비밀 검사
+  const secretPatterns = [
+    /password\s*[:=]\s*['"][^'"]+['"]/gi,
+    /api[_-]?key\s*[:=]\s*['"][^'"]+['"]/gi,
+    /secret\s*[:=]\s*['"][^'"]+['"]/gi,
+    /token\s*[:=]\s*['"][A-Za-z0-9_-]{20,}['"]/gi
+  ];
+
+  for (const pattern of secretPatterns) {
+    if (pattern.test(content)) {
+      issues.push('hardcoded_secret');
+    }
+  }
+
+  // eval 사용 검사
+  if (/\beval\s*\(/g.test(content)) {
+    issues.push('eval_usage');
+  }
+
+  // innerHTML 직접 할당 검사
+  if (/\.innerHTML\s*=/g.test(content)) {
+    issues.push('innerHTML_assignment');
+  }
+
+  // SQL 인젝션 가능성
+  if (/\$\{.*\}.*(?:SELECT|INSERT|UPDATE|DELETE)/gi.test(content)) {
+    issues.push('potential_sql_injection');
+  }
+
+  return issues;
+}
+
+// 성능 검사
+function checkPerformance(content) {
+  const issues = [];
+
+  // 비효율적 루프 패턴
+  if (/for\s*\([^)]*\.length[^)]*\)/g.test(content)) {
+    // length를 루프 내에서 매번 계산
+    issues.push('inefficient_loop');
+  }
+
+  // 중첩 루프 경고
+  const forCount = (content.match(/\bfor\s*\(/g) || []).length;
+  const whileCount = (content.match(/\bwhile\s*\(/g) || []).length;
+  if (forCount + whileCount > 3) {
+    issues.push('multiple_loops');
+  }
+
+  return issues;
+}
+
+// 접근성 검사 (React/HTML)
+function checkAccessibility(content, filePath) {
+  const issues = [];
+
+  // HTML/JSX 파일인 경우만
+  if (!/\.(tsx?|jsx?|html)$/.test(filePath)) {
+    return issues;
+  }
+
+  // 이미지에 alt 속성 누락
+  if (/<img[^>]+(?!alt=)[^>]*>/g.test(content)) {
+    issues.push('missing_alt');
+  }
+
+  // 버튼에 접근성 라벨 누락
+  if (/<button[^>]*>(?:<[^>]+>)*\s*<\/button>/g.test(content)) {
+    issues.push('empty_button');
+  }
+
+  // 링크에 의미있는 텍스트 누락
+  if (/<a[^>]*>(?:click here|here|link)<\/a>/gi.test(content)) {
+    issues.push('meaningless_link_text');
+  }
+
+  return issues;
+}
+
+// 문서화 검사
+function checkDocumentation(content, filePath) {
+  const issues = [];
+
+  // TypeScript/JavaScript 파일
+  if (/\.(tsx?|jsx?)$/.test(filePath)) {
+    // 함수에 JSDoc 누락 (export 함수만)
+    const exportFunctions = content.match(/export\s+(async\s+)?function\s+\w+/g) || [];
+    const jsdocBlocks = content.match(/\/\*\*[\s\S]*?\*\//g) || [];
+
+    if (exportFunctions.length > jsdocBlocks.length) {
+      issues.push('missing_jsdoc');
+    }
+  }
+
+  return issues;
+}
+
+// 전체 품질 검사 실행
+function runQualityGates(content, filePath) {
+  const results = {
+    passed: [],
+    failed: [],
+    warnings: [],
+    score: 0
+  };
+
+  // Gate 1: 문법 검증
+  const syntaxOk = checkBracketBalance(content) && checkQuoteBalance(content);
+  if (syntaxOk) {
+    results.passed.push({ gate: 'syntax', score: 1.0 });
+  } else {
+    results.failed.push({ gate: 'syntax', score: 0, reason: '괄호/따옴표 불균형' });
+  }
+
+  // Gate 2: 보안 검증
+  const securityIssues = checkSecurity(content);
+  if (securityIssues.length === 0) {
+    results.passed.push({ gate: 'security', score: 1.0 });
+  } else {
+    results.failed.push({ gate: 'security', score: 0.5, issues: securityIssues });
+  }
+
+  // Gate 3: 성능 검증
+  const perfIssues = checkPerformance(content);
+  if (perfIssues.length === 0) {
+    results.passed.push({ gate: 'performance', score: 1.0 });
+  } else {
+    results.warnings.push({ gate: 'performance', score: 0.7, issues: perfIssues });
+  }
+
+  // Gate 4: 접근성 검증
+  const a11yIssues = checkAccessibility(content, filePath);
+  if (a11yIssues.length === 0) {
+    results.passed.push({ gate: 'accessibility', score: 1.0 });
+  } else {
+    results.warnings.push({ gate: 'accessibility', score: 0.8, issues: a11yIssues });
+  }
+
+  // Gate 5: 문서화 검증
+  const docIssues = checkDocumentation(content, filePath);
+  if (docIssues.length === 0) {
+    results.passed.push({ gate: 'documentation', score: 1.0 });
+  } else {
+    results.warnings.push({ gate: 'documentation', score: 0.9, issues: docIssues });
+  }
+
+  // 전체 점수 계산
+  const allResults = [...results.passed, ...results.failed, ...results.warnings];
+  const totalWeight = QUALITY_GATES.filter(g =>
+    allResults.some(r => r.gate === g.id)
+  ).reduce((sum, g) => sum + g.weight, 0);
+
+  let weightedScore = 0;
+  for (const result of allResults) {
+    const gate = QUALITY_GATES.find(g => g.id === result.gate);
+    if (gate) {
+      weightedScore += result.score * gate.weight;
+    }
+  }
+
+  results.score = totalWeight > 0 ? weightedScore / totalWeight : 1.0;
+
+  return results;
+}
+
+function saveQualityLog(filePath, results) {
+  ensureDir();
+
+  const logEntry = {
+    timestamp: new Date().toISOString(),
+    file: filePath,
+    score: results.score,
+    passed: results.passed.length,
+    failed: results.failed.length,
+    warnings: results.warnings.length
+  };
+
+  const logFile = path.join(QUALITY_LOG_DIR, 'quality.log');
+  const line = JSON.stringify(logEntry) + '\n';
+
+  fs.appendFileSync(logFile, line);
+}
+
+async function main() {
+  try {
+    let input = '';
+    process.stdin.setEncoding('utf8');
+
+    for await (const chunk of process.stdin) {
+      input += chunk;
+    }
+
+    const data = JSON.parse(input);
+    const filePath = data.file_path || data.path || '';
+    const content = data.content || data.new_string || '';
+
+    // 스킵 조건
+    const skipExtensions = ['.json', '.md', '.txt', '.env', '.lock'];
+    if (skipExtensions.some(ext => filePath.endsWith(ext))) {
+      console.log(JSON.stringify({
+        status: 'skipped',
+        message: '품질 검증 스킵 (비코드 파일)'
+      }));
+      process.exit(0);
+    }
+
+    const results = runQualityGates(content, filePath);
+    saveQualityLog(filePath, results);
+
+    const scorePercent = Math.round(results.score * 100);
+    const status = results.score >= 0.85 ? 'passed' :
+                   results.score >= 0.70 ? 'warning' : 'failed';
+
+    const output = {
+      status: status,
+      score: scorePercent,
+      gatesPassed: results.passed.length,
+      gatesFailed: results.failed.length,
+      gatesWarning: results.warnings.length,
+      details: {
+        passed: results.passed.map(r => r.gate),
+        failed: results.failed.map(r => ({ gate: r.gate, reason: r.reason || r.issues })),
+        warnings: results.warnings.map(r => ({ gate: r.gate, issues: r.issues }))
+      },
+      message: `🎯 품질 점수: ${scorePercent}% (${status.toUpperCase()})`
+    };
+
+    console.log(JSON.stringify(output));
+    process.exit(0);
+
+  } catch (error) {
+    console.error(JSON.stringify({ status: 'error', message: error.message }));
+    process.exit(1);
+  }
+}
+
+main();

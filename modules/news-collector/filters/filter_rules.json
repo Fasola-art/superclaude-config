@@ -1,0 +1,174 @@
+{
+  "filters": [
+    {
+      "id": "ai_focus",
+      "name": "AI 관련 뉴스",
+      "description": "AI/ML 관련 뉴스만 필터링",
+      "enabled": true,
+      "priority": 10,
+      "rules": {
+        "include": {
+          "keywords": [
+            "AI", "artificial intelligence", "machine learning",
+            "deep learning", "neural network", "GPT", "LLM",
+            "Claude", "ChatGPT", "OpenAI", "Anthropic", "Google AI",
+            "transformer", "foundation model", "generative AI",
+            "인공지능", "머신러닝", "딥러닝"
+          ],
+          "matchMode": "any"
+        },
+        "exclude": {
+          "keywords": ["광고", "sponsored", "AD"],
+          "matchMode": "any"
+        }
+      },
+      "actions": {
+        "setCategory": "ai",
+        "boostPriority": 2
+      }
+    },
+    {
+      "id": "crypto_focus",
+      "name": "암호화폐 뉴스",
+      "description": "암호화폐/블록체인 관련 뉴스",
+      "enabled": true,
+      "priority": 9,
+      "rules": {
+        "include": {
+          "keywords": [
+            "Bitcoin", "BTC", "Ethereum", "ETH", "crypto",
+            "cryptocurrency", "blockchain", "DeFi", "NFT",
+            "Web3", "Solana", "Cardano", "binance",
+            "비트코인", "이더리움", "암호화폐", "블록체인"
+          ],
+          "matchMode": "any"
+        },
+        "exclude": {
+          "keywords": ["scam", "rug pull", "광고"],
+          "matchMode": "any"
+        }
+      },
+      "actions": {
+        "setCategory": "crypto",
+        "boostPriority": 1
+      }
+    },
+    {
+      "id": "breaking_news",
+      "name": "속보 감지",
+      "description": "속보성 뉴스 우선 표시",
+      "enabled": true,
+      "priority": 10,
+      "rules": {
+        "include": {
+          "keywords": [
+            "breaking", "BREAKING", "속보", "긴급",
+            "just announced", "just released", "발표",
+            "exclusive", "단독", "최초"
+          ],
+          "matchMode": "any"
+        }
+      },
+      "actions": {
+        "setPriority": "critical",
+        "triggerAlert": true
+      }
+    },
+    {
+      "id": "market_news",
+      "name": "시장 뉴스",
+      "description": "금융시장 관련 뉴스",
+      "enabled": true,
+      "priority": 8,
+      "rules": {
+        "include": {
+          "keywords": [
+            "stock", "market", "NASDAQ", "S&P", "Dow Jones",
+            "Fed", "interest rate", "inflation", "GDP",
+            "earnings", "revenue", "IPO", "merger", "acquisition",
+            "주식", "증시", "금리", "인플레이션"
+          ],
+          "matchMode": "any"
+        }
+      },
+      "actions": {
+        "setCategory": "finance"
+      }
+    },
+    {
+      "id": "tech_giants",
+      "name": "빅테크 뉴스",
+      "description": "주요 기술 기업 관련 뉴스",
+      "enabled": true,
+      "priority": 8,
+      "rules": {
+        "include": {
+          "keywords": [
+            "Apple", "Google", "Microsoft", "Amazon", "Meta",
+            "NVIDIA", "Tesla", "Samsung", "TSMC",
+            "애플", "구글", "마이크로소프트", "아마존", "삼성"
+          ],
+          "matchMode": "any"
+        }
+      },
+      "actions": {
+        "setCategory": "technology",
+        "boostPriority": 1
+      }
+    },
+    {
+      "id": "spam_filter",
+      "name": "스팸 필터",
+      "description": "스팸/광고성 콘텐츠 제거",
+      "enabled": true,
+      "priority": 100,
+      "rules": {
+        "exclude": {
+          "keywords": [
+            "sponsored", "advertisement", "광고", "협찬",
+            "click here", "subscribe now", "limited offer",
+            "make money", "get rich", "무료", "이벤트 당첨"
+          ],
+          "matchMode": "any"
+        },
+        "excludePatterns": [
+          "\\d+% off",
+          "buy now",
+          "free trial"
+        ]
+      },
+      "actions": {
+        "reject": true
+      }
+    },
+    {
+      "id": "quality_filter",
+      "name": "품질 필터",
+      "description": "저품질 콘텐츠 필터링",
+      "enabled": true,
+      "priority": 50,
+      "rules": {
+        "minTitleLength": 10,
+        "maxTitleLength": 300,
+        "requireUrl": true,
+        "excludeSources": []
+      },
+      "actions": {
+        "reject": true
+      }
+    }
+  ],
+  "globalSettings": {
+    "defaultAction": "accept",
+    "maxArticlesPerSource": 50,
+    "deduplicationEnabled": true,
+    "deduplicationWindow": 86400,
+    "languageFilter": ["ko", "en"]
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-01-29",
+    "totalFilters": 7,
+    "enabledFilters": 7
+  }
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.mls.watcher</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/node</string>
+        <string>/Users/reim/music-lesson-summarizer/node_modules/.bin/tsx</string>
+        <string>/Users/reim/music-lesson-summarizer/src/cli/index.ts</string>
+        <string>watch</string>
+        <string>/Users/reim/Library/CloudStorage/GoogleDrive-comp4709@gmail.com/내 드라이브/클로바노트</string>
+        <string>-o</string>
+        <string>/Users/reim/music-lesson-summarizer/output</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/reim/music-lesson-summarizer</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/Users/reim/music-lesson-summarizer/logs/watcher.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/reim/music-lesson-summarizer/logs/watcher.error.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>ANTHROPIC_API_KEY</key>
+        <string>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</string>
+        <key>NOTION_API_KEY</key>
+        <string>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</string>
+        <key>NOTION_PAGE_ID</key>
+        <string>2f8ecc9a6ef580018794f0ba232ece99</string>
+    </dict>
+</dict>
+</plist>

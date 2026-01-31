@@ -1,0 +1,267 @@
+# 음악 수업 요약 자동화 시스템
+
+> 클로바 노트 녹음 → 플라우드 노트 스타일 AI 요약
+
+---
+
+## 1. 프로젝트 개요
+
+### 목표
+- 음악 수업 녹음을 자동으로 요약/정리
+- 플라우드 노트 수준의 구조화된 출력
+- 음악 수업 특화 기능 (코드 인식, 연습 과제 추출)
+
+### 핵심 플로우
+```
+[클로바 노트 앱] → [텍스트 내보내기] → [요약 시스템] → [구조화된 노트]
+     녹음              수동/자동           Claude API        마크다운/Notion
+```
+
+---
+
+## 2. 시스템 아키텍처
+
+### 옵션 A: CLI 도구 (권장 - 빠른 구현)
+```
+┌─────────────────────────────────────────────────────────┐
+│                    CLI Application                       │
+├─────────────────────────────────────────────────────────┤
+│  Input      │  Processor      │  Output                 │
+│  ─────────  │  ───────────    │  ──────────             │
+│  • 텍스트    │  • Claude API   │  • 마크다운 파일         │
+│  • 음성파일  │  • 템플릿 엔진   │  • Notion 페이지        │
+│             │  • 코드 파서     │  • 마인드맵 (Mermaid)   │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 옵션 B: 웹앱 (확장성)
+```
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  Next.js    │───▶│  API Route  │───▶│  Output     │
+│  Frontend   │    │  - STT      │    │  - Preview  │
+│  - Upload   │    │  - Summary  │    │  - Export   │
+│  - Preview  │    │  - Format   │    │  - Share    │
+└─────────────┘    └─────────────┘    └─────────────┘
+```
+
+### 선택: **옵션 A (CLI) 먼저 → 옵션 B (웹앱) 확장**
+
+---
+
+## 3. 기술 스택
+
+| 영역 | 기술 | 이유 |
+|------|------|------|
+| 언어 | TypeScript | 타입 안전성, Claude SDK 지원 |
+| STT | CLOVA Speech API | 한국어 정확도 최고, 180분 지원 |
+| 요약 | Claude API (Sonnet) | 긴 컨텍스트, 구조화 능력 |
+| 출력 | Markdown + Notion API | 범용성 + 협업 |
+| 실행 | Node.js CLI (tsx) | 빠른 개발, 크로스플랫폼 |
+
+---
+
+## 4. 핵심 기능 (플라우드 벤치마킹)
+
+### 4.1 다중 요약 템플릿
+
+```typescript
+// 템플릿 종류
+enum SummaryTemplate {
+  LESSON_NOTE = '강의 노트',      // 계층화된 개요
+  PRACTICE_LIST = '연습 과제',    // 숙제/연습 목록
+  KEY_POINTS = '핵심 포인트',     // 중요 개념 추출
+  QA_FORMAT = 'Q&A',             // 질문-답변 정리
+  TIMELINE = '타임라인',          // 시간순 정리
+}
+```
+
+### 4.2 음악 수업 특화 기능
+
+```typescript
+// 자동 추출 항목
+interface MusicLessonExtraction {
+  // 코드/화성
+  chords: string[];           // Am, C7, Dm7 등
+  scales: string[];           // C Major, A minor 등
+
+  // 연습 과제
+  homework: {
+    piece: string;            // 연습곡
+    sections: string[];       // 연습 구간 (마디 1-8)
+    technique: string;        // 연습 기법
+    deadline?: string;        // 다음 레슨까지
+  }[];
+
+  // 핵심 포인트
+  keyPoints: {
+    topic: string;
+    explanation: string;
+    timestamp?: string;
+  }[];
+
+  // 다음 레슨 준비
+  nextLesson: {
+    goals: string[];
+    preparation: string[];
+  };
+}
+```
+
+### 4.3 마인드맵 자동 생성
+
+```mermaid
+mindmap
+  root((오늘 수업))
+    기본기
+      자세 교정
+      손가락 위치
+    곡 분석
+      A 파트
+        Am - F - C - G
+      B 파트
+        코드 체인지 연습
+    숙제
+      마디 1-16 반복
+      메트로놈 80 BPM
+```
+
+### 4.4 Ask AI (질문 기반 추출)
+
+```typescript
+// 사용 예시
+await askLesson("이번 레슨의 핵심 기술은?")
+await askLesson("다음 시간까지 연습할 부분은?")
+await askLesson("선생님이 강조한 포인트는?")
+```
+
+---
+
+## 5. 구현 단계
+
+### Phase 1: MVP (1주)
+- [ ] 프로젝트 초기화 (TypeScript + CLI)
+- [ ] 텍스트 입력 → Claude 요약
+- [ ] 기본 템플릿 (강의 노트, 연습 과제)
+- [ ] 마크다운 출력
+
+### Phase 2: 음성 지원 (2주)
+- [ ] CLOVA Speech API 연동
+- [ ] 음성 파일 → 텍스트 변환
+- [ ] 파일 감시 자동화 (옵션)
+
+### Phase 3: 고급 기능 (3주)
+- [ ] 음악 코드/화성 자동 인식
+- [ ] 마인드맵 생성 (Mermaid)
+- [ ] Notion API 연동
+- [ ] Ask AI 기능
+
+### Phase 4: 웹앱 (선택)
+- [ ] Next.js 프론트엔드
+- [ ] 실시간 미리보기
+- [ ] 히스토리 관리
+
+---
+
+## 6. 폴더 구조
+
+```
+music-lesson-summarizer/
+├── src/
+│   ├── cli/
+│   │   └── index.ts          # CLI 진입점
+│   ├── core/
+│   │   ├── summarizer.ts     # 요약 엔진
+│   │   ├── extractor.ts      # 정보 추출
+│   │   └── templates/        # 요약 템플릿
+│   ├── integrations/
+│   │   ├── clova-speech.ts   # STT API
+│   │   ├── claude.ts         # Claude API
+│   │   └── notion.ts         # Notion API
+│   ├── utils/
+│   │   ├── music-parser.ts   # 코드/화성 파서
+│   │   └── mindmap.ts        # 마인드맵 생성
+│   └── types/
+│       └── index.ts          # 타입 정의
+├── templates/
+│   ├── lesson-note.md        # 강의 노트 템플릿
+│   ├── practice-list.md      # 연습 과제 템플릿
+│   └── key-points.md         # 핵심 포인트 템플릿
+├── output/                   # 생성된 노트
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+---
+
+## 7. 사용 예시
+
+### CLI 사용
+```bash
+# 텍스트 파일 요약
+mls summarize lesson.txt --template lesson-note
+
+# 음성 파일 요약 (STT 포함)
+mls summarize recording.m4a --template practice-list
+
+# 질문하기
+mls ask "다음 레슨까지 연습할 곡은?"
+
+# Notion으로 내보내기
+mls summarize lesson.txt --output notion
+```
+
+### 출력 예시
+```markdown
+# 🎵 피아노 레슨 노트 - 2026.01.31
+
+## 📋 오늘 배운 내용
+
+### 1. 기본기
+- **자세 교정**: 손목을 너무 낮추지 않도록 주의
+- **손가락 위치**: 검은 건반 가까이 유지
+
+### 2. 곡 분석: "River Flows in You"
+- **A 파트 (마디 1-8)**: Am - F - C - G 진행
+- **B 파트 (마디 9-16)**: 코드 체인지 속도 향상 필요
+
+## ✅ 이번 주 연습 과제
+
+| 우선순위 | 과제 | 템포 | 반복 |
+|---------|------|------|------|
+| 🔴 높음 | 마디 1-8 양손 연습 | 60 BPM | 매일 20분 |
+| 🟡 중간 | 코드 체인지 연습 | 자유 | 매일 10분 |
+| 🟢 낮음 | 전체 통주 | 50 BPM | 주 2회 |
+
+## 🎯 다음 레슨 목표
+- A 파트 완벽 암기
+- B 파트 시작
+
+---
+*Generated by Music Lesson Summarizer*
+```
+
+---
+
+## 8. API 비용 예상
+
+| 서비스 | 단가 | 예상 사용량 | 월 비용 |
+|--------|------|------------|--------|
+| CLOVA Speech | 10초당 5원 | 주 2시간 (8시간/월) | ~14,400원 |
+| Claude API | 입력 $3/M, 출력 $15/M | ~50K 토큰/월 | ~$1.5 |
+| Notion API | 무료 | - | 0원 |
+| **합계** | | | **~15,000원/월** |
+
+---
+
+## 9. 다음 단계
+
+계획 승인 시:
+1. 프로젝트 초기화
+2. 기본 CLI 구현
+3. Claude 요약 기능 구현
+4. 첫 번째 템플릿 완성
+
+---
+
+**승인 요청**: 이 계획으로 진행할까요?

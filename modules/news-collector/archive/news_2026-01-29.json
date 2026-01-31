@@ -1,0 +1,22 @@
+[
+  {
+    "id": "910d8f18ffe4",
+    "title": "Test AI Article",
+    "url": "https://example.com/test",
+    "source": "test",
+    "category": "ai",
+    "summary": "This is a test article about AI technology.",
+    "content": null,
+    "publishedAt": "2026-01-29T12:51:12.739268",
+    "collectedAt": "2026-01-29T12:51:12.739274",
+    "keywords": [
+      "test",
+      "article",
+      "this",
+      "about",
+      "technology"
+    ],
+    "priority": "low",
+    "sentiment": 0.0
+  }
+]

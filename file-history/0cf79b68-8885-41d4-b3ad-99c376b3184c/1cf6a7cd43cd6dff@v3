@@ -1,0 +1,33 @@
+{
+  "$schema": "https://claude.ai/schemas/mcp.json",
+  "version": "1.0.0",
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/reim/Documents", "/Users/reim/.claude"],
+      "description": "파일시스템 접근 (Documents, .claude)",
+      "enabled": true,
+      "priority": 10
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "description": "지식 그래프 메모리",
+      "enabled": true,
+      "priority": 5
+    }
+  },
+  "routing": {
+    "default": "filesystem",
+    "rules": [
+      {
+        "pattern": "file|read|write|directory|path",
+        "server": "filesystem"
+      },
+      {
+        "pattern": "memory|remember|recall|knowledge",
+        "server": "memory"
+      }
+    ]
+  }
+}

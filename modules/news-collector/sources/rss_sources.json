@@ -1,0 +1,178 @@
+{
+  "sources": [
+    {
+      "id": "techcrunch",
+      "name": "TechCrunch",
+      "type": "rss",
+      "url": "https://techcrunch.com/feed/",
+      "category": "technology",
+      "language": "en",
+      "enabled": true,
+      "priority": 8,
+      "refreshInterval": 1800,
+      "description": "테크 스타트업 및 기술 뉴스"
+    },
+    {
+      "id": "hackernews",
+      "name": "Hacker News",
+      "type": "api",
+      "url": "https://hacker-news.firebaseio.com/v0/topstories.json",
+      "category": "technology",
+      "language": "en",
+      "enabled": true,
+      "priority": 9,
+      "refreshInterval": 900,
+      "description": "기술자 커뮤니티 뉴스"
+    },
+    {
+      "id": "coindesk",
+      "name": "CoinDesk",
+      "type": "rss",
+      "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "category": "crypto",
+      "language": "en",
+      "enabled": true,
+      "priority": 8,
+      "refreshInterval": 1800,
+      "description": "암호화폐 및 블록체인 뉴스"
+    },
+    {
+      "id": "cointelegraph",
+      "name": "CoinTelegraph",
+      "type": "rss",
+      "url": "https://cointelegraph.com/rss",
+      "category": "crypto",
+      "language": "en",
+      "enabled": true,
+      "priority": 7,
+      "refreshInterval": 1800,
+      "description": "암호화폐 뉴스 및 분석"
+    },
+    {
+      "id": "reuters_tech",
+      "name": "Reuters Technology",
+      "type": "rss",
+      "url": "https://feeds.reuters.com/reuters/technologyNews",
+      "category": "technology",
+      "language": "en",
+      "enabled": true,
+      "priority": 9,
+      "refreshInterval": 1800,
+      "description": "로이터 기술 뉴스"
+    },
+    {
+      "id": "bloomberg_tech",
+      "name": "Bloomberg Technology",
+      "type": "rss",
+      "url": "https://feeds.bloomberg.com/technology/news.rss",
+      "category": "technology",
+      "language": "en",
+      "enabled": false,
+      "priority": 9,
+      "refreshInterval": 1800,
+      "description": "블룸버그 기술 뉴스"
+    },
+    {
+      "id": "verge",
+      "name": "The Verge",
+      "type": "rss",
+      "url": "https://www.theverge.com/rss/index.xml",
+      "category": "technology",
+      "language": "en",
+      "enabled": true,
+      "priority": 7,
+      "refreshInterval": 1800,
+      "description": "기술, 과학, 문화 뉴스"
+    },
+    {
+      "id": "ars_technica",
+      "name": "Ars Technica",
+      "type": "rss",
+      "url": "https://feeds.arstechnica.com/arstechnica/index",
+      "category": "technology",
+      "language": "en",
+      "enabled": true,
+      "priority": 7,
+      "refreshInterval": 3600,
+      "description": "심층 기술 분석"
+    },
+    {
+      "id": "mit_tech_review",
+      "name": "MIT Technology Review",
+      "type": "rss",
+      "url": "https://www.technologyreview.com/feed/",
+      "category": "ai",
+      "language": "en",
+      "enabled": true,
+      "priority": 9,
+      "refreshInterval": 3600,
+      "description": "AI 및 신기술 연구"
+    },
+    {
+      "id": "openai_blog",
+      "name": "OpenAI Blog",
+      "type": "rss",
+      "url": "https://openai.com/blog/rss/",
+      "category": "ai",
+      "language": "en",
+      "enabled": true,
+      "priority": 10,
+      "refreshInterval": 7200,
+      "description": "OpenAI 공식 블로그"
+    },
+    {
+      "id": "anthropic_blog",
+      "name": "Anthropic Blog",
+      "type": "scrape",
+      "url": "https://www.anthropic.com/news",
+      "category": "ai",
+      "language": "en",
+      "enabled": true,
+      "priority": 10,
+      "refreshInterval": 7200,
+      "description": "Anthropic 공식 뉴스"
+    },
+    {
+      "id": "google_ai_blog",
+      "name": "Google AI Blog",
+      "type": "rss",
+      "url": "https://blog.google/technology/ai/rss/",
+      "category": "ai",
+      "language": "en",
+      "enabled": true,
+      "priority": 9,
+      "refreshInterval": 7200,
+      "description": "Google AI 연구 블로그"
+    },
+    {
+      "id": "yonhap_it",
+      "name": "연합뉴스 IT",
+      "type": "rss",
+      "url": "https://www.yna.co.kr/rss/it.xml",
+      "category": "technology",
+      "language": "ko",
+      "enabled": true,
+      "priority": 8,
+      "refreshInterval": 1800,
+      "description": "연합뉴스 IT/과학"
+    },
+    {
+      "id": "zdnet_korea",
+      "name": "ZDNet Korea",
+      "type": "rss",
+      "url": "https://zdnet.co.kr/rss/news.xml",
+      "category": "technology",
+      "language": "ko",
+      "enabled": true,
+      "priority": 7,
+      "refreshInterval": 1800,
+      "description": "ZDNet 한국판"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-01-29",
+    "totalSources": 14,
+    "enabledSources": 13
+  }
+}

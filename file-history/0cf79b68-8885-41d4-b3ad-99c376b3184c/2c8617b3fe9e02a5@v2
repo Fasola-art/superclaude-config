@@ -1,0 +1,41 @@
+# SuperClaude TODO
+
+> 현재 진행 중인 작업 및 계획된 태스크
+
+---
+
+## 진행 중
+
+*현재 진행 중인 작업 없음*
+
+---
+
+## 대기 중
+
+### 모듈 개발 (보류)
+- [ ] Trading Module 상세 구현 (전략, 지표, 백테스팅)
+- [ ] News Collector Module 상세 구현 (소스 연동, 필터링)
+- [ ] Realtime Analysis Module 상세 구현 (WebSocket, 대시보드)
+
+---
+
+## 완료됨
+
+### 2026-01-29
+- [x] SuperClaude v2.0.9 macOS 이식
+- [x] MCP 서버 연동 (11/14 활성)
+- [x] PostgreSQL 데이터베이스 설정
+- [x] Error KB 시스템 구축
+- [x] Hooks 18개 구현
+- [x] 페르소나 41개 생성
+- [x] Vercel React 49개 규칙 통합
+- [x] 한국어 응답 설정
+- [x] launchd 서비스 설정
+
+---
+
+## 메모
+
+- 비활성 MCP 서버: fetch, time, puppeteer (타임아웃)
+- Error collector: 5분 간격 자동 실행
+- MCP router: 상시 실행

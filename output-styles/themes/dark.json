@@ -1,0 +1,59 @@
+{
+  "name": "dark",
+  "version": "1.0.0",
+  "description": "다크 테마 - 어두운 환경용 출력 스타일",
+
+  "colors": {
+    "background": "#1e1e1e",
+    "text": "#d4d4d4",
+    "text_secondary": "#9d9d9d",
+    "heading": "#ffffff",
+    "link": "#4fc1ff",
+    "link_hover": "#7dd3fc",
+    "code_bg": "#2d2d2d",
+    "code_text": "#ce9178",
+    "border": "#404040",
+    "table_header": "#2d2d2d",
+    "table_border": "#404040",
+    "blockquote_bg": "#252525",
+    "blockquote_border": "#4fc1ff",
+    "success": "#4ec9b0",
+    "warning": "#dcdcaa",
+    "error": "#f14c4c",
+    "info": "#9cdcfe"
+  },
+
+  "fonts": {
+    "body": {
+      "family": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "size": "16px",
+      "line_height": "1.6"
+    },
+    "heading": {
+      "family": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "weight": "600"
+    },
+    "code": {
+      "family": "JetBrains Mono, Menlo, Monaco, Consolas, monospace",
+      "size": "14px"
+    }
+  },
+
+  "spacing": {
+    "section": "2rem",
+    "paragraph": "1rem",
+    "list_item": "0.5rem"
+  },
+
+  "code_block": {
+    "border_radius": "8px",
+    "padding": "1rem",
+    "syntax_theme": "github-dark"
+  },
+
+  "table": {
+    "border_radius": "4px",
+    "header_bg": "#2d2d2d",
+    "stripe_bg": "#252525"
+  }
+}

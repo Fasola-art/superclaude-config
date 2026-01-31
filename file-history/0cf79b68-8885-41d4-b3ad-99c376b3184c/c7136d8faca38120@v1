@@ -1,0 +1,330 @@
+# Mac Studio Ultra M2 AI Agent System
+
+> **프로젝트**: SuperClaude v2.0.9 macOS 이식 + 확장 모듈 개발
+> **대상 하드웨어**: Mac Studio Ultra M2 (작업 데스크탑)
+> **버전**: 1.0.0
+
+---
+
+## 🎯 프로젝트 목표
+
+### Primary Outcome
+Windows 기반 SuperClaude v2.0.9 시스템을 macOS로 완전 이식하고, 
+트레이딩/뉴스/실시간 분석 모듈을 추가하여 통합 AI 워크스테이션 구축
+
+### Success Criteria
+- [ ] 34개 폴더 구조 macOS 경로 변환 완료
+- [ ] 18개 핵심 파일 이식 완료
+- [ ] 17개 Hooks 동작 확인
+- [ ] 49개 Vercel React 규칙 통합
+- [ ] 추가 모듈 3개 (Trading, News, Realtime) 설계 완료
+
+---
+
+## 📁 원본 시스템 구조 (Windows)
+
+### 경로 변환 규칙
+```
+Windows                          macOS
+─────────────────────────────────────────────────────
+C:\Users\looki\.claude    →     ~/.claude
+W:C:/Users/...            →     /Users/[username]/...
+```
+
+### 핵심 폴더 (34개)
+```
+~/.claude/
+├── agents/           # 에이전트 정의
+├── archive/          # 아카이브
+├── backups/          # 백업
+├── cache/            # 캐시
+├── cheatsheets/      # 치트시트
+├── chrome/           # 크롬 통합
+├── commands/         # 명령어
+├── debug/            # 디버그
+├── docs/             # 문서
+├── error-kb/         # 에러 지식베이스
+├── file-history/     # 파일 히스토리
+├── hooks/            # 17개 Hooks
+├── ide/              # IDE 통합
+├── jarvis/           # Jarvis 시스템
+├── logs/             # 로그
+├── mcp-router/       # MCP 라우터
+├── output-styles/    # 출력 스타일
+├── patterns/         # 패턴
+├── personas/         # 41개 페르소나
+├── plans/            # 계획
+├── plugins/          # 플러그인
+├── profiles/         # 프로필
+├── projects/         # 프로젝트
+├── prompts/          # 프롬프트
+├── references/       # 참조
+├── scripts/          # 스크립트
+├── session-env/      # 세션 환경
+├── sessions/         # 세션
+├── shell-snapshots/  # 쉘 스냅샷
+├── skills/           # 스킬
+├── statsig/          # 통계
+├── telemetry/        # 텔레메트리
+├── templates/        # 템플릿
+└── todos/            # 할일
+```
+
+### 핵심 파일 (18개)
+```
+~/.claude/
+├── .credentials.json
+├── superclaude-metadata.json
+├── AGENTS.md
+├── CLAUDE.md              ← 이 파일
+├── CLAUDE_SKILLS_GUIDE.md
+├── CONTEXT-MANAGER.md
+├── history.json
+├── INSTALLED_SKILLS.md
+├── KEYWORD-TRIGGERS.md
+├── mcp.json
+├── SESSION-MANAGER.md
+├── settings.json
+├── settings.local.json
+├── stats-cache.json
+├── WRITER-REVIEWER.md
+├── todo.md
+└── VERSION
+```
+
+---
+
+## 🔧 SuperClaude v2.0.9 핵심 시스템
+
+### 페르소나 (41개)
+| 카테고리 | 수량 | 예시 |
+|---------|------|------|
+| 개발 | 14개 | architect, frontend, backend, devops... |
+| Ideation | 27개 | strategist, analyst, researcher... |
+
+### Vibe Keywords (13개)
+```
+빠르게, 실험, 동시에, 고쳐, 되돌려, 계속, 확인해, 
+테스트해, 배포해, 정리해, 성능, 계획, 분석
+```
+
+### Mode Keywords (4개)
+```
+ultrawork, deepsearch, strategic, visual
+```
+
+### Hooks (17개)
+| 트리거 | 수량 |
+|--------|------|
+| UserPromptSubmit | 7개 |
+| PreToolUse | 2개 |
+| PostToolUse | 8개 |
+
+### Writer-Reviewer System
+- 4-Agent 병렬 검토 (Quality/Security/Performance/Accessibility)
+- 목표 점수: 0.85
+- 최대 반복: 10회
+
+### Error KB System
+- Jaccard 유사도 70% 검색
+- Ralph Loop 자동 복구 (최대 10회)
+
+### Context Manager
+- DCP 70%: 자동 아카이브 시작
+- DCP 85%: 적극적 정리
+- DCP 95%: 긴급 압축
+
+### 적응형 병렬 실행
+```
+시작: 5개 동시 실행
+
+스케일링:
+├── 연속 3개 성공 → +5 (10개로 증가)
+├── 1개 실패 → -3 (최소 3개)
+└── 최대: 무제한
+
+예시:
+5개 → 성공 → 10개 → 성공 → 15개 → 에러 → 12개
+```
+
+---
+
+## 📚 Vercel React Best Practices (49개 규칙)
+
+### 우선순위별 분류
+
+| 우선순위 | 카테고리 | 규칙 수 | 핵심 효과 |
+|---------|---------|--------|----------|
+| **CRITICAL** | ASYNC | 5 | 로딩 시간 50-70% 단축 |
+| **CRITICAL** | BUNDLE | 5 | 번들 크기 30-60% 감소 |
+| **HIGH** | RENDER | 5 | 클라이언트 번들 50% 감소 |
+| **HIGH** | SERVER | 5 | TTFB 90%+ 감소 |
+| **MEDIUM** | CACHE | 5 | 응답 시간 90% 감소 |
+| **MEDIUM** | IMAGE | 5 | 이미지 로딩 50% 빠름 |
+| **MEDIUM** | RERENDER | 7 | 불필요한 리렌더 90% 감소 |
+| **LOW** | JS-OPT | 12 | 런타임 성능 개선 |
+
+### CRITICAL 규칙 요약
+
+#### ASYNC (비동기 최적화)
+- ASYNC-001: 병렬 데이터 페칭 (Promise.all)
+- ASYNC-002: Waterfall 방지
+- ASYNC-003: Promise.all 활용
+- ASYNC-004: Streaming 응답
+- ASYNC-005: Suspense 경계
+
+#### BUNDLE (번들 최적화)
+- BUNDLE-001: Barrel Import 회피
+- BUNDLE-002: Dynamic Import
+- BUNDLE-003: Tree Shaking
+- BUNDLE-004: 의존성 감사
+- BUNDLE-005: Chunk 분할
+
+### HIGH 규칙 요약
+
+#### RENDER (렌더링)
+- RENDER-001: RSC/RCC 분리
+- RENDER-002: Streaming 렌더링
+- RENDER-003: Selective Hydration
+- RENDER-004: Partial Prerendering (PPR)
+- RENDER-005: Layout Stability (CLS 0)
+
+#### SERVER (서버)
+- SERVER-001: Server Components
+- SERVER-002: Server Actions
+- SERVER-003: Edge Functions
+- SERVER-004: ISR
+- SERVER-005: SSR 최적화
+
+---
+
+## 🆕 추가 모듈 설계
+
+### 1. Trading Module
+```
+~/.claude/modules/trading/
+├── strategies/      # 트레이딩 전략
+├── indicators/      # 기술적 지표
+├── backtesting/     # 백테스팅
+├── alerts/          # 알림
+└── TRADING.md       # 모듈 가이드
+```
+
+### 2. News Collector Module
+```
+~/.claude/modules/news-collector/
+├── sources/         # 뉴스 소스
+├── filters/         # 필터링 규칙
+├── alerts/          # 알림
+├── archive/         # 아카이브
+└── NEWS.md          # 모듈 가이드
+```
+
+### 3. Realtime Analysis Module
+```
+~/.claude/modules/realtime-analysis/
+├── streams/         # 데이터 스트림
+├── processors/      # 프로세서
+├── dashboards/      # 대시보드
+├── websocket/       # WebSocket 연결
+└── REALTIME.md      # 모듈 가이드
+```
+
+---
+
+## 📋 지침 생성 시스템
+
+### 포함된 템플릿
+1. **template.md** - PRD 템플릿 26개 섹션 (Enterprise 모드)
+2. **instruction_file_checklist.md** - 지침 파일 설계 6 Phase 체크리스트
+3. **instruction_creator_prompt.md** - 지침 파일 자동 생성 프롬프트
+
+### 핵심 원칙
+- 모듈화 설계 (각 섹션 독립적)
+- 표 중심 구조 (60% 이상)
+- 메타데이터 통일 (H/M/L, P0/P1/P2)
+- 이모지 체계 (🎯📋📊💡⚠️✅)
+
+---
+
+## 🚀 실행 계획
+
+### Phase 1: 기본 구조 생성
+```bash
+# 폴더 구조 생성
+mkdir -p ~/.claude/{agents,hooks,personas,skills,modules}
+mkdir -p ~/.claude/modules/{trading,news-collector,realtime-analysis}
+```
+
+### Phase 2: 핵심 파일 이식
+```bash
+# 설정 파일 생성
+touch ~/.claude/settings.json
+touch ~/.claude/mcp.json
+touch ~/.claude/CLAUDE.md
+```
+
+### Phase 3: Hooks 설정
+```bash
+# hooks 디렉토리 구성
+mkdir -p ~/.claude/hooks/{UserPromptSubmit,PreToolUse,PostToolUse}
+```
+
+### Phase 4: 모듈 개발
+```bash
+# 추가 모듈 초기화
+cd ~/.claude/modules/trading && npm init -y
+cd ~/.claude/modules/news-collector && npm init -y
+cd ~/.claude/modules/realtime-analysis && npm init -y
+```
+
+---
+
+## ⚙️ 권장 설정
+
+### settings.json 기본 구조
+```json
+{
+  "permissions": {
+    "allow": ["Read", "Write", "Edit"],
+    "deny": ["WebFetch"],
+    "ask": ["Bash(npm:*)", "Bash(git:*)"]
+  },
+  "hooks": {
+    "enabled": true,
+    "path": "~/.claude/hooks"
+  },
+  "context": {
+    "warningThreshold": 70,
+    "criticalThreshold": 85,
+    "emergencyThreshold": 95
+  }
+}
+```
+
+---
+
+## 📞 참조 문서
+
+- `/docs/system_file_layout.md` - 전체 파일 레이아웃
+- `/docs/Plan_Mode_Workflow.md` - Plan Mode 워크플로우
+- `/docs/WRITER_REVIEWER.md` - 4-Agent 검토 시스템
+- `/docs/CONTEXT_MANAGER.md` - 컨텍스트 관리
+- `/docs/global_error.md` - Error KB 시스템
+- `/docs/vercel-react-rules/` - 49개 React 규칙
+
+---
+
+## 🎯 첫 번째 태스크
+
+```
+ultrathink으로 Mac Studio Ultra M2용 통합 AI 에이전트 시스템 설계 문서를 생성해줘.
+
+포함 내용:
+1. macOS 폴더 구조 (경로 변환 완료)
+2. 핵심 설정 파일 (settings.json, mcp.json)
+3. SuperClaude v2.0.9 시스템 통합
+4. Vercel React 49개 규칙 요약
+5. Trading/News/Realtime 모듈 상세 설계
+6. 설치 스크립트 (setup.sh)
+```

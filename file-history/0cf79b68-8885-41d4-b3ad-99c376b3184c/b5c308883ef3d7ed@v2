@@ -1,0 +1,89 @@
+{
+  "version": "1.0",
+  "patterns": [
+    {
+      "id": "qf_001",
+      "regex": "Cannot find module '(.+)'",
+      "fix": "npm install $1",
+      "description": "누락된 모듈 설치"
+    },
+    {
+      "id": "qf_002",
+      "regex": "TS2304: Cannot find name '(.+)'",
+      "fix": "타입 정의 확인 또는 import 추가",
+      "description": "타입 정의 누락"
+    },
+    {
+      "id": "qf_003",
+      "regex": "Permission denied",
+      "fix": "chmod +x $file",
+      "description": "권한 부족 해결"
+    },
+    {
+      "id": "qf_004",
+      "regex": "ENOENT: no such file or directory",
+      "fix": "mkdir -p $dir",
+      "description": "디렉토리 생성"
+    },
+    {
+      "id": "qf_005",
+      "regex": "npm ERR! peer dep missing",
+      "fix": "npm install --legacy-peer-deps",
+      "description": "피어 의존성 충돌 해결"
+    },
+    {
+      "id": "qf_006",
+      "regex": "Error: listen EADDRINUSE",
+      "fix": "lsof -ti:$port | xargs kill -9",
+      "description": "포트 충돌 해결"
+    },
+    {
+      "id": "qf_007",
+      "regex": "zsh: command not found: (.+)",
+      "fix": "brew install $1",
+      "description": "macOS 명령어 설치"
+    }
+  ],
+  "common_patterns": {
+    "module_not_found": {
+      "patterns": ["Cannot find module", "Module not found", "ENOENT"],
+      "solutions": ["npm install <package>", "import 경로 확인 후 수정"]
+    },
+    "typescript_error": {
+      "patterns": ["TS2304", "TS2339", "TS2345", "TS2322", "TS2307"],
+      "solutions": ["적절한 타입 정의 추가", "타입 캐스팅 사용"]
+    },
+    "build_error": {
+      "patterns": ["Build failed", "Compilation failed", "webpack", "esbuild"],
+      "solutions": ["rm -rf node_modules && npm install", "npm cache clean --force"]
+    },
+    "lint_error": {
+      "patterns": ["ESLint", "Parsing error", "prettier"],
+      "solutions": ["npm run lint --fix", "eslint 규칙 확인"]
+    },
+    "test_error": {
+      "patterns": ["Test failed", "FAIL", "AssertionError"],
+      "solutions": ["테스트 로직 확인", "mock 데이터 확인"]
+    },
+    "react_error": {
+      "patterns": ["React", "hook", "component", "Invalid hook call"],
+      "solutions": ["Hook 규칙 확인", "컴포넌트 라이프사이클 확인"]
+    },
+    "next_error": {
+      "patterns": ["Next.js", "getServerSideProps", "Hydration failed"],
+      "solutions": ["서버/클라이언트 컴포넌트 분리", "use client 지시어 추가"]
+    },
+    "database_error": {
+      "patterns": ["ECONNREFUSED", "database", "PostgreSQL", "supabase"],
+      "solutions": ["DB 서버 실행 상태 확인", "연결 문자열 확인"]
+    },
+    "permission_error": {
+      "patterns": ["EACCES", "Permission denied", "EPERM"],
+      "solutions": ["chmod로 권한 변경", "sudo 없이 재시도"]
+    },
+    "network_error": {
+      "patterns": ["ECONNRESET", "timeout", "fetch failed", "ETIMEDOUT"],
+      "solutions": ["네트워크 연결 확인", "프록시 설정 확인"]
+    }
+  }
+}

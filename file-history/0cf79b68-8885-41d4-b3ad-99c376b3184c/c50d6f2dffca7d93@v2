@@ -1,0 +1,132 @@
+{
+  "$schema": "https://claude.ai/schemas/settings.json",
+  "version": "2.0.9",
+  "platform": "macOS",
+  "hardware": {
+    "model": "Mac Studio Ultra M2",
+    "cpu_cores": 24,
+    "gpu_cores": 76,
+    "memory_gb": 192,
+    "storage_tb": 8
+  },
+  "permissions": {
+    "allow": [
+      "Read:**",
+      "Write:**",
+      "Edit:**",
+      "MultiEdit:**",
+      "NotebookEdit:**",
+      "WebFetch:**",
+      "WebSearch:**",
+      "Grep:**",
+      "Glob:**",
+      "LS:**",
+      "Bash:Output:**",
+      "KillBash:**",
+      "TodoWrite:**",
+      "Task:**",
+      "ExitPlanMode:**",
+      "Bash:npm install*",
+      "Bash:npm search*",
+      "Bash:npm uninstall*",
+      "Bash:npx *",
+      "Bash:claude mcp*",
+      "Bash:pip install*",
+      "Bash:pip3 install*",
+      "Bash:brew install*",
+      "Bash:brew update*",
+      "Bash:git status*",
+      "Bash:git diff*",
+      "Bash:git log*",
+      "Bash:git branch*",
+      "Bash:git show*",
+      "Bash:git add*",
+      "Bash:git commit*",
+      "Bash:git checkout*",
+      "Bash:git switch*",
+      "Bash:git stash*",
+      "Bash:git merge*",
+      "Bash:git rebase*",
+      "Bash:ls*",
+      "Bash:pwd*",
+      "Bash:cat*",
+      "Bash:echo*",
+      "Bash:which*",
+      "Bash:npm run*",
+      "Bash:python*",
+      "Bash:python3*",
+      "Bash:node*",
+      "Bash:npm test*",
+      "Bash:npm lint*",
+      "Bash:npm build*",
+      "Bash:npx shadcn*",
+      "Bash:npx playwright*",
+      "Bash:gh search*",
+      "Bash:gh api*",
+      "Bash:gh repo*",
+      "Bash:gh issue*",
+      "Bash:gh pr*",
+      "mcp__context7__*",
+      "mcp__taskmaster-ai__*",
+      "mcp__ide__*",
+      "mcp__mcp-router__*"
+    ],
+    "deny": [
+      "Bash:git push*",
+      "Bash:git push --force*",
+      "Bash:git reset --hard*",
+      "Bash:git clean -fd*",
+      "Bash:rm -rf*",
+      "Bash:sudo*",
+      "Read:.env*",
+      "Write:.env*"
+    ],
+    "ask": []
+  },
+  "parallelExecution": {
+    "initial": 10,
+    "scaleUp": 5,
+    "scaleDown": 3,
+    "maximum": 24,
+    "consecutiveSuccessForScaleUp": 3
+  },
+  "context": {
+    "warningThreshold": 75,
+    "criticalThreshold": 90,
+    "emergencyThreshold": 95,
+    "autoArchive": true
+  },
+  "writerReviewer": {
+    "enabled": true,
+    "targetScore": 0.85,
+    "maxIterations": 10,
+    "convergenceThreshold": 0.015,
+    "agents": {
+      "quality": { "weight": 0.30 },
+      "security": { "weight": 0.30, "minScore": 0.85 },
+      "performance": { "weight": 0.20 },
+      "accessibility": { "weight": 0.20 }
+    }
+  },
+  "errorKB": {
+    "enabled": true,
+    "similarityThreshold": 0.70,
+    "maxRalphLoopRetries": 10,
+    "autoLearnOnSuccess": true
+  },
+  "session": {
+    "autoSnapshot": true,
+    "maxSnapshots": 10,
+    "autoResume": true
+  },
+  "language": {
+    "response": "ko",
+    "codeComments": "ko"
+  },
+  "hooks": {
+    "enabled": true,
+    "path": "~/.claude/hooks"
+  },
+  "enableAllProjectMcpServers": true,
+  "defaultMode": "acceptedEdits"
+}

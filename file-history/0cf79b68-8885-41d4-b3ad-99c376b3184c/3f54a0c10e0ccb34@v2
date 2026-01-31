@@ -1,0 +1,130 @@
+#!/usr/bin/env node
+/**
+ * persona-activator.js
+ * 페르소나 자동 활성화 훅
+ *
+ * 트리거: UserPromptSubmit
+ * 타임아웃: 1500ms
+ */
+
+const SECURITY_KEYWORDS = [
+  'auth', 'login', 'password', 'token', 'session', 'api', 'payment',
+  'credential', 'encrypt', 'decrypt', 'hash', 'secret', 'key', 'jwt',
+  '인증', '로그인', '비밀번호', '토큰', '세션', '결제', '암호화'
+];
+
+const PERSONA_TRIGGERS = {
+  security: {
+    priority: 90,
+    keywords: SECURITY_KEYWORDS,
+    forced: true
+  },
+  architect: {
+    priority: 85,
+    keywords: ['architecture', 'design', 'structure', 'system', 'pattern', '아키텍처', '설계', '구조']
+  },
+  backend: {
+    priority: 85,
+    keywords: ['api', 'endpoint', 'database', 'server', 'route', 'db', '백엔드', '서버']
+  },
+  frontend: {
+    priority: 80,
+    keywords: ['component', 'ui', 'form', 'button', 'style', 'css', 'react', '컴포넌트', '화면']
+  },
+  performance: {
+    priority: 85,
+    keywords: ['performance', 'slow', 'optimize', 'speed', 'memory', '성능', '최적화', '느린']
+  },
+  qa: {
+    priority: 80,
+    keywords: ['test', 'e2e', 'coverage', 'bug', 'quality', '테스트', '버그', '품질']
+  },
+  devops: {
+    priority: 80,
+    keywords: ['deploy', 'ci', 'cd', 'docker', 'kubernetes', 'infrastructure', '배포', '인프라']
+  },
+  analyzer: {
+    priority: 75,
+    keywords: ['analyze', 'why', 'cause', 'debug', 'investigate', '분석', '원인', '디버그']
+  },
+  explorer: {
+    priority: 75,
+    keywords: ['find', 'search', 'where', 'locate', '찾아', '검색', '어디']
+  },
+  refactorer: {
+    priority: 75,
+    keywords: ['refactor', 'clean', 'improve', 'simplify', '리팩토링', '정리', '개선']
+  }
+};
+
+const MAX_CONCURRENT_PERSONAS = 3;
+
+function detectPersonas(prompt) {
+  const lowerPrompt = prompt.toLowerCase();
+  const matched = [];
+
+  for (const [persona, config] of Object.entries(PERSONA_TRIGGERS)) {
+    for (const keyword of config.keywords) {
+      if (lowerPrompt.includes(keyword.toLowerCase())) {
+        matched.push({
+          name: persona,
+          priority: config.priority,
+          forced: config.forced || false,
+          matchedKeyword: keyword
+        });
+        break;
+      }
+    }
+  }
+
+  // 우선순위 정렬
+  matched.sort((a, b) => b.priority - a.priority);
+
+  // 강제 활성화 페르소나 확인
+  const forced = matched.filter(p => p.forced);
+  const optional = matched.filter(p => !p.forced);
+
+  // 최대 3개 선택 (강제 활성화 우선)
+  const selected = [...forced, ...optional].slice(0, MAX_CONCURRENT_PERSONAS);
+
+  return {
+    activated: selected.map(p => p.name),
+    details: selected,
+    securityForced: forced.some(p => p.name === 'security')
+  };
+}
+
+async function main() {
+  try {
+    let input = '';
+    process.stdin.setEncoding('utf8');
+
+    for await (const chunk of process.stdin) {
+      input += chunk;
+    }
+
+    const data = JSON.parse(input);
+    const prompt = data.prompt || data.message || '';
+
+    const result = detectPersonas(prompt);
+
+    if (result.activated.length > 0) {
+      const output = {
+        status: 'activated',
+        personas: result.activated,
+        securityForced: result.securityForced,
+        message: `페르소나 활성화: ${result.activated.join(', ')}${result.securityForced ? ' (보안 강제)' : ''}`
+      };
+      console.log(JSON.stringify(output));
+    } else {
+      console.log(JSON.stringify({ status: 'none', message: '페르소나 활성화 없음' }));
+    }
+
+    process.exit(0);
+  } catch (error) {
+    console.error(JSON.stringify({ status: 'error', message: error.message }));
+    process.exit(1);
+  }
+}
+
+main();

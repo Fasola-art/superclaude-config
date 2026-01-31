@@ -1,0 +1,262 @@
+/**
+ * 파일 감시 자동화 모듈
+ * 클로바 노트 → 구글 드라이브 → 자동 요약 + Notion 업로드
+ */
+
+import chokidar from 'chokidar';
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
+import { transcribe } from '../integrations/stt.js';
+import { getFullSummary } from '../integrations/claude.js';
+import { uploadToNotion } from '../integrations/notion.js';
+import type { LessonSummary } from '../types/index.js';
+
+// 처리 상태 추적
+const processedFiles = new Set<string>();
+const processingFiles = new Set<string>();
+
+// 설정
+interface WatcherConfig {
+  /** 감시할 폴더 경로 */
+  watchDir: string;
+  /** 처리 완료 후 파일 이동 경로 (선택) */
+  processedDir?: string;
+  /** 감시할 파일 확장자 */
+  extensions: string[];
+  /** 텍스트 파일도 처리 */
+  includeText: boolean;
+  /** Notion 업로드 여부 */
+  uploadToNotion: boolean;
+  /** 마크다운 저장 경로 */
+  outputDir: string;
+  /** 디바운스 시간 (ms) - 파일 쓰기 완료 대기 */
+  debounceMs: number;
+}
+
+const defaultConfig: WatcherConfig = {
+  watchDir: '',
+  extensions: ['.m4a', '.mp3', '.wav', '.txt'],
+  includeText: true,
+  uploadToNotion: true,
+  outputDir: './output',
+  debounceMs: 5000,
+};
+
+/**
+ * 파일 처리 함수
+ */
+async function processFile(
+  filePath: string,
+  config: WatcherConfig
+): Promise<void> {
+  const fileName = path.basename(filePath);
+  const ext = path.extname(filePath).toLowerCase();
+
+  // 이미 처리 중이거나 완료된 파일 스킵
+  if (processingFiles.has(filePath) || processedFiles.has(filePath)) {
+    return;
+  }
+
+  processingFiles.add(filePath);
+  console.log(`\n🎵 새 파일 감지: ${fileName}`);
+
+  try {
+    let transcript: string;
+
+    // 1. 텍스트 추출
+    if (ext === '.txt') {
+      console.log('📄 텍스트 파일 읽는 중...');
+      transcript = await fs.readFile(filePath, 'utf-8');
+    } else {
+      // 음성 파일 → STT
+      console.log('🎤 음성 변환 중 (Whisper)...');
+      const sttResult = await transcribe(filePath, 'whisper');
+
+      if (!sttResult.success || !sttResult.text) {
+        throw new Error(sttResult.error ?? '음성 변환 실패');
+      }
+      transcript = sttResult.text;
+      console.log('✅ 음성 변환 완료');
+    }
+
+    // 2. AI 요약
+    console.log('🤖 AI 요약 생성 중...');
+    const summary = await getFullSummary(transcript);
+    console.log('✅ 요약 완료');
+
+    // 3. 마크다운 저장
+    const outputPath = path.join(
+      config.outputDir,
+      `${summary.date}-${sanitizeFileName(summary.title)}.md`
+    );
+    await fs.mkdir(config.outputDir, { recursive: true });
+    await fs.writeFile(outputPath, renderSummaryToMarkdown(summary), 'utf-8');
+    console.log(`📁 저장됨: ${outputPath}`);
+
+    // 4. Notion 업로드
+    if (config.uploadToNotion) {
+      console.log('📤 Notion 업로드 중...');
+      const notionResult = await uploadToNotion(summary);
+
+      if (notionResult.success) {
+        console.log(`✅ Notion 업로드 완료: ${notionResult.pageUrl}`);
+      } else {
+        console.error(`⚠️ Notion 업로드 실패: ${notionResult.error}`);
+      }
+    }
+
+    // 5. 처리 완료 파일 이동 (선택)
+    if (config.processedDir) {
+      const destPath = path.join(config.processedDir, fileName);
+      await fs.mkdir(config.processedDir, { recursive: true });
+      await fs.rename(filePath, destPath);
+      console.log(`📦 파일 이동: ${config.processedDir}`);
+    }
+
+    processedFiles.add(filePath);
+    console.log(`\n✨ 처리 완료: ${fileName}\n`);
+
+  } catch (error) {
+    const message = error instanceof Error ? error.message : '알 수 없는 오류';
+    console.error(`❌ 처리 실패 (${fileName}): ${message}`);
+  } finally {
+    processingFiles.delete(filePath);
+  }
+}
+
+/**
+ * 파일명 정리 (특수문자 제거)
+ */
+function sanitizeFileName(name: string): string {
+  return name
+    .replace(/[<>:"/\\|?*]/g, '')
+    .replace(/\s+/g, '-')
+    .substring(0, 50);
+}
+
+/**
+ * 요약을 마크다운으로 렌더링
+ */
+function renderSummaryToMarkdown(summary: LessonSummary): string {
+  const lines: string[] = [];
+
+  lines.push(`# 🎵 ${summary.title} - ${summary.date}`);
+  lines.push('');
+  lines.push(`> ${summary.overview}`);
+  lines.push('');
+
+  // 배운 내용
+  if (summary.topics.length > 0) {
+    lines.push('## 📋 오늘 배운 내용');
+    lines.push('');
+    for (const topic of summary.topics) {
+      lines.push(`### ${topic.category}`);
+      for (const item of topic.items) {
+        lines.push(`- ${item}`);
+      }
+      lines.push('');
+    }
+  }
+
+  // 연습 과제
+  if (summary.practiceTasks.length > 0) {
+    lines.push('## ✅ 연습 과제');
+    lines.push('');
+    lines.push('| 우선순위 | 과제 | 구간 | 템포 |');
+    lines.push('|---------|------|------|------|');
+
+    for (const task of summary.practiceTasks) {
+      const emoji = task.priority === 'high' ? '🔴' : task.priority === 'medium' ? '🟡' : '🟢';
+      const sections = task.sections?.join(', ') ?? '-';
+      const tempo = task.tempo ?? '-';
+      lines.push(`| ${emoji} | ${task.title} | ${sections} | ${tempo} |`);
+    }
+    lines.push('');
+  }
+
+  // 핵심 포인트
+  if (summary.keyPoints.length > 0) {
+    lines.push('## 🎯 핵심 포인트');
+    lines.push('');
+    for (const point of summary.keyPoints) {
+      lines.push(`### ${point.topic}`);
+      lines.push(point.explanation);
+      lines.push('');
+    }
+  }
+
+  lines.push('---');
+  lines.push('*Generated by Music Lesson Summarizer*');
+
+  return lines.join('\n');
+}
+
+/**
+ * 파일 감시 시작
+ */
+export function startWatcher(config: Partial<WatcherConfig>): void {
+  const finalConfig: WatcherConfig = { ...defaultConfig, ...config };
+
+  if (!finalConfig.watchDir) {
+    throw new Error('watchDir이 설정되지 않았습니다.');
+  }
+
+  console.log('🔍 Music Lesson Summarizer - 자동화 모드');
+  console.log(`📂 감시 폴더: ${finalConfig.watchDir}`);
+  console.log(`📝 파일 형식: ${finalConfig.extensions.join(', ')}`);
+  console.log(`📤 Notion 업로드: ${finalConfig.uploadToNotion ? '활성화' : '비활성화'}`);
+  console.log('');
+  console.log('파일을 기다리는 중... (Ctrl+C로 종료)\n');
+
+  // 감시할 패턴 생성
+  const patterns = finalConfig.extensions.map(
+    (ext) => path.join(finalConfig.watchDir, `**/*${ext}`)
+  );
+
+  // chokidar로 폴더 감시 시작 (한글 경로 호환)
+  const watcher = chokidar.watch(finalConfig.watchDir, {
+    persistent: true,
+    ignoreInitial: false,
+    usePolling: true,
+    interval: 2000,
+    depth: 1, // 하위 1단계까지만
+    awaitWriteFinish: {
+      stabilityThreshold: finalConfig.debounceMs,
+      pollInterval: 1000,
+    },
+  });
+
+  // 파일 추가 이벤트
+  watcher.on('add', (filePath) => {
+    const fileName = path.basename(filePath);
+    const ext = path.extname(filePath).toLowerCase();
+
+    // 숨김 파일 무시
+    if (fileName.startsWith('.')) {
+      return;
+    }
+
+    // 확장자 필터
+    if (!finalConfig.extensions.includes(ext)) {
+      console.log(`⏭️ 무시: ${fileName} (지원하지 않는 형식)`);
+      return;
+    }
+
+    console.log(`📥 파일 감지: ${fileName}`);
+    processFile(filePath, finalConfig);
+  });
+
+  // 에러 처리
+  watcher.on('error', (error) => {
+    console.error('감시 오류:', error);
+  });
+
+  // 종료 시 정리
+  process.on('SIGINT', () => {
+    console.log('\n👋 감시 종료');
+    watcher.close();
+    process.exit(0);
+  });
+}
+
+export { WatcherConfig };

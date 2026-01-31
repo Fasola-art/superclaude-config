@@ -1,0 +1,293 @@
+#!/usr/bin/env node
+/**
+ * pattern-tracker.js
+ * 코드 패턴 추적 및 학습 훅
+ *
+ * 트리거: PostToolUse
+ * 매처: Edit|Write|Bash
+ * 타임아웃: 5000ms
+ */
+
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+
+const CLAUDE_DIR = path.join(process.env.HOME, '.claude');
+const PATTERNS_DIR = path.join(CLAUDE_DIR, 'patterns');
+const LEARNED_PATTERNS_FILE = path.join(PATTERNS_DIR, 'learned-patterns.json');
+const SUCCESS_PATTERNS_FILE = path.join(PATTERNS_DIR, 'success-patterns.json');
+
+function ensureDir() {
+  if (!fs.existsSync(PATTERNS_DIR)) {
+    fs.mkdirSync(PATTERNS_DIR, { recursive: true });
+  }
+}
+
+function loadPatterns(file) {
+  try {
+    if (fs.existsSync(file)) {
+      return JSON.parse(fs.readFileSync(file, 'utf8'));
+    }
+  } catch (e) {
+    // 파일 오류
+  }
+  return { patterns: [], metadata: { lastUpdated: null, totalPatterns: 0 } };
+}
+
+function savePatterns(file, data) {
+  ensureDir();
+  data.metadata.lastUpdated = new Date().toISOString();
+  data.metadata.totalPatterns = data.patterns.length;
+  fs.writeFileSync(file, JSON.stringify(data, null, 2));
+}
+
+// 코드에서 패턴 추출
+function extractPatterns(content, filePath) {
+  const patterns = [];
+  const ext = path.extname(filePath);
+
+  // 파일 타입별 패턴 추출
+  if (['.ts', '.tsx', '.js', '.jsx'].includes(ext)) {
+    patterns.push(...extractJsPatterns(content));
+  } else if (['.py'].includes(ext)) {
+    patterns.push(...extractPyPatterns(content));
+  }
+
+  return patterns;
+}
+
+function extractJsPatterns(content) {
+  const patterns = [];
+
+  // React 컴포넌트 패턴
+  const componentMatch = content.match(/(?:export\s+)?(?:default\s+)?function\s+([A-Z]\w+)\s*\(/);
+  if (componentMatch) {
+    patterns.push({
+      type: 'react_component',
+      name: componentMatch[1],
+      hasExport: content.includes('export')
+    });
+  }
+
+  // Hook 사용 패턴
+  const hooks = content.match(/use[A-Z]\w+/g);
+  if (hooks) {
+    patterns.push({
+      type: 'hooks_usage',
+      hooks: [...new Set(hooks)]
+    });
+  }
+
+  // API 호출 패턴
+  if (content.includes('fetch(') || content.includes('axios')) {
+    patterns.push({
+      type: 'api_call',
+      method: content.includes('POST') ? 'POST' :
+              content.includes('PUT') ? 'PUT' :
+              content.includes('DELETE') ? 'DELETE' : 'GET'
+    });
+  }
+
+  // 에러 핸들링 패턴
+  if (content.includes('try') && content.includes('catch')) {
+    patterns.push({
+      type: 'error_handling',
+      hasTryCatch: true,
+      hasFinally: content.includes('finally')
+    });
+  }
+
+  // 비동기 패턴
+  if (content.includes('async') || content.includes('await')) {
+    patterns.push({
+      type: 'async_pattern',
+      hasAsync: content.includes('async'),
+      hasAwait: content.includes('await')
+    });
+  }
+
+  // 타입 정의 패턴
+  const typeMatch = content.match(/(?:interface|type)\s+(\w+)/g);
+  if (typeMatch) {
+    patterns.push({
+      type: 'type_definitions',
+      count: typeMatch.length
+    });
+  }
+
+  return patterns;
+}
+
+function extractPyPatterns(content) {
+  const patterns = [];
+
+  // 클래스 정의
+  const classMatch = content.match(/class\s+(\w+)/g);
+  if (classMatch) {
+    patterns.push({
+      type: 'class_definition',
+      count: classMatch.length
+    });
+  }
+
+  // 데코레이터 사용
+  const decorators = content.match(/@\w+/g);
+  if (decorators) {
+    patterns.push({
+      type: 'decorators',
+      decorators: [...new Set(decorators)]
+    });
+  }
+
+  // 예외 처리
+  if (content.includes('try:') && content.includes('except')) {
+    patterns.push({
+      type: 'exception_handling',
+      hasExcept: true
+    });
+  }
+
+  return patterns;
+}
+
+// Bash 명령 패턴 추출
+function extractBashPatterns(command) {
+  const patterns = [];
+
+  // Git 명령 패턴
+  if (command.startsWith('git ')) {
+    const gitCmd = command.split(' ')[1];
+    patterns.push({
+      type: 'git_command',
+      command: gitCmd
+    });
+  }
+
+  // npm/yarn 명령 패턴
+  if (command.startsWith('npm ') || command.startsWith('yarn ')) {
+    const pkgManager = command.startsWith('npm') ? 'npm' : 'yarn';
+    const action = command.split(' ')[1];
+    patterns.push({
+      type: 'package_manager',
+      manager: pkgManager,
+      action: action
+    });
+  }
+
+  // 파이프라인 패턴
+  if (command.includes('|')) {
+    patterns.push({
+      type: 'pipeline',
+      steps: command.split('|').length
+    });
+  }
+
+  return patterns;
+}
+
+// 패턴 해시 생성
+function getPatternHash(pattern) {
+  const str = JSON.stringify(pattern);
+  return crypto.createHash('md5').update(str).digest('hex').substring(0, 8);
+}
+
+// 성공 패턴 학습
+function learnSuccessPattern(data, patterns) {
+  const successData = loadPatterns(SUCCESS_PATTERNS_FILE);
+
+  for (const pattern of patterns) {
+    const hash = getPatternHash(pattern);
+    const existing = successData.patterns.find(p => p.hash === hash);
+
+    if (existing) {
+      existing.count++;
+      existing.lastSeen = new Date().toISOString();
+    } else {
+      successData.patterns.push({
+        hash: hash,
+        pattern: pattern,
+        count: 1,
+        firstSeen: new Date().toISOString(),
+        lastSeen: new Date().toISOString()
+      });
+    }
+  }
+
+  // 상위 100개만 유지 (사용 빈도순)
+  successData.patterns.sort((a, b) => b.count - a.count);
+  successData.patterns = successData.patterns.slice(0, 100);
+
+  savePatterns(SUCCESS_PATTERNS_FILE, successData);
+
+  return successData.patterns.length;
+}
+
+// 메인 패턴 추적
+function trackPatterns(data) {
+  const tool = data.tool || '';
+  const filePath = data.file_path || data.path || '';
+  const content = data.content || data.new_string || '';
+  const command = data.command || '';
+  const exitCode = data.exitCode || 0;
+
+  let patterns = [];
+
+  // 도구별 패턴 추출
+  if (['Edit', 'Write'].includes(tool) && content) {
+    patterns = extractPatterns(content, filePath);
+  } else if (tool === 'Bash' && command) {
+    patterns = extractBashPatterns(command);
+  }
+
+  if (patterns.length === 0) {
+    return {
+      status: 'no_patterns',
+      message: '추출된 패턴 없음'
+    };
+  }
+
+  // 성공한 경우만 학습
+  const isSuccess = exitCode === 0 && !data.stderr;
+
+  if (isSuccess) {
+    const totalPatterns = learnSuccessPattern(data, patterns);
+
+    return {
+      status: 'learned',
+      patternsExtracted: patterns.length,
+      totalStoredPatterns: totalPatterns,
+      patterns: patterns.slice(0, 3), // 샘플로 3개만
+      message: `🧠 ${patterns.length}개 패턴 학습됨 (총 ${totalPatterns}개)`
+    };
+  }
+
+  return {
+    status: 'extracted',
+    patternsExtracted: patterns.length,
+    patterns: patterns.slice(0, 3),
+    message: `📊 ${patterns.length}개 패턴 감지 (미학습 - 실패)`
+  };
+}
+
+async function main() {
+  try {
+    let input = '';
+    process.stdin.setEncoding('utf8');
+
+    for await (const chunk of process.stdin) {
+      input += chunk;
+    }
+
+    const data = JSON.parse(input);
+    const result = trackPatterns(data);
+
+    console.log(JSON.stringify(result));
+    process.exit(0);
+
+  } catch (error) {
+    console.error(JSON.stringify({ status: 'error', message: error.message }));
+    process.exit(1);
+  }
+}
+
+main();

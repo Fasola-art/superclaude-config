@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+"""
+무한 루프 감지 Hook
+- 연속 실패 감지
+- 강제 중단 트리거
+"""
+
+import os
+import json
+from pathlib import Path
+from datetime import datetime, timedelta
+
+STATE_FILE = Path.home() / ".claude" / "cache" / "loop-state.json"
+MAX_CONSECUTIVE_FAILURES = 5
+TIME_WINDOW_MINUTES = 5
+
+def load_state() -> dict:
+    """상태 로드"""
+    if STATE_FILE.exists():
+        try:
+            with open(STATE_FILE, 'r') as f:
+                return json.load(f)
+        except:
+            pass
+    return {"failures": [], "warned": False}
+
+def save_state(state: dict):
+    """상태 저장"""
+    STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(STATE_FILE, 'w') as f:
+        json.dump(state, f)
+
+def check_loop():
+    """무한 루프 체크"""
+    exit_code = os.environ.get("EXIT_CODE", "0")
+    tool_name = os.environ.get("TOOL_NAME", "")
+
+    # 성공이면 상태 리셋
+    if exit_code == "0":
+        save_state({"failures": [], "warned": False})
+        return
+
+    state = load_state()
+    now = datetime.now()
+
+    # 시간 윈도우 내 실패만 유지
+    cutoff = now - timedelta(minutes=TIME_WINDOW_MINUTES)
+    recent_failures = [
+        f for f in state["failures"]
+        if datetime.fromisoformat(f["time"]) > cutoff
+    ]
+
+    # 현재 실패 추가
+    recent_failures.append({
+        "time": now.isoformat(),
+        "tool": tool_name
+    })
+
+    state["failures"] = recent_failures
+
+    if len(recent_failures) >= MAX_CONSECUTIVE_FAILURES:
+        if not state["warned"]:
+            print(f"🛑 Loop:{len(recent_failures)}회 → 수동 개입")
+            state["warned"] = True
+    elif len(recent_failures) >= 3:
+        print(f"⚠️ Loop:{len(recent_failures)}/{MAX_CONSECUTIVE_FAILURES}")
+
+    save_state(state)
+
+if __name__ == "__main__":
+    check_loop()

@@ -1,0 +1,12 @@
+{
+  "id": "974438b66598",
+  "type": "mcp-protocol",
+  "message": "서버 시작 실패: sentry",
+  "timestamp": "2026-01-29 19:46:10,328",
+  "raw_log": "2026-01-29 19:46:10,328 [ERROR] mcp-protocol: 서버 시작 실패: sentry",
+  "created_at": "2026-01-29T20:09:55.759983",
+  "resolved": true,
+  "resolution": "SENTRY_ACCESS_TOKEN 환경변수명 수정, @sentry/mcp-server 패키지 사용",
+  "context": {},
+  "resolved_at": "2026-01-29T20:10:08.672124"
+}

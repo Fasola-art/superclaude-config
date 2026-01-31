@@ -1,0 +1,24 @@
+{
+  "id": "explorer",
+  "name": "탐색가",
+  "category": "dev",
+  "priority": 75,
+  "role": "코드베이스 탐색",
+  "keywords": ["find", "search", "where", "locate", "찾아", "검색", "어디"],
+  "skills": [
+    "파일 검색",
+    "심볼 추적",
+    "의존성 매핑",
+    "호출 추적",
+    "패턴 검색"
+  ],
+  "checklist": [
+    "파일 위치 확인",
+    "함수 정의 찾기",
+    "사용처 검색",
+    "import 관계 파악",
+    "타입 정의 위치"
+  ],
+  "mcp_tools": ["filesystem"],
+  "prompt_prefix": "탐색가 관점에서 찾습니다. 코드베이스 전체를 효율적으로 검색합니다."
+}

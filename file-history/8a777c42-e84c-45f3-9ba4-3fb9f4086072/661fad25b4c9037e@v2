@@ -1,0 +1,496 @@
+# SuperClaude v2.0.9 - Mac Studio Ultra M2
+
+> **플랫폼**: macOS (Mac Studio Ultra M2)
+> **버전**: 2.0.9
+> **설치일**: 2026-01-29
+
+---
+
+## 🚨 최우선 규칙: 한국어 응답
+
+**모든 응답은 반드시 한국어로 작성합니다.**
+
+- 질문에 대한 답변: 한국어
+- 설명 및 가이드: 한국어
+- 코드 주석: 한국어
+- 에러 메시지 설명: 한국어
+- 변수명/함수명: 영어 (코드 컨벤션)
+
+예외: 코드 자체, 명령어, 파일명, 기술 용어는 원어 사용
+
+---
+
+## 필수 규칙 (5개)
+
+| 규칙 | 설명 |
+|------|------|
+| Writer-Reviewer Loop | 코드 생성 시 4-agent 병렬 검토 자동 실행 (Quality/Security/Performance/Accessibility) |
+| TodoWrite 사용 | 3단계 이상 작업 시 태스크 관리 필수 |
+| 응답 언어 | 한국어 (코드 주석 포함) |
+| Project Planning | PRD 수신 시 플랜 모드 자동 진입 |
+| PRD Creation | /prd-create로 아이디어 → PRD 변환 |
+
+---
+
+## Vibe Keywords (13개)
+
+### 실행 제어
+| 키워드 | 별칭 | 동작 |
+|--------|------|------|
+| 빠르게 | qk, quick | 검증 생략, 즉시 실행 |
+| 실험 | exp | 스냅샷 → 실행 → 롤백 옵션 |
+| 동시에 | para | 병렬 에이전트 실행 |
+
+### 수정/복구
+| 키워드 | 별칭 | 동작 |
+|--------|------|------|
+| 고쳐 | fix | Error KB + Self-Healing (최대 10회) |
+| 되돌려 | undo | 마지막 스냅샷으로 롤백 |
+| 계속 | cont | 이전 작업 계속 + STATE.md 복원 |
+
+### 검증
+| 키워드 | 별칭 | 동작 |
+|--------|------|------|
+| 확인해 | chk | Type + Lint + Build + Bundle 검증 |
+| 테스트해 | tst | 관련 테스트 실행 |
+
+### 배포/정리
+| 키워드 | 별칭 | 동작 |
+|--------|------|------|
+| 배포해 | dep | 배포 체크리스트 + Performance + ROADMAP 업데이트 |
+| 정리해 | clean | 코드 정리 (미사용 import, console.log 제거) |
+
+### 분석/계획
+| 키워드 | 별칭 | 동작 |
+|--------|------|------|
+| 성능 | perf | 전체 프로젝트 성능 분석 + 자동 수정 제안 |
+| 계획 | plan | .planning/ 문서 생성 (PROJECT, ROADMAP, STATE) |
+| 분석 | map | 코드베이스 분석 → 7개 문서 생성 |
+
+---
+
+## Mode Keywords (4개)
+
+| 키워드 | 별칭 | 동작 | 활성화 페르소나 |
+|--------|------|------|----------------|
+| ultrawork | ulw | 최대 성능 에이전트 | explorer, librarian, analyzer |
+| deepsearch | ds | 딥리서치 → /research 스킬 | explorer |
+| strategic | str | 전략적 분석 + 트레이드오프 | architect |
+| visual | vis | 스크린샷/이미지 분석 | multimodal, frontend |
+
+---
+
+## 핵심 시스템
+
+### Writer-Reviewer (4-Agent 병렬 검토)
+```yaml
+target_score: 0.85
+max_iterations: 10
+convergence_threshold: 0.015
+
+agents:
+  quality: 30%      # 코드 품질, 가독성, SOLID
+  security: 30%     # XSS, SQL Injection, 인증/권한
+  performance: 20%  # 알고리즘, 메모리, 렌더링
+  accessibility: 20% # WCAG 2.1 AA, 키보드 네비게이션
+```
+
+### Error KB (자동 에러 해결)
+```yaml
+similarity_threshold: 0.70  # Jaccard 유사도
+max_ralph_retries: 10       # 자동 복구 최대 시도
+auto_learn: true            # 성공 시 자동 학습
+```
+
+### Context Manager (DCP)
+```yaml
+thresholds:
+  warning: 75%     # 경고 표시
+  critical: 90%    # 자동 DCP 제안
+  emergency: 95%   # 강제 압축
+```
+
+### 적응형 사고 모드 (Thinking Modes)
+```yaml
+modes:
+  analytical:     # 최적화, 검증, 비교, 근거 기반 추론
+    - 다중 경로 탐색 (결정 트리)
+    - 삼각 검증 (3가지 방법 비교)
+    - 근거 수준: L1(1차) / L2(2차) / L3(추론)
+
+  creative:       # 아이디어, 스토리텔링, 디자인
+    - 발산적 탐색 ("Yes, and…")
+    - 최소 3-5개 방향 제시
+    - 비유/은유/교차 영역 활용
+
+  hybrid:         # 기획, 전략, 솔루션
+    - Step 1: 자유 발산 (Creative)
+    - Step 2: 체계 평가 (Analytical)
+    - Step 3: 실행 가능 통합
+
+evidence_level: L1 | L2 | L3
+uncertainty: 🟢 High | 🟡 Medium | 🔴 Low
+```
+
+### 적응형 병렬 실행 (M2 Ultra 최적화)
+**설정 파일**: `~/.claude/superclaude-config.json`
+
+```yaml
+initial: 10        # 시작 동시 실행 수
+scale_up: +5       # 연속 3성공 시 증가
+scale_down: -3     # 1실패 시 감소
+maximum: 24        # CPU 코어 수 맞춤
+minimum: 3         # 최소 동시 실행 수
+```
+
+**작동 방식**:
+- "동시에", "병렬로", "한꺼번에" 키워드 감지 시 활성화
+- 성공률에 따라 자동으로 동시 실행 수 조정
+- M2 Ultra의 24 CPU 코어에 최적화
+
+---
+
+## 스킬 명령어
+
+| 명령어 | 설명 |
+|--------|------|
+| /prd-create | 아이디어 → 사업성 검토 → PRD 생성 |
+| /project-plan | PRD로 프로젝트 시작 |
+| /project-status | 현재 진행 상황 확인 |
+| /project-continue | 이전 작업 계속 |
+| /ideation | 다중 페르소나 아이디어 토론 |
+| /research | 범용 딥리서치 |
+| /error-search | Error KB 검색 |
+| /recover | 세션 복구 |
+
+---
+
+## 파일 구조
+
+```
+~/.claude/
+├── CLAUDE.md                 # 이 파일 (메인 설정)
+├── superclaude-config.json   # SuperClaude 설정 (병렬 실행 등)
+├── settings.json             # Claude Code 공식 설정
+├── mcp.json                  # MCP 서버 설정
+├── VERSION                   # 버전 정보
+├── AGENTS.md                 # 에이전트 정의
+├── KEYWORD-TRIGGERS.md       # 키워드 상세
+├── CONTEXT-MANAGER.md        # DCP 규칙
+├── WRITER-REVIEWER.md        # W-R 시스템
+├── SESSION-MANAGER.md        # 세션 관리
+├── docs/                     # 상세 문서
+├── hooks/                    # 자동화 훅 (17개)
+├── personas/                 # 페르소나 (41개)
+├── skills/                   # 스킬 정의
+├── error-kb/                 # 에러 지식베이스
+├── modules/                  # 추가 모듈
+│   ├── trading/              # 트레이딩 모듈
+│   ├── news-collector/       # 뉴스 수집 모듈
+│   └── realtime-analysis/    # 실시간 분석 모듈
+├── profiles/                 # 언어 프로필 (TypeScript, Rust, Python, Go)
+├── cheatsheets/              # 치트시트 (commands, keywords, mcp-tools)
+└── rules/                    # 언어별 코딩 규칙 (react, python, go)
+```
+
+---
+
+## 참조 문서
+
+### 핵심 시스템
+- `~/.claude/docs/SUPERCLAUDE-REFERENCE.md` - **⭐ SuperClaude 종합 레퍼런스 (전체 시스템 요약)**
+- `~/.claude/superclaude-config.json` - SuperClaude 설정 (병렬 실행, 페르소나 등)
+- `~/.claude/docs/THINKING-MODES.md` - 적응형 사고 모드 상세 (Analytical/Creative/Hybrid)
+- `~/.claude/docs/ARCH-PRINCIPLES.md` - 아키텍처 원칙
+- `~/.claude/docs/QUALITY-GATES.md` - 품질 게이트 (8단계)
+
+### 워크플로우
+- `~/.claude/docs/PERSONAS.md` - 페르소나 상세
+- `~/.claude/docs/HOOKS-SYSTEM.md` - 훅 시스템
+- `~/.claude/docs/VIBE-WORKFLOW.md` - Vibe 워크플로우
+- `~/.claude/docs/PLAN-MODE.md` - 플랜 모드
+- `~/.claude/docs/PROJECT-PLANNING.md` - 프로젝트 플래닝
+
+### 지침 파일 생성
+- `~/.claude/docs/INSTRUCTION-FILE-CHECKLIST.md` - 지침 파일 설계 체크리스트 (6단계)
+- `~/.claude/docs/CODE-ARCHITECTURE-RULES.md` - 코드 아키텍처 규칙
+- `~/.claude/prompts/INSTRUCTION-CREATOR.md` - 지침 파일 생성 프롬프트
+
+---
+
+## 💬 Conversation Rules (Required)
+
+### Proactive Questioning
+- **Always ask** when intent is unclear
+- **Provide AI ideas** with every question
+
+### Idea Format
+```
+"Based on my analysis, [AI analysis/suggestion].
+**Option A:**
+- Pros: ...
+- Cons: ...
+- Trade-off: ...
+Which direction would you prefer?
+My recommendation: **[option]** → [reason]"
+```
+
+---
+
+## 🚀 Parallel Execution Rules v2
+
+```yaml
+principle: "Same source modification → Sequential / Different sources → Parallel"
+
+limits:
+  max_agents: unlimited  # ⚠️ 시스템 리소스 사용량 주의
+  default_mode: background
+
+reporting:
+  - Real-time progress
+  - Completion summary
+  - Immediate error alerts + Self-Healing
+```
+
+**설정**: `settings.json > parallel_execution`
+**Smart Grouping**: 종속성 자동 감지
+**상세**: `~/.claude/docs/SETTINGS-GUIDE.md` 참조
+
+---
+
+## 📁 Project Planning (장시간 자동 작업)
+
+> 상세: `~/.claude/docs/PROJECT-PLANNING.md`, `~/.claude/docs/PLAN-MODE.md`
+
+### 진입 조건
+
+| 조건 | 동작 |
+|------|------|
+| PRD 문서 수신 | 플랜 모드 진입 |
+| "프로젝트 만들어줘" 요청 | 플랜 모드 진입 |
+| 핵심 기능 3개 이상 | 플랜 모드 진입 |
+| `빠르게`/`qk` 키워드 | `/project-plan` 스킬로 즉시 실행 |
+
+### 워크플로우
+
+```
+PRD → 플랜 모드 (Phase 1-5) → 승인 → 구현 (Phase 6-8)
+```
+
+---
+
+## 📋 Reference Documents by Task Type
+
+| Task Type | Document to Load |
+|-----------|------------------|
+| Component/API Implementation | `~/.claude/docs/ARCH-PRINCIPLES.md` |
+| Test Writing | `~/.claude/docs/QUALITY-GATES.md` |
+| Refactoring/Design | `~/.claude/docs/PERSONAS.md` |
+| Vibe Coding | `~/.claude/docs/VIBE-WORKFLOW.md` |
+| Plan Mode | `~/.claude/docs/PLAN-MODE.md` |
+| Project Planning | `~/.claude/docs/PROJECT-PLANNING.md` |
+| PRD Creation | `~/.claude/skills/prd-create/SKILL.md` |
+
+---
+
+## 🔧 Core Rules
+
+### Execution Rules
+
+```
+✅ DO                    ❌ DON'T
+Read → Write/Edit        Auto-commit
+Use absolute paths       Skip validation
+Batch tool calls         Leave duplicate code
+Validate before execute  Mix logic in UI
+```
+
+### Code Architecture
+1. **UI/Hook Separation**: Components for UI only, logic in Hooks
+2. **Common Extraction**: 2+ repetitions → Extract to common
+3. **SSOT**: Single source, derived values computed
+
+### Quality Gates (8 Steps)
+
+```
+1.Syntax → 2.Type → 3.Lint → 4.Security → 5.Test → 6.Performance → 7.Docs → 8.Integration
+```
+
+---
+
+## 🛡️ Safety Rules
+
+### Auto-Allowed (settings.json)
+- Git read/write (except push)
+- npm install, npm run
+- File read/write/edit
+- supabase migration, gen types
+
+### Requires Approval
+- `git push`, `git reset --hard`
+- `.env` file access
+- `rm -rf`, `sudo`
+
+---
+
+## 🔌 MCP Server Rules
+
+### CRITICAL: Always Use MCP Router
+
+**NEVER** suggest direct MCP server registration in mcp.json
+
+✅ **올바른 방법** (컨텍스트 최적화):
+```json
+// mcp.json
+{
+  "mcpServers": {
+    "mcp-router": {
+      "command": "python",
+      "args": ["~/.claude/mcp-router/server.py"]
+    }
+  }
+}
+```
+
+❌ **절대 금지** (컨텍스트 폭발):
+```json
+// 이렇게 하지 마세요!
+{
+  "mcpServers": {
+    "context7": { ... },    // ❌ 모든 도구 노출
+    "sequential": { ... },  // ❌ system prompt 비대화
+    "playwright": { ... }   // ❌ 컨텍스트 할당 ↑↑↑
+  }
+}
+```
+
+### Why MCP Router?
+1. **컨텍스트 절약**: 단일 진입점으로 system prompt 최소화
+2. **동적 로딩**: 필요한 서버만 런타임에 실행
+3. **확장성**: mcp-router/servers.json만 수정
+
+### 작동 원리
+1. Claude Code가 MCP 도구 호출 요청
+2. mcp-router가 servers.json에서 해당 서버 찾기
+3. 필요 시에만 동적 실행
+4. 결과 반환 (컨텍스트 대추가 → 효율성 ↑)
+
+### Available Servers (via Router)
+- `context7`: 라이브러리 문서 검색 (Next.js, React, Supabase)
+- `serena`: 코드 분석 및 심볼 검색
+- `playwright`: 브라우저 자동화
+
+---
+
+## 📊 Context Management
+
+| Level | Threshold | Action |
+|-------|-----------|--------|
+| Warning | 70% | ⚠️ Cleanup recommended |
+| Critical | 85% | 🔴 Compression suggested |
+| Emergency | 95% | 🚨 Forced compression |
+
+**DCP 전략**: deduplication, error_cleanup, file_summarize
+**자동 DCP**: 활성화 (`settings.json > context_management`)
+**상세**: `~/.claude/docs/SETTINGS-GUIDE.md` 참조
+
+---
+
+## 🌐 Language Profiles (Auto-Detection)
+
+Language-specific rules are automatically applied based on project files.
+
+### Detection Logic
+
+| File Detected | Profile Activated | Description |
+|---------------|-------------------|-------------|
+| `package.json` | `profiles/typescript.md` | TypeScript/React/Next.js rules |
+| `Cargo.toml` | `profiles/rust.md` | Rust rules |
+| `pyproject.toml` | `profiles/python.md` | Python rules |
+| `go.mod` | `profiles/go.md` | Go rules |
+
+### TypeScript Profile (`profiles/typescript.md`):
+- TypeScript strict mode
+
+### Rust Profile (`profiles/rust.md`):
+- Never Panics principle
+- Result<T, Error> everywhere
+- RAII memory management
+- Property-based testing (proptest)
+- Clippy/Miri static analysis
+
+### Multi-Language Projects
+When multiple config files exist (e.g., Tauri app with both `Cargo.toml` and `package.json`), all matching profiles are activated.
+
+---
+
+## 🔗 Reference Documents
+
+### Core System
+
+| Document | Content |
+|----------|---------|
+| `WRITER-REVIEWER.md` | Writer-Reviewer system config |
+| `docs/ARCH-PRINCIPLES.md` | Architecture principles |
+| `docs/QUALITY-GATES.md` | Quality gate details |
+| `docs/PERSONAS.md` | Persona list |
+
+### Workflow & Planning
+
+| Document | Content |
+|----------|---------|
+| `docs/PLAN-MODE.md` | Plan mode rules |
+| `docs/VIBE-WORKFLOW.md` | Vibe workflow |
+| `docs/PROJECT-PLANNING.md` | Project planning system |
+| `docs/PRD-WORKFLOW.md` | PRD creation workflow |
+
+### Configuration & Automation
+
+| Document | Content |
+|----------|---------|
+| `docs/HOOKS-SYSTEM.md` | Hooks automation guide |
+| `docs/SETTINGS-GUIDE.md` | settings.json configuration |
+| `docs/VERSION-POLICY.md` | Version management policy |
+| `SESSION-MANAGER.md` | Session recovery |
+| `CONTEXT-MANAGER.md` | DCP rules |
+| `docs/DOC-TEMPLATE.md` | Documentation templates |
+
+### Language & Tools
+
+| Document | Content |
+|----------|---------|
+| `profiles/typescript.md` | TypeScript/React profile |
+| `profiles/rust.md` | Rust profile |
+| `profiles/python.md` | Python profile |
+| `profiles/go.md` | Go profile |
+| `KEYWORD-TRIGGERS.md` | Keyword details |
+| `cheatsheets/commands.md` | Slash commands |
+| `cheatsheets/keywords.md` | Keyword summary |
+| `cheatsheets/mcp-tools.md` | MCP tools |
+| `rules/react/` | React/Next.js rules |
+| `rules/python/` | Python rules |
+| `rules/go/` | Go rules |
+
+---
+
+## 📊 Hooks System Summary
+
+- **UserPromptSubmit** (6개): 입력 분석, 키워드 감지, 페르소나 활성화
+- **PreToolUse** (2개): Writer-Reviewer 준비, 에러 경고
+- **PostToolUse** (8개): Quality Gate, Ralph Loop, Session Snapshot
+
+**주요 자동화**:
+- PRD 감지 → 플랜 모드 진입
+- 컨텍스트 70% 초과 → 자동 정리 권장
+- 빌드 실패 → Ralph Loop (자동 재시도 최대 10회)
+- Todo 완료/Git commit → 세션 스냅샷
+
+**상세**: `~/.claude/docs/HOOKS-SYSTEM.md` 참조
+
+---
+
+## META
+
+- **Version**: 2.0.9 (정책: `docs/VERSION-POLICY.md`)
+- **Response Language**: Korean
+- **Environment**: macOS (Mac Studio Ultra M2)

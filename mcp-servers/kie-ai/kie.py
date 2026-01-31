@@ -1,0 +1,236 @@
+#!/usr/bin/env python3
+"""
+Kie.ai CLI 도구
+Usage: python3 kie.py <command> [args]
+
+Commands:
+  credits                    - 크레딧 잔액 확인
+  video <model> <prompt>     - 영상 생성 (runway, veo3, sora2, wan2.5)
+  image <model> <prompt>     - 이미지 생성 (4o-image, flux, midjourney)
+  music <prompt> [--style=X] - 음악 생성 (Suno)
+  status <type> <task_id>    - 작업 상태 확인 (video, image, music)
+"""
+
+import sys
+import os
+import json
+import urllib.request
+import urllib.error
+from pathlib import Path
+
+API_BASE = "https://api.kie.ai"
+
+# API 키 로드 (환경변수 > 설정파일 > 하드코딩)
+def load_api_key():
+    if os.environ.get("KIE_API_KEY"):
+        return os.environ["KIE_API_KEY"]
+    cred_file = Path.home() / ".claude" / "credentials" / "kie-ai.json"
+    if cred_file.exists():
+        import json
+        with open(cred_file) as f:
+            return json.load(f).get("api_key", "")
+    return "09044bf1be5d44ce8c576869421b155b"
+
+API_KEY = load_api_key()
+
+def api_request(method: str, endpoint: str, data: dict = None) -> dict:
+    """API 요청 실행"""
+    url = f"{API_BASE}{endpoint}"
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    }
+
+    if method == "GET" and data:
+        params = "&".join(f"{k}={v}" for k, v in data.items())
+        url = f"{url}?{params}"
+        data = None
+
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(data).encode() if data else None,
+        headers=headers,
+        method=method
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=60) as response:
+            return json.loads(response.read().decode())
+    except urllib.error.HTTPError as e:
+        return {"error": f"HTTP {e.code}", "message": e.read().decode()}
+    except Exception as e:
+        return {"error": str(e)}
+
+def check_credits():
+    """크레딧 잔액 확인"""
+    result = api_request("GET", "/api/v1/chat/credit")
+    print(f"💰 크레딧: {json.dumps(result, ensure_ascii=False, indent=2)}")
+
+def generate_video(model: str, prompt: str, image_url: str = None):
+    """영상 생성"""
+    endpoints = {
+        "runway": "/api/v1/runway/generate",
+        "veo3": "/api/v1/video/veo3/generate",
+        "sora2": "/api/v1/video/sora2/generate",
+        "wan2.5": "/api/v1/video/wan/generate"
+    }
+
+    if model not in endpoints:
+        print(f"❌ 지원 모델: {', '.join(endpoints.keys())}")
+        return
+
+    data = {"prompt": prompt}
+    if image_url:
+        data["image_url"] = image_url
+
+    result = api_request("POST", endpoints[model], data)
+    task_id = result.get("task_id") or result.get("id")
+
+    if task_id:
+        print(f"🎬 영상 생성 시작!")
+        print(f"   모델: {model}")
+        print(f"   task_id: {task_id}")
+        print(f"\n   상태 확인: python3 kie.py status video {task_id}")
+    else:
+        print(f"❌ 오류: {json.dumps(result, ensure_ascii=False)}")
+
+def generate_image(model: str, prompt: str, aspect_ratio: str = "1:1"):
+    """이미지 생성"""
+    endpoints = {
+        "4o-image": "/api/v1/gpt4o-image/generate",
+        "flux": "/api/v1/flux/kontext/generate",
+        "midjourney": "/api/v1/midjourney/generate"
+    }
+
+    if model not in endpoints:
+        print(f"❌ 지원 모델: {', '.join(endpoints.keys())}")
+        return
+
+    data = {"prompt": prompt, "aspect_ratio": aspect_ratio}
+    result = api_request("POST", endpoints[model], data)
+    task_id = result.get("task_id") or result.get("id")
+
+    if task_id:
+        print(f"🖼️ 이미지 생성 시작!")
+        print(f"   모델: {model}")
+        print(f"   task_id: {task_id}")
+        print(f"\n   상태 확인: python3 kie.py status image {task_id}")
+    else:
+        print(f"❌ 오류: {json.dumps(result, ensure_ascii=False)}")
+
+def generate_music(prompt: str, style: str = None, title: str = None, instrumental: bool = False):
+    """음악 생성 (Suno)"""
+    data = {
+        "prompt": prompt,
+        "make_instrumental": instrumental
+    }
+    if style:
+        data["style"] = style
+    if title:
+        data["title"] = title
+
+    result = api_request("POST", "/api/v1/generate", data)
+    task_id = result.get("task_id") or result.get("id")
+
+    if task_id:
+        print(f"🎵 음악 생성 시작!")
+        print(f"   task_id: {task_id}")
+        if style:
+            print(f"   스타일: {style}")
+        print(f"\n   상태 확인: python3 kie.py status music {task_id}")
+    else:
+        print(f"❌ 오류: {json.dumps(result, ensure_ascii=False)}")
+
+def check_status(task_type: str, task_id: str):
+    """작업 상태 확인"""
+    endpoints = {
+        "video": "/api/v1/runway/record-detail",
+        "image": "/api/v1/gpt4o-image/record-info",
+        "music": "/api/v1/generate/record-info"
+    }
+
+    if task_type not in endpoints:
+        print(f"❌ 지원 타입: {', '.join(endpoints.keys())}")
+        return
+
+    result = api_request("GET", endpoints[task_type], {"task_id": task_id})
+
+    status = result.get("status", "unknown")
+    output_url = (result.get("output_url") or result.get("video_url") or
+                  result.get("audio_url") or result.get("image_url"))
+
+    emoji = {"pending": "⏳", "processing": "🔄", "completed": "✅", "failed": "❌"}.get(status, "❓")
+
+    print(f"{emoji} 상태: {status}")
+    if output_url:
+        print(f"📥 결과: {output_url}")
+
+    # 전체 응답도 표시
+    print(f"\n상세: {json.dumps(result, ensure_ascii=False, indent=2)}")
+
+def main():
+    if len(sys.argv) < 2:
+        print(__doc__)
+        return
+
+    cmd = sys.argv[1].lower()
+
+    if cmd == "credits":
+        check_credits()
+
+    elif cmd == "video":
+        if len(sys.argv) < 4:
+            print("Usage: python3 kie.py video <model> <prompt>")
+            print("Models: runway, veo3, sora2, wan2.5")
+            return
+        model = sys.argv[2]
+        prompt = " ".join(sys.argv[3:])
+        generate_video(model, prompt)
+
+    elif cmd == "image":
+        if len(sys.argv) < 4:
+            print("Usage: python3 kie.py image <model> <prompt>")
+            print("Models: 4o-image, flux, midjourney")
+            return
+        model = sys.argv[2]
+        prompt = " ".join(sys.argv[3:])
+        generate_image(model, prompt)
+
+    elif cmd == "music":
+        if len(sys.argv) < 3:
+            print("Usage: python3 kie.py music <prompt> [--style=X] [--title=X] [--instrumental]")
+            return
+
+        # 인자 파싱
+        prompt_parts = []
+        style = None
+        title = None
+        instrumental = False
+
+        for arg in sys.argv[2:]:
+            if arg.startswith("--style="):
+                style = arg.split("=", 1)[1]
+            elif arg.startswith("--title="):
+                title = arg.split("=", 1)[1]
+            elif arg == "--instrumental":
+                instrumental = True
+            else:
+                prompt_parts.append(arg)
+
+        prompt = " ".join(prompt_parts)
+        generate_music(prompt, style, title, instrumental)
+
+    elif cmd == "status":
+        if len(sys.argv) < 4:
+            print("Usage: python3 kie.py status <type> <task_id>")
+            print("Types: video, image, music")
+            return
+        check_status(sys.argv[2], sys.argv[3])
+
+    else:
+        print(f"❌ 알 수 없는 명령어: {cmd}")
+        print(__doc__)
+
+if __name__ == "__main__":
+    main()

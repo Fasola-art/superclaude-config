@@ -1,0 +1,12 @@
+{
+  "id": "b8c0a15afab5",
+  "type": "mcp-protocol",
+  "message": "MCP 서버 시작 실패 [gdrive]: 요청 타임아웃: initialize",
+  "timestamp": "2026-01-29 19:01:56,152",
+  "raw_log": "2026-01-29 19:01:56,152 [ERROR] mcp-protocol: MCP 서버 시작 실패 [gdrive]: 요청 타임아웃: initialize",
+  "created_at": "2026-01-29T20:09:55.671952",
+  "resolved": true,
+  "resolution": "@isaacphi/mcp-gdrive 패키지로 대체",
+  "context": {},
+  "resolved_at": "2026-01-29T20:10:08.443346"
+}

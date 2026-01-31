@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "description": "PDF 출력 설정",
+
+  "page": {
+    "size": "A4",
+    "orientation": "portrait",
+    "margins": {
+      "top": "2cm",
+      "bottom": "2cm",
+      "left": "2.5cm",
+      "right": "2.5cm"
+    }
+  },
+
+  "header": {
+    "enabled": true,
+    "height": "1cm",
+    "content": {
+      "left": "{title}",
+      "center": "",
+      "right": "{date}"
+    },
+    "style": {
+      "font_size": "10px",
+      "color": "#666666",
+      "border_bottom": "1px solid #e0e0e0"
+    }
+  },
+
+  "footer": {
+    "enabled": true,
+    "height": "1cm",
+    "content": {
+      "left": "Claude Code",
+      "center": "Page {page} of {pages}",
+      "right": ""
+    },
+    "style": {
+      "font_size": "10px",
+      "color": "#666666",
+      "border_top": "1px solid #e0e0e0"
+    }
+  },
+
+  "fonts": {
+    "body": {
+      "family": "Noto Sans KR, sans-serif",
+      "size": "11pt"
+    },
+    "heading": {
+      "family": "Noto Sans KR, sans-serif",
+      "size_h1": "18pt",
+      "size_h2": "14pt",
+      "size_h3": "12pt"
+    },
+    "code": {
+      "family": "JetBrains Mono, monospace",
+      "size": "9pt"
+    }
+  },
+
+  "table_of_contents": {
+    "enabled": true,
+    "title": "목차",
+    "max_depth": 3
+  },
+
+  "code_block": {
+    "syntax_highlighting": true,
+    "line_numbers": true,
+    "background": "#f5f5f5",
+    "border_radius": "4px"
+  },
+
+  "images": {
+    "max_width": "100%",
+    "quality": 90,
+    "format": "png"
+  },
+
+  "watermark": {
+    "enabled": false,
+    "text": "CONFIDENTIAL",
+    "opacity": 0.1
+  }
+}

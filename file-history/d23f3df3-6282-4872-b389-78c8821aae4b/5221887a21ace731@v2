@@ -1,0 +1,169 @@
+# 자동화 설정 가이드
+
+> 클로바 노트 녹음 → 자동 요약 + Notion 업로드
+
+---
+
+## 1. Google Drive Desktop 설치
+
+### Mac에서 설치
+
+1. https://www.google.com/drive/download/ 접속
+2. **Mac용 다운로드** 클릭
+3. `GoogleDrive.dmg` 실행 → 설치
+4. Google 계정 로그인
+
+### 동기화 폴더 확인
+
+설치 후 기본 경로:
+```
+/Users/<username>/Library/CloudStorage/GoogleDrive-<email>/My Drive
+```
+
+또는:
+```
+/Users/<username>/Google Drive
+```
+
+---
+
+## 2. 클로바 노트 설정 (핸드폰)
+
+### 녹음 파일 자동 업로드 설정
+
+1. **클로바 노트 앱** 열기
+2. **설정** → **백업 설정**
+3. **Google Drive 연결**
+4. 백업 폴더 지정: `클로바노트` 또는 `ClovaNote`
+
+### 내보내기 방식
+
+녹음 완료 후:
+1. 녹음 파일 선택
+2. **공유** → **Google Drive에 저장**
+3. 폴더 선택: `/클로바노트/`
+
+---
+
+## 3. Mac에서 감시 시작
+
+### 자동 실행 (권장)
+
+```bash
+cd ~/music-lesson-summarizer
+
+# Google Drive 폴더 감시 시작
+npm run dev -- watch "/Users/reim/Library/CloudStorage/GoogleDrive-*/My Drive/클로바노트"
+```
+
+### 옵션
+
+```bash
+# Notion 업로드 포함 (기본)
+npm run dev -- watch <폴더>
+
+# Notion 없이 로컬 저장만
+npm run dev -- watch <폴더> --no-notion
+
+# 처리 완료 파일 이동
+npm run dev -- watch <폴더> -p ./processed
+```
+
+---
+
+## 4. 백그라운드 실행 (launchd)
+
+### 서비스 등록
+
+```bash
+# 서비스 파일 생성
+npm run dev -- install-service
+```
+
+또는 수동 생성:
+
+```xml
+<!-- ~/Library/LaunchAgents/com.mls.watcher.plist -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.mls.watcher</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/node</string>
+        <string>/Users/reim/music-lesson-summarizer/dist/cli/index.js</string>
+        <string>watch</string>
+        <string>/Users/reim/Library/CloudStorage/GoogleDrive-email@gmail.com/My Drive/클로바노트</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/mls-watcher.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/mls-watcher.error.log</string>
+</dict>
+</plist>
+```
+
+### 서비스 제어
+
+```bash
+# 시작
+launchctl load ~/Library/LaunchAgents/com.mls.watcher.plist
+
+# 중지
+launchctl unload ~/Library/LaunchAgents/com.mls.watcher.plist
+
+# 상태 확인
+launchctl list | grep mls
+```
+
+---
+
+## 5. 전체 흐름
+
+```
+📱 핸드폰                    💻 Mac                         📝 Notion
+    │                          │                              │
+    │ 1. 클로바 노트 녹음       │                              │
+    │ 2. Google Drive 업로드   │                              │
+    │         ─────────────────▶                              │
+    │                          │ 3. 동기화 감지                │
+    │                          │ 4. Whisper STT               │
+    │                          │ 5. Claude 요약               │
+    │                          │ 6. 마크다운 저장              │
+    │                          │         ─────────────────────▶
+    │                          │                    7. 페이지 생성
+```
+
+---
+
+## 트러블슈팅
+
+### Google Drive 동기화 안됨
+- Google Drive 앱이 실행 중인지 확인
+- 메뉴바 아이콘 클릭 → 동기화 상태 확인
+
+### 파일이 감지 안됨
+- 확장자 확인 (.m4a, .mp3, .wav, .txt)
+- 폴더 경로 정확한지 확인
+- 숨김 파일(.)으로 시작하는지 확인
+
+### Whisper 변환 실패
+- ffmpeg 설치 확인: `brew install ffmpeg`
+- 파일 손상 여부 확인
+
+---
+
+**설정 완료 후 테스트:**
+```bash
+# 테스트 파일 복사
+cp examples/sample-lesson.txt <감시폴더>/
+
+# 로그 확인
+# → 자동으로 처리되어야 함
+```

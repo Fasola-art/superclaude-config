@@ -1,0 +1,152 @@
+#!/usr/bin/env node
+/**
+ * ralph-loop-checker.js
+ * 무한 루프 감지 훅
+ *
+ * 트리거: PostToolUse
+ * 매처: Bash|Task
+ * 타임아웃: 1000ms
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const CLAUDE_DIR = path.join(process.env.HOME, '.claude');
+const LOOP_STATE_FILE = path.join(CLAUDE_DIR, 'cache', 'ralph-loop-state.json');
+
+const CONFIG = {
+  maxConsecutiveFailures: 5,
+  maxSameErrorCount: 3,
+  resetTimeMs: 300000 // 5분
+};
+
+function loadState() {
+  try {
+    if (fs.existsSync(LOOP_STATE_FILE)) {
+      return JSON.parse(fs.readFileSync(LOOP_STATE_FILE, 'utf8'));
+    }
+  } catch (e) {
+    // 파일 오류
+  }
+  return {
+    consecutiveFailures: 0,
+    errorHistory: [],
+    lastFailure: null
+  };
+}
+
+function saveState(state) {
+  const dir = path.dirname(LOOP_STATE_FILE);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  fs.writeFileSync(LOOP_STATE_FILE, JSON.stringify(state, null, 2));
+}
+
+function getErrorSignature(error) {
+  // 에러의 고유 시그니처 생성 (숫자, 경로 등 제거)
+  return error
+    .replace(/\d+/g, 'N')
+    .replace(/\/[^\s]+/g, '/PATH')
+    .substring(0, 200);
+}
+
+function isError(result) {
+  if (result.exitCode && result.exitCode !== 0) return true;
+  if (result.stderr && result.stderr.trim()) return true;
+  return false;
+}
+
+async function main() {
+  try {
+    let input = '';
+    process.stdin.setEncoding('utf8');
+
+    for await (const chunk of process.stdin) {
+      input += chunk;
+    }
+
+    const data = JSON.parse(input);
+    const stderr = data.stderr || '';
+    const exitCode = data.exitCode || 0;
+
+    const state = loadState();
+    const now = Date.now();
+
+    // 5분 이상 지나면 상태 리셋
+    if (state.lastFailure && (now - state.lastFailure) > CONFIG.resetTimeMs) {
+      state.consecutiveFailures = 0;
+      state.errorHistory = [];
+    }
+
+    // 성공한 경우
+    if (!isError({ exitCode, stderr })) {
+      state.consecutiveFailures = 0;
+      saveState(state);
+
+      console.log(JSON.stringify({
+        status: 'ok',
+        consecutiveFailures: 0,
+        message: '명령 성공 - 루프 카운터 리셋'
+      }));
+      process.exit(0);
+    }
+
+    // 실패한 경우
+    state.consecutiveFailures++;
+    state.lastFailure = now;
+
+    // 에러 시그니처 추적
+    const errorSig = getErrorSignature(stderr);
+    state.errorHistory.push({
+      signature: errorSig,
+      timestamp: now
+    });
+
+    // 최근 10개만 유지
+    state.errorHistory = state.errorHistory.slice(-10);
+
+    // 같은 에러 반복 횟수 계산
+    const sameErrorCount = state.errorHistory.filter(h => h.signature === errorSig).length;
+
+    saveState(state);
+
+    // 무한 루프 감지
+    if (state.consecutiveFailures >= CONFIG.maxConsecutiveFailures) {
+      console.log(JSON.stringify({
+        status: 'loop_detected',
+        consecutiveFailures: state.consecutiveFailures,
+        sameErrorCount: sameErrorCount,
+        message: `🚨 무한 루프 감지: 연속 ${state.consecutiveFailures}회 실패 - 중단 권장`
+      }));
+      process.exit(0);
+    }
+
+    // 같은 에러 반복 감지
+    if (sameErrorCount >= CONFIG.maxSameErrorCount) {
+      console.log(JSON.stringify({
+        status: 'same_error_repeated',
+        consecutiveFailures: state.consecutiveFailures,
+        sameErrorCount: sameErrorCount,
+        message: `⚠️ 동일 에러 ${sameErrorCount}회 반복 - 다른 접근법 필요`
+      }));
+      process.exit(0);
+    }
+
+    // 일반 실패
+    console.log(JSON.stringify({
+      status: 'failure',
+      consecutiveFailures: state.consecutiveFailures,
+      remaining: CONFIG.maxConsecutiveFailures - state.consecutiveFailures,
+      message: `실패 ${state.consecutiveFailures}/${CONFIG.maxConsecutiveFailures}`
+    }));
+
+    process.exit(0);
+
+  } catch (error) {
+    console.error(JSON.stringify({ status: 'error', message: error.message }));
+    process.exit(1);
+  }
+}
+
+main();

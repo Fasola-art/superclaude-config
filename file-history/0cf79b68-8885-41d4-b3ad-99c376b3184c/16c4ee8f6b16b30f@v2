@@ -1,0 +1,38 @@
+{
+  "module": "news-collector",
+  "version": "1.0.0",
+  "enabled": true,
+  "fetchInterval": 3600,
+  "maxArticlesPerSource": 50,
+  "archiveRetentionDays": 90,
+  "sources": {
+    "rss": [],
+    "api": []
+  },
+  "filters": {
+    "keywords": {
+      "include": [],
+      "exclude": []
+    },
+    "categories": [],
+    "languages": ["ko", "en"],
+    "maxAgeHours": 24
+  },
+  "deduplication": {
+    "enabled": true,
+    "similarityThreshold": 0.8
+  },
+  "sentiment": {
+    "enabled": true,
+    "model": "local"
+  },
+  "summarization": {
+    "enabled": true,
+    "maxLength": 200,
+    "language": "ko"
+  },
+  "alerts": {
+    "enabled": true,
+    "channels": ["desktop"]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "personas": [
+    {
+      "id": "innovator",
+      "name": "혁신가",
+      "role": "혁신 아이디어",
+      "perspective": "신기술, 트렌드",
+      "questions": ["최신 기술을 어떻게 활용할까?", "업계 트렌드는?", "파괴적 혁신 기회는?"]
+    },
+    {
+      "id": "futurist",
+      "name": "미래학자",
+      "role": "미래 예측",
+      "perspective": "장기 전망",
+      "questions": ["5년 후 이 시장은?", "기술 발전 방향은?", "소비자 행동 변화는?"]
+    },
+    {
+      "id": "visionary",
+      "name": "비저너리",
+      "role": "비전 제시",
+      "perspective": "큰 그림",
+      "questions": ["궁극적 목표는?", "세상을 어떻게 바꿀까?", "영감을 주는 비전은?"]
+    },
+    {
+      "id": "disruptor",
+      "name": "디스럽터",
+      "role": "파괴적 혁신",
+      "perspective": "기존 관행 도전",
+      "questions": ["왜 지금 방식대로 해야 하나?", "근본적으로 다른 접근은?", "업계 규칙을 깰 수 있나?"]
+    },
+    {
+      "id": "inventor",
+      "name": "발명가",
+      "role": "발명",
+      "perspective": "새로운 솔루션",
+      "questions": ["전혀 새로운 방법은?", "기존 기술의 새로운 조합은?", "특허 가능한 혁신은?"]
+    }
+  ]
+}

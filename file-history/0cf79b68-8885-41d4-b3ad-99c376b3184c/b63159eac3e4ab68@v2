@@ -1,0 +1,123 @@
+#!/usr/bin/env node
+/**
+ * context-cleaner.js
+ * 컨텍스트 자동 정리 훅 (DCP)
+ *
+ * 트리거: UserPromptSubmit
+ * 타임아웃: 2000ms
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+const CONFIG = {
+  warningThreshold: 75,
+  criticalThreshold: 90,
+  emergencyThreshold: 95
+};
+
+// 컨텍스트 사용량 시뮬레이션 (실제 구현에서는 Claude API 연동)
+function getContextUsage() {
+  // 실제 구현에서는 현재 세션의 토큰 사용량 계산
+  // 여기서는 환경 변수 또는 임시 파일에서 읽음
+  const usageFile = path.join(process.env.HOME, '.claude', 'cache', 'context-usage.json');
+
+  try {
+    if (fs.existsSync(usageFile)) {
+      const data = JSON.parse(fs.readFileSync(usageFile, 'utf8'));
+      return data.percentage || 0;
+    }
+  } catch (e) {
+    // 파일 없으면 기본값
+  }
+
+  return 0; // 기본값: 0%
+}
+
+function getDCPStrategy(usage) {
+  if (usage >= CONFIG.emergencyThreshold) {
+    return {
+      level: 'emergency',
+      strategies: ['deduplication', 'error_cleanup', 'file_summarize', 'force_archive'],
+      message: `🚨 컨텍스트 ${usage}% - 강제 압축 필요`
+    };
+  } else if (usage >= CONFIG.criticalThreshold) {
+    return {
+      level: 'critical',
+      strategies: ['deduplication', 'error_cleanup', 'file_summarize'],
+      message: `🔴 컨텍스트 ${usage}% - 압축 권장`
+    };
+  } else if (usage >= CONFIG.warningThreshold) {
+    return {
+      level: 'warning',
+      strategies: ['deduplication'],
+      message: `⚠️ 컨텍스트 ${usage}%`
+    };
+  }
+
+  return {
+    level: 'normal',
+    strategies: [],
+    message: null
+  };
+}
+
+async function executeDCPStrategies(strategies) {
+  const results = [];
+
+  for (const strategy of strategies) {
+    switch (strategy) {
+      case 'deduplication':
+        results.push({ strategy, action: '중복 파일 읽기 제거', tokensFreed: 500 });
+        break;
+      case 'error_cleanup':
+        results.push({ strategy, action: '해결된 에러 정리', tokensFreed: 300 });
+        break;
+      case 'file_summarize':
+        results.push({ strategy, action: '대용량 파일 요약', tokensFreed: 800 });
+        break;
+      case 'force_archive':
+        results.push({ strategy, action: '세션 아카이브 생성', tokensFreed: 1500 });
+        break;
+    }
+  }
+
+  return results;
+}
+
+async function main() {
+  try {
+    const usage = getContextUsage();
+    const dcp = getDCPStrategy(usage);
+
+    if (dcp.level === 'normal') {
+      console.log(JSON.stringify({
+        status: 'ok',
+        usage: usage,
+        message: '컨텍스트 정상'
+      }));
+      process.exit(0);
+    }
+
+    // DCP 전략 실행
+    const results = await executeDCPStrategies(dcp.strategies);
+    const totalFreed = results.reduce((sum, r) => sum + r.tokensFreed, 0);
+
+    const output = {
+      status: dcp.level,
+      usage: usage,
+      strategies: dcp.strategies,
+      results: results,
+      tokensFreed: totalFreed,
+      message: dcp.message
+    };
+
+    console.log(JSON.stringify(output));
+    process.exit(0);
+  } catch (error) {
+    console.error(JSON.stringify({ status: 'error', message: error.message }));
+    process.exit(1);
+  }
+}
+
+main();

@@ -1,0 +1,141 @@
+{
+  "streams": [
+    {
+      "id": "binance_btc",
+      "name": "Binance BTC/USDT",
+      "type": "websocket",
+      "provider": "binance",
+      "url": "wss://stream.binance.com:9443/ws/btcusdt@ticker",
+      "symbols": ["BTC/USDT"],
+      "dataTypes": ["price", "volume", "trade"],
+      "enabled": true,
+      "priority": 10,
+      "reconnectOnError": true,
+      "maxReconnects": 10
+    },
+    {
+      "id": "binance_eth",
+      "name": "Binance ETH/USDT",
+      "type": "websocket",
+      "provider": "binance",
+      "url": "wss://stream.binance.com:9443/ws/ethusdt@ticker",
+      "symbols": ["ETH/USDT"],
+      "dataTypes": ["price", "volume", "trade"],
+      "enabled": true,
+      "priority": 9,
+      "reconnectOnError": true,
+      "maxReconnects": 10
+    },
+    {
+      "id": "binance_multi",
+      "name": "Binance Multi-Stream",
+      "type": "websocket",
+      "provider": "binance",
+      "url": "wss://stream.binance.com:9443/stream",
+      "subscribeMessage": {
+        "method": "SUBSCRIBE",
+        "params": [
+          "btcusdt@ticker",
+          "ethusdt@ticker",
+          "solusdt@ticker",
+          "adausdt@ticker"
+        ],
+        "id": 1
+      },
+      "symbols": ["BTC/USDT", "ETH/USDT", "SOL/USDT", "ADA/USDT"],
+      "dataTypes": ["price", "volume"],
+      "enabled": false,
+      "priority": 8,
+      "reconnectOnError": true,
+      "maxReconnects": 10
+    },
+    {
+      "id": "coinbase_btc",
+      "name": "Coinbase BTC/USD",
+      "type": "websocket",
+      "provider": "coinbase",
+      "url": "wss://ws-feed.exchange.coinbase.com",
+      "subscribeMessage": {
+        "type": "subscribe",
+        "product_ids": ["BTC-USD"],
+        "channels": ["ticker"]
+      },
+      "symbols": ["BTC/USD"],
+      "dataTypes": ["price", "volume", "trade"],
+      "enabled": false,
+      "priority": 8,
+      "reconnectOnError": true,
+      "maxReconnects": 10
+    },
+    {
+      "id": "news_feed",
+      "name": "뉴스 피드",
+      "type": "polling",
+      "provider": "custom",
+      "url": null,
+      "pollInterval": 60000,
+      "symbols": [],
+      "dataTypes": ["news"],
+      "enabled": true,
+      "priority": 7,
+      "description": "뉴스 모듈과 연동"
+    },
+    {
+      "id": "trading_signals",
+      "name": "트레이딩 시그널",
+      "type": "internal",
+      "provider": "trading_module",
+      "url": null,
+      "symbols": ["*"],
+      "dataTypes": ["signal"],
+      "enabled": true,
+      "priority": 10,
+      "description": "트레이딩 모듈에서 생성된 시그널"
+    }
+  ],
+  "providers": {
+    "binance": {
+      "name": "Binance",
+      "baseWsUrl": "wss://stream.binance.com:9443",
+      "baseApiUrl": "https://api.binance.com",
+      "rateLimit": {
+        "requests": 1200,
+        "interval": 60000
+      },
+      "parser": "binance"
+    },
+    "coinbase": {
+      "name": "Coinbase",
+      "baseWsUrl": "wss://ws-feed.exchange.coinbase.com",
+      "baseApiUrl": "https://api.exchange.coinbase.com",
+      "rateLimit": {
+        "requests": 10,
+        "interval": 1000
+      },
+      "parser": "coinbase"
+    },
+    "kraken": {
+      "name": "Kraken",
+      "baseWsUrl": "wss://ws.kraken.com",
+      "baseApiUrl": "https://api.kraken.com",
+      "rateLimit": {
+        "requests": 15,
+        "interval": 1000
+      },
+      "parser": "kraken"
+    }
+  },
+  "globalSettings": {
+    "maxConcurrentConnections": 10,
+    "bufferSize": 10000,
+    "heartbeatInterval": 30000,
+    "reconnectDelay": 5000,
+    "messageQueueSize": 1000
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-01-29",
+    "totalStreams": 6,
+    "enabledStreams": 4
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "github": {
+    "description": "GitHub API",
+    "personal_access_token": "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",
+    "oauth": {
+      "client_id": "Ov23limGokW611IQXvKE",
+      "client_secret": "9609e7e0c4fdaa3e1a15d9b87fa1c9ab5b0310ad",
+      "app_name": "My Dev Portal",
+      "app_description": "Fasola-art",
+      "homepage_url": "http://localhost:3456",
+      "callback_url": "http://localhost:3456/auth/github/callback"
+    }
+  },
+  "slack": {
+    "description": "Slack API",
+    "workspace": {
+      "name": "Fasola-Art",
+      "team_id": "T0AB8AF7QP9",
+      "url": "https://fasola-art.slack.com/"
+    },
+    "user_token": "xoxe.xoxp-1-Mi0yLTEwMzgyMzU1MjYyNzkxLTEwMzk1NzUxNTc5NzM0LTEwNDEwNzM4ODk2OTkzLTEwMzk0Mzk0MzI3MDI5LTlmNWVhMjg3ODMxNmI3YzY4YzNjNzEzNDliZmY1ZWRmMzEwN2I1NzZjMzQzOTM4MTMzZjI2MDkxYWExZDE5MzU",
+    "bot_token": "xoxb-10382355262791-10394831205045-MlIs7EylLrlqg8NHCYYBeeZc"
+  },
+  "google": {
+    "description": "Google Cloud Platform",
+    "api_key": "AQ.Ab8RN6IwKEY-jXhxaSvSMs-JfkfPx_Ze2QPxPsjc-qS9PEYusQ",
+    "service_account": {
+      "name": "comp4709",
+      "email": "comp4709@iron-atom-483704-a5.iam.gserviceaccount.com",
+      "unique_id": "114408062301103049498",
+      "key_file": "/Users/reim/.claude/credentials/google-service-account.json"
+    }
+  },
+  "brave_search": {
+    "description": "Brave Search API",
+    "keys": {
+      "free": "BSABwW53C-tFFnpMHO3VYQOWVRVass4",
+      "free_ai": "BSAObjBvZ6Ocy1ouK86Op8hJj9jiWuO",
+      "free_autosuggest": "BSA5e_j8LVqGx_QHSTnNQIKE4ngz-gi",
+      "free_spellcheck": "BSApO4CTo1h6d-IdBS33kFD2abTwdGU"
+    }
+  },
+  "notion": {
+    "description": "Notion API",
+    "integration_name": "My API Integration",
+    "internal_secret": "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"
+  },
+  "linear": {
+    "description": "Linear API",
+    "api_key": "lin_api_6q87SQZ9eYlCiecpmcByKy8XjGRQt9P861LGCN8z"
+  },
+  "sentry": {
+    "description": "Sentry Error Tracking",
+    "token": "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",
+    "token_name": "Fasola-Art",
+    "scopes": ["alerts:read", "alerts:write", "event:read", "event:write", "member:invite", "member:read", "member:write", "org:read", "org:write", "project:read", "project:releases", "project:write", "team:read", "team:write"]
+  },
+  "fred": {
+    "description": "Federal Reserve Economic Data API",
+    "keys": [
+      {
+        "key": "870d23847c174b64cc1897d862d3f760",
+        "description": "Python API 연결용",
+        "created": "2026-01-09"
+      },
+      {
+        "key": "8fd54c32eace00ab12563945b22c366a",
+        "description": "Economic data analysis and trading strategies",
+        "created": "2026-01-08"
+      }
+    ],
+    "usage": "차트 트레이딩, 경제 데이터 분석"
+  },
+  "anthropic": {
+    "description": "Anthropic Claude API",
+    "api_key": "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",
+    "created": "2026-01-29",
+    "usage": "일일 경제 시황 자동 생성 (Haiku)",
+    "env_var": "ANTHROPIC_API_KEY"
+  },
+  "telegram": {
+    "description": "Telegram Bot API",
+    "user_id": "6771364293",
+    "bot_token": "8284168474:AAHtS_Wr-3RZCiOA5aDsqhLrvk9_TYjrgqY",
+    "created": "2026-01-30",
+    "usage": "그룹 채팅 모니터링 및 요약"
+  }
+}
