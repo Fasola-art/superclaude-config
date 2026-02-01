@@ -1,139 +1,184 @@
 # SuperClaude v2.0.9 - Mac Studio Ultra M2
 
-> **플랫폼**: macOS (Mac Studio Ultra M2) | **버전**: 2.0.9
+> **Platform**: macOS (Mac Studio Ultra M2) | **Version**: 2.0.9
 
 ---
 
-## 🚨 최우선 규칙: 한국어 응답
+## Primary Rule: Korean Response
 
-**모든 응답은 반드시 한국어로 작성합니다.**
-- 질문, 설명, 가이드, 코드 주석, 에러 설명: 한국어
-- 예외: 코드, 명령어, 파일명, 기술 용어는 원어 사용
-
----
-
-## ⚡ 효율성 원칙
-
-| 규칙 | 내용 |
-|------|------|
-| 실행 | 도구 호출 전 설명 금지, 명확 → 즉시 실행, 모호 → 1회 질문 |
-| 출력 | 결과 요약 3줄 이내, 성공 시 "✅ 완료" + 핵심 정보만 |
-| 컨텍스트 | 훅 주입 1줄, 상시 로드 비활성화 |
+**All responses MUST be in Korean.**
+- Questions, explanations, guides, code comments, error messages: Korean
+- Exceptions: code syntax, commands, filenames, technical terms: original language
 
 ---
 
-## 필수 규칙 (6개)
+## Instruction Translation Rule
 
-| 규칙 | 설명 |
-|------|------|
-| Writer-Reviewer Loop | 코드 생성 시 4-agent 병렬 검토 |
-| TodoWrite 사용 | 3단계 이상 작업 시 태스크 관리 필수 |
-| 응답 언어 | 한국어 (코드 주석 포함) |
-| Project Planning | PRD 수신 시 플랜 모드 자동 진입 |
-| PRD Creation | /prd-create로 아이디어 → PRD 변환 |
-| **Skill Capture** | 개발 작업 완료 시 재사용 가능한 스킬로 저장 |
+**When user provides instructions in natural language:**
+1. DO NOT copy user's words verbatim into config/rules
+2. ALWAYS translate to Claude-optimized technical terminology
+3. Use imperative commands and precise technical terms
+4. Prefer English keywords for better model comprehension
 
-### 📦 Skill Capture 규칙
+Example:
+- User says: "껍데기만 만들지 마" → Write: "No stub/placeholder code"
+- User says: "표 정렬 맞춰" → Write: "Use fixed-width text formatting for tables"
 
-**트리거 조건** (하나 이상 충족 시 스킬 생성):
-- 새 프로젝트/도구 생성 완료
-- 반복 가능한 워크플로우 구현
-- 복잡한 통합 작업 완료 (API 연동 등)
-- 사용자가 "나중에 재사용" 언급
+---
 
-**스킬 저장 위치**: `~/.claude/skills/<skill-name>.md`
+## Efficiency Rules
 
-**스킬 파일 구조**:
+| Rule            | Instruction                                                                               |
+|-----------------|-------------------------------------------------------------------------------------------|
+| Execution       | Skip pre-execution explanations. Clear intent → execute immediately. Ambiguous → ask once. |
+| Output          | Max 3-line summary. On success: "✅ Complete" + essential info only.                       |
+| Context         | Hook injection: 1 line max. Disable always-load.                                          |
+| File Export     | After file creation, run `open -R <path>` to reveal in Finder.                            |
+| Markdown Tables | Use fixed-width plain text format (monospace-compatible).                                 |
+
+---
+
+## Development Rules
+
+### Full Implementation Required (No Stub/Placeholder/Skeleton Code)
+
+**PROHIBITED patterns:**
+- `pass`, `...`, `TODO`, `FIXME`, `NotImplementedError`
+- Empty function bodies
+- Placeholder comments like "implement later"
+- Partial implementations
+
+**REQUIRED for every feature:**
+1. **Functions/Classes**: Complete working implementation
+2. **API Integration**: Actual endpoint calls + error handling
+3. **Hooks/Triggers**: Config modification + activation
+4. **Automation Services**: Create LaunchAgent + run `launchctl load`
+5. **Verification**: Execute at least once to confirm functionality
+
+**Pre-completion Checklist:**
+- [ ] Code executes without errors
+- [ ] Dependencies installed
+- [ ] Config files correctly written
+- [ ] Services activated and running
+
+---
+
+## Core Rules (7)
+
+| Rule                 | Instruction                                        |
+|----------------------|----------------------------------------------------|
+| Writer-Reviewer Loop | Trigger 4-agent parallel review on code generation |
+| TodoWrite            | REQUIRED for tasks with 3+ steps                   |
+| Response Language    | Korean (including code comments)                   |
+| Project Planning     | Auto-enter plan mode on PRD receipt                |
+| PRD Creation         | Use /prd-create for idea → PRD conversion          |
+| Skill Capture        | Save completed dev work as reusable skill          |
+| TDD/E2E Suggestion   | On feature request, ask "TDD/E2E로 진행할까요?"     |
+
+### Skill Capture Rules
+
+**Trigger conditions (if any met, create skill):**
+- New project/tool creation completed
+- Reusable workflow implemented
+- Complex integration completed (API, etc.)
+- User mentions "reuse later" / "나중에 재사용"
+
+**Save location**: `~/.claude/skills/<skill-name>.md`
+
+**Skill file structure**:
 ```markdown
 ---
 name: <skill-name>
-description: <한줄 설명>
+description: <one-line description>
 version: "1.0.0"
 triggers:
   - /<command>
-  - <자연어 트리거>
+  - <natural language trigger>
 ---
 # <Skill Name>
-## 사용법
-## 실행 지침
-## 참고
+## Usage
+## Execution Instructions
+## Reference
 ```
 
-**완료 후 안내**: "이 작업을 `/스킬명`으로 재사용할 수 있습니다."
+**Post-completion**: Notify user: "This work can be reused with `/skill-name`."
 
 ---
 
-## 스킬 명령어
+## Slash Commands
 
-| 명령어 | 설명 |
-|--------|------|
-| /prd-create | 아이디어 → PRD 생성 |
-| /project-plan | PRD로 프로젝트 시작 |
-| /project-status | 현재 진행 상황 확인 |
-| /project-continue | 이전 작업 계속 |
-| /scaffold | TypeScript CLI 프로젝트 빠른 생성 |
-| /ideation | 다중 페르소나 아이디어 토론 |
-| /research | 범용 딥리서치 |
-| /error-search | Error KB 검색 |
-| /recover | 세션 복구 |
+| Command           | Action                             |
+|-------------------|------------------------------------|
+| /prd-create       | Generate PRD from idea             |
+| /project-plan     | Initialize project from PRD        |
+| /project-status   | Check current progress             |
+| /project-continue | Resume previous work               |
+| /scaffold         | Quick TypeScript CLI project setup |
+| /ideation         | Multi-persona ideation discussion  |
+| /research         | Deep research                      |
+| /error-search     | Search Error KB                    |
+| /recover          | Session recovery                   |
+| /tdd              | Start TDD workflow                 |
+| /e2e              | Create E2E tests                   |
 
 ---
 
-## 🛡️ Safety Rules
+## Safety Rules
 
 **Auto-Allowed**: Git read/write (except push), npm, File read/write/edit, supabase
 **Requires Approval**: `git push`, `.env`, `rm -rf`, `sudo`
 
 ---
 
-## 🔑 API Key 규칙
+## API Key Rules
 
-**API 키 필요 시 자동 체크 우선**:
-1. `~/.claude/credentials/api-keys.json` 먼저 확인
-2. 있으면 자동 사용, 없으면 사용자에게 요청
-3. 새 키 획득 시 `api-keys.json`에 추가 제안
+**On API key requirement:**
+1. First check: `~/.claude/credentials/api-keys.json`
+2. If exists: use automatically
+3. If not: request from user
+4. On new key acquisition: suggest adding to `api-keys.json`
 
 ---
 
-## 🔌 MCP Router (필수)
+## MCP Router (Required)
 
 **NEVER** suggest direct MCP server registration in mcp.json.
-항상 MCP Router를 통해 등록: `~/.claude/mcp-router/servers.json`
+ALWAYS use MCP Router: `~/.claude/mcp-router/servers.json`
 
 ---
 
-## 📁 파일 구조
+## File Structure
 
 ```
 ~/.claude/
-├── CLAUDE.md                 # 이 파일
-├── superclaude-config.json   # 설정 (병렬 실행, W-R 등)
-├── settings.json             # Claude Code 공식 설정
-├── docs/                     # 상세 문서 (필요 시 참조)
-├── hooks/                    # 자동화 훅
-├── personas/                 # 페르소나 (45개)
-├── skills/                   # 스킬 정의
-├── error-kb/                 # 에러 지식베이스
+├── CLAUDE.md                 # This file
+├── superclaude-config.json   # Config (parallel execution, W-R, etc.)
+├── settings.json             # Claude Code official settings
+├── docs/                     # Detailed documentation (reference as needed)
+├── hooks/                    # Automation hooks
+├── personas/                 # Personas (45+)
+├── skills/                   # Skill definitions
+├── error-kb/                 # Error knowledge base
 ├── modules/                  # trading, news-collector, realtime-analysis
-├── profiles/                 # 언어 프로필 (TypeScript, Rust, Python, Go)
-└── rules/                    # 언어별 코딩 규칙
+├── profiles/                 # Language profiles (TypeScript, Rust, Python, Go)
+└── rules/                    # Language-specific coding rules
 ```
 
 ---
 
-## 📖 상세 문서 참조
+## Documentation Reference
 
-| 주제 | 문서 경로 |
-|------|----------|
-| 전체 시스템 | `docs/SUPERCLAUDE-REFERENCE.md` |
-| Vibe/Mode 키워드 | `KEYWORD-TRIGGERS.md` |
-| 사고 모드 | `docs/THINKING-MODES.md` |
-| 프로젝트 플래닝 | `docs/PROJECT-PLANNING.md` |
-| 훅 시스템 | `docs/HOOKS-SYSTEM.md` |
-| 설정 가이드 | `docs/SETTINGS-GUIDE.md` |
-| 페르소나 | `docs/PERSONAS.md` |
-| 아키텍처 원칙 | `docs/ARCH-PRINCIPLES.md` |
-| 품질 게이트 | `docs/QUALITY-GATES.md` |
+| Topic                   | Path                              |
+|-------------------------|-----------------------------------|
+| Full System             | `docs/SUPERCLAUDE-REFERENCE.md`   |
+| Vibe/Mode Keywords      | `KEYWORD-TRIGGERS.md`             |
+| Thinking Modes          | `docs/THINKING-MODES.md`          |
+| Project Planning        | `docs/PROJECT-PLANNING.md`        |
+| Hook System             | `docs/HOOKS-SYSTEM.md`            |
+| Settings Guide          | `docs/SETTINGS-GUIDE.md`          |
+| Personas                | `docs/PERSONAS.md`                |
+| Architecture Principles | `docs/ARCH-PRINCIPLES.md`         |
+| Quality Gates           | `docs/QUALITY-GATES.md`           |
 
 ---
 
