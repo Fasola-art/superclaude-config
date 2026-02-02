@@ -17,8 +17,8 @@ def test_database():
     print("\n=== Database Test ===")
 
     from manager import (
-        init_database, WorkSessionManager, TaskManager,
-        CalendarManager, ContextManager, UsagePatternTracker
+        init_database, TaskManager,
+        ContextManager, UsagePatternTracker
     )
 
     # 초기화

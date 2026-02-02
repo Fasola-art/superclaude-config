@@ -4,10 +4,11 @@ JARVIS ML Predictor
 scikit-learn 기반 시간대별 행동 패턴 학습 및 예측
 """
 
-import json
+from __future__ import annotations
+
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 
 # scikit-learn은 선택적 의존성
 try:
@@ -19,7 +20,7 @@ except ImportError:
     SKLEARN_AVAILABLE = False
     print("scikit-learn not installed. ML features disabled.")
 
-from manager import get_connection, UsagePatternTracker
+from manager import UsagePatternTracker
 
 MODEL_PATH = Path(__file__).parent / "predictor_model.json"
 MIN_PATTERNS_FOR_PREDICTION = 10
@@ -68,7 +69,7 @@ class MLPredictor:
         self.model = RandomForestClassifier(n_estimators=50, random_state=42)
         self.model.fit(X, y_encoded)
 
-    def predict_work_type(self, day_of_week: int = None, hour: int = None) -> Optional[Dict]:
+    def predict_work_type(self, day_of_week: int | None = None, hour: int | None = None) -> Optional[Dict]:
         """현재 시간에 예상되는 작업 유형 예측"""
         if not SKLEARN_AVAILABLE or self.model is None:
             return None
@@ -95,7 +96,7 @@ class MLPredictor:
             }
         }
 
-    def get_peak_hours(self, work_type: str = None) -> List[Dict]:
+    def get_peak_hours(self, work_type: str | None = None) -> List[Dict]:
         """특정 작업 유형의 피크 시간대 분석"""
         patterns = UsagePatternTracker.get_patterns()
 
@@ -123,7 +124,7 @@ class MLPredictor:
         patterns = UsagePatternTracker.get_patterns()
 
         days = ['월', '화', '수', '목', '금', '토', '일']
-        day_patterns = {day: [] for day in days}
+        day_patterns: dict[str, list[dict[str, object]]] = {day: [] for day in days}
 
         for p in patterns:
             day_name = days[p['day_of_week']]

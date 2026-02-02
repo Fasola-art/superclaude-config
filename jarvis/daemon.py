@@ -5,7 +5,6 @@ JARVIS Background Daemon
 """
 
 import time
-import json
 import shutil
 import threading
 from datetime import datetime, timedelta

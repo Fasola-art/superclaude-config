@@ -7,9 +7,8 @@ JARVIS Task Executor
 import json
 import re
 import subprocess
-from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Any, Tuple
+from typing import Dict, Any
 
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "memory"))
@@ -216,7 +215,7 @@ class TaskExecutor:
         try:
             result = subprocess.run(['pwd'], capture_output=True, text=True)
             project_path = result.stdout.strip()
-        except:
+        except (subprocess.CalledProcessError, FileNotFoundError, OSError):
             project_path = str(Path.cwd())
 
         self.context_manager.save_context(

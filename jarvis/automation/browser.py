@@ -4,7 +4,8 @@ JARVIS Browser Automation
 브라우저 자동화 모듈 (Playwright 기반)
 """
 
-import json
+from __future__ import annotations
+
 from typing import Optional, Dict, List, Any
 
 # Playwright는 선택적 의존성
@@ -62,7 +63,7 @@ class BrowserAutomation:
         self.navigate(url)
 
         # 결과 파싱 (간단한 예시)
-        results = []
+        results: list[dict[str, str]] = []
         # 실제 구현에서는 각 엔진에 맞는 셀렉터 사용
         return results
 
@@ -149,7 +150,7 @@ class BookingAutomation:
         }
 
     def book_movie(self, movie_title: str, date: str, time: str,
-                   theater: str = None) -> Dict[str, Any]:
+                   theater: str | None = None) -> Dict[str, Any]:
         """영화 예약"""
         return {
             "status": "not_implemented",
