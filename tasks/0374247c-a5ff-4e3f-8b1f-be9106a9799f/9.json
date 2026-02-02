@@ -1,0 +1,9 @@
+{
+  "id": "9",
+  "subject": "JARVIS 기능: 브리핑 (Briefing)",
+  "description": "\"/j\" 또는 \"/j 오늘 뭐해?\" - 날씨, 일정, 대기 작업, 습관 진행률, 프로젝트 상태, GitHub, 클라이언트 작업, 운동/식단 통합 브리핑",
+  "activeForm": "브리핑 기능 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

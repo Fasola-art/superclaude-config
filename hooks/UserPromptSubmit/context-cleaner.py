@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-컨텍스트 자동 정리 Hook (DCP)
-- 컨텍스트 사용량 모니터링
-- 임계치 도달 시 자동 정리
+Context Auto-Cleanup Hook (DCP)
+- Monitor context usage
+- Auto-cleanup when threshold reached
 """
 
 import os
@@ -11,26 +11,26 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-# DCP 임계치
+# DCP thresholds
 THRESHOLDS = {
-    "warning": 75,    # 경고 표시
-    "critical": 90,   # 자동 DCP 제안
-    "emergency": 95   # 강제 압축
+    "warning": 75,    # Show warning
+    "critical": 90,   # Suggest auto DCP
+    "emergency": 95   # Force compression
 }
 
-# 상태 파일
+# State file
 STATE_FILE = Path.home() / ".claude" / "cache" / "context-state.json"
 
 def get_context_usage() -> int:
-    """현재 컨텍스트 사용량 추정 (%)"""
-    # 실제로는 Claude API에서 토큰 수를 가져와야 함
-    # 여기서는 세션 파일 크기로 추정
+    """Estimate current context usage (%)"""
+    # In practice, should get token count from Claude API
+    # Here we estimate based on session file size
     session_dir = Path.home() / ".claude" / "projects"
 
     if not session_dir.exists():
         return 0
 
-    # 가장 최근 세션 파일
+    # Most recent session file
     jsonl_files = list(session_dir.rglob("*.jsonl"))
     if not jsonl_files:
         return 0
@@ -38,21 +38,21 @@ def get_context_usage() -> int:
     latest = max(jsonl_files, key=lambda f: f.stat().st_mtime)
     size_mb = latest.stat().st_size / (1024 * 1024)
 
-    # 대략적인 추정 (200KB = 약 10%)
+    # Rough estimate (200KB = about 10%)
     estimated_usage = min(int(size_mb * 50), 100)
     return estimated_usage
 
 def check_and_alert():
-    """컨텍스트 사용량 확인 및 알림"""
+    """Check context usage and alert"""
     usage = get_context_usage()
 
     if usage >= THRESHOLDS["emergency"]:
-        print(f"🚨 CTX:{usage}% → /compact 필요")
+        print(f"CTX:{usage}% -> /compact needed")
     elif usage >= THRESHOLDS["critical"]:
-        print(f"⚠️ CTX:{usage}%")
-    # warning은 출력 생략
+        print(f"CTX:{usage}%")
+    # Skip warning output
 
-    # 상태 저장
+    # Save state
     STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
     state = {
         "usage": usage,

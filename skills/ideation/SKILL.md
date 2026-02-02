@@ -1,193 +1,193 @@
 # Ideation Skill
 
-> 다중 페르소나 아이디어 토론 스킬 - 27개 전문가 관점에서 아이디어 검토
+> Multi-persona idea discussion skill - Review ideas from 27 expert perspectives
 
 ---
 
-## 개요
+## Overview
 
-`/ideation` 명령어는 아이디어를 여러 전문가 페르소나 관점에서 다각도로 검토합니다. 각 페르소나가 자신의 전문 영역에서 질문하고, 의견을 제시하며, 최종적으로 모더레이터가 종합합니다.
-
----
-
-## 사용법
-
-```
-/ideation [아이디어 또는 주제]
-```
-
-**예시**:
-```
-/ideation AI 기반 반려동물 건강 관리 앱
-/ideation 크리에이터 이코노미 플랫폼 아이디어
-/ideation 새로운 SaaS 비즈니스 모델
-```
+The `/ideation` command reviews ideas from multiple expert persona perspectives. Each persona asks questions and provides opinions from their area of expertise, with a moderator synthesizing the final conclusions.
 
 ---
 
-## 토론 구성
-
-### 기본 패널 (6인)
-
-| 역할 | 페르소나 | 관점 |
-|------|----------|------|
-| 전략 | `ceo` | 비즈니스 전략, 비전 |
-| 재무 | `cfo` | ROI, 비용 효율성 |
-| 운영 | `coo` | 실행 가능성, 리소스 |
-| 고객 | `user_advocate` | 사용자 니즈, 접근성 |
-| 비판 | `devil_advocate` | 반대 의견, 대안 |
-| 진행 | `moderator` | 의견 종합, 결론 |
-
-### 확장 패널 (옵션)
+## Usage
 
 ```
-/ideation --panel marketing  → 마케팅 중심 패널
-/ideation --panel tech       → 기술 중심 패널
-/ideation --panel full       → 전체 27인 패널
+/ideation [idea or topic]
 ```
 
-| 패널 | 페르소나들 |
-|------|-----------|
+**Examples**:
+```
+/ideation AI-based pet health management app
+/ideation Creator economy platform idea
+/ideation New SaaS business model
+```
+
+---
+
+## Discussion Structure
+
+### Base Panel (6 members)
+
+| Role | Persona | Perspective |
+|------|---------|-------------|
+| Strategy | `ceo` | Business strategy, vision |
+| Finance | `cfo` | ROI, cost efficiency |
+| Operations | `coo` | Feasibility, resources |
+| Customer | `user_advocate` | User needs, accessibility |
+| Critic | `devil_advocate` | Opposing views, alternatives |
+| Facilitator | `moderator` | Synthesize opinions, conclusions |
+
+### Extended Panels (Optional)
+
+```
+/ideation --panel marketing  → Marketing-focused panel
+/ideation --panel tech       → Technology-focused panel
+/ideation --panel full       → All 27 personas
+```
+
+| Panel | Personas |
+|-------|----------|
 | marketing | marketing, growth, content, community, pr |
 | tech | innovator, futurist, inventor, designer, ux |
 | validation | critic, realist, risk_analyst, devil_advocate |
 | research | researcher, ethnographer, competitor |
-| full | 모든 27개 페르소나 |
+| full | All 27 personas |
 
 ---
 
-## 토론 워크플로우
+## Discussion Workflow
 
-### Phase 1: 아이디어 발표
+### Phase 1: Idea Presentation
 
 ```
-[사용자] 아이디어 제시
+[User] Presents idea
     ↓
-[CEO] 전략적 관점에서 첫 인상 및 핵심 질문
+[CEO] Strategic perspective - first impression and key questions
 ```
 
-### Phase 2: 다각도 검토 (병렬)
+### Phase 2: Multi-angle Review (Parallel)
 
 ```
-[CFO] 재무적 타당성
-    - 예상 ROI는?
-    - 초기 투자 비용은?
-    - 수익화 시점은?
+[CFO] Financial viability
+    - Expected ROI?
+    - Initial investment cost?
+    - Time to monetization?
 
-[COO] 운영 가능성
-    - 필요 인력은?
-    - 운영 프로세스는?
-    - 확장 가능한가?
+[COO] Operational feasibility
+    - Required personnel?
+    - Operational processes?
+    - Is it scalable?
 
-[User Advocate] 사용자 관점
-    - 실제 니즈가 있는가?
-    - 사용자 경험은?
-    - 접근성은?
+[User Advocate] User perspective
+    - Is there real need?
+    - User experience?
+    - Accessibility?
 
-[Devil's Advocate] 비판적 검토
-    - 왜 실패할 수 있는가?
-    - 경쟁사는 왜 안 했는가?
-    - 대안은 없는가?
+[Devil's Advocate] Critical review
+    - Why might it fail?
+    - Why haven't competitors done this?
+    - Are there alternatives?
 ```
 
-### Phase 3: 심층 토론 (선택적)
+### Phase 3: Deep Discussion (Optional)
 
 ```
-[Marketing] 시장 진입 전략
-[Growth] 성장 지표 및 레버
-[Legal] 법적 리스크
-[Risk Analyst] 리스크 완화 방안
+[Marketing] Market entry strategy
+[Growth] Growth metrics and levers
+[Legal] Legal risks
+[Risk Analyst] Risk mitigation strategies
 ```
 
-### Phase 4: 종합 및 결론
+### Phase 4: Synthesis and Conclusion
 
 ```
-[Moderator] 의견 종합
-    ├── 핵심 합의점
-    ├── 미해결 논점
-    ├── 추천 방향
-    └── 다음 단계 (Action Items)
+[Moderator] Opinion synthesis
+    ├── Key consensus points
+    ├── Unresolved issues
+    ├── Recommended direction
+    └── Next steps (Action Items)
 ```
 
 ---
 
-## 출력 형식
+## Output Format
 
 ```markdown
-# 💡 Ideation Session: [아이디어 제목]
+# Ideation Session: [Idea Title]
 
-## 📋 Executive Summary
-[한 문단 요약]
-
----
-
-## 🎭 페르소나별 의견
-
-### CEO (전략)
-**관점**: [전략적 평가]
-**질문**: [핵심 질문]
-**제안**: [추천 사항]
-
-### CFO (재무)
-**관점**: [재무적 평가]
-**우려**: [비용/수익 이슈]
-**제안**: [재무 전략]
-
-### COO (운영)
-**관점**: [운영 평가]
-**우려**: [실행 이슈]
-**제안**: [운영 계획]
-
-### User Advocate (사용자)
-**관점**: [사용자 관점]
-**우려**: [UX 이슈]
-**제안**: [사용자 중심 개선]
-
-### Devil's Advocate (비판)
-**관점**: [비판적 분석]
-**우려**: [핵심 약점]
-**대안**: [대안 제시]
+## Executive Summary
+[One paragraph summary]
 
 ---
 
-## ⚖️ 종합 평가
+## Persona Opinions
 
-### ✅ 강점
-- [강점 1]
-- [강점 2]
+### CEO (Strategy)
+**Perspective**: [Strategic assessment]
+**Questions**: [Key questions]
+**Suggestions**: [Recommendations]
 
-### ⚠️ 우려사항
-- [우려 1]
-- [우려 2]
+### CFO (Finance)
+**Perspective**: [Financial assessment]
+**Concerns**: [Cost/revenue issues]
+**Suggestions**: [Financial strategy]
 
-### 🎯 핵심 논점
-- [해결해야 할 질문들]
+### COO (Operations)
+**Perspective**: [Operational assessment]
+**Concerns**: [Execution issues]
+**Suggestions**: [Operational plan]
+
+### User Advocate (Customer)
+**Perspective**: [User viewpoint]
+**Concerns**: [UX issues]
+**Suggestions**: [User-centric improvements]
+
+### Devil's Advocate (Critic)
+**Perspective**: [Critical analysis]
+**Concerns**: [Key weaknesses]
+**Alternatives**: [Alternative proposals]
 
 ---
 
-## 📌 Action Items
+## Overall Assessment
 
-1. [다음 단계 1]
-2. [다음 단계 2]
-3. [다음 단계 3]
+### Strengths
+- [Strength 1]
+- [Strength 2]
+
+### Concerns
+- [Concern 1]
+- [Concern 2]
+
+### Key Issues
+- [Questions to resolve]
 
 ---
 
-## 🔗 추천 다음 스킬
+## Action Items
 
-- `/prd-create` - PRD 문서 작성
-- `/research` - 심층 리서치
-- `/project-plan` - 프로젝트 계획
+1. [Next step 1]
+2. [Next step 2]
+3. [Next step 3]
+
+---
+
+## Recommended Next Skills
+
+- `/prd-create` - Create PRD document
+- `/research` - Deep research
+- `/project-plan` - Project planning
 ```
 
 ---
 
-## 페르소나 참조
+## Persona Reference
 
-### 전체 페르소나 (27개)
+### All Personas (27)
 
-| 그룹 | 페르소나들 |
-|------|-----------|
+| Group | Personas |
+|-------|----------|
 | Business | ceo, cfo, coo, legal, sales, bd |
 | Marketing | marketing, growth, content, community, pr |
 | Innovation | innovator, futurist, visionary, disruptor, inventor |
@@ -196,46 +196,46 @@
 | Research | researcher, ethnographer, competitor |
 | Special | moderator |
 
-### 페르소나 상세
+### Persona Details
 
-경로: `~/.claude/personas/ideation/`
+Path: `~/.claude/personas/ideation/`
 
 ---
 
-## 설정 옵션
+## Configuration Options
 
 ```yaml
 # ~/.claude/superclaude-config.json
 ideation:
   default_panel: "basic"       # basic/marketing/tech/validation/full
-  parallel_opinions: true      # 병렬 의견 수집
-  include_questions: true      # 각 페르소나 질문 포함
+  parallel_opinions: true      # Collect opinions in parallel
+  include_questions: true      # Include questions from each persona
   summary_style: "detailed"    # brief/detailed
-  auto_action_items: true      # Action Items 자동 생성
+  auto_action_items: true      # Auto-generate action items
 ```
 
 ---
 
-## 트리거
+## Triggers
 
-- `/ideation` 명령어 직접 호출
-- "아이디어 토론해줘" 요청 시 자동 활성화
-- "다양한 관점에서 검토해줘" 요청 시 활성화
-- "페르소나 토론" 요청 시 활성화
-
----
-
-## 관련 스킬
-
-| 스킬 | 용도 |
-|------|------|
-| `/prd-create` | 아이디어 → PRD 문서 |
-| `/research` | 시장/기술 리서치 |
-| `/project-plan` | 프로젝트 계획 수립 |
+- Direct `/ideation` command
+- Auto-activates on "discuss this idea" request
+- Activates on "review from different perspectives" request
+- Activates on "persona discussion" request
 
 ---
 
-## 관련 문서
+## Related Skills
 
-- `~/.claude/personas/ideation/INDEX.md` - 페르소나 인덱스
-- `~/.claude/docs/PERSONAS.md` - 페르소나 시스템 문서
+| Skill | Purpose |
+|-------|---------|
+| `/prd-create` | Idea → PRD document |
+| `/research` | Market/technology research |
+| `/project-plan` | Project planning |
+
+---
+
+## Related Documents
+
+- `~/.claude/personas/ideation/INDEX.md` - Persona index
+- `~/.claude/docs/PERSONAS.md` - Persona system documentation

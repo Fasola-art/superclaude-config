@@ -1,0 +1,9 @@
+{
+  "id": "7",
+  "subject": "JARVIS 모듈 구현: GitHubMonitor",
+  "description": "PR, 이슈, 리뷰 모니터링\n- PR: 오픈 목록, 상태 확인, 머지 가능 여부, CI/CD 상태\n- 이슈: 할당된 이슈, 멘션, 레이블 필터링\n- 리뷰: 요청받은 리뷰, 대기 중 알림, 코멘트 요약\n- 자동 알림: 새 PR/이슈, 리뷰 요청, CI 실패",
+  "activeForm": "GitHubMonitor 모듈 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

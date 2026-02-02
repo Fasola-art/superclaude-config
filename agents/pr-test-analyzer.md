@@ -1,6 +1,6 @@
 ---
 name: pr-test-analyzer
-description: PR 테스트 커버리지 분석 (Analyze PR test coverage quality)
+description: PR test coverage analysis (Analyze PR test coverage quality)
 model: inherit
 color: cyan
 ---

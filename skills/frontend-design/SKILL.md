@@ -1,6 +1,6 @@
 ---
 name: frontend-design
-description: 고품질 프론트엔드 인터페이스 생성 (Create distinctive, production-grade frontend interfaces)
+description: Create distinctive, production-grade frontend interfaces. Avoid generic AI aesthetics. Implement real working code with exceptional attention to visual details.
 license: Complete terms in LICENSE.txt
 ---
 

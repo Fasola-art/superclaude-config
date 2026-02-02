@@ -1,35 +1,35 @@
-# Git 에러 패턴
+# Git Error Patterns
 
-> **카테고리**: git
-> **갱신일**: 2026-01-30
+> **Category**: git
+> **Updated**: 2026-01-30
 
 ---
 
-## 🔴 Critical 에러
+## 🔴 Critical Errors
 
 ### Merge Conflict
 
-**메시지**: `CONFLICT (content): Merge conflict in [파일]`
+**Message**: `CONFLICT (content): Merge conflict in [file]`
 
-**해결책**:
+**Solutions**:
 ```bash
-# 1. 충돌 파일 확인
+# 1. Check conflicting files
 git status
 
-# 2. 충돌 해결
+# 2. Resolve conflicts
 # <<<<<<< HEAD
-# 현재 브랜치 내용
+# Current branch content
 # =======
-# 머지하려는 브랜치 내용
+# Branch being merged content
 # >>>>>>> feature-branch
 
-# 3. 마커 제거 후 원하는 내용 유지
+# 3. Remove markers and keep desired content
 
-# 4. 스테이징 & 커밋
-git add [파일]
+# 4. Stage & commit
+git add [file]
 git commit -m "Resolve merge conflict"
 
-# 도구 사용
+# Use tool
 git mergetool
 ```
 
@@ -37,19 +37,19 @@ git mergetool
 
 ### Detached HEAD
 
-**메시지**: `You are in 'detached HEAD' state`
+**Message**: `You are in 'detached HEAD' state`
 
-**원인**: 브랜치 대신 커밋 체크아웃
+**Cause**: Checked out commit instead of branch
 
-**해결책**:
+**Solutions**:
 ```bash
-# 1. 현재 위치에서 브랜치 생성
+# 1. Create branch at current position
 git checkout -b new-branch-name
 
-# 2. 또는 기존 브랜치로 복귀
+# 2. Or return to existing branch
 git checkout main
 
-# 3. 변경사항 있는 경우
+# 3. If there are changes
 git stash
 git checkout main
 git stash pop
@@ -59,47 +59,47 @@ git stash pop
 
 ### Push Rejected (non-fast-forward)
 
-**메시지**: `Updates were rejected because the remote contains work`
+**Message**: `Updates were rejected because the remote contains work`
 
-**원인**: 리모트에 로컬에 없는 커밋 존재
+**Cause**: Remote has commits not in local
 
-**해결책**:
+**Solutions**:
 ```bash
-# 1. rebase (권장)
+# 1. Rebase (recommended)
 git pull --rebase origin main
 git push
 
-# 2. merge
+# 2. Merge
 git pull origin main
-# 충돌 해결 후
+# After resolving conflicts
 git push
 
-# ⚠️ force push (주의!)
-git push --force-with-lease  # 다른 사람 작업 확인
+# ⚠️ Force push (caution!)
+git push --force-with-lease  # Verify no others' work
 ```
 
 ---
 
-## 🟠 Common 에러
+## 🟠 Common Errors
 
 ### Permission Denied (publickey)
 
-**원인**: SSH 키 인증 실패
+**Cause**: SSH key authentication failed
 
-**해결책**:
+**Solutions**:
 ```bash
-# 1. SSH 키 확인
+# 1. Check SSH keys
 ls -la ~/.ssh
 
-# 2. SSH 에이전트에 키 추가
+# 2. Add key to SSH agent
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 
-# 3. GitHub에 공개키 등록 확인
+# 3. Verify public key registered on GitHub
 cat ~/.ssh/id_ed25519.pub
-# GitHub > Settings > SSH keys에 추가
+# Add to GitHub > Settings > SSH keys
 
-# 4. 연결 테스트
+# 4. Test connection
 ssh -T git@github.com
 ```
 
@@ -107,20 +107,20 @@ ssh -T git@github.com
 
 ### Failed to Push Some Refs
 
-**원인**: 로컬/리모트 불일치
+**Cause**: Local/remote mismatch
 
-**해결책**:
+**Solutions**:
 ```bash
-# 1. 리모트 변경사항 가져오기
+# 1. Fetch remote changes
 git fetch origin
 
-# 2. 상태 확인
+# 2. Check status
 git status
 git log --oneline --graph --all
 
-# 3. rebase 또는 merge
+# 3. Rebase or merge
 git rebase origin/main
-# 또는
+# Or
 git merge origin/main
 ```
 
@@ -128,14 +128,14 @@ git merge origin/main
 
 ### Fatal: refusing to merge unrelated histories
 
-**원인**: 공통 조상 없는 브랜치 머지 시도
+**Cause**: Attempting to merge branches with no common ancestor
 
-**해결책**:
+**Solutions**:
 ```bash
-# 명시적 허용
+# Explicitly allow
 git merge other-branch --allow-unrelated-histories
 
-# 또는 rebase
+# Or rebase
 git rebase other-branch --allow-unrelated-histories
 ```
 
@@ -143,30 +143,30 @@ git rebase other-branch --allow-unrelated-histories
 
 ### Cannot lock ref
 
-**원인**: 동시 Git 작업 또는 잠금 파일 잔존
+**Cause**: Concurrent Git operation or stale lock file
 
-**해결책**:
+**Solutions**:
 ```bash
-# 1. 잠금 파일 제거
-rm -f .git/refs/heads/[브랜치].lock
+# 1. Remove lock file
+rm -f .git/refs/heads/[branch].lock
 rm -f .git/index.lock
 
-# 2. 재시도
-git [명령어]
+# 2. Retry
+git [command]
 ```
 
 ---
 
-## 🟡 Warning
+## 🟡 Warnings
 
 ### Your branch is behind
 
-**해결책**:
+**Solutions**:
 ```bash
-# pull로 최신화
+# Update with pull
 git pull origin main
 
-# 또는 fetch 후 수동 머지
+# Or fetch then manual merge
 git fetch origin
 git merge origin/main
 ```
@@ -175,15 +175,15 @@ git merge origin/main
 
 ### Changes not staged for commit
 
-**해결책**:
+**Solutions**:
 ```bash
-# 스테이징
-git add [파일]
+# Stage
+git add [file]
 
-# 전체 스테이징 (주의)
+# Stage all (caution)
 git add -A
 
-# 변경사항 확인 후 스테이징
+# Interactive staging
 git add -p
 ```
 
@@ -191,86 +191,86 @@ git add -p
 
 ### Unstaged changes after reset
 
-**해결책**:
+**Solutions**:
 ```bash
-# line ending 문제일 가능성
+# Likely line ending issue
 git config core.autocrlf input  # macOS/Linux
 
-# 또는
+# Or
 git config core.autocrlf true   # Windows
 
-# 캐시 초기화
+# Clear cache
 git rm --cached -r .
 git reset --hard
 ```
 
 ---
 
-## 🔧 복구 명령어
+## 🔧 Recovery Commands
 
-### 실수로 커밋 삭제
+### Accidentally Deleted Commits
 
 ```bash
-# reflog에서 찾기
+# Find in reflog
 git reflog
 
-# 복구
-git checkout [커밋해시]
+# Recover
+git checkout [commit-hash]
 git checkout -b recovered-branch
 ```
 
-### 잘못된 커밋 수정
+### Fix Wrong Commit
 
 ```bash
-# 마지막 커밋 메시지 수정
-git commit --amend -m "새 메시지"
+# Amend last commit message
+git commit --amend -m "new message"
 
-# 마지막 커밋에 파일 추가
-git add [파일]
+# Add file to last commit
+git add [file]
 git commit --amend --no-edit
 
-# 여러 커밋 수정 (interactive rebase)
+# Edit multiple commits (interactive rebase)
 git rebase -i HEAD~3
 ```
 
-### 작업 내용 임시 저장
+### Temporarily Save Work
 
 ```bash
-# stash
+# Stash
 git stash
 git stash list
 git stash pop
 
-# stash 이름 지정
-git stash push -m "작업 설명"
+# Stash with name
+git stash push -m "work description"
 ```
 
 ---
 
-## 📊 에러 빈도
+## 📊 Error Frequency
 
-| 에러 | 빈도 | 심각도 |
-|------|------|--------|
-| Merge Conflict | 높음 | 중간 |
-| Push Rejected | 높음 | 낮음 |
-| Permission Denied | 중간 | 높음 |
-| Detached HEAD | 중간 | 낮음 |
+| Error | Frequency | Severity |
+|-------|-----------|----------|
+| Merge Conflict | High | Medium |
+| Push Rejected | High | Low |
+| Permission Denied | Medium | High |
+| Detached HEAD | Medium | Low |
 
 ---
 
-## 🔧 유용한 설정
+## 🔧 Useful Settings
 
 ```bash
-# 자주 쓰는 alias
+# Common aliases
 git config --global alias.co checkout
 git config --global alias.br branch
 git config --global alias.st status
 git config --global alias.lg "log --oneline --graph --all"
 
-# 기본 브랜치 설정
+# Default branch setting
 git config --global init.defaultBranch main
 
-# pull 전략
+# Pull strategy
 git config --global pull.rebase true
 ```
 

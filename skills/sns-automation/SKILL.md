@@ -1,59 +1,59 @@
-# SNS 자동화 워크플로우 스킬
+# SNS Automation Workflow Skill
 
-> **버전**: 1.2.0
-> **생성일**: 2026-01-30
-> **최종 수정**: 2026-01-30
-> **목적**: 인플루언서/콘텐츠 크리에이터를 위한 SNS 자동화 시스템 설계 및 구현
-> **모듈 경로**: `~/.claude/modules/sns-automation/`
-> **명령어**: `/sns`
-
----
-
-## 개요
-
-이 스킬은 SNS 콘텐츠 제작, 배포, 인게이지먼트 관리, 분석을 자동화하는 워크플로우를 설계합니다.
+> **Version**: 1.2.0
+> **Created**: 2026-01-30
+> **Last Updated**: 2026-01-30
+> **Purpose**: Design and implement SNS automation system for influencers/content creators
+> **Module Path**: `~/.claude/modules/sns-automation/`
+> **Command**: `/sns`
 
 ---
 
-## 🚀 퀵스타트
+## Overview
+
+This skill designs workflows to automate SNS content creation, distribution, engagement management, and analytics.
+
+---
+
+## Quick Start
 
 ```bash
-# 1. n8n 실행 (Docker)
+# 1. Run n8n (Docker)
 docker run -d --name n8n -p 5678:5678 n8nio/n8n
 
-# 2. 워크플로우 Import
+# 2. Import Workflows
 # n8n UI (localhost:5678) → Workflows → Import from File
 # ~/.claude/modules/sns-automation/n8n-workflows/*.json
 
-# 3. Credentials 설정
-# Settings → Credentials → 각 서비스 API 키 입력
+# 3. Configure Credentials
+# Settings → Credentials → Enter API keys for each service
 ```
 
-| 워크플로우 | 트리거 | 용도 |
-|-----------|--------|------|
-| 01-content-distributor | Webhook | 멀티플랫폼 콘텐츠 배포 |
-| 02-engagement-automation | 15분 스케줄 | 댓글/DM 자동 응답 |
-| 03-trend-analyzer | 매일 06:00 | 트렌드 분석 + 아이디어 |
-| 04-weekly-report | 매주 일 21:00 | 주간 성과 리포트 |
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| 01-content-distributor | Webhook | Multi-platform content distribution |
+| 02-engagement-automation | 15min schedule | Auto-reply to comments/DMs |
+| 03-trend-analyzer | Daily 06:00 | Trend analysis + ideas |
+| 04-weekly-report | Sunday 21:00 | Weekly performance report |
 
 ---
 
-## 시스템 아키텍처 (TO-BE)
+## System Architecture (TO-BE)
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    SNS 자동화 시스템                          │
+│                    SNS Automation System                     │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐  │
-│  │ 콘텐츠 허브   │───▶│ AI 프로세서  │───▶│  배포 엔진   │  │
-│  │ (원본 저장)   │    │ (변환/최적화) │    │ (스케줄링)   │  │
+│  │ Content Hub  │───▶│ AI Processor │───▶│ Distribution │  │
+│  │ (Storage)    │    │ (Transform)  │    │   Engine     │  │
 │  └──────┬───────┘    └──────┬───────┘    └──────┬───────┘  │
 │         │                   │                   │          │
 │         ▼                   ▼                   ▼          │
 │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐  │
-│  │ 분석 대시보드 │◀───│ 인게이지먼트 │◀───│ 멀티플랫폼   │  │
-│  │ (인사이트)   │    │  자동 응답    │    │ (IG/TT/YT)  │  │
+│  │  Analytics   │◀───│ Engagement   │◀───│ Multi-platform│  │
+│  │  Dashboard   │    │  Auto-reply  │    │ (IG/TT/YT)   │  │
 │  └──────────────┘    └──────────────┘    └──────────────┘  │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
@@ -61,226 +61,226 @@ docker run -d --name n8n -p 5678:5678 n8nio/n8n
 
 ---
 
-## 워크플로우 상세
+## Workflow Details
 
-### 워크플로우 1: 콘텐츠 제작 → 멀티플랫폼 배포
+### Workflow 1: Content Creation → Multi-platform Distribution
 
 ```
-[트리거] 원본 콘텐츠 업로드 (Google Drive / Dropbox)
+[Trigger] Original content upload (Google Drive / Dropbox)
     │
     ▼
 ┌─────────────────────────────────────────────┐
-│ [AI 프로세서] 콘텐츠 분석                     │
-│ • 영상 길이, 주제, 무드 감지                  │
-│ • 적적 썸네일 자동 추출                       │
-│ • 자막 자동 생성 (Whisper API)               │
+│ [AI Processor] Content Analysis              │
+│ • Detect video length, topic, mood           │
+│ • Auto-extract optimal thumbnail             │
+│ • Auto-generate subtitles (Whisper API)      │
 └─────────────────────────────────────────────┘
     │
     ├──────────────┬──────────────┐
     ▼              ▼              ▼
 ┌────────────┐ ┌────────────┐ ┌────────────┐
 │ Instagram  │ │  TikTok    │ │  YouTube   │
-│ 변환       │ │  변환      │ │  변환      │
+│ Transform  │ │  Transform │ │  Transform │
 │ • 1:1/4:5  │ │ • 9:16     │ │ • Shorts   │
-│   리사이즈 │ │   세로형   │ │   60초     │
-│ • 캡션     │ │ • 트렌드   │ │ • 챕터     │
-│   최적화   │ │   음악매칭 │ │   마커추가 │
-│ • 해시태그 │ │ • 후킹     │ │ • SEO 태그 │
-│   추천     │ │   텍스트   │ │           │
+│   resize   │ │   vertical │ │   60sec    │
+│ • Caption  │ │ • Trending │ │ • Chapter  │
+│   optimize │ │   music    │ │   markers  │
+│ • Hashtag  │ │ • Hook     │ │ • SEO tags │
+│   suggest  │ │   text     │ │            │
 └────────────┘ └────────────┘ └────────────┘
     │              │              │
     ▼              ▼              ▼
 ┌─────────────────────────────────────────────┐
-│ [스케줄러] 최적 시간대 예약                   │
+│ [Scheduler] Optimal time scheduling          │
 │ • Instagram: 12:00, 18:00, 21:00            │
 │ • TikTok: 07:00, 12:00, 19:00               │
 │ • YouTube: 17:00, 20:00                     │
 └─────────────────────────────────────────────┘
     │
     ▼
-[실행] 자동 업로드 + 크로스포스팅
+[Execute] Auto-upload + cross-posting
 ```
 
-### 워크플로우 2: 인게이지먼트 자동화
+### Workflow 2: Engagement Automation
 
 ```
-[트리거] 새 댓글/DM 수신
+[Trigger] New comment/DM received
     │
     ▼
 ┌─────────────────────────────────────────────┐
-│ [AI] 메시지 유형 분류                        │
-│ • 팬 댓글 → 자동 응답                        │
-│ • 협찬 문의 → 별도 큐 + 알림                 │
-│ • 부정적 댓글 → 모니터링 플래그              │
-│ • 질문 → FAQ 매칭 또는 수동 응답 요청        │
+│ [AI] Message Type Classification             │
+│ • Fan comment → Auto-reply                   │
+│ • Sponsorship inquiry → Separate queue + alert│
+│ • Negative comment → Monitoring flag         │
+│ • Question → FAQ match or manual request     │
 └─────────────────────────────────────────────┘
     │
     ├─────────────┬─────────────┐
     ▼             ▼             ▼
 ┌──────────┐ ┌──────────┐ ┌──────────┐
-│ 자동응답  │ │ 협찬관리  │ │ 위기대응  │
-│          │ │          │ │          │
-│ "감사    │ │• Notion  │ │• 즉시    │
-│  합니다  │ │  DB 저장 │ │  알림    │
-│  💕"    │ │• 템플릿  │ │• 숨김    │
-│ "좋은    │ │  답변    │ │  처리    │
-│  하루    │ │• 캘린더  │ │• 에스컬  │
-│  되세요" │ │  연동    │ │  레이션  │
-│ (페르소나│ │          │ │          │
-│  유지)   │ │          │ │          │
+│ Auto-reply│ │ Sponsor  │ │ Crisis   │
+│          │ │ Mgmt     │ │ Response │
+│ "Thank   │ │• Notion  │ │• Instant │
+│  you!    │ │  DB save │ │  alert   │
+│  💕"     │ │• Template│ │• Hide    │
+│ "Have a  │ │  reply   │ │  action  │
+│  great   │ │• Calendar│ │• Escalate│
+│  day!"   │ │  sync    │ │          │
+│ (persona │ │          │ │          │
+│  maintain)│ │          │ │          │
 └──────────┘ └──────────┘ └──────────┘
 ```
 
-### 워크플로우 3: 콘텐츠 기획 자동화
+### Workflow 3: Content Planning Automation
 
 ```
-[트리거] 매일 오전 6시 / 주간 월요일
+[Trigger] Daily 6am / Weekly Monday
     │
     ▼
 ┌─────────────────────────────────────────────┐
-│ [트렌드 수집]                                │
-│ • TikTok 트렌딩 해시태그                     │
-│ • Instagram 탐색 탭 인기 콘텐츠              │
-│ • Google Trends 급상승 키워드               │
-│ • 경쟁 인플루언서 최근 게시물                │
+│ [Trend Collection]                           │
+│ • TikTok trending hashtags                   │
+│ • Instagram explore tab popular content      │
+│ • Google Trends rising keywords              │
+│ • Competitor influencer recent posts         │
 └─────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────┐
-│ [AI 분석]                                    │
-│ • 내 콘텐츠 스타일과 매칭되는 트렌드 필터링  │
-│ • 예상 성과 점수 산출                        │
-│ • 콘텐츠 아이디어 3개 생성                   │
+│ [AI Analysis]                                │
+│ • Filter trends matching my content style    │
+│ • Calculate expected performance score       │
+│ • Generate 3 content ideas                   │
 └─────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────┐
-│ [출력] 콘텐츠 캘린더 자동 업데이트           │
-│ • Notion / Google Calendar 연동             │
-│ • 슬랙/텔레그램 알림                         │
+│ [Output] Auto-update content calendar        │
+│ • Notion / Google Calendar sync              │
+│ • Slack/Telegram notification                │
 └─────────────────────────────────────────────┘
 ```
 
-### 워크플로우 4: 분석 및 리포팅
+### Workflow 4: Analytics and Reporting
 
 ```
-[트리거] 매주 일요일 21:00
+[Trigger] Every Sunday 21:00
     │
     ▼
 ┌─────────────────────────────────────────────┐
-│ [데이터 수집]                                │
-│ • Instagram Insights API                    │
-│ • TikTok Analytics                          │
-│ • YouTube Studio API                        │
+│ [Data Collection]                            │
+│ • Instagram Insights API                     │
+│ • TikTok Analytics                           │
+│ • YouTube Studio API                         │
 └─────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────┐
-│ [분석]                                       │
-│ • Top 5 콘텐츠 (도달/인게이지먼트)           │
-│ • 팔로워 증감 추이                           │
-│ • 최적 업로드 시간대 재계산                  │
-│ • 해시태그 성과 분석                         │
+│ [Analysis]                                   │
+│ • Top 5 content (reach/engagement)           │
+│ • Follower growth trends                     │
+│ • Recalculate optimal upload times           │
+│ • Hashtag performance analysis               │
 └─────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────┐
-│ [리포트 생성]                                │
-│ • PDF 주간 리포트 자동 생성                  │
-│ • 메일 발송 (협찬사 공유용)                  │
-│ • 대시보드 업데이트                          │
+│ [Report Generation]                          │
+│ • Auto-generate PDF weekly report            │
+│ • Email (for sponsor sharing)                │
+│ • Dashboard update                           │
 └─────────────────────────────────────────────┘
 ```
 
 ---
 
-## 기술 스택 제안
+## Tech Stack Recommendations
 
-| 레이어 | 도구 | 용도 |
-|--------|------|------|
-| 워크플로우 엔진 | n8n (셀프호스팅) | 전체 자동화 오케스트레이션 |
-| AI | OpenAI GPT-4 / Claude | 캡션 생성, 댓글 분류, 아이디어 |
-| 미디어 처리 | FFmpeg / Cloudinary | 리사이징, 포맷 변환 |
-| 음성 | Whisper API | 자동 자막 생성 |
-| 스케줄링 | Buffer / Later API | 멀티플랫폼 예약 |
-| 데이터베이스 | Notion API / Supabase | 콘텐츠/협찬 관리 |
-| 알림 | Telegram Bot / Slack | 실시간 알림 |
-| 대시보드 | Metabase / Google Sheets | 대시보드 |
-
----
-
-## 자동화 후 예상 효과
-
-| 항목 | Before | After | 절감 |
-|------|--------|-------|------|
-| 플랫폼 업로드 | 2시간 | 5분 | **95%** |
-| 댓글/DM 응대 | 2시간 | 30분 | **75%** |
-| 해시태그 리서치 | 1시간 | 자동 | **100%** |
-| 트렌드 분석 | 1시간 | 자동 | **100%** |
-| 리포팅 | 1시간 | 자동 | **100%** |
-| 주간 총 작업 | 7시간 | 35분 | **92%** |
+| Layer | Tool | Purpose |
+|-------|------|---------|
+| Workflow Engine | n8n (self-hosted) | Full automation orchestration |
+| AI | OpenAI GPT-4 / Claude | Caption generation, comment classification, ideas |
+| Media Processing | FFmpeg / Cloudinary | Resizing, format conversion |
+| Voice | Whisper API | Auto-subtitle generation |
+| Scheduling | Buffer / Later API | Multi-platform scheduling |
+| Database | Notion API / Supabase | Content/sponsor management |
+| Notifications | Telegram Bot / Slack | Real-time alerts |
+| Dashboard | Metabase / Google Sheets | Analytics dashboard |
 
 ---
 
-## 구현 단계
+## Expected Results After Automation
 
-### Phase 1: 환경 설정
-1. n8n 설치 (Docker / 셀프호스팅)
-2. `.env` 환경변수 설정
-3. API 키 입력
+| Task | Before | After | Savings |
+|------|--------|-------|---------|
+| Platform upload | 2 hours | 5 min | **95%** |
+| Comment/DM response | 2 hours | 30 min | **75%** |
+| Hashtag research | 1 hour | Auto | **100%** |
+| Trend analysis | 1 hour | Auto | **100%** |
+| Reporting | 1 hour | Auto | **100%** |
+| Weekly total | 7 hours | 35 min | **92%** |
 
-### Phase 2: 워크플로우 Import
-1. n8n에서 워크플로우 Import
-2. `Workflows → Import from File → JSON 선택`
-3. Credentials 연결
+---
+
+## Implementation Phases
+
+### Phase 1: Environment Setup
+1. Install n8n (Docker / self-hosted)
+2. Configure `.env` environment variables
+3. Enter API keys
+
+### Phase 2: Workflow Import
+1. Import workflows in n8n
+2. `Workflows → Import from File → Select JSON`
+3. Connect Credentials
    - OpenAI, Instagram, YouTube, TikTok, Telegram, Notion, Google Sheets
 
-### Phase 3: 테스트 실행
-1. 워크플로우 수동 실행으로 확인
+### Phase 3: Test Execution
+1. Verify with manual workflow execution
 
 ---
 
-## 플랫폼별 API 설정 시 주의
+## Platform API Notes
 
-| 플랫폼 | 특이사항 |
-|--------|----------|
-| Instagram | 비즈니스/크리에이터 계정 필수, Meta 앱 검수 필요 |
-| TikTok | Content Posting API 별도 승인 필요 (1-2주) |
-| Twitter | v2 API + OAuth 2.0 필수 |
-| YouTube | OAuth 동의 화면 설정 필요 |
-
----
-
-## 구현 방식 선택
-
-### Option A: n8n 워크플로우 구축
-- 셀프호스팅으로 직접 자동화 파이프라인 구축 (무료)
-
-### Option B: SaaS 조합 활용
-- Zapier + Buffer + Notion 등 기존 서비스 연동
-
-### Option C: 커스텀 앱 개발
-- Next.js + API로 전용 대시보드 개발
-
-### Option D: 기획서 먼저
-- 기획서 작성 후 개발 진행
+| Platform | Notes |
+|----------|-------|
+| Instagram | Business/Creator account required, Meta app review needed |
+| TikTok | Content Posting API requires separate approval (1-2 weeks) |
+| Twitter | v2 API + OAuth 2.0 required |
+| YouTube | OAuth consent screen setup required |
 
 ---
 
-## 관련 명령어
+## Implementation Options
+
+### Option A: n8n Workflow Build
+- Build automation pipeline with self-hosting (free)
+
+### Option B: SaaS Combination
+- Connect existing services like Zapier + Buffer + Notion
+
+### Option C: Custom App Development
+- Develop dedicated dashboard with Next.js + API
+
+### Option D: Planning First
+- Write specification first, then develop
+
+---
+
+## Related Commands
 
 ```bash
-# /sns 스킬 호출
+# Call /sns skill
 /sns
 
-# 특정 워크플로우 요청
-"SNS 자동화 워크플로우 설계해줘"
-"인플루언서 페르소나를 이용해서 자동화를 만들어줘"
+# Request specific workflow
+"Design SNS automation workflow"
+"Create automation using influencer persona"
 ```
 
 ---
 
-## 참고 자료
+## References
 
 - https://kissflow.com/workflow/bpm/bpm-vs-workflow/
 - https://www.boc-group.com/en/blog/bpm/business-process-management-bpm/
@@ -290,46 +290,46 @@ docker run -d --name n8n -p 5678:5678 n8nio/n8n
 
 ---
 
-## ✅ 자가진단 체크리스트
+## Self-diagnostic Checklist
 
-### 환경 설정
-- [ ] n8n 설치 및 실행 확인 (`localhost:5678` 접속)
-- [ ] `.env` 파일 생성 및 API 키 입력
-- [ ] 4개 워크플로우 JSON 모두 Import
+### Environment Setup
+- [ ] n8n installed and running (`localhost:5678` accessible)
+- [ ] `.env` file created with API keys
+- [ ] All 4 workflow JSONs imported
 
-### API 연결
-- [ ] OpenAI API 키 유효성 확인
-- [ ] Instagram Graph API 연결 (비즈니스 계정 필수)
-- [ ] Telegram Bot Token 설정
-- [ ] Google Sheets 서비스 계정 연결
+### API Connections
+- [ ] OpenAI API key validated
+- [ ] Instagram Graph API connected (business account required)
+- [ ] Telegram Bot Token configured
+- [ ] Google Sheets service account connected
 
-### 테스트
-- [ ] 01-content-distributor: Webhook 테스트 URL로 호출
-- [ ] 02-engagement: 수동 실행 → 댓글 fetch 확인
-- [ ] 03-trend-analyzer: 수동 실행 → AI 분석 결과 확인
-- [ ] 04-weekly-report: 수동 실행 → 리포트 생성 확인
-
----
-
-## 🔧 트러블슈팅
-
-| 증상 | 원인 | 해결 |
-|------|------|------|
-| Instagram API 401 | 토큰 만료 | Meta Business Suite에서 토큰 재발급 |
-| n8n Webhook 404 | 워크플로우 비활성화 | 워크플로우 → Active 토글 ON |
-| OpenAI rate limit | API 호출 과다 | `HTTP Request` 노드에 retry 설정 추가 |
-| Telegram 메시지 안 옴 | Chat ID 오류 | `/start` → Bot에서 Chat ID 재확인 |
-| Google Sheets 권한 | 서비스 계정 미공유 | 스프레드시트에 서비스 계정 이메일 공유 |
+### Testing
+- [ ] 01-content-distributor: Test with webhook URL
+- [ ] 02-engagement: Manual run → verify comment fetch
+- [ ] 03-trend-analyzer: Manual run → verify AI analysis
+- [ ] 04-weekly-report: Manual run → verify report generation
 
 ---
 
-## 📋 변경이력
+## Troubleshooting
 
-| 버전 | 날짜 | 변경 내용 |
-|------|------|----------|
-| 1.0.0 | 2026-01-30 | 초기 버전: 워크플로우 1-3 |
-| 1.1.0 | 2026-01-30 | 워크플로우 4 추가 (분석 및 리포팅) |
-| 1.2.0 | 2026-01-30 | 퀵스타트, 체크리스트, 트러블슈팅 추가 |
+| Symptom | Cause | Solution |
+|---------|-------|----------|
+| Instagram API 401 | Token expired | Reissue token in Meta Business Suite |
+| n8n Webhook 404 | Workflow inactive | Toggle workflow → Active ON |
+| OpenAI rate limit | Excessive API calls | Add retry settings to HTTP Request node |
+| Telegram no messages | Chat ID error | `/start` → Verify Chat ID from bot |
+| Google Sheets permission | Service account not shared | Share spreadsheet with service account email |
+
+---
+
+## Changelog
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.0.0 | 2026-01-30 | Initial version: Workflows 1-3 |
+| 1.1.0 | 2026-01-30 | Added Workflow 4 (Analytics and Reporting) |
+| 1.2.0 | 2026-01-30 | Added Quick Start, Checklist, Troubleshooting |
 
 ---
 

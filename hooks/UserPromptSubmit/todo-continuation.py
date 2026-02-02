@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Todo 지속성 검증 Hook
-- 미완료 태스크 확인
-- 세션 간 연속성 보장
+Todo Persistence Verification Hook
+- Check incomplete tasks
+- Ensure continuity between sessions
 """
 
 import os
@@ -14,7 +14,7 @@ TODO_FILE = Path.home() / ".claude" / "todos" / "active.json"
 STATE_FILE = Path.home() / ".claude" / "cache" / "todo-state.json"
 
 def load_todos() -> list:
-    """활성 Todo 로드"""
+    """Load active todos"""
     if not TODO_FILE.exists():
         return []
 
@@ -26,7 +26,7 @@ def load_todos() -> list:
         return []
 
 def get_incomplete_todos(todos: list) -> list:
-    """미완료 Todo 필터링"""
+    """Filter incomplete todos"""
     return [t for t in todos if t.get("status") != "completed"]
 
 def main():
@@ -37,19 +37,19 @@ def main():
         high_priority = [t for t in incomplete if t.get("priority") == "high"]
         normal = [t for t in incomplete if t.get("priority") != "high"]
 
-        print(f"📋 미완료 태스크: {len(incomplete)}개")
+        print(f"Incomplete tasks: {len(incomplete)}")
 
         if high_priority:
-            print(f"  🔴 높은 우선순위: {len(high_priority)}개")
+            print(f"  High priority: {len(high_priority)}")
             for t in high_priority[:3]:
-                print(f"     • {t.get('title', 'Untitled')}")
+                print(f"     - {t.get('title', 'Untitled')}")
 
         if normal and len(high_priority) < 3:
             remaining = 3 - len(high_priority)
             for t in normal[:remaining]:
-                print(f"  ⚪ {t.get('title', 'Untitled')}")
+                print(f"  - {t.get('title', 'Untitled')}")
 
-    # 상태 저장
+    # Save state
     STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
     state = {
         "total": len(todos),

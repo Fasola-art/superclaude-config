@@ -1,6 +1,6 @@
 ---
 name: comment-analyzer
-description: 코드 주석 분석 (Analyze comments for accuracy and maintainability)
+description: Code comment analysis (Analyze comments for accuracy and maintainability)
 model: inherit
 color: green
 ---

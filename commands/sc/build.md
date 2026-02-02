@@ -1,22 +1,22 @@
 ---
-description: "프로젝트 빌드 실행 (Build project)"
+description: "Build project"
 argument-hint: "[options]"
 ---
 
-# 빌드
+# Build
 
-프로젝트를 빌드합니다.
+Build the project.
 
-## 사용
+## Usage
 
 ```
-/sc:build              # 기본 빌드
-/sc:build --prod       # 프로덕션 빌드
-/sc:build --watch      # 워치 모드
+/sc:build              # Default build
+/sc:build --prod       # Production build
+/sc:build --watch      # Watch mode
 ```
 
-## 동작
+## Behavior
 
-1. 프로젝트 유형 감지 (Next.js, Vite, etc.)
-2. 적절한 빌드 명령어 실행
-3. 빌드 결과 분석 및 보고
+1. Detect project type (Next.js, Vite, etc.)
+2. Execute appropriate build command
+3. Analyze and report build results

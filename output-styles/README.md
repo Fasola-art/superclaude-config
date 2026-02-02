@@ -1,46 +1,46 @@
-# Output Styles 폴더
+# Output Styles Folder
 
-> **목적**: 결과물 생성을 위한 마크다운/PDF/HTML 스타일 템플릿
-> **갱신일**: 2026-01-30
+> **Purpose**: Markdown/PDF/HTML style templates for output generation
+> **Updated**: 2026-01-30
 
 ---
 
-## 📁 폴더 구조
+## Folder Structure
 
 ```
 output-styles/
-├── README.md           # 이 파일
-├── markdown/           # 마크다운 스타일
-│   ├── default.md      # 기본 스타일
-│   ├── technical.md    # 기술 문서용
-│   └── report.md       # 보고서용
-├── html/               # HTML 템플릿
+├── README.md           # This file
+├── markdown/           # Markdown styles
+│   ├── default.md      # Default style
+│   ├── technical.md    # Technical documentation
+│   └── report.md       # Report style
+├── html/               # HTML templates
 │   ├── default.html
 │   └── presentation.html
-├── pdf/                # PDF 설정
+├── pdf/                # PDF settings
 │   └── config.json
-└── themes/             # 테마 설정
+└── themes/             # Theme settings
     ├── light.json
     └── dark.json
 ```
 
 ---
 
-## 🎯 스타일 유형
+## Style Types
 
-| 스타일 | 용도 | 형식 |
-|--------|------|------|
-| **default** | 일반 문서 | MD/HTML |
-| **technical** | 기술 문서, API 문서 | MD |
-| **report** | 분석 보고서, PRD | MD/PDF |
-| **presentation** | 발표 자료 | HTML |
-| **code** | 코드 문서화 | MD |
+| Style | Purpose | Format |
+|-------|---------|--------|
+| **default** | General documents | MD/HTML |
+| **technical** | Technical docs, API docs | MD |
+| **report** | Analysis reports, PRD | MD/PDF |
+| **presentation** | Presentation materials | HTML |
+| **code** | Code documentation | MD |
 
 ---
 
-## 📋 마크다운 스타일
+## Markdown Styles
 
-### 기본 스타일 (default.md)
+### Default Style (default.md)
 ```markdown
 ---
 title: "{title}"
@@ -55,15 +55,15 @@ version: "{version}"
 
 ---
 
-## 목차
-1. [개요](#개요)
-2. [상세](#상세)
-3. [결론](#결론)
+## Table of Contents
+1. [Overview](#overview)
+2. [Details](#details)
+3. [Conclusion](#conclusion)
 
 ---
 ```
 
-### 기술 문서 스타일 (technical.md)
+### Technical Documentation Style (technical.md)
 ```markdown
 ---
 title: "{title}"
@@ -73,25 +73,25 @@ api_version: "{version}"
 
 # {title}
 
-## 개요
+## Overview
 {overview}
 
-## 사용법
+## Usage
 \`\`\`{language}
 {code_example}
 \`\`\`
 
-## API 레퍼런스
-| 메서드 | 설명 | 반환값 |
-|--------|------|--------|
+## API Reference
+| Method | Description | Return |
+|--------|-------------|--------|
 | ... | ... | ... |
 ```
 
 ---
 
-## 🎨 테마 설정
+## Theme Settings
 
-### 라이트 테마
+### Light Theme
 ```json
 // themes/light.json
 {
@@ -110,7 +110,7 @@ api_version: "{version}"
 }
 ```
 
-### 다크 테마
+### Dark Theme
 ```json
 // themes/dark.json
 {
@@ -127,7 +127,7 @@ api_version: "{version}"
 
 ---
 
-## 📄 PDF 설정
+## PDF Settings
 
 ```json
 // pdf/config.json
@@ -152,21 +152,21 @@ api_version: "{version}"
 
 ---
 
-## 🔧 사용 방법
+## Usage
 
-### 스타일 적용
+### Applying Styles
 ```bash
-# 기술 문서 스타일로 생성
+# Generate with technical documentation style
 /sc:document --style technical
 
-# PDF로 내보내기
+# Export as PDF
 /sc:document --format pdf --theme light
 ```
 
-### 커스텀 스타일 추가
-1. `output-styles/{format}/` 폴더에 새 템플릿 추가
-2. 템플릿 파일명이 스타일 이름이 됨
-3. `{placeholder}` 형식으로 변수 사용
+### Adding Custom Styles
+1. Add new template to `output-styles/{format}/` folder
+2. Template filename becomes style name
+3. Use `{placeholder}` format for variables
 
 ---
 

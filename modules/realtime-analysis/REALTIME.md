@@ -1,44 +1,44 @@
 # Realtime Analysis Module
 
-> SuperClaude 실시간 데이터 분석 모듈
+> SuperClaude real-time data analysis module
 
 ---
 
-## 개요
+## Overview
 
-실시간 분석 모듈은 WebSocket을 통해 실시간 데이터 스트림을 처리하고,
-대시보드를 통해 시각화합니다. M2 Ultra의 멀티코어 성능을 활용합니다.
+Realtime analysis module processes real-time data streams via WebSocket
+and visualizes through dashboards. Leverages M2 Ultra multi-core performance.
 
 ---
 
-## 폴더 구조
+## Folder Structure
 
 ```
 ~/.claude/modules/realtime-analysis/
-├── REALTIME.md         # 이 파일 (모듈 가이드)
-├── config.json         # 모듈 설정
-├── streams/            # 데이터 스트림 정의
+├── REALTIME.md         # This file (module guide)
+├── config.json         # Module configuration
+├── streams/            # Data stream definitions
 │   ├── market.json
 │   ├── social.json
 │   └── custom/
-├── processors/         # 데이터 프로세서
+├── processors/         # Data processors
 │   ├── aggregator.ts
 │   ├── analyzer.ts
 │   └── transformer.ts
-├── dashboards/         # 대시보드 정의
+├── dashboards/         # Dashboard definitions
 │   ├── market.json
 │   ├── portfolio.json
 │   └── custom/
-└── websocket/          # WebSocket 서버
+└── websocket/          # WebSocket server
     ├── server.ts
     └── handlers/
 ```
 
 ---
 
-## 기능
+## Features
 
-### 1. 데이터 스트림
+### 1. Data Streams
 
 ```yaml
 streams:
@@ -75,7 +75,7 @@ streams:
         url: "ws://localhost:8080"
 ```
 
-### 2. 데이터 처리 파이프라인
+### 2. Data Processing Pipeline
 
 ```yaml
 pipeline:
@@ -102,11 +102,11 @@ pipeline:
 
   parallel_processing:
     enabled: true
-    workers: 24  # M2 Ultra 코어 수
+    workers: 24  # M2 Ultra core count
     buffer_size: 10000
 ```
 
-### 3. 실시간 지표
+### 3. Real-time Metrics
 
 ```yaml
 realtime_metrics:
@@ -137,7 +137,7 @@ realtime_metrics:
     - combined_score
 ```
 
-### 4. 대시보드
+### 4. Dashboards
 
 ```yaml
 dashboards:
@@ -174,7 +174,7 @@ dashboards:
     widgets: []
 ```
 
-### 5. 알림 시스템
+### 5. Alert System
 
 ```yaml
 realtime_alerts:
@@ -184,7 +184,7 @@ realtime_alerts:
       symbol: "BTCUSDT"
 
     - condition: "price_change_1m > 1%"
-      cooldown: 300  # 초
+      cooldown: 300  # seconds
 
   volume_alerts:
     - condition: "volume_spike > 300%"
@@ -202,19 +202,19 @@ realtime_alerts:
 
 ---
 
-## 스킬 명령어
+## Skill Commands
 
-| 명령어 | 설명 |
-|--------|------|
-| /stream-start [소스] | 스트림 시작 |
-| /stream-stop [소스] | 스트림 중지 |
-| /stream-status | 스트림 상태 확인 |
-| /dashboard [이름] | 대시보드 열기 |
-| /realtime-alert [조건] | 실시간 알림 설정 |
+| Command | Description |
+|---------|-------------|
+| /stream-start [source] | Start stream |
+| /stream-stop [source] | Stop stream |
+| /stream-status | Check stream status |
+| /dashboard [name] | Open dashboard |
+| /realtime-alert [condition] | Set real-time alert |
 
 ---
 
-## 설정 (config.json)
+## Configuration (config.json)
 
 ```json
 {
@@ -241,7 +241,7 @@ realtime_alerts:
 
 ---
 
-## 아키텍처
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -283,25 +283,25 @@ realtime_alerts:
 
 ---
 
-## 사용 예시
+## Usage Examples
 
 ```bash
-# BTC 실시간 스트림 시작
+# Start BTC real-time stream
 /stream-start binance:btcusdt
 
-# 대시보드 열기
+# Open dashboard
 /dashboard market_overview
 
-# 가격 알림 설정
+# Set price alert
 /realtime-alert "BTCUSDT > 50000"
 
-# 스트림 상태 확인
+# Check stream status
 /stream-status
 ```
 
 ---
 
-## 성능 최적화
+## Performance Optimization
 
 ```yaml
 optimization:
@@ -325,9 +325,9 @@ optimization:
 
 ---
 
-## 향후 계획
+## Roadmap
 
-- [ ] GPU 가속 분석 (Metal)
-- [ ] 분산 처리 지원
-- [ ] 머신러닝 실시간 예측
-- [ ] Trading/News 모듈 통합
+- [ ] GPU-accelerated analysis (Metal)
+- [ ] Distributed processing support
+- [ ] Real-time ML prediction
+- [ ] Trading/News module integration

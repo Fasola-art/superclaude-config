@@ -1,22 +1,22 @@
 ---
-description: "작업 규모 추정 (Estimate task scope)"
+description: "Estimate task scope"
 argument-hint: "[task]"
 ---
 
-# 추정
+# Estimate
 
-작업의 규모와 복잡도를 추정합니다.
+Estimate task scope and complexity.
 
-## 사용
+## Usage
 
 ```
-/sc:estimate "사용자 인증 구현"
+/sc:estimate "Implement user authentication"
 /sc:estimate --feature login
 ```
 
-## 분석 항목
+## Analysis Items
 
-- 예상 파일 수
-- 복잡도 수준
-- 필요 기술 스택
-- 의존성 영향도
+- Expected file count
+- Complexity level
+- Required tech stack
+- Dependency impact

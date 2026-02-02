@@ -1,23 +1,23 @@
 ---
-description: "워크플로우 실행 (Execute workflow)"
+description: "Execute workflow"
 argument-hint: "[workflow_name]"
 ---
 
-# 워크플로우
+# Workflow
 
-사전 정의된 워크플로우를 실행합니다.
+Execute predefined workflows.
 
-## 사용
+## Usage
 
 ```
-/sc:workflow feature      # 기능 개발 워크플로우
-/sc:workflow bugfix       # 버그 수정 워크플로우
-/sc:workflow release      # 릴리즈 워크플로우
+/sc:workflow feature      # Feature development workflow
+/sc:workflow bugfix       # Bug fix workflow
+/sc:workflow release      # Release workflow
 ```
 
-## 워크플로우 유형
+## Workflow Types
 
-- feature: 기능 개발
-- bugfix: 버그 수정
-- refactor: 리팩토링
-- release: 릴리즈
+- feature: Feature development
+- bugfix: Bug fixing
+- refactor: Refactoring
+- release: Release

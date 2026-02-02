@@ -1,5 +1,5 @@
 ---
-description: 기능 개발 가이드 (Feature development with architecture focus)
+description: Feature development with architecture focus
 argument-hint: Optional feature description
 ---
 

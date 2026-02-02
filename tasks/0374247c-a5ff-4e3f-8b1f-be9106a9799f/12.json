@@ -1,0 +1,9 @@
+{
+  "id": "12",
+  "subject": "JARVIS 기능: 예약 자동화 (Book)",
+  "description": "\"/j 레스토랑 예약해\" \"/j 영화 잡아줘\" - 조건 수집 → 옵션 검색 → 선택 → 예약, 브라우저 자동화 활용",
+  "activeForm": "예약 자동화 기능 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

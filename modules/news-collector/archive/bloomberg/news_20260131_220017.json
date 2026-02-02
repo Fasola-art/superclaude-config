@@ -1,0 +1,1354 @@
+{
+  "markets": [
+    {
+      "title": "Russia to Allow Gasoline Exports for Producers Through July",
+      "description": "Russia will allow gasoline exports for fuel producers through July 31, while extending a temporary ban for other suppliers.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/russia-to-allow-gasoline-exports-for-producers-through-july-31",
+      "category": "markets",
+      "published": "2026-01-31 11:48:11+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Dollar Rallies Most Since May as Trump Taps Warsh: Markets Wrap",
+      "description": "The biggest dollar rally since May accelerated a plunge in precious metals as President Donald Trump announced his pick for the Federal Reserve’s top job: Kevin Warsh, who’s seen as less supportive of deep rate cuts and more worried about inflation. Stocks fell. Bonds were mixed.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-29/stock-market-today-dow-s-p-live-updates",
+      "category": "markets",
+      "published": "2026-01-29 22:40:22+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Italy’s Outlook Raised to Positive by S&amp;P in New Meloni Win",
+      "description": "Italy’s credit rating outlook was raised to positive from stable by S&amp;P Global Ratings, the latest victory for Prime Minister Giorgia Meloni.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/italy-s-outlook-raised-to-positive-by-s-p-in-new-meloni-win",
+      "category": "markets",
+      "published": "2026-01-30 21:58:59+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Filmmaker Laura Poitras on US Actions in Venezuela",
+      "description": "\"The US doesn't have the right to steal resources.\" BAFTA nominated filmmaker Laura Poitras tells Mishal Husain that US action in Venezuela amounts to regime change in pursuit of oil. Subscribe to The Mishal Husain Show wherever you get your podcasts. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-31/filmmaker-laura-poitras-on-us-actions-in-venezuela-video",
+      "category": "markets",
+      "published": "2026-01-31 10:28:32+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Kazakhstan Starts Gradual Restoration of Output at Tengiz Field",
+      "description": "The Chevron-led venture Tengizchevroil has started to restore production at the Tengiz oil field, Kazakhstan’s largest, after operations were partially suspended earlier this month.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/kazakhstan-starts-gradual-restoration-of-output-at-tengiz-field",
+      "category": "markets",
+      "published": "2026-01-31 08:38:36+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "India’s NSE Targets IPO in Seven to Eight Months, CNBC Says",
+      "description": "The National Stock Exchange of India Ltd. plans to launch its initial public offering in the next seven to eight months, CNBC-TV18 reported, citing Chief Executive Officer Ashish Kumar Chauhan.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/india-s-nse-targets-ipo-in-seven-to-eight-months-cnbc-says",
+      "category": "markets",
+      "published": "2026-01-31 08:04:05+00:00",
+      "author": "",
+      "tags": [
+        "PAR:ALNSE"
+      ],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Philippine Regulator Charges Villar Land on Market Manipulation",
+      "description": "The Philippine market regulator has filed a criminal complaint against the property-holding firm of the country’s second-richest man, Manuel Villar.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/philippine-regulator-charges-villar-land-on-market-manipulation",
+      "category": "markets",
+      "published": "2026-01-31 06:04:34+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Africa’s Gambling Boom: Investment, Risk and Regulation",
+      "description": "Sports wagering is booming in Africa. Fueled by a young population, and access to latest technology, legal gambling revenues across the continent have nearly tripled in the past decade, turning it into a multi-billion-dollar market that global operators can no longer ignore. Bloomberg's Olatomiwa Babalola and Senior Africa reporter Loni Prinsloo explain. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-31/africa-s-gambling-boom-investment-risk-and-regulation",
+      "category": "markets",
+      "published": "2026-01-31 06:00:07+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "China Factory Activity Unexpectedly Slides Into Contraction",
+      "description": "China’s factory activity unexpectedly worsened after snapping its worst contraction streak on record in December, as the world’s second-largest economy struggles to pick up momentum.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/china-factory-activity-unexpectedly-slides-back-into-contraction",
+      "category": "markets",
+      "published": "2026-01-31 01:39:11+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "CME Raises Gold, Silver Margins After Historic Price Plunge",
+      "description": "CME Group is raising margins on Comex gold and silver futures after prices suffered their biggest slides in decades.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/cme-raises-gold-silver-margins-after-historic-price-plunge",
+      "category": "markets",
+      "published": "2026-01-31 02:43:18+00:00",
+      "author": "",
+      "tags": [
+        "NMS:CME"
+      ],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Trump Picks BLS Economist Brett Matsumoto to Head Agency",
+      "description": "President Donald Trump said he intends to nominate Brett Matsumoto to lead the Bureau of Labor Statistics, his second pick for the role that’s been vacant since August.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/trump-picks-bls-economist-brett-matsumoto-to-head-data-agency",
+      "category": "markets",
+      "published": "2026-01-31 01:00:16+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Andreessen, Coinbase Directors Face Trading Suit for Now",
+      "description": "A Delaware judge ruled that a shareholder lawsuit alleging insider trading by several directors of Coinbase Global Inc., including venture capitalist Marc Andreessen, can proceed for now after an internal investigation cleared the defendants of wrongdoing.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/andreessen-coinbase-directors-face-trading-suit-for-now",
+      "category": "markets",
+      "published": "2026-01-30 21:53:35+00:00",
+      "author": "",
+      "tags": [
+        "NMS:COIN"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Market Swings in India Surge From Historic Low as Budget Nears",
+      "description": "Indian stocks are seeing a resurgence of volatility just weeks after being dubbed the world’s calmest equity market, with growing skepticism sparking an exodus of overseas investors.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/market-swings-in-india-surge-from-historic-low-as-budget-nears",
+      "category": "markets",
+      "published": "2026-01-31 00:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Stocks Lower as Commodities and Tech Weigh on S&P; Gold, Silver Dip | The Close 1/30/2026",
+      "description": "Bloomberg Television brings you the latest news and analysis leading up to the final minutes and seconds before and after the closing bell on Wall Street. Today's guests are Federal Reserve Governor Stephen Miran, City University of New York’s Paul Krugman, Starbucks’ Brian Niccol, Wolfe Research’s Darrin Peller, TCW’s Bryan Whalen, University of Pennsylvania’s Peter Conti-Brown, Apollo’s Trosten Slok, Rep. Brad Sherman (D-CA), Former World Bank’s Paul Romer, Goldman Sachs’ Eric Sheridan. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-30/the-close-1-30-2026-video",
+      "category": "markets",
+      "published": "2026-01-30 23:39:07+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "AI Fears Hinder Deutsche Bank’s $1.2 Billion Loan Deal for Conga",
+      "description": "A group of lenders led by Deutsche Bank AG is at risk of getting stuck with about $1.2 billion of loans linked to the acquisition of an artificial intelligence-driven software provider, as investors shy away from businesses perceived as vulnerable to competition from free AI tools.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/ai-fears-hinder-deutsche-bank-s-1-2-billion-loan-deal-for-conga",
+      "category": "markets",
+      "published": "2026-01-30 23:22:52+00:00",
+      "author": "",
+      "tags": [
+        "GER:DBK"
+      ],
+      "sentiment": "negative",
+      "importance": "normal"
+    },
+    {
+      "title": "Fmr World Bank Chief Economist: Trump Doesn’t Believe in Fed Independence",
+      "description": "Paul Romer, Nobel laureate, former World Bank chief economist, and Boston College professor, says Donald Trump does not believe in central bank independence. Speaking with Romaine Bostick and Katie Greifeld on The Close, Romer says it is entirely possible Trump could move to impose wage and price controls. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-30/romer-trump-doesn-t-believe-in-fed-independence-video",
+      "category": "markets",
+      "published": "2026-01-30 23:10:35+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Brazil’s Haddad Pitches Ministry Ally for Open Central Bank Seat",
+      "description": "Brazil Finance Minister Fernando Haddad has pitched President Luiz Inacio Lula da Silva on naming an ally from inside his ministry to an open seat on the central bank board, according to two people with knowledge of the situation.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/brazil-s-haddad-pitches-ministry-ally-for-open-central-bank-seat",
+      "category": "markets",
+      "published": "2026-01-30 23:01:31+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Oil Rally Runs Out of Steam After Trump Says Iran Wants a Deal",
+      "description": "Oil edged lower, though still notched its biggest monthly gain since 2022, as US President Donald Trump reiterated openness to negotiations with Iran though investors remain on edge about the potential for further tensions. West Texas Intermediate fell 0.3% to settle near $65 a barrel, snapping a breathless three-day rally, while Brent ended the day above $70. Prices tumbled after Trump told reporters that Iran wants to make a deal. The US president’s messaging has shifted from punishing Tehran for its deadly crackdown on protesters to this week trying to extract a new nuclear agreement. Dr. Ellen Wald, President of Transversal Consulting, Senior Fellow at the Atlantic Council, and author of \"Saudi, Inc.\" joins Bloomberg Businessweek Daily to discuss. She also weighs in on Chevron and Exxon earnings results. Wald speaks with Carol Massar and Tim Stenovec. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-30/oil-rally-runs-out-of-steam-trump-says-iran-wants-deal-video",
+      "category": "markets",
+      "published": "2026-01-30 22:56:55+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "positive",
+      "importance": "normal"
+    },
+    {
+      "title": "Bowman Says Fed Can 'Afford to Take Time' With Rate Cuts",
+      "description": "Federal Reserve Vice Chair for Supervision Michelle Bowman says she saw merit in waiting to lower rates further given elevated inflation and uncertainty over potential distortions in economic data during an event in Oahu, Hawaii. (This report is audio only.) (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-30/bowman-says-fed-can-afford-to-take-time-with-rate-cuts-video",
+      "category": "markets",
+      "published": "2026-01-30 22:55:58+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Rep. Sherman (D-CA): Investigation into Fed is ‘Phony’",
+      "description": "Rep. Brad Sherman (D-CA) calls the Fed investigation a “phony” attempt to intimidate the central bank. Speaking with Romaine Bostick and Katie Greifeld on The Close, he says Kevin Warsh backs a digital dollar to compete with crypto. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-30/rep-sherman-d-ca-investigation-into-fed-is-phony-video",
+      "category": "markets",
+      "published": "2026-01-30 22:47:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    }
+  ],
+  "technology": [
+    {
+      "title": "Nvidia Investment in OpenAI Round ‘Nothing Like’ $100 Billion",
+      "description": "Nvidia Corp. will “absolutely” be involved in OpenAI’s current funding round, though the investment will be “nothing like” $100 billion, Chief Executive Jensen Huang said.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/nvidia-to-join-openai-s-current-funding-round-huang-says",
+      "category": "technology",
+      "published": "2026-01-31 12:26:02+00:00",
+      "author": "",
+      "tags": [
+        "NMS:NVDA"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Elon Musk’s Relentless AI Pursuit Has Him on the Hunt for Capital",
+      "description": "Spiraling costs have prompted talk of a Tesla and SpaceX merger as the billionaire looks to use his empire to fund his&nbsp;ambitions.",
+      "url": "https://www.bloomberg.com/news/features/2026-01-31/elon-musk-s-ai-push-has-him-considering-mergers-in-search-for-capital",
+      "category": "technology",
+      "published": "2026-01-31 00:31:57+00:00",
+      "author": "",
+      "tags": [
+        "NMS:TSLA"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Amazon Seeks FCC Extension of Satellite Deadline, Lacks Rockets",
+      "description": "Amazon.com Inc. asked the Federal Communications Commission for more time to meet a regulatory deadline to have more than 1,600 internet satellites in orbit by mid-2026, citing a shortage of rockets to launch them.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/amazon-seeks-fcc-extension-of-satellite-deadline-lacks-rockets",
+      "category": "technology",
+      "published": "2026-01-30 22:39:43+00:00",
+      "author": "",
+      "tags": [
+        "NMS:AMZN"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Peloton Cuts 11% of Jobs, With Engineering Teams Getting Hit",
+      "description": "Peloton Interactive Inc., the long-struggling fitness technology company, slashed 11% of its workforce in a cost-cutting move, according to a person with knowledge of the matter.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/peloton-cuts-11-of-staff-including-from-engineering-teams",
+      "category": "technology",
+      "published": "2026-01-30 20:57:42+00:00",
+      "author": "",
+      "tags": [
+        "NMS:PTON"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Andreessen, Horowitz Fuel AI Industry’s $51 Million Midterm Haul",
+      "description": "Venture capitalists Marc Andreessen and Ben Horowitz are among the major donors who fueled a $50.8 million haul for a super political action committee that plans to spend big in the midterm elections as it pursues a business-friendly regulatory environment for artificial intelligence.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/andreessen-horowitz-fuel-ai-industry-s-51-million-midterm-haul",
+      "category": "technology",
+      "published": "2026-01-30 22:17:52+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "3D Printing Startup VulcanForms Raises $220 Million for US Manufacturing",
+      "description": "Metal parts maker VulcanForms Inc. has raised $220 million in a funding round led by Eclipse and 1789 Capital, the VC firm where Donald Trump Jr. is a partner.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/3d-printing-startup-vulcanforms-raises-220-million-for-us-manufacturing",
+      "category": "technology",
+      "published": "2026-01-30 22:03:27+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Unity, Video Game Stocks Fall as Google AI Tool Sparks Fears",
+      "description": "Unity Software Inc. and video game stocks plunge Friday on fears of possible artificial intelligence disruption after Google began to roll out Project Genie.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/unity-video-game-stocks-fall-as-google-s-ai-tool-genie-sparks-fears",
+      "category": "technology",
+      "published": "2026-01-30 20:30:37+00:00",
+      "author": "",
+      "tags": [
+        "NMS:GOOGL",
+        "NYS:U"
+      ],
+      "sentiment": "negative",
+      "importance": "normal"
+    },
+    {
+      "title": "Bezos’ Rocket Firm Blue Origin to Halt Space Tourism Flights",
+      "description": "Jeff Bezos’ Blue Origin will pause tourist flights to space for “no less than two years” in order to prioritize development of its moon lander and other lunar technologies.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/bezos-rocket-firm-blue-origin-to-halt-space-tourism-flights",
+      "category": "technology",
+      "published": "2026-01-30 20:38:27+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Verizon Posts Big Wireless Gain, Plans $25 Billion Buyback",
+      "description": "Verizon Communications Inc. reported its biggest gain in mobile phone subscribers since 2019 and announced plans to buy back as much as $25 billion in shares, signaling turnaround efforts under new Chief Executive Officer Dan Schulman are starting to bear fruit.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/verizon-posts-big-gain-in-wireless-customers-under-new-ceo",
+      "category": "technology",
+      "published": "2026-01-30 11:31:05+00:00",
+      "author": "",
+      "tags": [
+        "NYS:VZ"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Tesla Bulls and Bears Agree: This Is Not an Auto Stock",
+      "description": "The long-standing debate among investors whether Tesla Inc. should be valued as a carmaker or a technology superpower came close to a resolution this week as the company laid out plans for a dramatic reshuffling of its factory lines.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/tesla-bulls-and-bears-reach-an-agreement-this-is-no-auto-stock",
+      "category": "technology",
+      "published": "2026-01-30 12:00:00+00:00",
+      "author": "",
+      "tags": [
+        "NMS:TSLA"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Why Record Labels Still Care About iTunes",
+      "description": "Over 80% of iTunes users are not subscribed to Apple Music, representing an untapped market",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-01-30/why-record-labels-still-care-about-itunes",
+      "category": "technology",
+      "published": "2026-01-30 20:47:48+00:00",
+      "author": "",
+      "tags": [
+        "AMS:UMG",
+        "NMS:AAPL"
+      ],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Musk Empire Merger Possibility, Memory Costs Weigh on Apple | Bloomberg Tech 1/30/2026",
+      "description": "Bloomberg’s Caroline Hyde and Ed Ludlow discuss how President Trump’s selection of Kevin Warsh to be the next chair of the Federal Reserve is affecting tech markets. Plus, Apple reports record sales but the rising cost of memory worries investors. And, SpaceX is said to be considering a merger with Tesla or xAI. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-30/bloomberg-tech-1-30-2026-video",
+      "category": "technology",
+      "published": "2026-01-30 20:44:11+00:00",
+      "author": "",
+      "tags": [
+        "NMS:AAPL"
+      ],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Eurizon’s Jen Says ‘Bumpy Road’ Is Ideal Path to Weaker Dollar",
+      "description": "The ideal path to a weaker dollar from the perspective of US officials may involve a “bumpy road” with a series of lurches, rather than a steady decline, according to Stephen Jen at Eurizon SLJ Capital.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/eurizon-s-jen-says-bumpy-road-is-ideal-path-to-weaker-dollar",
+      "category": "technology",
+      "published": "2026-01-30 19:26:11+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "negative",
+      "importance": "normal"
+    },
+    {
+      "title": "Apple Gives Upbeat Forecast, Warns of Rising Costs",
+      "description": "Apple delivered record quarterly sales over the holiday season and forecast continued strong demand, but the company also warned about the impact of the rising costs of components. Richard Kramer, senior analyst at Arete Research, discusses Apple’s results with Caroline Hyde and Ed Ludlow on “Bloomberg Tech.” (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-30/apple-gives-upbeat-forecast-warns-of-rising-costs-video",
+      "category": "technology",
+      "published": "2026-01-30 19:21:35+00:00",
+      "author": "",
+      "tags": [
+        "NMS:AAPL"
+      ],
+      "sentiment": "positive",
+      "importance": "normal"
+    },
+    {
+      "title": "Minnesota Woman Says Her Global Entry Nixed After Agent Run-In",
+      "description": "A payments director at the Minneapolis-based retail giant Target Corp. said her fast-track credentials for airport security were revoked following an interaction with a federal border patrol agent who claimed he had facial recognition and was recording with a “body cam.”",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/minnesota-woman-says-her-global-entry-nixed-after-agent-run-in",
+      "category": "technology",
+      "published": "2026-01-30 15:03:59+00:00",
+      "author": "",
+      "tags": [
+        "NYS:TGT"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Metal Parts Startup Raises $220M Led By Eclipse, 1789 Capital",
+      "description": "Metal parts maker VulcanForms has closed a $220 million funding round, led by existing investor Eclipse and 1789 Capital, where Donald Trump Jr. is a partner. The company, which uses additive manufacturing, is part of a growing wave of startups using advances in technology to bring manufacturing back to the US. VulcanForms CEO Kevin Kassekert joins Caroline Hyde and Ed Ludlow on \"Bloomberg Tech.” (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-30/metal-parts-startup-closes-a-220-million-funding-round-video",
+      "category": "technology",
+      "published": "2026-01-30 19:05:48+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Apple Has Watched AI From the Stands Says Dan Ives",
+      "description": "Apple Inc. enjoyed a sharp rebound in China during the holiday period, when demand for the new iPhone 17 fueled its first $25 billion quarter in the region since the end of 2021. The company generated sales of $25.5 billion from its greater China segment during a three-month span that ended Dec. 27. The revenue soared 38%, smashing Wall Street’s average estimate of $21.8 billion and far outpacing total sales growth. Dan Ives, Global Head of Technology Research at Wedbush Securities joins to discuss on Bloomberg Intelligence. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-30/apple-has-watched-ai-from-the-stands-says-dan-ives-video",
+      "category": "technology",
+      "published": "2026-01-30 19:02:05+00:00",
+      "author": "",
+      "tags": [
+        "NMS:GOOGL",
+        "NMS:AAPL"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Apple Loses More AI Researchers and a Siri Executive in Latest Departures",
+      "description": "Apple Inc. has lost at least four more of its artificial intelligence researchers in recent weeks in addition to a top Siri executive, with the staff headed to employers such as Meta Platforms Inc. and Google DeepMind.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/apple-loses-more-ai-researchers-and-a-siri-executive-in-latest-departures",
+      "category": "technology",
+      "published": "2026-01-30 18:53:59+00:00",
+      "author": "",
+      "tags": [
+        "NMS:META",
+        "NMS:GOOGL",
+        "NMS:AAPL"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "‘Highguard’ Maker Talks About the Game’s Dramatic Launch",
+      "description": "The former Respawn developers have dealt with a lot of drama since announcing their new game last month",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-01-30/-highguard-maker-wildlight-entertainment-talks-about-the-game-s-dramatic-launch",
+      "category": "technology",
+      "published": "2026-01-30 18:00:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Apple Bear Weighs In on iPhone Maker’s Record Results",
+      "description": "Apple’s quarterly sales record and upbeat outlook are being overshadowed by rising component costs. Tim Long, a Barclays senior equity research analyst who has an underweight rating on Apple, joins \"Bloomberg Open Interest\" to discuss the company’s results. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-30/apple-bear-weighs-in-on-iphone-maker-s-record-results-video",
+      "category": "technology",
+      "published": "2026-01-30 17:47:36+00:00",
+      "author": "",
+      "tags": [
+        "NMS:AAPL"
+      ],
+      "sentiment": "neutral",
+      "importance": "high"
+    }
+  ],
+  "politics": [
+    {
+      "title": "Ukraine Faces Widespread Power Outages From Grid Strains",
+      "description": "Ukraine’s capital suffered widespread power outages on Saturday in response to what were termed cascading “technical issues” across the nation’s power grid.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/kyiv-seeing-widespread-power-outages-with-metro-also-halted",
+      "category": "politics",
+      "published": "2026-01-31 09:43:40+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Iran Renews Threat to Strike Israel as Fears of US Attack Grow",
+      "description": "Iran’s army chief renewed warnings that Tehran could strike Israel, as tensions heighten amid fears of a possible US military attack on the Islamic Republic.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/iran-renews-threat-to-strike-israel-as-fears-of-us-attack-grow",
+      "category": "politics",
+      "published": "2026-01-31 10:22:25+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Merz Has Activated His Plan to Fix Germany. Now We’ll Find Out If It Works",
+      "description": "Friedrich Merz is about to discover whether his plan to reboot Germany will succeed.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/merz-has-activated-his-plan-to-fix-germany-now-we-ll-find-out-if-it-works",
+      "category": "politics",
+      "published": "2026-01-31 07:30:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "China Targets ‘Rats’ Stealing Military Funds After Purge",
+      "description": "China’s official military newspaper vowed to punish corrupt officials who misuse military funds, days after a high-profile probe into the nation’s top generals roiled Beijing’s defense establishment.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/china-vows-to-punish-rats-stealing-military-funds-after-purge",
+      "category": "politics",
+      "published": "2026-01-30 09:42:10+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Carney’s Conservative Rival Poilievre Wins Fresh Landslide in Party Review",
+      "description": "Canada’s opposition Conservative Party voted to hand a fresh endorsement to its leader Pierre Poilievre nine months after a shock election which saw him narrowly lose to Mark Carney’s Liberal Party.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/carney-s-conservative-rival-poilievre-wins-fresh-landslide-in-party-review",
+      "category": "politics",
+      "published": "2026-01-31 06:13:58+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Starmer’s Labour Heads Into Crunch UK Elections Short of Cash",
+      "description": "Prime Minister Keir Starmer gave an alarming explanation when he blocked Manchester Mayor Andy Burnham from seeking a seat in parliament: The Labour Party couldn’t afford to fight the contest to replace him.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/starmer-s-labour-heads-into-crunch-uk-elections-short-of-cash",
+      "category": "politics",
+      "published": "2026-01-31 06:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Merz' Bewährungsprobe",
+      "description": "Für Friedrich Merz wird 2026 zur Bewährungsprobe. Der Bundeskanzler hat das Schicksal seiner Koalition an eine wirtschaftliche Wiederbelebung geknüpft &mdash; viel zu spüren ist davon bislang jedoch nicht. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-31/merz-bewahrungsprobe-video",
+      "category": "politics",
+      "published": "2026-01-31 05:58:08+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Putin’s War Budget Faces Growing Strains as Peace Talks Resume",
+      "description": "President Vladimir Putin faces a narrowing window to reach a peace deal in Ukraine as Russia wrestles with a widening budget gap to fund its war.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/putin-s-war-budget-faces-growing-strains-as-peace-talks-resume",
+      "category": "politics",
+      "published": "2026-01-31 05:30:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "US Government Agencies Shut Down as Trump Deal Awaits House Vote",
+      "description": "The US government stumbled into a partial shutdown Saturday while waiting for the House to approve a funding deal President Donald Trump worked out with Democrats following a national uproar over Border Patrol agents’ killing of a US citizen in Minneapolis.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/us-government-agencies-shut-down-as-trump-deal-awaits-house-vote",
+      "category": "politics",
+      "published": "2026-01-31 05:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Canada Opposition MP Wants to Open Channel With Yale Buddy Vance",
+      "description": "Canadian opposition lawmaker Jamil Jivani attended Yale Law School with US Vice President JD Vance. He says that since his Conservative Party lost last April’s election to Mark Carney’s Liberals, he hasn’t discussed politics with his influential friend &mdash; just fantasy football and family.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/canada-opposition-mp-wants-to-open-channel-with-yale-buddy-vance",
+      "category": "politics",
+      "published": "2026-01-31 02:37:05+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Lutnick Sought Visit to Epstein’s Island, DOJ Files Indicate",
+      "description": "Commerce Secretary Howard Lutnick once planned a visit to disgraced financier Jeffrey Epstein’s private island and maintained contact with the sex offender far longer than he has previously claimed, according to documents released Friday by the Justice Department.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/doj-epstein-files-lutnick-sought-visit-to-island",
+      "category": "politics",
+      "published": "2026-01-31 02:25:06+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Senate Votes on Government Funding Bill | Balance of Power: Late Edition 01/30/2026",
+      "description": "\"Balance of Power: Late Edition\" focuses on the intersection of politics and global business. On today's show, Senator Elizabeth Warren (D-MA) shares her thoughts on President Trump nominating Kevin Warsh as Federal Reserve Chair to replace Jerome Powell. Patrick McHenry, former Representative (R-NC) on what to expect after the Senate votes on government funding. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-31/balance-of-power-late-edition-01-30-2026-video",
+      "category": "politics",
+      "published": "2026-01-31 01:17:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Trump Picks BLS Economist Brett Matsumoto to Head Agency",
+      "description": "President Donald Trump said he intends to nominate Brett Matsumoto to lead the Bureau of Labor Statistics, his second pick for the role that’s been vacant since August.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/trump-picks-bls-economist-brett-matsumoto-to-head-data-agency",
+      "category": "politics",
+      "published": "2026-01-31 01:00:16+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Patrick McHenry on Govt. Funding Vote, Kevin Warsh",
+      "description": "Patrick McHenry, former Representative (R) North Carolina, discusses what he expects will happen in the House of Representatives early next week as the Senate votes on the government funding bill. McHenry also shares his thoughts on President Trump picking Kevin Warsh as his Federal Reserve Chair nominee. He speaks with Joe Mathieu on the late edition of Bloomberg's \"Balance of Power.\" (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-31/patrick-mchenry-on-govt-funding-vote-kevin-warsh-video",
+      "category": "politics",
+      "published": "2026-01-31 01:02:10+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "State Department Approves Arms Sales to Israel, Saudi Arabia",
+      "description": "The US State Department has approved the sales of about $6.7 billion of armaments to Israel, including AH-64E Apache attack helicopters, and $9 billion for Patriot missiles to be purchased by Saudi Arabia.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/state-department-approves-arms-sales-to-israel-saudi-arabia",
+      "category": "politics",
+      "published": "2026-01-31 00:49:10+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Chile President-Elect Kast Visits Bukele’s Mega-Prison to Spotlight Security Plans",
+      "description": "Chile’s incoming president, José Antonio Kast, toured El Salvador’s notorious mega-prison on Friday, one stop on a week-long trip focused on showcasing his commitment to beefing up security once he takes office in March.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/jose-antonio-kast-visits-bukele-s-mega-prison-in-el-salvador",
+      "category": "politics",
+      "published": "2026-01-30 15:10:03+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Trump Funding Deal Passes Senate as Short US Shutdown Looms",
+      "description": "The Senate late Friday passed a government spending package aimed at averting a long US government shutdown as the White House continues to negotiate with Democrats on placing new limits on immigration raids that have provoked a national outcry.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/us-government-poised-for-short-shutdown-as-congress-talks-drag",
+      "category": "politics",
+      "published": "2026-01-30 15:40:38+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Venezuela to Shutter Torture Center, Promises Political Amnesty",
+      "description": "Venezuela’s interim government announced the closure of the infamous Helicoide prison in Caracas and promised broad amnesty for political prisoners on Friday, one of its most significant gestures yet to meet the Trump administration’s demands since the capture of Nicolás Maduro.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/venezuela-s-rodriguez-announces-amnesty-for-political-prisoners",
+      "category": "politics",
+      "published": "2026-01-30 23:01:43+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Trump Taps Warsh For Fed Chair, Furman Reacts to Rate Hold",
+      "description": "President Trump announces he intends to nominate Kevin Warsh as the next chair of the Federal Reserve, replacing Jay Powell when his term ends in May. Michael McKee speaks with Fed Governor Stephen Miran for reaction. Plus, we speak with Harvard Professor of Economics Jason Furman following the Fed’s decision to keep rates on hold earlier this week. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-01-31/trump-taps-warsh-for-fed-furman-reacts-to-rate-hold-video",
+      "category": "politics",
+      "published": "2026-01-31 00:04:31+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "DOJ Wraps Up Epstein Review as Critics Flag Unreleased Files",
+      "description": "The Justice Department released another 3 million pages of documents related to its probe of the late financier Jeffrey Epstein as the Trump administration seeks to end a months-long firestorm over the government’s investigations of the sex offender.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/justice-department-releasing-new-tranche-of-epstein-files",
+      "category": "politics",
+      "published": "2026-01-30 16:12:42+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ],
+  "wealth": [
+    {
+      "title": "PennyMac’s 33% Plunge Reveals Risks to Mortgage Lenders",
+      "description": "Mortgage company stocks tumbled Friday after PennyMac Financial Services Inc.’s reported profits that were significantly below Wall Street’s expectations, dampening the outlook for other lenders as the industry is squeezed by increasing competition.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/mortgage-lenders-sink-as-pennymac-s-profit-lags-expectations",
+      "category": "wealth",
+      "published": "2026-01-30 19:26:10+00:00",
+      "author": "",
+      "tags": [
+        "NYS:PFSI"
+      ],
+      "sentiment": "negative",
+      "importance": "high"
+    },
+    {
+      "title": "Canadian Tycoon Nixes Plan to Sell Warehouse for Use as ICE Jail",
+      "description": "Canadian billionaire Jimmy Pattison’s development company said Friday it won’t move forward with the sale of a Virginia warehouse that the Department of Homeland Security planned to convert into an ICE jail.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/billionaire-is-third-to-cancel-ice-warehouse-sale-after-protests",
+      "category": "wealth",
+      "published": "2026-01-30 20:02:27+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "AI Boom Raises Stakes in Fallout From Regional Bank Collapse",
+      "description": "From loans backed by venture investments to high-stakes talent grabs and new offices, the banking industry has rushed to fill the void left by the 2023 collapse of Silicon Valley’s major lenders. An intensifying AI boom is raising the stakes of that race.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/ai-boom-raises-stakes-in-fallout-from-regional-banking-collapse",
+      "category": "wealth",
+      "published": "2026-01-30 13:10:45+00:00",
+      "author": "",
+      "tags": [
+        "NYS:JPM",
+        "NYS:CFG"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "What’s Been Driving This Week’s Metals Mayhem?",
+      "description": "It’s not just the US dollar debasement trade.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-01-30/what-s-been-driving-this-week-s-metals-mayhem",
+      "category": "wealth",
+      "published": "2026-01-30 13:05:10+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Trump ya coqueteaba con la élite venezolana antes de interesarse en salvar su petróleo",
+      "description": "Desde su adolescencia hasta el mundo de los concursos de belleza, el presidente estadounidense se movió entre la jet set venezolana mucho antes de fijar su atención en la industria petrolera del país.",
+      "url": "https://www.bloomberg.com/news/features/2026-01-30/trump-ya-coqueteaba-con-venezuela-antes-de-buscar-capturar-a-maduro",
+      "category": "wealth",
+      "published": "2026-01-30 10:00:30+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Trump Mingled With Venezuela’s Elite Long Before He Vowed to Fix the Country",
+      "description": "From boarding school to beauty pageants, the US president mingled with Venezuela’s jet set long before he set sights on the country's oil industry.",
+      "url": "https://www.bloomberg.com/news/features/2026-01-30/trump-mingled-with-venezuelan-elites-long-before-he-vowed-to-fix-the-country",
+      "category": "wealth",
+      "published": "2026-01-30 10:00:28+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Why the UK Is Preparing to Change Its Ancient Leasehold Laws",
+      "description": "If you buy an apartment in England, the chances are you aren’t actually “buying” it at all. In most cases, you’re paying the real owner for the right to live there. “Leaseholds” are one of the oddest, and most contested, quirks of Britain’s ancient property laws. Critics who see them as a license for landlords to rip off their tenants have convinced the Labour government to overhaul the system. Here’s why campaign groups have called it an “end of history moment.”",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/why-uk-s-leasehold-property-laws-and-ground-rents-are-changing",
+      "category": "wealth",
+      "published": "2026-01-30 09:48:21+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Billionaire Salinas Reaches Tax Deal With Mexican Government",
+      "description": "Mexican billionaire Ricardo Salinas Pliego’s companies on Thursday promised to pay 32 billion pesos ($1.87 billion) to the government, capping a decade-long dispute over tax claims.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-29/billionaire-ricardo-salinas-pliego-reaches-tax-deal-with-mexican-government",
+      "category": "wealth",
+      "published": "2026-01-29 23:52:19+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Wells Fargo Boosts CEO Pay 28% to $40 Million in Key Year",
+      "description": "Wells Fargo &amp; Co. boosted Chief Executive Officer Charlie Scharf’s pay by 28% to $40 million for 2025, the highest level for a top leader of the bank in decades as Scharf helped the firm emerge from a major regulatory constraint.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-29/wells-fargo-boosts-ceo-pay-28-to-40-million-in-milestone-year",
+      "category": "wealth",
+      "published": "2026-01-29 22:16:05+00:00",
+      "author": "",
+      "tags": [
+        "NYS:WFC"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Visa Earnings Beat Estimates, Bolstered by Stronger Spending",
+      "description": "Visa Inc. reported earnings that topped analyst estimates as payments surged 8% from a year earlier amid strong holiday spending.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-29/visa-earnings-beat-estimates-bolstered-by-stronger-spending",
+      "category": "wealth",
+      "published": "2026-01-29 21:07:14+00:00",
+      "author": "",
+      "tags": [
+        "NYS:V"
+      ],
+      "sentiment": "positive",
+      "importance": "high"
+    },
+    {
+      "title": "Evercore Pauses Offers to Canadian Workers Amid Visa Concerns",
+      "description": "Evercore Inc. is pausing recruitment from Canada because of difficulties in securing work visas for prospective employees, according to people with knowledge of the matter.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-29/evercore-pauses-offers-to-canadian-workers-amid-visa-concerns",
+      "category": "wealth",
+      "published": "2026-01-29 20:08:43+00:00",
+      "author": "",
+      "tags": [
+        "NYS:EVR"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Copper Billionaires’ Fortunes Double as Metal Prices Soar",
+      "description": "The wealth of Latin America’s two richest copper billionaires has doubled over the past year, fueled by record-setting prices for the wiring metal that have outpaced the share price growth of more diversified mining companies.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-29/latin-american-billionaire-fortunes-double-on-copper-price-surge",
+      "category": "wealth",
+      "published": "2026-01-29 16:09:15+00:00",
+      "author": "",
+      "tags": [
+        "LSE:ANTO"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Newsom Warns a Wealth Tax Could Hurt California in the Long Term",
+      "description": "",
+      "url": "https://www.bloomberg.com/news/live-blog/2026-01-29/gavin-newsom-speaks-at-bloomberg-newsmakers-event",
+      "category": "wealth",
+      "published": "2026-01-29 18:04:13+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "January Is Divorce Month. Here’s How to Prepare if You’re Considering One",
+      "description": "Experts offer their thoughts on how to frame your thinking and avoid wasting money on the process",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-01-29/january-is-divorce-month-here-s-how-to-prepare-if-you-re-considering-one",
+      "category": "wealth",
+      "published": "2026-01-29 18:00:14+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "How to Avoid Precious Metals Investment Regret",
+      "description": "Whether you own a lot or none at all, here’s how to think about precious metals and your portfolio.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-01-29/how-to-avoid-precious-metals-investment-regret",
+      "category": "wealth",
+      "published": "2026-01-29 13:33:08+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ],
+  "economics": [
+    {
+      "title": "Why There’s No Grand ‘Mar-a-Lago Accord’ for Global Currencies",
+      "description": "Trump 2.0 has shown this administration’s priorities are interest, tariff and tax rates, with exchange rates an afterthought.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-01-31/why-there-won-t-be-a-grand-mar-a-lago-accord-new-economy",
+      "category": "economics",
+      "published": "2026-01-31 11:45:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Italy’s Outlook Raised to Positive by S&amp;P in New Meloni Win",
+      "description": "Italy’s credit rating outlook was raised to positive from stable by S&amp;P Global Ratings, the latest victory for Prime Minister Giorgia Meloni.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/italy-s-outlook-raised-to-positive-by-s-p-in-new-meloni-win",
+      "category": "economics",
+      "published": "2026-01-30 21:58:59+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Charting the Global Economy: Warsh Fed Pick Triggers Metals Selloff",
+      "description": "President Donald Trump’s pick of Kevin Warsh for the next chair of the Federal Reserve triggered a rebound in the dollar and a subsequent plunge in precious metals.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/world-economy-latest-trump-selection-of-warsh-for-fed-sparks-metals-selloff",
+      "category": "economics",
+      "published": "2026-01-31 10:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Merz Has Activated His Plan to Fix Germany. Now We’ll Find Out If It Works",
+      "description": "Friedrich Merz is about to discover whether his plan to reboot Germany will succeed.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/merz-has-activated-his-plan-to-fix-germany-now-we-ll-find-out-if-it-works",
+      "category": "economics",
+      "published": "2026-01-31 07:30:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Starmer’s Labour Heads Into Crunch UK Elections Short of Cash",
+      "description": "Prime Minister Keir Starmer gave an alarming explanation when he blocked Manchester Mayor Andy Burnham from seeking a seat in parliament: The Labour Party couldn’t afford to fight the contest to replace him.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/starmer-s-labour-heads-into-crunch-uk-elections-short-of-cash",
+      "category": "economics",
+      "published": "2026-01-31 06:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Putin’s War Budget Faces Growing Strains as Peace Talks Resume",
+      "description": "President Vladimir Putin faces a narrowing window to reach a peace deal in Ukraine as Russia wrestles with a widening budget gap to fund its war.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/putin-s-war-budget-faces-growing-strains-as-peace-talks-resume",
+      "category": "economics",
+      "published": "2026-01-31 05:30:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "China Factory Activity Unexpectedly Slides Into Contraction",
+      "description": "China’s factory activity unexpectedly worsened after snapping its worst contraction streak on record in December, as the world’s second-largest economy struggles to pick up momentum.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/china-factory-activity-unexpectedly-slides-back-into-contraction",
+      "category": "economics",
+      "published": "2026-01-31 01:39:11+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Fed’s Bowman Says Officials Can ‘Afford to Take Time’ With Cuts",
+      "description": "Federal Reserve Vice Chair for Supervision Michelle Bowman said she saw merit in waiting to lower rates further given elevated inflation and uncertainty over potential distortions in economic data stemming from last year’s record-long government shutdown.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/fed-s-bowman-says-officials-can-afford-to-take-time-with-cuts",
+      "category": "economics",
+      "published": "2026-01-30 22:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Fed’s Miran Sees Warsh as Persuasive, Respected New Chair",
+      "description": "Federal Reserve Governor Stephen Miran said he expects Kevin Warsh, President Donald Trump’s pick to lead the central bank, will prove effective in his leadership of the Fed’s monetary policy committee.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/fed-s-miran-sees-warsh-as-persuasive-respected-new-chair",
+      "category": "economics",
+      "published": "2026-01-30 16:37:57+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Warsh Set to Face Early Reality Check as Trump’s Man at the Fed",
+      "description": "Kevin Warsh waited almost a decade before finally clinching President Donald Trump’s nomination to be chair of the Federal Reserve. He won’t need to wait as long before his first big test in the job.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/warsh-set-to-face-early-reality-check-as-trump-s-man-at-the-fed",
+      "category": "economics",
+      "published": "2026-01-30 20:20:36+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Fed’s Musalem Says It Would Be ‘Unadvisable’ to Lower Rates",
+      "description": "Federal Reserve Bank of St. Louis President Alberto Musalem said officials should hold off from lowering interest rates further at this time to prevent stoking inflationary pressures.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/fed-s-musalem-says-it-would-be-unadvisable-to-lower-rates-now",
+      "category": "economics",
+      "published": "2026-01-30 18:30:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Statistics Canada Changes Inflation Release Date After Criticism",
+      "description": "Canada’s central statistics agency changed the date it plans to publish a major inflation print after economists warned against releasing the data while the country’s financial markets are closed for a holiday next month.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/statistics-canada-changes-inflation-release-date-after-criticism",
+      "category": "economics",
+      "published": "2026-01-30 19:10:31+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Trump Picks a Reinvented Warsh to Lead the Federal Reserve",
+      "description": "Donald Trump named Kevin Warsh to be the next chair of the Federal Reserve, ending months of speculation over who’d take charge of US interest rates as the president pushes for big cuts.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/trump-picks-a-reinvented-kevin-warsh-to-lead-the-federal-reserve",
+      "category": "economics",
+      "published": "2026-01-30 11:53:46+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Colombia Raises Key Rate to 10.25%, Surprising All Analysts",
+      "description": "Colombia surprised all analysts by raising borrowing costs more than expected as a record minimum wage increase stokes inflation pressure.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/colombia-raises-interest-rate-more-than-expected-to-10-25",
+      "category": "economics",
+      "published": "2026-01-30 18:07:31+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Carney, Macklem Congratulate Warsh on Federal Reserve Nomination",
+      "description": "Canadian Prime Minister Mark Carney and Bank of Canada Governor Tiff Macklem congratulated Kevin Warsh on his nomination to lead the Federal Reserve.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/carney-macklem-congratulate-warsh-on-federal-reserve-nomination",
+      "category": "economics",
+      "published": "2026-01-30 18:17:09+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Tracking Every Trump Tariff and Its Economic Effect",
+      "description": "For the full experience visit: Tracking Every Trump Tariff and Its Economic Effect",
+      "url": "https://www.bloomberg.com/graphics/trump-tariffs-tracker/",
+      "category": "economics",
+      "published": "2025-03-21 05:00:41+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Tillis Vows to Block Warsh Nomination Until Fed Legal Fight Ends",
+      "description": "Republican Senator Thom Tillis reiterated his intention to block Kevin Warsh from becoming chairman of the Federal Reserve until a criminal investigation into renovations at the Fed is stopped, despite his belief that the nomination is a good one.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/tillis-vows-to-block-warsh-nomination-until-fed-legal-fight-ends",
+      "category": "economics",
+      "published": "2026-01-30 15:26:21+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Fed Pick Warsh on Lower Rates, Balance Sheet and ‘Regime Change’",
+      "description": "Kevin Warsh, President Donald Trump’s pick to lead the Federal Reserve, has called for lower interest rates and sweeping changes at the central bank that would include reducing the size of its balance sheet and rethinking economic models.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/fed-pick-warsh-on-lower-rates-balance-sheet-and-regime-change",
+      "category": "economics",
+      "published": "2026-01-30 17:38:23+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "ECB Locked on Hold as Calls for Hikes This Year Fade, Poll Shows",
+      "description": "The European Central Bank is expected to keep interest rates unchanged at least through the end of next year, with calls for a hike in 2026 receding.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/ecb-locked-on-hold-as-calls-for-hikes-this-year-fade-poll-shows",
+      "category": "economics",
+      "published": "2026-01-30 00:15:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Trump Threatens Canada With More Tariffs Over Jet Snag",
+      "description": "President Donald Trump threatened to impose a 50% tariff on aircraft from Canada sold in the US and decertify all new planes made there, jeopardizing Bombardier Inc.’s access to its biggest market for private jets.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-29/trump-says-us-to-decertify-levy-tariff-on-planes-from-canada",
+      "category": "economics",
+      "published": "2026-01-29 23:48:33+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ],
+  "industries": [
+    {
+      "title": "Labubu Maker Pop Mart Sets Up London Hub for European Push",
+      "description": "Pop Mart International Group Ltd. is setting up a London headquarters for its European operations as the Chinese maker of Labubu collectible toys seeks a new growth market after its breakout success in the US.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/labubu-maker-pop-mart-sets-up-london-hub-for-european-push",
+      "category": "industries",
+      "published": "2026-01-30 22:30:00+00:00",
+      "author": "",
+      "tags": [
+        "HKG:9992"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Hedge Funds Rush Into Bullish Oil Bets Amid Iran Risk, US Freeze",
+      "description": "Hedge funds turned the most bullish on Brent oil since early April as President Donald Trump touted a growing US military presence near Iran and traders monitored the fallout from a sweeping winter storm.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/hedge-funds-rush-into-bullish-oil-bets-amid-iran-risk-us-freeze",
+      "category": "industries",
+      "published": "2026-01-30 21:56:09+00:00",
+      "author": "",
+      "tags": [
+        "NYS:BLSH"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Canada Says Jet Certification Trump Complained About Is ‘Underway’",
+      "description": "Canadian Industry Minister Melanie Joly said the country’s aviation regulator is working toward certifying Gulfstream jets and that she believes the Trump administration’s complaints about delays can be resolved.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/canada-minister-says-gulfstream-certification-is-well-underway",
+      "category": "industries",
+      "published": "2026-01-30 16:18:26+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "US Cattle Herd Stays at 75-Year Low, Keeping Beef Prices High",
+      "description": "The US cattle herd remained the smallest since 1951 at the start of the year, in the latest signal that consumer beef prices will remain near records.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/us-cattle-herd-stays-at-75-year-low-keeping-beef-prices-high",
+      "category": "industries",
+      "published": "2026-01-30 20:45:29+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Wrexham’s Feel-Good Story Hits a Snag",
+      "description": "The Welsh club owned by Ryan Reynolds and Rob McElhenney has millions caught up in Argentex’s collapse.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-01-30/wrexham-afc-6-million-caught-up-in-argentex-insolvency",
+      "category": "industries",
+      "published": "2026-01-30 20:31:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Canada Aims for More LNG Exports to India as Carney Plans Visit",
+      "description": "With Prime Minister Mark Carney preparing to visit India in the coming weeks, Canada’s energy minister sees potential for boosting his country’s liquefied natural gas exports there.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/canada-aims-for-more-lng-exports-to-india-as-carney-plans-visit",
+      "category": "industries",
+      "published": "2026-01-30 19:48:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Exxon’s Imperial to Shut Norman Wells Oil Site After Century of Output",
+      "description": "Imperial Oil Ltd. plans to shut the historic Norman Wells oil production site near the Arctic Circle in Canada after a century of operation.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/exxon-s-imperial-to-shut-norman-wells-after-century-of-output",
+      "category": "industries",
+      "published": "2026-01-30 19:07:34+00:00",
+      "author": "",
+      "tags": [
+        "NYS:XOM",
+        "TOR:IMO"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Airbus Still Setting Delivery Goal as Engine Shortage Persists",
+      "description": "Airbus SE has yet to settle on an aircraft delivery target for this year, less than three weeks before the European planemaker is due to unveil that figure, as engine supplies for its crucial A320 model remain tight, according to people familiar with the matter.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/airbus-still-setting-delivery-goal-as-engine-shortage-persists",
+      "category": "industries",
+      "published": "2026-01-30 18:00:54+00:00",
+      "author": "",
+      "tags": [
+        "PAR:AIR"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Amex Shares Drop as Platinum Card Refresh Boosts Expenses",
+      "description": "American Express Co. shares fell after the company’s Platinum card refresh boosted expenses more than expected and profit fell short of analysts’ estimates.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/amex-sees-boost-in-customer-spending-raises-quarterly-dividend",
+      "category": "industries",
+      "published": "2026-01-30 12:01:47+00:00",
+      "author": "",
+      "tags": [
+        "NYS:AXP"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Tariffs Caused $400 Million Hit to Canadian Railways in 2025",
+      "description": "US tariffs on commodities and the resulting uncertainty led to more than C$550 million ($406 million) in forgone revenues last year at Canada’s two largest railroad operators.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/tariffs-caused-400-million-hit-to-canadian-railways-in-2025",
+      "category": "industries",
+      "published": "2026-01-30 17:04:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Levy Is Said in Talks to Sell Stake in Tottenham Hotspur",
+      "description": "Businessman Daniel Levy is in talks to sell his nearly 30% stake in the group that owns Tottenham Hotspur to a consortium that includes Hong Kong businessman Ng Wing Fai, according to people familiar with the matter.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/levy-is-said-in-talks-to-sell-stake-in-tottenham-hotspur",
+      "category": "industries",
+      "published": "2026-01-30 17:41:31+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Rio and Glencore Set to Extend Deadline for Talks on Mega Deal",
+      "description": "Rio Tinto Group and Glencore Plc are poised to seek more time to work on a deal to create the world’s biggest miner as they wrangle over the premium that Rio would need to pay, people familiar with the matter said.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/rio-and-glencore-set-to-extend-deadline-for-talks-on-mega-deal",
+      "category": "industries",
+      "published": "2026-01-30 17:19:11+00:00",
+      "author": "",
+      "tags": [
+        "ASX:MQG",
+        "LSE:GLEN",
+        "LSE:RIO"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Canada Seeks to Claw Back GM Funding After Ontario Job Cuts",
+      "description": "Industry Minister Melanie Joly said the Canadian government will seek to recover money from General Motors Co. after the company’s decision to lay off 500 workers at a truck plant in Oshawa, Ontario.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/canada-seeks-to-claw-back-gm-funding-after-ontario-job-cuts",
+      "category": "industries",
+      "published": "2026-01-30 17:10:56+00:00",
+      "author": "",
+      "tags": [
+        "NYS:GM"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Ex-Manager of German Dentists Fund Loses Dismissal Suit",
+      "description": "A former top manager of a German pension fund that’s facing a loss of half its assets lost a court bid to overturn his dismissal.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/ex-manager-of-german-dentists-fund-loses-unfair-dismissal-suit",
+      "category": "industries",
+      "published": "2026-01-30 15:37:11+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "negative",
+      "importance": "normal"
+    },
+    {
+      "title": "Brazil Imports More ‘Dirt Cheap’ Russian Diesel at Expense of US",
+      "description": "Brazil is once again importing major volumes of heavily discounted diesel from Russia, at the expense of shipments from the US.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/brazil-imports-more-cheap-russian-diesel-at-expense-of-us-supply",
+      "category": "industries",
+      "published": "2026-01-30 16:52:41+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "The US Is About to Import the Most Venezuelan Oil in a Year With Trump’s Backing",
+      "description": "The US is set to import the most Venezuelan oil in a year after President Donald Trump’s administration moved to control the country’s energy supply.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/us-to-import-the-most-venezuelan-oil-in-a-year-with-trump-s-backing",
+      "category": "industries",
+      "published": "2026-01-30 16:29:26+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Cockpit Voice Recorders Must Retain 25 Hours of Data Under New FAA Rule",
+      "description": "New aircraft must have a cockpit voice recorder that can retain 25 hours of information under a final rule from US aviation regulators intended to improve safety and help investigators determine causes of accidents.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/cockpit-voice-recorders-must-retain-25-hours-of-data-faa-rule",
+      "category": "industries",
+      "published": "2026-01-30 16:24:07+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "French Health Startup Alan in Funding Talks at €5 Billion Value",
+      "description": "Alan is in talks to raise funds at a €5 billion ($5.9 billion) valuation as the French health-insurance startup works to expand its customer base, people familiar with the matter said.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/french-health-startup-alan-in-funding-talks-at-5-billion-value",
+      "category": "industries",
+      "published": "2026-01-30 16:01:42+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Amex Nears Deal for Last Office Tower at World Trade Center Site",
+      "description": "American Express Co. is close to a deal to relocate its headquarters to 2 World Trade Center, a move that would allow Silverstein Properties to start construction of the long-planned Manhattan skyscraper, according to people with knowledge of the matter.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/amex-nears-deal-for-last-office-tower-at-world-trade-center-site",
+      "category": "industries",
+      "published": "2026-01-30 15:55:56+00:00",
+      "author": "",
+      "tags": [
+        "NYS:AXP"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Deutsche Bank Faces Other AML Probe, German Prosecutors Confirm",
+      "description": "Deutsche Bank AG’s money-laundering raids by prosecutors this week were sparked by another, previously unreported probe, authorities said on Friday, confirming comments by Chief Financial Officer James von Moltke.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-30/deutsche-bank-faces-other-aml-probe-german-prosecutors-confirm-ml11lndl",
+      "category": "industries",
+      "published": "2026-01-30 15:33:13+00:00",
+      "author": "",
+      "tags": [
+        "GER:DBK"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ]
+}

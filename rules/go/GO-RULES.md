@@ -1,56 +1,56 @@
-# Go 코딩 규칙 (38개 규칙)
+# Go Coding Rules (38 Rules)
 
-> **버전**: 2026.01
-> **적용 대상**: Go 1.21+
-> **목표**: 관용적(idiomatic)이고 효율적인 Go 코드
-
----
-
-## 우선순위 요약
-
-| 우선순위 | 카테고리 | 규칙 수 | 핵심 효과 |
-|---------|---------|--------|----------|
-| 🔴 CRITICAL | ERROR | 6 | 안정적 에러 처리 |
-| 🔴 CRITICAL | CONCUR | 6 | 안전한 동시성 |
-| 🟠 HIGH | STRUCT | 5 | 구조체 설계 |
-| 🟠 HIGH | IFACE | 5 | 인터페이스 설계 |
-| 🟡 MEDIUM | FUNC | 5 | 함수 설계 |
-| 🟡 MEDIUM | PKG | 5 | 패키지 구조 |
-| 🟢 LOW | PERF | 3 | 성능 최적화 |
-| 🟢 LOW | TEST | 3 | 테스트 패턴 |
+> **Version**: 2026.01
+> **Target**: Go 1.21+
+> **Goal**: Idiomatic and efficient Go code
 
 ---
 
-## 🔴 CRITICAL: ERROR (에러 처리)
+## Priority Summary
 
-### ERROR-001: 에러 즉시 처리
+| Priority | Category | Rules | Key Effect             |
+|----------|----------|-------|------------------------|
+| CRITICAL | ERROR    | 6     | Robust error handling  |
+| CRITICAL | CONCUR   | 6     | Safe concurrency       |
+| HIGH     | STRUCT   | 5     | Struct design          |
+| HIGH     | IFACE    | 5     | Interface design       |
+| MEDIUM   | FUNC     | 5     | Function design        |
+| MEDIUM   | PKG      | 5     | Package structure      |
+| LOW      | PERF     | 3     | Performance optimization |
+| LOW      | TEST     | 3     | Test patterns          |
+
+---
+
+## CRITICAL: ERROR (Error Handling)
+
+### ERROR-001: Handle Errors Immediately
 
 ```go
-// ❌ BAD: 에러 무시
+// BAD: Ignoring error
 data, _ := os.ReadFile("config.json")
 
-// ✅ GOOD: 에러 처리
+// GOOD: Handle error
 data, err := os.ReadFile("config.json")
 if err != nil {
-    return nil, fmt.Errorf("설정 파일 읽기 실패: %w", err)
+    return nil, fmt.Errorf("failed to read config file: %w", err)
 }
 ```
 
-### ERROR-002: 에러 래핑
+### ERROR-002: Wrap Errors with Context
 
 ```go
-// ❌ BAD: 컨텍스트 없음
+// BAD: No context
 if err != nil {
     return err
 }
 
-// ✅ GOOD: 컨텍스트 추가
+// GOOD: Add context
 if err != nil {
-    return fmt.Errorf("사용자 %s 조회 실패: %w", userID, err)
+    return fmt.Errorf("failed to fetch user %s: %w", userID, err)
 }
 ```
 
-### ERROR-003: sentinel 에러
+### ERROR-003: Use Sentinel Errors
 
 ```go
 var (
@@ -58,13 +58,13 @@ var (
     ErrInvalid  = errors.New("invalid input")
 )
 
-// 사용
+// Usage
 if errors.Is(err, ErrNotFound) {
     return http.StatusNotFound
 }
 ```
 
-### ERROR-004: 커스텀 에러 타입
+### ERROR-004: Custom Error Types
 
 ```go
 type NotFoundError struct {
@@ -76,28 +76,28 @@ func (e *NotFoundError) Error() string {
     return fmt.Sprintf("%s not found: %s", e.Resource, e.ID)
 }
 
-// 사용
+// Usage
 var notFound *NotFoundError
 if errors.As(err, &notFound) {
-    log.Printf("리소스: %s, ID: %s", notFound.Resource, notFound.ID)
+    log.Printf("Resource: %s, ID: %s", notFound.Resource, notFound.ID)
 }
 ```
 
-### ERROR-005: panic 금지
+### ERROR-005: Never Use panic
 
 ```go
-// ❌ BAD: panic 사용
+// BAD: Using panic
 if err != nil {
     panic(err)
 }
 
-// ✅ GOOD: 에러 반환
+// GOOD: Return error
 if err != nil {
     return nil, err
 }
 ```
 
-### ERROR-006: defer로 리소스 정리
+### ERROR-006: Use defer for Resource Cleanup
 
 ```go
 func ReadFile(path string) ([]byte, error) {
@@ -105,7 +105,7 @@ func ReadFile(path string) ([]byte, error) {
     if err != nil {
         return nil, err
     }
-    defer f.Close()  // 항상 실행
+    defer f.Close()  // Always executes
 
     return io.ReadAll(f)
 }
@@ -113,15 +113,15 @@ func ReadFile(path string) ([]byte, error) {
 
 ---
 
-## 🔴 CRITICAL: CONCUR (동시성)
+## CRITICAL: CONCUR (Concurrency)
 
-### CONCUR-001: errgroup 사용
+### CONCUR-001: Use errgroup
 
 ```go
 g, ctx := errgroup.WithContext(ctx)
 
 for _, url := range urls {
-    url := url  // 캡처
+    url := url  // Capture
     g.Go(func() error {
         return fetch(ctx, url)
     })
@@ -132,7 +132,7 @@ if err := g.Wait(); err != nil {
 }
 ```
 
-### CONCUR-002: context 전파
+### CONCUR-002: Propagate Context
 
 ```go
 func Fetch(ctx context.Context, url string) (*Response, error) {
@@ -144,7 +144,7 @@ func Fetch(ctx context.Context, url string) (*Response, error) {
 }
 ```
 
-### CONCUR-003: 타임아웃 설정
+### CONCUR-003: Set Timeouts
 
 ```go
 ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -153,30 +153,30 @@ defer cancel()
 result, err := Fetch(ctx, url)
 ```
 
-### CONCUR-004: 채널로 통신
+### CONCUR-004: Communicate via Channels
 
 ```go
-// ❌ BAD: 공유 메모리
+// BAD: Shared memory
 var counter int
 go func() { counter++ }()
 
-// ✅ GOOD: 채널
+// GOOD: Channel
 results := make(chan int)
 go func() { results <- compute() }()
 result := <-results
 ```
 
-### CONCUR-005: goroutine 누수 방지
+### CONCUR-005: Prevent Goroutine Leaks
 
 ```go
-// ❌ BAD: 누수 가능
+// BAD: Potential leak
 go func() {
     for {
         process()
     }
 }()
 
-// ✅ GOOD: context로 종료
+// GOOD: Exit via context
 go func() {
     for {
         select {
@@ -189,11 +189,11 @@ go func() {
 }()
 ```
 
-### CONCUR-006: 송신자만 close
+### CONCUR-006: Only Sender Closes Channel
 
 ```go
 func producer(ch chan<- int) {
-    defer close(ch)  // 송신자가 close
+    defer close(ch)  // Sender closes
     for i := 0; i < 10; i++ {
         ch <- i
     }
@@ -208,9 +208,9 @@ func consumer(ch <-chan int) {
 
 ---
 
-## 🟠 HIGH: STRUCT (구조체)
+## HIGH: STRUCT (Structs)
 
-### STRUCT-001: 생성자 함수
+### STRUCT-001: Constructor Functions
 
 ```go
 type Server struct {
@@ -246,7 +246,7 @@ func NewServer(addr string, opts ...Option) *Server {
 }
 ```
 
-### STRUCT-003: 임베딩
+### STRUCT-003: Embedding
 
 ```go
 type LoggedServer struct {
@@ -255,55 +255,55 @@ type LoggedServer struct {
 }
 ```
 
-### STRUCT-004: 포인터 vs 값 수신자
+### STRUCT-004: Pointer vs Value Receivers
 
 ```go
-// 값 수신자: 작은 구조체, 불변
+// Value receiver: Small structs, immutable
 func (p Point) String() string {
     return fmt.Sprintf("(%d, %d)", p.X, p.Y)
 }
 
-// 포인터 수신자: 큰 구조체, 수정 필요
+// Pointer receiver: Large structs, needs mutation
 func (s *Server) Start() error {
     s.running = true
     return nil
 }
 ```
 
-### STRUCT-005: 제로값 유용하게
+### STRUCT-005: Useful Zero Values
 
 ```go
-// ✅ 제로값이 유효한 상태
+// Zero value is valid state
 type Buffer struct {
     data []byte
 }
 
-var buf Buffer  // 바로 사용 가능
+var buf Buffer  // Ready to use
 buf.Write([]byte("hello"))
 ```
 
 ---
 
-## 🟠 HIGH: IFACE (인터페이스)
+## HIGH: IFACE (Interfaces)
 
-### IFACE-001: 작은 인터페이스
+### IFACE-001: Keep Interfaces Small
 
 ```go
-// ✅ GOOD: 작은 인터페이스
+// GOOD: Small interface
 type Reader interface {
     Read(p []byte) (n int, err error)
 }
 
-// ❌ BAD: 너무 큰 인터페이스
+// BAD: Too large interface
 type Repository interface {
     Get, Save, Delete, Update, List, Count, Search...
 }
 ```
 
-### IFACE-002: 소비자 정의
+### IFACE-002: Define at Consumer Side
 
 ```go
-// 소비자 쪽에서 필요한 인터페이스 정의
+// Define interface where needed
 type UserGetter interface {
     GetByID(ctx context.Context, id string) (*User, error)
 }
@@ -313,7 +313,7 @@ func NewHandler(ug UserGetter) *Handler {
 }
 ```
 
-### IFACE-003: 인터페이스 합성
+### IFACE-003: Compose Interfaces
 
 ```go
 type ReadWriter interface {
@@ -322,30 +322,30 @@ type ReadWriter interface {
 }
 ```
 
-### IFACE-004: 인터페이스 검증
+### IFACE-004: Verify Interface Compliance
 
 ```go
 var _ UserRepository = (*PostgresRepo)(nil)
 ```
 
-### IFACE-005: 빈 인터페이스 최소화
+### IFACE-005: Minimize Empty Interface
 
 ```go
-// ❌ BAD
+// BAD
 func Process(data any) any { ... }
 
-// ✅ GOOD
+// GOOD
 func Process[T any](data T) T { ... }
 ```
 
 ---
 
-## 🟡 MEDIUM: FUNC (함수)
+## MEDIUM: FUNC (Functions)
 
-### FUNC-001: 명확한 반환
+### FUNC-001: Explicit Returns
 
 ```go
-// ❌ BAD: naked return
+// BAD: Naked return
 func divide(a, b int) (result int, err error) {
     if b == 0 {
         err = errors.New("division by zero")
@@ -355,7 +355,7 @@ func divide(a, b int) (result int, err error) {
     return
 }
 
-// ✅ GOOD: 명시적 반환
+// GOOD: Explicit return
 func divide(a, b int) (int, error) {
     if b == 0 {
         return 0, errors.New("division by zero")
@@ -364,7 +364,7 @@ func divide(a, b int) (int, error) {
 }
 ```
 
-### FUNC-002: 조기 반환
+### FUNC-002: Early Return
 
 ```go
 func process(data *Data) error {
@@ -374,12 +374,12 @@ func process(data *Data) error {
     if !data.Valid() {
         return ErrInvalidData
     }
-    // 정상 로직
+    // Main logic
     return nil
 }
 ```
 
-### FUNC-003: 가변 인자
+### FUNC-003: Variadic Parameters
 
 ```go
 func Sum(nums ...int) int {
@@ -391,87 +391,87 @@ func Sum(nums ...int) int {
 }
 ```
 
-### FUNC-004: 클로저 주의
+### FUNC-004: Closure Capture Caution
 
 ```go
-// ❌ BAD: 변수 캡처 문제
+// BAD: Variable capture issue
 for _, v := range values {
     go func() {
-        process(v)  // 항상 마지막 값
+        process(v)  // Always last value
     }()
 }
 
-// ✅ GOOD: 명시적 전달
+// GOOD: Explicit capture
 for _, v := range values {
-    v := v  // 로컬 복사
+    v := v  // Local copy
     go func() {
         process(v)
     }()
 }
 ```
 
-### FUNC-005: defer 순서
+### FUNC-005: defer Order
 
 ```go
 func process() {
-    defer fmt.Println("first")   // 마지막 실행
-    defer fmt.Println("second")  // 두 번째 실행
-    defer fmt.Println("third")   // 첫 번째 실행
+    defer fmt.Println("first")   // Executes last
+    defer fmt.Println("second")  // Executes second
+    defer fmt.Println("third")   // Executes first
 }
-// 출력: third, second, first (LIFO)
+// Output: third, second, first (LIFO)
 ```
 
 ---
 
-## 🟡 MEDIUM: PKG (패키지)
+## MEDIUM: PKG (Packages)
 
-### PKG-001: 패키지 명명
+### PKG-001: Package Naming
 
 ```go
-// ✅ GOOD
+// GOOD
 package user
 package http
 package json
 
-// ❌ BAD
-package userService  // camelCase 금지
-package utils        // 너무 일반적
-package common       // 무의미
+// BAD
+package userService  // No camelCase
+package utils        // Too generic
+package common       // Meaningless
 ```
 
-### PKG-002: 내부 패키지
+### PKG-002: Internal Packages
 
 ```
 project/
 ├── cmd/
-├── internal/    # 외부 접근 불가
+├── internal/    # Not accessible externally
 │   ├── config/
 │   └── db/
-└── pkg/         # 외부 공개 가능
+└── pkg/         # Publicly accessible
 ```
 
-### PKG-003: 순환 의존성 금지
+### PKG-003: No Circular Dependencies
 
 ```go
-// ❌ BAD: A → B → A
-// ✅ GOOD: 인터페이스로 분리
+// BAD: A → B → A
+// GOOD: Separate with interfaces
 ```
 
-### PKG-004: init() 최소화
+### PKG-004: Minimize init()
 
 ```go
-// ⚠️ 필요한 경우만 사용
+// Use only when necessary
 func init() {
-    // 레지스트리 등록 등
+    // Registry registration, etc.
 }
 
-// ✅ 명시적 초기화 선호
+// Prefer explicit initialization
 func Setup() error {
     return nil
 }
 ```
 
-### PKG-005: 문서 주석
+### PKG-005: Documentation Comments
 
 ```go
 // Package user provides user management functionality.
@@ -491,9 +491,9 @@ func NewUser(name string) *User {
 
 ---
 
-## 🟢 LOW: PERF (성능)
+## LOW: PERF (Performance)
 
-### PERF-001: 슬라이스 사전 할당
+### PERF-001: Preallocate Slices
 
 ```go
 items := make([]Item, 0, expectedSize)
@@ -530,9 +530,9 @@ func Process(data []byte) {
 
 ---
 
-## 🟢 LOW: TEST (테스트)
+## LOW: TEST (Testing)
 
-### TEST-001: 테이블 기반 테스트
+### TEST-001: Table-Driven Tests
 
 ```go
 func TestAdd(t *testing.T) {
@@ -557,7 +557,7 @@ func TestAdd(t *testing.T) {
 }
 ```
 
-### TEST-002: 병렬 테스트
+### TEST-002: Parallel Tests
 
 ```go
 func TestParallel(t *testing.T) {
@@ -567,13 +567,13 @@ func TestParallel(t *testing.T) {
         tt := tt
         t.Run(tt.name, func(t *testing.T) {
             t.Parallel()
-            // 테스트
+            // Test
         })
     }
 }
 ```
 
-### TEST-003: 벤치마크
+### TEST-003: Benchmarks
 
 ```go
 func BenchmarkProcess(b *testing.B) {
@@ -587,9 +587,9 @@ func BenchmarkProcess(b *testing.B) {
 
 ---
 
-## 📊 체크리스트
+## Checklist
 
-### 빌드 전
+### Before Build
 ```bash
 go fmt ./...
 go vet ./...
@@ -597,11 +597,11 @@ golangci-lint run
 go test -race ./...
 ```
 
-### 코드 리뷰 시
-- [ ] 모든 에러 처리됨
-- [ ] 에러 래핑 적절함
-- [ ] goroutine 누수 없음
-- [ ] context 전파됨
+### Code Review
+- [ ] All errors handled
+- [ ] Errors wrapped appropriately
+- [ ] No goroutine leaks
+- [ ] Context propagated
 
 ---
 

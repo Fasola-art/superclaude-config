@@ -1,23 +1,23 @@
 ---
-description: "문서 생성 (Generate documentation)"
+description: "Generate documentation"
 argument-hint: "[target]"
 ---
 
-# 문서화
+# Document
 
-코드나 프로젝트의 문서를 생성합니다.
+Generate documentation for code or projects.
 
-## 사용
+## Usage
 
 ```
-/sc:document src/utils/   # 유틸 함수 문서화
-/sc:document --api        # API 문서 생성
-/sc:document --readme     # README 생성
+/sc:document src/utils/   # Document utility functions
+/sc:document --api        # Generate API docs
+/sc:document --readme     # Generate README
 ```
 
-## 생성 문서
+## Generated Documentation
 
-- JSDoc/TSDoc 주석
-- API 문서
+- JSDoc/TSDoc comments
+- API documentation
 - README.md
-- 사용 가이드
+- Usage guides

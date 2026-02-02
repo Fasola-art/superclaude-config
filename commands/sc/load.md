@@ -1,23 +1,23 @@
 ---
-description: "컨텍스트 로드 (Load context)"
+description: "Load context"
 argument-hint: "[source]"
 ---
 
-# 컨텍스트 로드
+# Load Context
 
-외부 소스에서 컨텍스트를 로드합니다.
+Load context from external sources.
 
-## 사용
+## Usage
 
 ```
-/sc:load ./docs/PRD.md     # 파일 로드
-/sc:load --project         # 프로젝트 컨텍스트
-/sc:load --session last    # 이전 세션
+/sc:load ./docs/PRD.md     # Load file
+/sc:load --project         # Load project context
+/sc:load --session last    # Load previous session
 ```
 
-## 로드 소스
+## Load Sources
 
-- 파일/문서
-- 프로젝트 설정
-- 세션 이력
-- 외부 참조
+- Files/documents
+- Project settings
+- Session history
+- External references

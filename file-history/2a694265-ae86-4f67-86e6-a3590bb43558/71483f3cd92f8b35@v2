@@ -1,0 +1,51 @@
+# 리서치 오케스트레이터
+
+복잡한 연구 주제를 체계적으로 조사하고 종합 보고서를 생성합니다.
+
+## 사용법
+```
+/orchestrator <연구 주제>
+/orchestrator AI가 암호화에 미치는 영향
+/orchestrator 2026년 한국 부동산 시장 전망
+```
+
+## 워크플로우
+
+```
+1. Query Analysis    → 질문 명확화
+2. Research Brief    → 연구 질문 구조화
+3. Strategy          → 연구 전략 수립
+4. Parallel Research → 병렬 리서치 실행
+5. Synthesis         → 결과 종합
+6. Report            → 최종 보고서 생성
+```
+
+## 사용 에이전트
+
+| 에이전트 | 역할 |
+|---------|------|
+| `research-orchestrator` | 전체 조율 |
+| `academic-researcher` | 학술 연구 |
+| `technical-researcher` | 기술 조사 |
+| `data-analyst` | 데이터 분석 |
+| `fact-checker` | 팩트체크 |
+| `research-synthesizer` | 결과 종합 |
+| `report-generator` | 보고서 생성 |
+
+---
+
+**실행 지침:**
+
+이 명령어가 호출되면:
+
+1. `research-orchestrator` 에이전트를 Task 도구로 호출
+2. 사용자의 연구 주제를 전달
+3. 오케스트레이터가 자동으로 필요한 에이전트들을 순차/병렬 조율
+4. 최종 보고서를 사용자에게 반환
+
+**예시 호출:**
+```
+Task 도구 사용:
+- subagent_type: research-orchestrator (없으면 general-purpose)
+- prompt: "다음 주제에 대해 Open Deep Research 방법론으로 종합 연구를 수행하세요: [주제]"
+```

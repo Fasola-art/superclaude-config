@@ -1,24 +1,24 @@
 ---
-description: "태스크 관리 (Manage tasks)"
+description: "Manage tasks"
 argument-hint: "[action]"
 ---
 
-# 태스크 관리
+# Task Management
 
-태스크를 관리합니다.
+Manage tasks.
 
-## 사용
+## Usage
 
 ```
-/sc:task list              # 태스크 목록
-/sc:task add "구현 완료"    # 태스크 추가
-/sc:task done 1            # 완료 처리
-/sc:task priority          # 우선순위 정렬
+/sc:task list              # List tasks
+/sc:task add "Complete implementation"  # Add task
+/sc:task done 1            # Mark complete
+/sc:task priority          # Sort by priority
 ```
 
-## 동작
+## Behavior
 
-- TodoWrite 연동
-- 태스크 추적
-- 의존성 관리
-- 진행률 보고
+- TodoWrite integration
+- Task tracking
+- Dependency management
+- Progress reporting

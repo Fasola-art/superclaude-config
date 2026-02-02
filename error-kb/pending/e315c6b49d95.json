@@ -1,0 +1,11 @@
+{
+  "id": "e315c6b49d95",
+  "type": "mcp-protocol",
+  "message": "MCP 서버 시작 실패 [notion]: 요청 타임아웃: tools/list",
+  "timestamp": "2026-02-01 16:33:22,565",
+  "raw_log": "2026-02-01 16:33:22,565 [ERROR] mcp-protocol: MCP 서버 시작 실패 [notion]: 요청 타임아웃: tools/list",
+  "created_at": "2026-02-01T16:35:26.734545",
+  "resolved": false,
+  "resolution": null,
+  "context": {}
+}

@@ -1,6 +1,6 @@
 ---
 name: claude-automation-recommender
-description: 코드베이스 분석 및 Claude Code 자동화 추천 (Recommend hooks, subagents, skills, plugins, MCP)
+description: Analyze codebase and recommend Claude Code automations. Suggests hooks, subagents, skills, plugins, and MCP servers.
 tools: Read, Glob, Grep, Bash
 ---
 

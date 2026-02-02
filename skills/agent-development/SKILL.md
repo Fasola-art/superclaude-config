@@ -1,6 +1,6 @@
 ---
 name: agent-development
-description: 에이전트 개발 가이드 (Agent development for Claude Code plugins)
+description: Agent development guide for Claude Code plugins. Covers agent structure, triggering conditions, and system prompt design.
 version: 0.1.0
 ---
 

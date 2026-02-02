@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-세션 종료 시 상태 저장 Hook
-- 미완료 Todo 저장
-- 세션 상태 저장
-- 복구 정보 기록
+Session End State Saver Hook
+- Save incomplete todos
+- Save session state
+- Record recovery information
 """
 
 import os
@@ -15,7 +15,7 @@ SESSION_STATE_DIR = Path.home() / ".claude" / "session-env"
 TODO_FILE = Path.home() / ".claude" / "todos" / "active.json"
 
 def save_session_state():
-    """세션 상태 저장"""
+    """Save session state"""
     SESSION_STATE_DIR.mkdir(parents=True, exist_ok=True)
 
     state = {
@@ -26,7 +26,7 @@ def save_session_state():
         "context_usage": os.environ.get("CONTEXT_USAGE", "unknown")
     }
 
-    # 미완료 Todo 저장
+    # Save incomplete todos
     if TODO_FILE.exists():
         try:
             with open(TODO_FILE, 'r') as f:
@@ -37,16 +37,16 @@ def save_session_state():
         except:
             pass
 
-    # 세션 상태 파일 저장
+    # Save session state file
     session_file = SESSION_STATE_DIR / "last-session.json"
     with open(session_file, 'w') as f:
         json.dump(state, f, indent=2)
 
-    # 복구 정보
+    # Recovery information
     if state["incomplete_todos"]:
-        print(f"\n💾 세션 저장됨")
-        print(f"   미완료 태스크: {len(state['incomplete_todos'])}개")
-        print(f"   복구: '계속' 키워드 사용")
+        print(f"\nSession saved")
+        print(f"   Incomplete tasks: {len(state['incomplete_todos'])}")
+        print(f"   Recovery: use 'continue' keyword")
 
 def main():
     save_session_state()

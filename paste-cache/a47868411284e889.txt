@@ -1,0 +1,20 @@
+  📋 관리 명령어                                                                                                         
+                                                                                                                         
+  # 상태 확인                                                                                                            
+  launchctl list | grep sql-trading                                                                                      
+                                                                                                                         
+  # 수동 실행                                                                                                            
+  launchctl start com.claude.sql-trading-collector                                                                       
+                                                                                                                         
+  # 중지                                                                                                                 
+  launchctl stop com.claude.sql-trading-collector                                                                        
+                                                                                                                         
+  # 비활성화                                                                                                             
+  launchctl unload ~/Library/LaunchAgents/com.claude.sql-trading-collector.plist                                         
+                                                                                                                         
+  # 다시 활성화                                                                                                          
+  launchctl load ~/Library/LaunchAgents/com.claude.sql-trading-collector.plist                                           
+                                                                                                                         
+  # 로그 확인                                                                                                            
+  tail -f ~/.claude/logs/sql-trading-collector.log                                                                       
+                                                          

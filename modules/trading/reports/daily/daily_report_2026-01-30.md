@@ -1,81 +1,81 @@
-# 📊 일일 경제 보고서
-> **2026-01-30** | 생성: 2026-01-30 22:00:26
+# 📊 Daily Economic Report
+> **2026-01-30** | Generated: 2026-01-30 22:00:26
 
 ---
 
-## 1️⃣ 시세표
+## 1️⃣ Price Table
 
-| # | 항목 | 가격 | 변동 |
-|---|------|------|------|
-| 1 | VIX (공포지수) | **17.77** | - |
-| 2 | MOVE Index (채권 변동성) | **60.73** | - |
-| 3 | Gold (금) | **5,109.20** | - |
-| 4 | EUR/USD (유로/달러) | **1.19** | - |
-| 5 | USD/JPY (달러/엔) | **154.02** | - |
+| # | Item | Price | Change |
+|---|------|-------|--------|
+| 1 | VIX (Fear Index) | **17.77** | - |
+| 2 | MOVE Index (Bond Volatility) | **60.73** | - |
+| 3 | Gold | **5,109.20** | - |
+| 4 | EUR/USD | **1.19** | - |
+| 5 | USD/JPY | **154.02** | - |
 | 6 | NASDAQ (NQ) | **25,854.00** | - |
 | 7 | S&P 500 (ES) | **6,963.25** | - |
 | 8 | Bitcoin (BTC/USD) | **82,622.00** | -5.98% |
 
-*출처: Yahoo Finance*
+*Source: Yahoo Finance*
 
 ---
 
-## 2️⃣ SOFR / MOVE Index 일주일간 동향
+## 2️⃣ SOFR / MOVE Index Weekly Trend
 
 ### SOFR (Secured Overnight Financing Rate)
-- **현재**: 3.65%
-- **추이**: 01-23: 3.65% → 01-26: 3.66% → 01-27: 3.66% → 01-28: 3.64% → 01-29: 3.65%
-- **분석**: 일주일간 소폭 상승 (3.63% → 3.65%, +0.02%p)
-- *출처: NY Fed (공식)*
+- **Current**: 3.65%
+- **Trend**: 01-23: 3.65% → 01-26: 3.66% → 01-27: 3.66% → 01-28: 3.64% → 01-29: 3.65%
+- **Analysis**: Slight increase over the week (3.63% → 3.65%, +0.02%p)
+- *Source: NY Fed (Official)*
 
-### MOVE Index (채권 변동성)
-- **현재**: 60.73
-- **추이**: 01-23: 56.2 → 01-26: 55.8 → 01-27: 56.1 → 01-28: 57.4 → 01-29: 60.7
-- **분석**: 일주일간 횡보 (59.6 → 60.7, +2.0%) - 낮은 채권 변동성 (안정적)
-- *출처: Yahoo Finance (ICE BofAML MOVE Index)*
+### MOVE Index (Bond Volatility)
+- **Current**: 60.73
+- **Trend**: 01-23: 56.2 → 01-26: 55.8 → 01-27: 56.1 → 01-28: 57.4 → 01-29: 60.7
+- **Analysis**: Sideways for the week (59.6 → 60.7, +2.0%) - Low bond volatility (stable)
+- *Source: Yahoo Finance (ICE BofAML MOVE Index)*
 
 ---
 
-## 3️⃣ 주요 경제 지표 (FRED)
+## 3️⃣ Key Economic Indicators (FRED)
 
-| 지표 | 값 | 기준일 |
-|------|-----|--------|
-| 연방기금금리 | **3.72%** | 2025-12-01 |
-| 10년 국채 수익률 | **4.26%** | 2026-01-28 |
-| 2년 국채 수익률 | **3.56%** | 2026-01-28 |
-| 10Y-2Y 스프레드 | **0.71%** | 2026-01-29 |
+| Indicator | Value | As Of |
+|-----------|-------|-------|
+| Federal Funds Rate | **3.72%** | 2025-12-01 |
+| 10-Year Treasury Yield | **4.26%** | 2026-01-28 |
+| 2-Year Treasury Yield | **3.56%** | 2026-01-28 |
+| 10Y-2Y Spread | **0.71%** | 2026-01-29 |
 | CPI | **326.03** | 2025-12-01 |
-| 실업률 | **4.40%** | 2025-12-01 |
+| Unemployment Rate | **4.40%** | 2025-12-01 |
 
-*출처: FRED (Federal Reserve Economic Data)*
-
----
-
-## 4️⃣ 시장 현황 분석
-
-### VIX (변동성 지수)
-- **현재**: 17.77
-- **해석**: 보통 수준의 변동성
-
-### 수익률 곡선 (10Y-2Y)
-- **스프레드**: 0.71%p
-- **해석**: 정상적인 수익률 곡선
-
-### 연방기금금리
-- **현재**: 3.72%
+*Source: FRED (Federal Reserve Economic Data)*
 
 ---
 
-## 📌 데이터 출처
+## 4️⃣ Market Analysis
 
-- Yahoo Finance (시세)
-- CoinGecko (비트코인)
+### VIX (Volatility Index)
+- **Current**: 17.77
+- **Interpretation**: Moderate volatility level
+
+### Yield Curve (10Y-2Y)
+- **Spread**: 0.71%p
+- **Interpretation**: Normal yield curve
+
+### Federal Funds Rate
+- **Current**: 3.72%
+
+---
+
+## 📌 Data Sources
+
+- Yahoo Finance (Prices)
+- CoinGecko (Bitcoin)
 - NY Fed (SOFR)
-- FRED - Federal Reserve Economic Data (경제 지표)
+- FRED - Federal Reserve Economic Data (Economic Indicators)
 
 ---
 
-## ⚠️ 주의사항
+## ⚠️ Disclaimer
 
-- ⚠️ 선물 가격(ES, NQ, GC)은 Yahoo Finance 기준으로 실시간 CME 데이터와 차이가 있을 수 있습니다.
-- ⚠️ 본 보고서는 정보 제공 목적이며 투자 조언이 아닙니다.
+- ⚠️ Futures prices (ES, NQ, GC) are from Yahoo Finance and may differ from real-time CME data.
+- ⚠️ This report is for informational purposes only and does not constitute investment advice.

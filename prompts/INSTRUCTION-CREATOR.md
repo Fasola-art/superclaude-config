@@ -1,358 +1,358 @@
-# 지침 파일 생성기 (Claude Code용)
+# Instruction File Generator (for Claude Code)
 
-> **용도**: 이 파일을 Claude Code에 제공하면, 고품질 지침 파일을 자동 생성합니다.
+> **Purpose**: Provide this file to Claude Code to auto-generate high-quality instruction files.
 
 ---
 
-## 사용 방법
+## How to Use
 
 ```bash
-# Claude Code에서 이렇게 요청하세요:
-"이 instruction-creator.md 파일을 기준으로, [주제]에 대한 지침 파일을 만들어줘"
+# Request in Claude Code like this:
+"Based on this instruction-creator.md file, create an instruction file for [topic]"
 
-# 예시:
-"이 파일을 기준으로, 'API 설계 가이드' 지침 파일을 만들어줘"
-"이 파일을 기준으로, 'React 컴포넌트 작성 규칙' 지침을 만들어줘"
+# Examples:
+"Based on this file, create an 'API Design Guide' instruction file"
+"Based on this file, create 'React Component Writing Rules' instructions"
 ```
 
 ---
 
-## 생성 원칙 (Claude가 따라야 할 규칙)
+## Generation Principles (Rules for Claude to Follow)
 
-### 🎯 Phase 1: 전략 수립
+### Phase 1: Strategy Development
 
-#### 목표 정의 템플릿
+#### Goal Definition Template
 ```markdown
-# [지침 제목]
+# [Instruction Title]
 
-## 목표
-**Primary Outcome**: 이 지침을 따르면 [구체적 결과물]을 얻습니다.
-- 예: "프로덕션 배포 가능한 API 문서"
-- 예: "투자자 제출용 PRD 문서"
+## Goal
+**Primary Outcome**: Following this instruction produces [specific deliverable].
+- Example: "Production-deployable API documentation"
+- Example: "PRD document for investor submission"
 
-**Success Criteria** (성공 기준):
-- [ ] [측정 가능한 기준 1] (예: 15개 섹션 중 12개 이상 작성)
-- [ ] [측정 가능한 기준 2] (예: 테스트 커버리지 80% 이상)
-- [ ] [측정 가능한 기준 3]
+**Success Criteria**:
+- [ ] [Measurable criterion 1] (e.g., 12+ of 15 sections completed)
+- [ ] [Measurable criterion 2] (e.g., Test coverage 80%+)
+- [ ] [Measurable criterion 3]
 
-**Failure Cases** (중단 신호):
-- 🔴 [상황 1]인 경우 → 작업 중단하고 재검토
-- 🔴 [상황 2]인 경우 → [대안 제시]
+**Failure Cases** (Stop signals):
+- If [situation 1] → Stop work and review
+- If [situation 2] → [Provide alternative]
 ```
 
-#### 사용자 정의 템플릿
+#### User Definition Template
 ```markdown
-## 대상 사용자
-**Primary User**: [구체적 역할] (예: 시니어 백엔드 개발자, 스타트업 PM)
+## Target Users
+**Primary User**: [Specific role] (e.g., Senior backend developer, Startup PM)
 
 **Usage Context**:
-- 상황: [언제 사용하는가]
-- 목적: [왜 사용하는가]
-- 환경: [어디서 사용하는가]
+- Situation: [When to use]
+- Purpose: [Why to use]
+- Environment: [Where to use]
 
-**제약 조건**:
-- 기술적: [제한사항]
-- 시간적: [예상 소요 시간]
-- 리소스: [필요한 도구/지식]
+**Constraints**:
+- Technical: [Limitations]
+- Time: [Expected duration]
+- Resources: [Required tools/knowledge]
 ```
 
 ---
 
-### 🏗️ Phase 2: 구조 설계 (가장 중요!)
+### Phase 2: Structure Design (Most Important!)
 
-#### 필수 구조 규칙
+#### Required Structure Rules
 
-**1. 섹션 독립성 원칙**
+**1. Section Independence Principle**
 ```markdown
-## [섹션 번호]. [섹션 제목]
+## [Section Number]. [Section Title]
 
-### 📋 섹션 개요
-- **목표**: 이 섹션에서 얻을 결과
-- **입력**: 필요한 선행 정보 (없으면 "없음")
-- **출력**: 완성 시 얻는 것
-- **소요 시간**: ⏱️ 약 XX분
+### Section Overview
+- **Goal**: Result from this section
+- **Input**: Required prior information ("None" if none)
+- **Output**: What you get on completion
+- **Duration**: Approx. XX minutes
 
-### 📊 작성 가이드
-[구체적 작성 방법]
+### Writing Guide
+[Specific writing method]
 
-### ✅ 완성 체크리스트
-- [ ] [필수 항목 1]
-- [ ] [필수 항목 2]
+### Completion Checklist
+- [ ] [Required item 1]
+- [ ] [Required item 2]
 
-### ⚠️ 예외 처리
-- **[데이터 없는 경우]**: → [대안]
-- **[선택지가 많은 경우]**: → [기준]
+### Exception Handling
+- **[If no data]**: → [Alternative]
+- **[If too many options]**: → [Criteria]
 ```
 
-**2. 표 중심 설계 규칙**
+**2. Table-Centric Design Rules**
 
-산문 대신 표를 60% 이상 사용:
+Use tables for 60%+ instead of prose:
 
 ```markdown
-# ❌ 나쁜 예 (산문)
-경쟁사 A는 강력한 브랜드를 가지고 있으나, 가격이 비싸고...
+# BAD Example (prose)
+Competitor A has a strong brand, but the price is high...
 
-# ✅ 좋은 예 (표)
-| 경쟁사 | 강점 | 약점 | 우선순위 |
-|--------|------|------|----------|
-| A | 강력한 브랜드 | 높은 가격 | P0 |
-| B | 저가 전략 | 낮은 품질 | P1 |
+# GOOD Example (table)
+| Competitor | Strengths | Weaknesses | Priority |
+|------------|-----------|------------|----------|
+| A | Strong brand | High price | P0 |
+| B | Low price strategy | Low quality | P1 |
 ```
 
-**3. 메타데이터 통일 규칙**
+**3. Unified Metadata Rules**
 
-모든 평가는 다음 기준만 사용:
+Use only these evaluation standards:
 
 ```markdown
-# 표준 평가 체계
-- 영향도: H (High) / M (Medium) / L (Low)
-- 우선순위: P0 (Critical) / P1 (Important) / P2 (Nice-to-have)
-- 상태: ✅ 완료 / 🔄 진행중 / ❌ 미착수 / ⏸️ 보류
-- 등급: 🟢 우수 / 🟡 양호 / 🔴 개선필요
+# Standard Evaluation System
+- Impact: H (High) / M (Medium) / L (Low)
+- Priority: P0 (Critical) / P1 (Important) / P2 (Nice-to-have)
+- Status: Complete / In Progress / Not Started / On Hold
+- Grade: Excellent / Good / Needs Improvement
 ```
 
-**4. 계층 구조 규칙**
+**4. Hierarchy Rules**
 
 ```markdown
-# 최상위 (파일 제목) - 1개만
-## 주요 섹션 (# 기호 2개) - 5-9개 권장
-### 하위 주제 (# 기호 3개) - 섹션당 3-7개
-#### 세부 항목 (# 기호 4개) - 최대 깊이
+# Top level (file title) - only 1
+## Main sections (2 #) - recommend 5-9
+### Sub-topics (3 #) - 3-7 per section
+#### Detail items (4 #) - maximum depth
 
-**주의**: ##### (5개)는 사용 금지 (너무 깊음)
+**Note**: ##### (5) is forbidden (too deep)
 ```
 
 ---
 
-### 🎨 Phase 3: 인터페이스 설계
+### Phase 3: Interface Design
 
-#### 필수 시각 요소
+#### Required Visual Elements
 
-**1. 이모지 체계 (일관되게 사용)**
+**1. Emoji System (use consistently)**
 ```markdown
-🎯 목표/목적
-📋 리스트/개요
-📊 데이터/분석
-💡 팁/인사이트
-⚠️ 주의/경고
-🔴 중요/긴급
-✅ 필수 항목
-🔄 선택 항목
-⏱️ 시간
-🚀 액션/실행
+Target/Purpose
+List/Overview
+Data/Analysis
+Tip/Insight
+Warning/Caution
+Important/Urgent
+Required item
+Optional item
+Time
+Action/Execute
 ```
 
-**2. 구분선 사용 규칙**
+**2. Separator Usage Rules**
 ```markdown
-# 섹션 간 명확한 구분
+# Clear separation between sections
 ---
 
-## 새 섹션 시작
+## New section starts
 ```
 
 ---
 
-### 🔬 Phase 4: 품질 보증
+### Phase 4: Quality Assurance
 
-#### 필수 포함 항목
+#### Required Inclusions
 
-**1. 예외 처리 섹션 (모든 주요 섹션에)**
+**1. Exception Handling Section (in all main sections)**
 ```markdown
-### ⚠️ 예외 상황 처리
+### Exception Handling
 
-#### 데이터가 없는 경우
-→ "[조사 필요]"로 표시하고 다음 단계 진행
+#### If No Data
+→ Mark as "[Research needed]" and proceed to next step
 
-#### 선택지가 너무 많은 경우
-→ [기준]으로 상위 3개만 선택
+#### If Too Many Options
+→ Select top 3 using [criteria]
 
-#### 상충하는 요구사항이 있는 경우
-→ [우선순위 매트릭스]로 판단
+#### If Conflicting Requirements
+→ Use [priority matrix] to decide
 ```
 
-**2. Good/Bad 예시 (핵심 섹션마다)**
+**2. Good/Bad Examples (in key sections)**
 ```markdown
-### 📖 작성 예시
+### Writing Examples
 
-#### ❌ 나쁜 예
-[구체적 나쁜 예시]
-**문제점**: [왜 나쁜지]
+#### BAD Example
+[Specific bad example]
+**Problem**: [Why it's bad]
 
-#### ✅ 좋은 예
-[구체적 좋은 예시]
-**장점**: [왜 좋은지]
+#### GOOD Example
+[Specific good example]
+**Benefit**: [Why it's good]
 ```
 
-**3. 자가 진단 체크리스트 (마지막에)**
+**3. Self-Diagnosis Checklist (at the end)**
 ```markdown
-## ✅ 완성도 자가 진단
+## Completion Self-Diagnosis
 
-### 🔴 Critical (반드시 완료)
-- [ ] [필수 항목 1]
-- [ ] [필수 항목 2]
+### Critical (Must Complete)
+- [ ] [Required item 1]
+- [ ] [Required item 2]
 
-### 🟡 Important (80% 이상 권장)
-- [ ] [중요 항목 1]
-- [ ] [중요 항목 2]
+### Important (80%+ recommended)
+- [ ] [Important item 1]
+- [ ] [Important item 2]
 
-### 🟢 Nice-to-have (선택)
-- [ ] [선택 항목 1]
+### Nice-to-have (Optional)
+- [ ] [Optional item 1]
 
-**합격 기준**: Critical 100% + Important 80% 이상
+**Pass Criteria**: Critical 100% + Important 80%+
 ```
 
 ---
 
-### 🚀 Phase 5: 실행 최적화
+### Phase 5: Execution Optimization
 
-#### 필수: 빠른 시작 가이드 (파일 맨 앞)
+#### Required: Quick Start Guide (at file beginning)
 
 ```markdown
-# 🚀 빠른 시작 가이드
+# Quick Start Guide
 
-## 핵심만 빠르게 (30분 버전)
-1. **섹션 [X]**: [핵심 항목] 작성
-2. **섹션 [Y]**: [필수 항목] 작성
-3. **섹션 [Z]**: [결과물] 확인
+## Core Only (30-minute version)
+1. **Section [X]**: Write [core item]
+2. **Section [Y]**: Write [required item]
+3. **Section [Z]**: Verify [deliverable]
 
-→ 이것만으로도 [최소 결과물] 완성!
+→ This alone produces [minimum deliverable]!
 
-## 완전판 작성 (2-4시간 버전)
-- 위 핵심 섹션 + [추가 섹션들]
-- [상세 분석] 포함
-- [검증 단계] 완료
-
----
-```
+## Full Version (2-4 hours)
+- Core sections above + [additional sections]
+- Include [detailed analysis]
+- Complete [verification steps]
 
 ---
-
-## 🎯 Claude Code 생성 프롬프트 템플릿
-
-Claude Code에서 이렇게 요청하세요:
-
-```
-다음 기준으로 "[주제]" 지침 파일을 생성해줘:
-
-1. 파일명: `[주제-영문].md`
-
-2. 필수 포함 섹션:
-   - 목표 정의 (Phase 1 템플릿)
-   - 빠른 시작 가이드 (Phase 5 템플릿)
-   - 5-9개 주요 섹션 (Phase 2 구조 규칙)
-   - 각 섹션마다 예외 처리 (Phase 4)
-   - 자가 진단 체크리스트 (Phase 4)
-   - 사용 가이드 (Phase 6)
-
-3. 필수 준수 규칙:
-   - 표/리스트 비율 60% 이상
-   - 메타데이터 통일 (H/M/L, P0/P1/P2)
-   - 이모지 체계 (🎯📋📊💡⚠️✅)
-   - 최대 4단계 계층 (####까지만)
-
-4. 스타일:
-   - 각 섹션 독립적으로 이해 가능
-   - 예시 풍부하게 (Good/Bad)
-   - 플레이스홀더 명확히 ([XX], $XX)
-
-instruction-creator.md 파일을 참고해서 작성해줘.
 ```
 
 ---
 
-## 📋 생성 체크리스트 (Claude용)
+## Claude Code Generation Prompt Template
 
-Claude Code야, 지침 파일을 생성할 때 이것들을 확인해:
+Request in Claude Code like this:
 
-### 필수 섹션 포함 여부
-- [ ] 목표 정의 (Primary Outcome, Success Criteria)
-- [ ] 빠른 시작 가이드 (30분 버전)
-- [ ] 사용 가이드 (시작 전 체크, 작성 순서)
-- [ ] 5-9개 주요 섹션
-- [ ] 각 섹션마다 "섹션 개요" 포함
-- [ ] 각 주요 섹션마다 "예외 처리" 포함
-- [ ] 자가 진단 체크리스트
-- [ ] Good/Bad 예시 (최소 3개 이상)
-
-### 스타일 준수 여부
-- [ ] 표/리스트 60% 이상
-- [ ] 이모지 일관되게 사용 (🎯📋📊💡⚠️✅)
-- [ ] 메타데이터 통일 (H/M/L, P0/P1/P2)
-- [ ] 플레이스홀더 명확히 ([XX], $XX)
-- [ ] 계층 4단계 이내 (####까지만)
-- [ ] 구분선으로 섹션 구분 (---)
-
-### 품질 기준
-- [ ] 각 섹션이 독립적으로 이해 가능
-- [ ] 측정 가능한 성공 기준 명시
-- [ ] 실행 가능한 지시문 (추상적 개념 금지)
-- [ ] 예외 상황 대응 방법 제시
-
----
-
-## 💡 핵심 원칙 (Claude가 기억해야 할 것)
-
-### 1. 모듈화 = 독립성
 ```
-각 섹션은 다른 섹션 없이도 작동해야 함
-→ 섹션마다 "입력/출력/목표" 명시
-```
+Create a "[topic]" instruction file with these criteria:
 
-### 2. 일관성 = 패턴 반복
-```
-같은 구조를 모든 섹션에 적용
-→ "개요 → 작성 가이드 → 예시 → 체크리스트"
-```
+1. Filename: `[topic-english].md`
 
-### 3. 실행 가능성 = 구체성
-```
-"모듈화하세요" (X) → "각 섹션을 ## 형식으로..." (O)
-"좋은 예시를 보세요" (X) → "다음과 같이 작성: [구체적 예시]" (O)
-```
+2. Required sections:
+   - Goal definition (Phase 1 template)
+   - Quick start guide (Phase 5 template)
+   - 5-9 main sections (Phase 2 structure rules)
+   - Exception handling per section (Phase 4)
+   - Self-diagnosis checklist (Phase 4)
+   - Usage guide (Phase 6)
 
-### 4. 표 중심 = 스캔 가능성
-```
-3문장 이상 산문 → 표로 전환 고려
-항목이 3개 이상 → 무조건 표 사용
-```
+3. Required rules:
+   - Table/list ratio 60%+
+   - Unified metadata (H/M/L, P0/P1/P2)
+   - Emoji system
+   - Maximum 4-level hierarchy (#### max)
 
-### 5. 예외 처리 = 막힘 방지
-```
-모든 주요 섹션에 "⚠️ 예외 상황 처리" 추가
-"데이터 없으면?", "선택지 많으면?" 대비
+4. Style:
+   - Each section independently understandable
+   - Rich examples (Good/Bad)
+   - Clear placeholders ([XX], $XX)
+
+Reference instruction-creator.md file.
 ```
 
 ---
 
-## 🚀 마무리: Claude Code 최종 지시
+## Generation Checklist (for Claude)
 
-**Claude Code야, 지침 파일을 만들 때:**
+Claude Code, verify these when generating instruction files:
 
-1. **이 파일의 모든 템플릿을 그대로 사용**
-   - "템플릿"이라고 표시된 부분은 복사-붙여넣기
-   - 주제에 맞게 내용만 채워넣기
+### Required Sections
+- [ ] Goal definition (Primary Outcome, Success Criteria)
+- [ ] Quick start guide (30-minute version)
+- [ ] Usage guide (Pre-start check, Writing order)
+- [ ] 5-9 main sections
+- [ ] "Section Overview" in each section
+- [ ] "Exception Handling" in each main section
+- [ ] Self-diagnosis checklist
+- [ ] Good/Bad examples (minimum 3)
 
-2. **필수 5단계 순서 준수**
+### Style Compliance
+- [ ] Tables/lists 60%+
+- [ ] Consistent emoji usage
+- [ ] Unified metadata (H/M/L, P0/P1/P2)
+- [ ] Clear placeholders ([XX], $XX)
+- [ ] Hierarchy within 4 levels (#### max)
+- [ ] Section separators (---)
+
+### Quality Criteria
+- [ ] Each section independently understandable
+- [ ] Measurable success criteria specified
+- [ ] Actionable instructions (no abstract concepts)
+- [ ] Exception handling methods provided
+
+---
+
+## Core Principles (What Claude Must Remember)
+
+### 1. Modularity = Independence
+```
+Each section must work without other sections
+→ Specify "Input/Output/Goal" per section
+```
+
+### 2. Consistency = Pattern Repetition
+```
+Apply same structure to all sections
+→ "Overview → Writing Guide → Examples → Checklist"
+```
+
+### 3. Actionability = Specificity
+```
+"Modularize" (X) → "Create each section in ## format..." (O)
+"See good examples" (X) → "Write as follows: [specific example]" (O)
+```
+
+### 4. Table-Centric = Scannability
+```
+3+ sentences of prose → Consider converting to table
+3+ items → Always use table
+```
+
+### 5. Exception Handling = Prevent Blockage
+```
+Add "Exception Handling" to all main sections
+Prepare for "No data?", "Too many options?"
+```
+
+---
+
+## Final Instructions for Claude Code
+
+**Claude Code, when creating instruction files:**
+
+1. **Use all templates from this file as-is**
+   - Copy-paste sections marked "template"
+   - Only fill in content for the topic
+
+2. **Follow required 5-step order**
    ```
-   1단계: 목표 정의 → Phase 1 템플릿 사용
-   2단계: 빠른 시작 가이드 → Phase 5 템플릿 사용
-   3단계: 주요 섹션 5-9개 → Phase 2 구조 규칙 적용
-   4단계: 예외 처리 + 예시 → Phase 4 템플릿 사용
-   5단계: 사용 가이드 + 체크리스트 → Phase 6 템플릿 사용
+   Step 1: Goal definition → Use Phase 1 template
+   Step 2: Quick start guide → Use Phase 5 template
+   Step 3: 5-9 main sections → Apply Phase 2 structure rules
+   Step 4: Exception handling + Examples → Use Phase 4 templates
+   Step 5: Usage guide + Checklist → Use Phase 6 templates
    ```
 
-3. **표 중심으로 작성**
-   - 항목 3개 이상 = 무조건 표
-   - 비교/평가 = 무조건 표
-   - 설명만 필요 = 산문 허용
+3. **Write table-centric**
+   - 3+ items = Always table
+   - Comparison/evaluation = Always table
+   - Explanation only = Prose allowed
 
-4. **예시를 풍부하게**
-   - 모든 플레이스홀더에 예시
-   - Good/Bad 비교 예시
-   - 실제 사용 시나리오 예시
+4. **Rich examples**
+   - Examples for all placeholders
+   - Good/Bad comparison examples
+   - Actual usage scenario examples
 
-5. **검증 후 완성**
-   - 위 "생성 후 검증 체크리스트" 확인
-   - 모든 [ ] 체크 후 제출
+5. **Verify before completion**
+   - Check "Generation Checklist" above
+   - Submit after all [ ] checked
 
-**이 규칙만 따르면, 85점 이상 품질의 지침 파일이 나옵니다!**
+**Following these rules produces 85%+ quality instruction files!**

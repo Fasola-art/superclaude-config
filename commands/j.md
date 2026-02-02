@@ -1,20 +1,19 @@
-# JARVIS 브리핑
+# JARVIS Briefing
 
-JARVIS 아침 브리핑을 표시합니다.
+Display JARVIS morning briefing.
 
-## 기능
-- 어제 작업 요약
-- 오늘 일정
-- 미완료 작업 목록
-- ML 기반 다음 작업 제안
+## Features
+- Yesterday's work summary
+- Today's schedule
+- Incomplete task list
+- ML-based next task suggestions
 
-## 사용법
+## Usage
 ```
-/j              # 브리핑 표시
-/j briefing     # 브리핑 표시
-/j 브리핑       # 브리핑 표시 (한글)
+/j              # Display briefing
+/j briefing     # Display briefing
 ```
 
 ---
 
-**실행:** 이 명령어가 호출되면 JARVIS 브리핑을 표시해주세요.
+**Execution:** When this command is invoked, display the JARVIS briefing.

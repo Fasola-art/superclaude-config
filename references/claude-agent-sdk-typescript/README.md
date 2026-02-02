@@ -1,18 +1,18 @@
 # Claude Agent SDK (TypeScript)
 
-> TypeScript용 Claude 에이전트 SDK 참조 문서
+> TypeScript Claude Agent SDK Reference Documentation
 
-## 개요
+## Overview
 
-Claude Agent SDK는 AI 에이전트를 구축하기 위한 공식 SDK입니다.
+The Claude Agent SDK is the official SDK for building AI agents.
 
-## 설치
+## Installation
 
 ```bash
 npm install @anthropic-ai/sdk
 ```
 
-## 기본 사용법
+## Basic Usage
 
 ```typescript
 import Anthropic from '@anthropic-ai/sdk';
@@ -28,7 +28,7 @@ const message = await client.messages.create({
 });
 ```
 
-## 참조 링크
+## Reference Links
 
-- [공식 문서](https://docs.anthropic.com/claude/reference)
+- [Official Documentation](https://docs.anthropic.com/claude/reference)
 - [GitHub](https://github.com/anthropics/anthropic-sdk-typescript)

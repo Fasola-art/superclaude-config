@@ -1,0 +1,9 @@
+{
+  "id": "25",
+  "subject": "자율자동과 랄프 시스템 구현",
+  "description": "자율 자동화 시스템과 랄프(Ralph) 시스템 구현\n\n- 자율 실행 로직\n- 랄프 루프 시스템 통합\n- 자동화 워크플로우 설계",
+  "activeForm": "자율자동/랄프 시스템 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

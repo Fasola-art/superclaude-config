@@ -1,6 +1,6 @@
 ---
 name: mcp-integration
-description: MCP 서버 통합 가이드 (MCP integration for Claude Code plugins)
+description: MCP server integration guide for Claude Code plugins. Covers server types, authentication, tool usage, and configuration.
 version: 0.1.0
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: agent-sdk-verifier-ts
-description: TypeScript Agent SDK 앱 검증 (Verify TypeScript Agent SDK application)
+description: TypeScript Agent SDK application verification (Verify TypeScript Agent SDK application)
 model: sonnet
 ---
 

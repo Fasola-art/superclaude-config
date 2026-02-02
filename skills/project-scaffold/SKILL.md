@@ -1,11 +1,11 @@
 ---
 name: project-scaffold
-description: TypeScript CLI 프로젝트 빠른 생성 (AI 통합 포함)
+description: Quick TypeScript CLI project generation with AI integration support.
 version: "1.0.0"
 triggers:
   - /scaffold
   - /new-project
-  - 프로젝트 생성
+  - create project
 author: reim
 tags:
   - typescript
@@ -14,24 +14,24 @@ tags:
   - scaffold
 ---
 
-# Project Scaffold 스킬
+# Project Scaffold Skill
 
-> TypeScript + CLI 프로젝트를 빠르게 생성하는 스킬
+> Quickly generate TypeScript + CLI projects
 
 ---
 
-## 사용법
+## Usage
 
 ```bash
 /scaffold <project-name> [options]
 ```
 
-### 옵션
-- `--cli`: CLI 도구 템플릿 (기본)
-- `--api`: API 서버 템플릿
-- `--ai`: AI 통합 (Claude API) 포함
+### Options
+- `--cli`: CLI tool template (default)
+- `--api`: API server template
+- `--ai`: Include AI integration (Claude API)
 
-### 예시
+### Examples
 ```bash
 /scaffold my-tool --cli --ai
 /scaffold api-server --api
@@ -39,36 +39,36 @@ tags:
 
 ---
 
-## 실행 지침
+## Execution Instructions
 
 <command-name>project-scaffold</command-name>
 
-### 1. 사용자 입력 수집
+### 1. Collect User Input
 
-프로젝트 이름이 없으면 AskUserQuestion으로 물어보세요:
-- 프로젝트 이름
-- 프로젝트 유형 (CLI / API / Library)
-- AI 통합 필요 여부 (Claude / OpenAI / 없음)
-- 출력 위치 (현재 디렉토리 / 지정 경로)
+If project name is not provided, ask using AskUserQuestion:
+- Project name
+- Project type (CLI / API / Library)
+- AI integration needed (Claude / OpenAI / None)
+- Output location (current directory / specified path)
 
-### 2. 프로젝트 구조 생성
+### 2. Generate Project Structure
 
 ```
 <project-name>/
 ├── src/
 │   ├── cli/
-│   │   └── index.ts          # CLI 진입점
+│   │   └── index.ts          # CLI entry point
 │   ├── core/
-│   │   └── main.ts           # 핵심 로직
+│   │   └── main.ts           # Core logic
 │   ├── integrations/
-│   │   └── claude.ts         # AI 연동 (선택)
+│   │   └── claude.ts         # AI integration (optional)
 │   ├── types/
-│   │   └── index.ts          # 타입 정의
+│   │   └── index.ts          # Type definitions
 │   └── utils/
-│       └── helpers.ts        # 유틸리티
+│       └── helpers.ts        # Utilities
 ├── examples/
-│   └── sample.txt            # 샘플 입력
-├── output/                   # 출력 디렉토리
+│   └── sample.txt            # Sample input
+├── output/                   # Output directory
 ├── package.json
 ├── tsconfig.json
 ├── .env.example
@@ -76,9 +76,9 @@ tags:
 └── README.md
 ```
 
-### 3. 필수 파일 내용
+### 3. Required File Contents
 
-#### package.json 템플릿
+#### package.json Template
 ```json
 {
   "name": "<project-name>",
@@ -107,7 +107,7 @@ tags:
 }
 ```
 
-#### tsconfig.json 템플릿
+#### tsconfig.json Template
 ```json
 {
   "compilerOptions": {
@@ -124,7 +124,7 @@ tags:
 }
 ```
 
-#### CLI 진입점 템플릿 (src/cli/index.ts)
+#### CLI Entry Point Template (src/cli/index.ts)
 ```typescript
 #!/usr/bin/env node
 import { Command } from 'commander';
@@ -142,55 +142,55 @@ program
 
 program
   .command('run <input>')
-  .description('메인 명령어')
-  .option('-v, --verbose', '상세 출력')
+  .description('Main command')
+  .option('-v, --verbose', 'Verbose output')
   .action(async (input, options) => {
-    const spinner = ora('처리 중...').start();
+    const spinner = ora('Processing...').start();
     try {
-      // 핵심 로직 호출
-      spinner.succeed(chalk.green('완료!'));
+      // Call core logic
+      spinner.succeed(chalk.green('Complete!'));
     } catch (error) {
-      spinner.fail(chalk.red('오류 발생'));
+      spinner.fail(chalk.red('Error occurred'));
     }
   });
 
 program.parse();
 ```
 
-### 4. 패키지 설치
+### 4. Install Packages
 
 ```bash
 cd <project-name> && npm install
 ```
 
-### 5. 완료 메시지
+### 5. Completion Message
 
 ```markdown
-✅ 프로젝트 생성 완료!
+Project created successfully!
 
-📁 위치: <path>
-📦 패키지: 설치 완료
+Location: <path>
+Packages: Installed
 
-시작하기:
+Getting started:
   cd <project-name>
   cp .env.example .env
-  # ANTHROPIC_API_KEY 설정
+  # Set ANTHROPIC_API_KEY
   npm run dev run examples/sample.txt
 ```
 
 ---
 
-## 참고
+## Reference
 
-### AI 통합 시 필요한 환경 변수
+### Environment Variables for AI Integration
 ```
 ANTHROPIC_API_KEY=sk-ant-xxx
 ```
 
-### 확장 가능한 템플릿
-- `--notion`: Notion API 통합
-- `--clova`: CLOVA Speech STT 통합
-- `--supabase`: Supabase 연동
+### Extensible Templates
+- `--notion`: Notion API integration
+- `--clova`: CLOVA Speech STT integration
+- `--supabase`: Supabase integration
 
 ---
 

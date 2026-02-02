@@ -1,36 +1,36 @@
-# 버전 관리 정책 (Version Policy)
+# Version Management Policy
 
-> SuperClaude 버전 관리 및 릴리즈 정책
+> SuperClaude versioning and release policy
 
 ---
 
-## 버전 체계
+## Version Scheme
 
 ### Semantic Versioning
 ```
 MAJOR.MINOR.PATCH
-  │     │     └── 버그 수정, 작은 개선
-  │     └──────── 새 기능, 하위 호환
-  └────────────── 주요 변경, 호환성 파괴
+  │     │     └── Bug fixes, minor improvements
+  │     └──────── New features, backward compatible
+  └────────────── Major changes, breaking compatibility
 ```
 
-### 현재 버전
+### Current Version
 ```
 SuperClaude v2.0.9
 ```
 
 ---
 
-## 버전 파일
+## Version Files
 
-### VERSION 파일
+### VERSION File
 ```
 ~/.claude/VERSION
 ```
 
-내용: `2.0.9`
+Content: `2.0.9`
 
-### 메타데이터
+### Metadata
 ```json
 // ~/.claude/superclaude-metadata.json
 {
@@ -42,51 +42,51 @@ SuperClaude v2.0.9
 
 ---
 
-## 업데이트 정책
+## Update Policy
 
-### 자동 업데이트
-- 패치 버전: 자동 적용
-- 마이너 버전: 알림 후 적용
-- 메이저 버전: 수동 승인 필요
+### Auto Updates
+- Patch version: Auto-apply
+- Minor version: Apply after notification
+- Major version: Manual approval required
 
-### 업데이트 확인
+### Update Check
 ```
-# 훅으로 자동 확인
+# Auto-checked via hook
 ~/.claude/hooks/UserPromptSubmit/auto-update-checker.js
 ```
 
 ---
 
-## 릴리즈 노트
+## Release Notes
 
-### 형식
+### Format
 ```markdown
 ## v2.0.9 (2026-01-30)
 
-### 새 기능
-- 기능 A 추가
-- 기능 B 개선
+### New Features
+- Feature A added
+- Feature B improved
 
-### 버그 수정
-- 이슈 #123 수정
-- 이슈 #456 수정
+### Bug Fixes
+- Issue #123 fixed
+- Issue #456 fixed
 
-### 변경 사항
-- 설정 X 변경
-- 동작 Y 개선
+### Changes
+- Setting X changed
+- Behavior Y improved
 ```
 
 ---
 
-## 호환성
+## Compatibility
 
-### 플러그인 호환성
-| SuperClaude | 플러그인 최소 버전 |
-|-------------|-------------------|
-| 2.0.x       | 1.0.0             |
-| 2.1.x       | 1.1.0             |
+### Plugin Compatibility
+| SuperClaude | Plugin Min Version |
+|-------------|---------------------|
+| 2.0.x       | 1.0.0               |
+| 2.1.x       | 1.1.0               |
 
-### Claude Code 호환성
+### Claude Code Compatibility
 | SuperClaude | Claude Code |
 |-------------|-------------|
 | 2.0.x       | 1.0.x       |

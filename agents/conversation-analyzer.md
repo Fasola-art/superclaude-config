@@ -1,6 +1,6 @@
 ---
 name: conversation-analyzer
-description: 대화 분석으로 훅 생성 대상 찾기 (Find behaviors to prevent with hooks)
+description: Conversation analysis for hook generation targets (Find behaviors to prevent with hooks)
 model: inherit
 color: yellow
 tools: ["Read", "Grep"]

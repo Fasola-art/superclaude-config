@@ -1,0 +1,9 @@
+{
+  "id": "17",
+  "subject": "JARVIS 기술: 로컬 메모리 (SQLite)",
+  "description": "SQLite 기반 프라이버시 보호 - 모든 데이터 로컬 저장",
+  "activeForm": "로컬 메모리 시스템 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,198 +1,198 @@
-# Ideation 페르소나 인덱스
+# Ideation Persona Index
 
-> **총 27개 전문가 페르소나**
-> **활성화**: 키워드/트리거 문구 입력 시 자동 활성화
-> **목적**: 다각도 아이디어 토론 및 검증
-
----
-
-## 페르소나 그룹
-
-### 🏢 Business (경영진) - 6개
-
-| ID | 이름 | 핵심 역할 | Priority | 주요 키워드 |
-|----|------|----------|----------|-------------|
-| `ceo` | CEO | 전략적 의사결정 | 82 | CEO, 전략, 의사결정, 비즈니스모델 |
-| `cfo` | CFO | 재무 분석 / ROI | 81 | 재무, ROI, 비용, 수익화, 예산 |
-| `coo` | COO | 운영 효율 / 프로세스 | 80 | 운영, 프로세스, 리소스, 효율화 |
-| `legal` | 법무 | 법률 검토 / 규제 | 79 | 법무, 규제, 계약, IP, 컴플라이언스 |
-| `sales` | 영업 담당 | 고객 가치 / 수익화 | 78 | 영업, 판매, 가격전략, B2B, B2C |
-| `bd` | 사업개발 | 파트너십 / 확장 | 77 | 파트너십, 제휴, 신사업, MOU |
-
-### 📈 Marketing (마케팅) - 5개
-
-| ID | 이름 | 핵심 역할 | Priority | 주요 키워드 |
-|----|------|----------|----------|-------------|
-| `marketing` | 마케팅 전략가 | 브랜딩 / 포지셔닝 | 76 | 마케팅, 브랜딩, 포지셔닝, 타겟팅 |
-| `growth` | 그로스 해커 | 성장 해킹 / 실험 | 75 | 그로스, AARRR, A/B테스트, 퍼널 |
-| `content` | 콘텐츠 전략가 | 스토리텔링 / 채널 | 74 | 콘텐츠, 스토리텔링, SNS콘텐츠 |
-| `community` | 커뮤니티 매니저 | 참여 / 충성도 | 73 | 커뮤니티, 팬덤, 참여, 로열티 |
-| `pr` | PR 전문가 | 홍보 / 미디어 관계 | 72 | PR, 홍보, 미디어, 보도자료 |
-
-### 💡 Innovation (혁신) - 5개
-
-| ID | 이름 | 핵심 역할 | Priority | 주요 키워드 |
-|----|------|----------|----------|-------------|
-| `innovator` | 혁신가 | 신기술 / 트렌드 | 71 | 혁신, 신기술, 트렌드, 이노베이션 |
-| `futurist` | 미래학자 | 장기 전망 / 시나리오 | 70 | 미래, 전망, 예측, 메가트렌드 |
-| `visionary` | 비저너리 | 비전 / 큰 그림 | 69 | 비전, 미션, 목표, 영감 |
-| `disruptor` | 디스럽터 | 파괴적 혁신 | 68 | 디스럽션, 파괴적혁신, 역발상 |
-| `inventor` | 발명가 | 새로운 솔루션 | 67 | 발명, 특허, 기술조합, 독창성 |
-
-### 🎨 Design (디자인/UX) - 3개
-
-| ID | 이름 | 핵심 역할 | Priority | 주요 키워드 |
-|----|------|----------|----------|-------------|
-| `designer` | 디자이너 | 시각 디자인 / 미학 | 66 | 디자인, 시각디자인, 브랜드 |
-| `ux` | UX 디자이너 | 사용자 경험 / 플로우 | 65 | UX, 사용자경험, 사용성, 플로우 |
-| `user_advocate` | 사용자 대변인 | 접근성 / 니즈 | 64 | 사용자, 접근성, 니즈, 불편 |
-
-### ⚖️ Validation (검증) - 4개
-
-| ID | 이름 | 핵심 역할 | Priority | 주요 키워드 |
-|----|------|----------|----------|-------------|
-| `critic` | 비평가 | 비판적 분석 / 약점 | 63 | 비평, 비판, 약점, 개선 |
-| `realist` | 현실주의자 | 실행 가능성 | 62 | 현실성, 실행가능성, 리소스 |
-| `devil_advocate` | 악마의 대변인 | 반대 의견 / 대안 | 61 | 반대의견, 반론, 대안 |
-| `risk_analyst` | 리스크 분석가 | 위험 요소 / 완화 | 60 | 리스크, 위험, 완화, 시나리오 |
-
-### 🔍 Research (리서치) - 3개
-
-| ID | 이름 | 핵심 역할 | Priority | 주요 키워드 |
-|----|------|----------|----------|-------------|
-| `researcher` | 리서처 | 시장 조사 / 데이터 | 59 | 리서치, 조사, 데이터, 시장분석 |
-| `ethnographer` | 에스노그라퍼 | 사용자 관찰 / 행동 | 58 | 에스노그래피, 관찰, 행동분석 |
-| `competitor` | 경쟁 분석가 | 벤치마킹 / 차별화 | 57 | 경쟁분석, 벤치마킹, 차별화 |
-
-### 🎯 Special (특수) - 1개
-
-| ID | 이름 | 핵심 역할 | Priority | 주요 키워드 |
-|----|------|----------|----------|-------------|
-| `moderator` | 모더레이터 | 토론 진행 / 합의 | 56 | 정리, 합의, 결론, 종합 |
+> **Total**: 27 expert personas
+> **Activation**: Auto-triggered by keywords/phrases
+> **Purpose**: Multi-perspective idea discussion and validation
 
 ---
 
-## 페르소나 활성화 규칙
+## Persona Groups
 
-### 우선순위 (Priority)
+### Business (Executives) - 6
 
-| 우선순위 | 값 | 설명 |
-|---------|-----|------|
-| 최우선 | 80+ | 경영진 (CEO, CFO, COO, Legal) |
-| 높음 | 70-79 | 마케팅, 영업, 사업개발 |
-| 보통 | 60-69 | 혁신, 디자인, 검증 |
-| 낮음 | 56-59 | 리서치, 모더레이터 |
+| ID               | Name                | Core Role                    | Priority | Keywords                                        |
+|------------------|---------------------|------------------------------|----------|-------------------------------------------------|
+| `ceo`            | CEO                 | Strategic decision-making    | 82       | CEO, strategy, decision-making, business model  |
+| `cfo`            | CFO                 | Financial analysis / ROI     | 81       | finance, ROI, cost, monetization, budget        |
+| `coo`            | COO                 | Operations / Process         | 80       | operations, process, resources, efficiency      |
+| `legal`          | Legal Counsel       | Legal review / Compliance    | 79       | legal, regulation, contract, IP, compliance     |
+| `sales`          | Sales Lead          | Customer value / Revenue     | 78       | sales, pricing strategy, B2B, B2C               |
+| `bd`             | Business Dev        | Partnership / Expansion      | 77       | partnership, alliance, new business, MOU        |
 
-### 키워드 매칭 규칙
+### Marketing - 5
 
-1. **정확한 키워드 매칭 우선**
-   - "ROI 분석해줘" → `cfo` (정확 매칭)
-   - "A/B 테스트 설계" → `growth` (정확 매칭)
+| ID               | Name                | Core Role                    | Priority | Keywords                                        |
+|------------------|---------------------|------------------------------|----------|-------------------------------------------------|
+| `marketing`      | Marketing Strategist| Branding / Positioning       | 76       | marketing, branding, positioning, targeting     |
+| `growth`         | Growth Hacker       | Growth hacking / Experiments | 75       | growth, AARRR, A/B test, funnel                 |
+| `content`        | Content Strategist  | Storytelling / Channels      | 74       | content, storytelling, social media             |
+| `community`      | Community Manager   | Engagement / Loyalty         | 73       | community, fandom, engagement, loyalty          |
+| `pr`             | PR Specialist       | Public relations / Media     | 72       | PR, publicity, media, press release             |
 
-2. **복합 키워드 처리**
-   - 여러 페르소나 키워드 포함 시 → priority 높은 페르소나 우선
-   - 동일 priority → 키워드 매칭 개수로 판단
+### Innovation - 5
 
-3. **모호한 경우**
-   - `/ideation` 명령으로 다중 페르소나 토론 진행
-   - 예: "새 서비스 아이디어" → 여러 관점 필요
+| ID               | Name                | Core Role                    | Priority | Keywords                                        |
+|------------------|---------------------|------------------------------|----------|-------------------------------------------------|
+| `innovator`      | Innovator           | New tech / Trends            | 71       | innovation, new tech, trends                    |
+| `futurist`       | Futurist            | Long-term outlook / Scenario | 70       | future, forecast, prediction, megatrend         |
+| `visionary`      | Visionary           | Vision / Big picture         | 69       | vision, mission, goals, inspiration             |
+| `disruptor`      | Disruptor           | Disruptive innovation        | 68       | disruption, disruptive innovation, contrarian   |
+| `inventor`       | Inventor            | Novel solutions              | 67       | invention, patent, tech combination, originality|
 
----
+### Design (Design/UX) - 3
 
-## 페르소나 간 위임 규칙
+| ID               | Name                | Core Role                    | Priority | Keywords                                        |
+|------------------|---------------------|------------------------------|----------|-------------------------------------------------|
+| `designer`       | Designer            | Visual design / Aesthetics   | 66       | design, visual design, brand                    |
+| `ux`             | UX Designer         | User experience / Flow       | 65       | UX, user experience, usability, flow            |
+| `user_advocate`  | User Advocate       | Accessibility / Needs        | 64       | user, accessibility, needs, pain points         |
 
-### 위임 체계
+### Validation - 4
 
-```
-ceo (최종 의사결정)
-    ├── cfo (재무 질문)
-    ├── coo (운영 질문)
-    ├── legal (법률 질문)
-    ├── marketing (마케팅 질문)
-    └── bd (파트너십 질문)
+| ID               | Name                | Core Role                    | Priority | Keywords                                        |
+|------------------|---------------------|------------------------------|----------|-------------------------------------------------|
+| `critic`         | Critic              | Critical analysis / Weakness | 63       | critique, criticism, weakness, improvement      |
+| `realist`        | Realist             | Feasibility                  | 62       | realism, feasibility, resources                 |
+| `devil_advocate` | Devil's Advocate    | Counter-argument / Alts      | 61       | counter-argument, rebuttal, alternative         |
+| `risk_analyst`   | Risk Analyst        | Risk factors / Mitigation    | 60       | risk, danger, mitigation, scenario              |
 
-marketing (마케팅 총괄)
-    ├── growth (성장 지표)
-    ├── content (콘텐츠)
-    ├── community (커뮤니티)
-    └── pr (홍보)
+### Research - 3
 
-moderator (토론 진행)
-    └── 모든 페르소나 의견 종합
-```
+| ID               | Name                | Core Role                    | Priority | Keywords                                        |
+|------------------|---------------------|------------------------------|----------|-------------------------------------------------|
+| `researcher`     | Researcher          | Market research / Data       | 59       | research, survey, data, market analysis         |
+| `ethnographer`   | Ethnographer        | User observation / Behavior  | 58       | ethnography, observation, behavior analysis     |
+| `competitor`     | Competitive Analyst | Benchmarking / Differentiation| 57      | competitive analysis, benchmarking, differentiation|
 
-### 위임 예시
+### Special - 1
 
-| 질문 | 담당 페르소나 | 위임 이유 |
-|------|--------------|----------|
-| "사업 전략 방향은?" | `ceo` | 전략적 의사결정 |
-| "예상 수익은?" | `cfo` | 재무 분석 |
-| "법적 리스크는?" | `legal` | 법률 검토 |
-| "타겟 고객은?" | `marketing` | 마케팅 전략 |
-| "경쟁사 분석해줘" | `competitor` | 경쟁 분석 |
-| "실현 가능해?" | `realist` | 현실성 검토 |
-| "반대 의견은?" | `devil_advocate` | 비판적 검토 |
-
----
-
-## /ideation 다중 페르소나 토론
-
-### 기본 구성
-
-`/ideation` 명령 실행 시 다음 페르소나 조합으로 토론:
-
-| 역할 | 페르소나 | 관점 |
-|------|----------|------|
-| 전략 | `ceo` | 비즈니스 전략 |
-| 재무 | `cfo` | ROI, 비용 |
-| 운영 | `coo` | 실행 가능성 |
-| 고객 | `user_advocate` | 사용자 니즈 |
-| 비판 | `devil_advocate` | 반대 의견 |
-| 진행 | `moderator` | 의견 종합 |
-
-### 토론 흐름
-
-```
-1. ceo: 전략적 관점 제시
-2. cfo: 재무적 타당성 검토
-3. coo: 운영 가능성 평가
-4. user_advocate: 사용자 관점 피드백
-5. devil_advocate: 비판적 검토
-6. moderator: 의견 종합 및 결론
-```
+| ID               | Name                | Core Role                    | Priority | Keywords                                        |
+|------------------|---------------------|------------------------------|----------|-------------------------------------------------|
+| `moderator`      | Moderator           | Discussion facilitation      | 56       | summarize, consensus, conclusion, synthesis     |
 
 ---
 
-## 활성화 예시
+## Persona Activation Rules
+
+### Priority Levels
+
+| Level    | Value | Description                                |
+|----------|-------|--------------------------------------------|
+| Highest  | 80+   | Executives (CEO, CFO, COO, Legal)          |
+| High     | 70-79 | Marketing, Sales, Business Development     |
+| Medium   | 60-69 | Innovation, Design, Validation             |
+| Low      | 56-59 | Research, Moderator                        |
+
+### Keyword Matching Rules
+
+1. **Exact keyword match takes precedence**
+   - "ROI analysis" → `cfo` (exact match)
+   - "A/B test design" → `growth` (exact match)
+
+2. **Compound keyword handling**
+   - Multiple persona keywords detected → higher priority persona takes precedence
+   - Same priority → persona with more keyword matches wins
+
+3. **Ambiguous cases**
+   - Use `/ideation` command for multi-persona discussion
+   - Example: "new service idea" → requires multiple perspectives
+
+---
+
+## Persona Delegation Rules
+
+### Delegation Hierarchy
 
 ```
-"새 제품 출시 전략 세워줘"
-→ ceo, marketing, cfo 활성화 (전략, 마케팅, 재무)
+ceo (final decision-maker)
+    ├── cfo (financial questions)
+    ├── coo (operational questions)
+    ├── legal (legal questions)
+    ├── marketing (marketing questions)
+    └── bd (partnership questions)
 
-"브랜드 리뉴얼 아이디어"
-→ marketing, designer, content 활성화
+marketing (marketing lead)
+    ├── growth (growth metrics)
+    ├── content (content)
+    ├── community (community)
+    └── pr (public relations)
 
-"스타트업 투자 유치 준비"
-→ ceo, cfo, bd 활성화
+moderator (discussion facilitator)
+    └── synthesizes all persona opinions
+```
 
-"신기술 도입 검토"
-→ innovator, cto, risk_analyst 활성화
+### Delegation Examples
 
-"시장 조사 필요해"
-→ researcher, competitor 활성화
+| Question                      | Assigned Persona   | Reason                   |
+|-------------------------------|--------------------|--------------------------|
+| "Business strategy direction?"| `ceo`              | Strategic decision       |
+| "Expected revenue?"           | `cfo`              | Financial analysis       |
+| "Legal risks?"                | `legal`            | Legal review             |
+| "Target customers?"           | `marketing`        | Marketing strategy       |
+| "Competitor analysis?"        | `competitor`       | Competitive analysis     |
+| "Is it feasible?"             | `realist`          | Feasibility check        |
+| "Counter-arguments?"          | `devil_advocate`   | Critical review          |
+
+---
+
+## /ideation Multi-Persona Discussion
+
+### Default Configuration
+
+When `/ideation` command executes, the following persona combination engages:
+
+| Role     | Persona           | Perspective              |
+|----------|-------------------|--------------------------|
+| Strategy | `ceo`             | Business strategy        |
+| Finance  | `cfo`             | ROI, costs               |
+| Ops      | `coo`             | Execution feasibility    |
+| Customer | `user_advocate`   | User needs               |
+| Critic   | `devil_advocate`  | Counter-arguments        |
+| Facilitator | `moderator`    | Opinion synthesis        |
+
+### Discussion Flow
+
+```
+1. ceo: Present strategic perspective
+2. cfo: Evaluate financial viability
+3. coo: Assess operational feasibility
+4. user_advocate: Provide user perspective feedback
+5. devil_advocate: Critical review
+6. moderator: Synthesize opinions and conclude
 ```
 
 ---
 
-## 그룹별 시너지
+## Activation Examples
 
-| 조합 | 페르소나들 | 시너지 |
-|------|-----------|--------|
-| 전략 수립 | ceo + cfo + coo | 전략-재무-실행 통합 |
-| 마케팅 캠페인 | marketing + content + growth | 전략-콘텐츠-성장 연계 |
-| 제품 개발 | ux + designer + user_advocate | 디자인-경험-니즈 통합 |
-| 리스크 검토 | legal + risk_analyst + realist | 법률-리스크-현실성 |
-| 혁신 탐색 | innovator + futurist + disruptor | 기술-미래-파괴 관점 |
+```
+"Create new product launch strategy"
+→ ceo, marketing, cfo activated (strategy, marketing, finance)
+
+"Brand renewal ideas"
+→ marketing, designer, content activated
+
+"Startup fundraising prep"
+→ ceo, cfo, bd activated
+
+"New technology adoption review"
+→ innovator, cto, risk_analyst activated
+
+"Need market research"
+→ researcher, competitor activated
+```
+
+---
+
+## Group Synergies
+
+| Combination         | Personas                             | Synergy                           |
+|---------------------|--------------------------------------|-----------------------------------|
+| Strategy Planning   | ceo + cfo + coo                      | Strategy-Finance-Execution        |
+| Marketing Campaign  | marketing + content + growth         | Strategy-Content-Growth           |
+| Product Development | ux + designer + user_advocate        | Design-Experience-Needs           |
+| Risk Review         | legal + risk_analyst + realist       | Legal-Risk-Feasibility            |
+| Innovation Exploration | innovator + futurist + disruptor  | Tech-Future-Disruption            |
 
 ---
 
@@ -201,4 +201,4 @@ moderator (토론 진행)
 - Updated: 2026-01-30
 - Count: 27 personas
 - Groups: 7 (Business, Marketing, Innovation, Design, Validation, Research, Special)
-- Version: 2.0 (개별 파일 분리 완료)
+- Version: 2.0 (individual file separation complete)

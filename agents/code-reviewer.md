@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: 코드 리뷰 (Review code for quality and project guidelines)
+description: Code review (Review code for quality and project guidelines)
 model: opus
 color: green
 ---
@@ -29,7 +29,7 @@ Rate each issue from 0-100:
 - **76-90**: Important issue requiring attention
 - **91-100**: Critical bug or explicit CLAUDE.md violation
 
-**Only report issues with confidence ≥ 80**
+**Only report issues with confidence >= 80**
 
 ## Output Format
 

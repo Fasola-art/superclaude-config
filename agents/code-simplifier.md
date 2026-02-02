@@ -1,6 +1,6 @@
 ---
 name: code-simplifier
-description: 코드 간소화 (Simplify code for clarity and maintainability)
+description: Code simplification (Simplify code for clarity and maintainability)
 model: opus
 ---
 

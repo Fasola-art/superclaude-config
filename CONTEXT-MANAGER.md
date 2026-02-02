@@ -1,115 +1,115 @@
 # Dynamic Context Pruning (DCP) Rules
 
-> SuperClaude v4.1 - 자동 컨텍스트 관리 시스템
+> SuperClaude v4.1 - Automatic Context Management System
 
 ---
 
-## 개요
+## Overview
 
-DCP (Dynamic Context Pruning)는 Claude Code 세션의 컨텍스트 창을 효율적으로 관리합니다.
-컨텍스트 사용량에 따라 불필요한 정보를 자동으로 정리하여 세션 연속성을 보장합니다.
-
----
-
-## 임계값 (Mac Studio Ultra M2 최적화)
-
-| 레벨 | 임계값 | 동작 | 알림 |
-|------|--------|------|------|
-| 🟢 Normal | < 75% | 모니터링만 | 없음 |
-| 🟡 Warning | 75% | 경고 표시 | `⚠️ 컨텍스트 75%` |
-| 🔴 Critical | 90% | 자동 DCP 제안 | `🔴 컨텍스트 90% - 압축 권장` |
-| ❌ Emergency | 95% | 강제 압축 | `🚨 컨텍스트 95% - 강제 압축` |
+DCP (Dynamic Context Pruning) efficiently manages the Claude Code session context window.
+Automatically cleans unnecessary information based on context usage to ensure session continuity.
 
 ---
 
-## DCP 전략
+## Thresholds (Optimized for Mac Studio Ultra M2)
 
-### 1. 중복 제거 (Deduplication)
+| Level | Threshold | Action | Alert |
+|-------|-----------|--------|-------|
+| Normal | < 75% | Monitor only | None |
+| Warning | 75% | Show warning | `Warning: Context 75%` |
+| Critical | 90% | Suggest auto DCP | `Critical: Context 90% - Compression recommended` |
+| Emergency | 95% | Force compression | `Emergency: Context 95% - Force compression` |
+
+---
+
+## DCP Strategies
+
+### 1. Deduplication
 
 ```yaml
 deduplication:
   file_reads:
-    rule: "동일 파일 반복 읽기 → 최신 결과만 유지"
-    action: "이전 Read 결과 제거"
+    rule: "Same file repeated reads -> Keep only latest result"
+    action: "Remove previous Read results"
   bash_outputs:
-    rule: "동일 명령어 반복 → 마지막 결과만 유지"
-    action: "이전 Bash 출력 제거"
+    rule: "Same command repeated -> Keep only last result"
+    action: "Remove previous Bash outputs"
   grep_results:
-    rule: "동일 패턴 검색 → 최신 결과만 유지"
-    action: "이전 Grep 결과 제거"
+    rule: "Same pattern search -> Keep only latest result"
+    action: "Remove previous Grep results"
 ```
 
-### 2. 에러 정리 (Error Cleanup)
+### 2. Error Cleanup
 
 ```yaml
 error_cleanup:
   resolved_errors:
-    rule: "해결된 에러 메시지 → 삭제"
-    condition: "동일 명령어 성공 시"
+    rule: "Resolved error messages -> Delete"
+    condition: "When same command succeeds"
   duplicate_errors:
-    rule: "동일 에러 반복 → 첫 번째 + 횟수만 유지"
-    format: "[에러 메시지] (N회 발생)"
+    rule: "Same error repeated -> Keep first + count only"
+    format: "[Error message] (occurred N times)"
   stack_traces:
-    rule: "3회 이상 반복 스택 트레이스 → 요약으로 대체"
-    action: "핵심 라인만 유지"
+    rule: "Stack traces repeated 3+ times -> Replace with summary"
+    action: "Keep only key lines"
 ```
 
-### 3. 파일 요약 (File Summarize)
+### 3. File Summarization
 
 ```yaml
 file_summarize:
   large_files:
-    threshold: 2000  # 라인
-    rule: "2000+ 라인 파일 → 관련 부분만 유지"
-    action: "요청된 섹션만 보존"
+    threshold: 2000  # lines
+    rule: "2000+ line files -> Keep only relevant sections"
+    action: "Preserve only requested sections"
   log_outputs:
-    threshold: 50  # 라인
-    rule: "로그 출력 → 마지막 50줄만 유지"
-    action: "이전 로그 제거"
+    threshold: 50  # lines
+    rule: "Log outputs -> Keep only last 50 lines"
+    action: "Remove previous logs"
   config_files:
-    rule: "설정 파일 → 변경된 부분만 유지"
-    action: "diff 형식으로 압축"
+    rule: "Config files -> Keep only changed parts"
+    action: "Compress to diff format"
 ```
 
 ---
 
-## 보존 항목 (절대 삭제 금지)
+## Preserved Items (Never Delete)
 
 ```yaml
 preserve_always:
-  - "현재 태스크 컨텍스트"
-  - "활성 TodoWrite 항목"
-  - "최근 수정 파일 목록"
-  - "CLAUDE.md 핵심 규칙"
-  - "현재 에러 및 수정 시도"
-  - "사용자 명시적 요청 내용"
+  - "Current task context"
+  - "Active TodoWrite items"
+  - "Recently modified file list"
+  - "CLAUDE.md core rules"
+  - "Current errors and fix attempts"
+  - "User explicit request content"
 ```
 
 ---
 
-## 자동 실행 조건
+## Auto-Execution Conditions
 
-### 90% 자동 DCP
+### 90% Auto DCP
 
 ```yaml
 auto_dcp_at_90:
-  trigger: "컨텍스트 사용량 >= 90%"
+  trigger: "Context usage >= 90%"
   actions:
-    1: "중복 제거 전략 실행"
-    2: "에러 정리 전략 실행"
-    3: "파일 요약 전략 실행"
+    1: "Execute deduplication strategy"
+    2: "Execute error cleanup strategy"
+    3: "Execute file summarization strategy"
   report:
-    format: "DCP 실행: [X] 토큰 확보. 현재 사용량: [Y]%"
+    format: "DCP executed: [X] tokens freed. Current usage: [Y]%"
 ```
 
-### 95% 긴급 압축
+### 95% Emergency Compression
 
 ```yaml
 emergency_at_95:
-  trigger: "컨텍스트 사용량 >= 95%"
+  trigger: "Context usage >= 95%"
   actions:
-    1: "모든 DCP 전략 강제 실행"
-    2: "오래된 파일 내용 제거"
-    3: "세션 아카이브 생성"
-  warning: "세션 연속성 위험 - 즉시 정리 필요"
+    1: "Force execute all DCP strategies"
+    2: "Remove old file contents"
+    3: "Create session archive"
+  warning: "Session continuity at risk - Immediate cleanup required"
 ```

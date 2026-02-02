@@ -1,6 +1,6 @@
 ---
 name: agent-creator
-description: 에이전트 생성 도우미 (Create agents for plugins)
+description: Agent creation assistant (Create agents for plugins)
 
 <example>
 Context: User wants to create a code review agent

@@ -1,220 +1,222 @@
-# /research - 범용 딥리서치 스킬
+# /research - General Deep Research Skill
 
-> **버전**: 1.0.0
-> **별칭**: /ds, deepsearch
-> **페르소나**: explorer
-
----
-
-## 개요
-
-범용 딥리서치 스킬. 코드베이스 분석부터 웹 리서치까지 다양한 조사 작업을 수행합니다.
-
-## 트리거
-
-- `/research [주제]`
-- `/ds [주제]`
-- `ds quick [주제]` - 빠른 모드 (질문 스킵)
-- `deepsearch [주제]`
+> **Version**: 1.0.0
+> **Alias**: /ds, deepsearch
+> **Persona**: explorer
 
 ---
 
-## 워크플로우
+## Overview
+
+General deep research skill. Performs various research tasks from codebase analysis to web research.
+
+## Triggers
+
+- `/research [topic]`
+- `/ds [topic]`
+- `ds quick [topic]` - Quick mode (skip questions)
+- `deepsearch [topic]`
+
+---
+
+## Workflow
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    /RESEARCH 워크플로우                          │
+│                    /RESEARCH WORKFLOW                            │
 └─────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐
-│ Phase 1: 입력 분석                                               │
+│ Phase 1: Input Analysis                                          │
 ├─────────────────────────────────────────────────────────────────┤
-│  사용자 입력                                                     │
-│       │                                                         │
-│       ▼                                                         │
-│  ┌─────────────────┐                                            │
-│  │ 트리거 감지      │                                            │
-│  │ - /research     │                                            │
-│  │ - ds / ds quick │                                            │
-│  │ - deepsearch    │                                            │
-│  └─────────────────┘                                            │
-│       │                                                         │
-│       ▼                                                         │
-│  ┌─────────────────┐     ┌────────────────────────────────────┐ │
-│  │ 프리셋 자동 감지 │────▶│ 10개 프리셋 매칭                    │ │
-│  └─────────────────┘     │ market_research / competitor_analysis│
-│                          │ tech_research / academic_research   │
-│                          │ decision_support / general_inquiry  │
-│                          │ product_review / how_to            │
-│                          │ news_analysis / troubleshooting    │
-│                          └────────────────────────────────────┘ │
-│       │                                                         │
-│       ▼                                                         │
-│  ┌─────────────────┐                                            │
-│  │ 기본값 설정      │                                            │
-│  │ - depth: preset │                                            │
-│  │ - format: preset│                                            │
-│  │ - breadth: auto │                                            │
-│  └─────────────────┘                                            │
+│  User Input                                                      │
+│       │                                                          │
+│       ▼                                                          │
+│  ┌─────────────────┐                                             │
+│  │ Trigger Detection│                                            │
+│  │ - /research      │                                            │
+│  │ - ds / ds quick  │                                            │
+│  │ - deepsearch     │                                            │
+│  └─────────────────┘                                             │
+│       │                                                          │
+│       ▼                                                          │
+│  ┌─────────────────┐     ┌────────────────────────────────────┐  │
+│  │ Auto-detect     │────▶│ 10 Preset Matching                 │  │
+│  │ Preset          │     │ market_research / competitor_analysis│ │
+│  └─────────────────┘     │ tech_research / academic_research   │  │
+│                          │ decision_support / general_inquiry  │  │
+│                          │ product_review / how_to             │  │
+│                          │ news_analysis / troubleshooting     │  │
+│                          └────────────────────────────────────┘  │
+│       │                                                          │
+│       ▼                                                          │
+│  ┌─────────────────┐                                             │
+│  │ Set Defaults    │                                             │
+│  │ - depth: preset │                                             │
+│  │ - format: preset│                                             │
+│  │ - breadth: auto │                                             │
+│  └─────────────────┘                                             │
 └─────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐
-│ Phase 2: 사전 질문 (AI 아이디어 포함)                            │
+│ Phase 2: Pre-questions (with AI Ideas)                           │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│     ┌──────────────────────┐                                    │
-│     │ "ds quick" 사용?      │                                    │
-│     └──────────────────────┘                                    │
-│          │           │                                          │
-│        YES          NO                                          │
-│          │           │                                          │
-│          ▼           ▼                                          │
-│     ┌────────┐  ┌──────────────────────────────┐                │
-│     │  스킵   │  │ AI 아이디어 제시              │                │
-│     │ Phase 3│  │                              │                │
-│     │ 직행   │  │ "[AI 분석] 다음 관점으로 조사: │                │
-│     └────────┘  │  1. [관점 1] - 이유          │                │
-│                 │  2. [관점 2] - 이유          │                │
-│                 │  3. [관점 3] - 이유          │                │
-│                 │                              │                │
-│                 │  추가 요청이 있으신가요?"     │                │
-│                 └──────────────────────────────┘                │
-│                           │                                     │
-│                           ▼                                     │
-│                 ┌──────────────────────────────┐                │
-│                 │ 사용자 피드백 수집            │                │
-│                 │ - 추가 관점 요청             │                │
-│                 │ - 길이/형식 변경             │                │
-│                 │ - 범위 조정                  │                │
-│                 └──────────────────────────────┘                │
+│                                                                  │
+│     ┌──────────────────────┐                                     │
+│     │ Using "ds quick"?    │                                     │
+│     └──────────────────────┘                                     │
+│          │           │                                           │
+│        YES          NO                                           │
+│          │           │                                           │
+│          ▼           ▼                                           │
+│     ┌────────┐  ┌──────────────────────────────┐                 │
+│     │  Skip  │  │ Present AI Ideas             │                 │
+│     │ Go to  │  │                              │                 │
+│     │ Phase 3│  │ "[AI Analysis] Research from:│                 │
+│     └────────┘  │  1. [Perspective 1] - reason │                 │
+│                 │  2. [Perspective 2] - reason │                 │
+│                 │  3. [Perspective 3] - reason │                 │
+│                 │                              │                 │
+│                 │  Any additional requests?"   │                 │
+│                 └──────────────────────────────┘                 │
+│                           │                                      │
+│                           ▼                                      │
+│                 ┌──────────────────────────────┐                 │
+│                 │ Collect User Feedback        │                 │
+│                 │ - Additional perspectives    │                 │
+│                 │ - Length/format changes      │                 │
+│                 │ - Scope adjustments          │                 │
+│                 └──────────────────────────────┘                 │
 └─────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐
-│ Phase 3: 리서치 실행                                             │
+│ Phase 3: Research Execution                                      │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│                 ┌──────────────────────────────┐                │
-│                 │        병렬 검색 실행         │                │
-│                 └──────────────────────────────┘                │
-│                           │                                     │
-│     ┌─────────────────────┼─────────────────────┐               │
-│     │                     │                     │               │
-│     ▼                     ▼                     ▼               │
-│ ┌───────────┐       ┌───────────┐       ┌───────────┐          │
-│ │ WebSearch │       │ WebSearch │       │ WebSearch │    ...   │
-│ │  Query 1  │       │  Query 2  │       │  Query 3  │          │
-│ │           │       │           │       │           │          │
-│ │ [주제]    │       │ [주제]    │       │ [주제]    │          │
-│ │ market    │       │ trends    │       │ key       │          │
-│ │ size      │       │ 2026      │       │ players   │          │
-│ └───────────┘       └───────────┘       └───────────┘          │
-│     │                     │                     │               │
-│     └─────────────────────┼─────────────────────┘               │
-│                           ▼                                     │
-│                 ┌──────────────────────────────┐                │
-│                 │ 결과 집계 (breadth × 쿼리)    │                │
-│                 └──────────────────────────────┘                │
-│                           │                                     │
-│                           ▼                                     │
-│                 ┌──────────────────────────────┐                │
-│                 │        페이지 수집           │                │
-│                 └──────────────────────────────┘                │
-│                           │                                     │
-│     ┌─────────────────────┼─────────────────────┐               │
-│     │                     │                     │               │
-│     ▼                     ▼                     ▼               │
-│ ┌───────────┐       ┌───────────┐       ┌───────────┐          │
-│ │ WebFetch  │       │ WebFetch  │       │ WebFetch  │    ...   │
-│ │ Source 1  │       │ Source 2  │       │ Source 3  │          │
-│ │ 공식 문서  │       │ 뉴스 기사 │       │ 연구 보고서│          │
-│ └───────────┘       └───────────┘       └───────────┘          │
-│     │                     │                     │               │
-│     └─────────────────────┼─────────────────────┘               │
-│                           ▼                                     │
-│                 ┌──────────────────────────────┐                │
-│                 │ depth >= deep?               │                │
-│                 └──────────────────────────────┘                │
-│                     │               │                           │
-│                   YES              NO                           │
-│                     │               │                           │
-│                     ▼               ▼                           │
-│           ┌─────────────────┐  ┌────────┐                       │
-│           │ 교차검증 실행    │  │  스킵  │                       │
-│           └─────────────────┘  └────────┘                       │
-│                     │                                           │
-│                     ▼                                           │
-│           ┌─────────────────────────────────┐                   │
-│           │ 교차검증 (3개 소스 비교)         │                   │
-│           │                                 │                   │
-│           │ 사실 1: ✅소스A ✅소스B ✅소스C → 검증됨  │          │
-│           │ 사실 2: ✅소스A ✅소스B ❌소스C → 대체로 확인│       │
-│           │ 사실 3: ✅소스A ❌소스B ❌소스C → 불일치  │          │
-│           └─────────────────────────────────┘                   │
+│                                                                  │
+│                 ┌──────────────────────────────┐                 │
+│                 │    Parallel Search Execution │                 │
+│                 └──────────────────────────────┘                 │
+│                           │                                      │
+│     ┌─────────────────────┼─────────────────────┐                │
+│     │                     │                     │                │
+│     ▼                     ▼                     ▼                │
+│ ┌───────────┐       ┌───────────┐       ┌───────────┐           │
+│ │ WebSearch │       │ WebSearch │       │ WebSearch │    ...    │
+│ │  Query 1  │       │  Query 2  │       │  Query 3  │           │
+│ │           │       │           │       │           │           │
+│ │ [topic]   │       │ [topic]   │       │ [topic]   │           │
+│ │ market    │       │ trends    │       │ key       │           │
+│ │ size      │       │ 2026      │       │ players   │           │
+│ └───────────┘       └───────────┘       └───────────┘           │
+│     │                     │                     │                │
+│     └─────────────────────┼─────────────────────┘                │
+│                           ▼                                      │
+│                 ┌──────────────────────────────┐                 │
+│                 │ Aggregate Results            │                 │
+│                 │ (breadth × queries)          │                 │
+│                 └──────────────────────────────┘                 │
+│                           │                                      │
+│                           ▼                                      │
+│                 ┌──────────────────────────────┐                 │
+│                 │        Fetch Pages           │                 │
+│                 └──────────────────────────────┘                 │
+│                           │                                      │
+│     ┌─────────────────────┼─────────────────────┐                │
+│     │                     │                     │                │
+│     ▼                     ▼                     ▼                │
+│ ┌───────────┐       ┌───────────┐       ┌───────────┐           │
+│ │ WebFetch  │       │ WebFetch  │       │ WebFetch  │    ...    │
+│ │ Source 1  │       │ Source 2  │       │ Source 3  │           │
+│ │ Official  │       │ News      │       │ Research  │           │
+│ │ Docs      │       │ Article   │       │ Report    │           │
+│ └───────────┘       └───────────┘       └───────────┘           │
+│     │                     │                     │                │
+│     └─────────────────────┼─────────────────────┘                │
+│                           ▼                                      │
+│                 ┌──────────────────────────────┐                 │
+│                 │ depth >= deep?               │                 │
+│                 └──────────────────────────────┘                 │
+│                     │               │                            │
+│                   YES              NO                            │
+│                     │               │                            │
+│                     ▼               ▼                            │
+│           ┌─────────────────┐  ┌────────┐                        │
+│           │ Cross-validation│  │  Skip  │                        │
+│           └─────────────────┘  └────────┘                        │
+│                     │                                            │
+│                     ▼                                            │
+│           ┌─────────────────────────────────┐                    │
+│           │ Cross-validation (3 sources)    │                    │
+│           │                                 │                    │
+│           │ Fact 1: ✅A ✅B ✅C → Verified   │                    │
+│           │ Fact 2: ✅A ✅B ❌C → Mostly OK  │                    │
+│           │ Fact 3: ✅A ❌B ❌C → Mismatch   │                    │
+│           └─────────────────────────────────┘                    │
 └─────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐
-│ Phase 4: 결과 생성                                               │
+│ Phase 4: Result Generation                                       │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│                 ┌──────────────────────────────┐                │
-│                 │         신뢰도 평가          │                │
-│                 │                              │                │
-│                 │ ⭐⭐⭐⭐⭐ (5점): 공식 문서, 학술 논문, 정부 보고서│
-│                 │ ⭐⭐⭐⭐ (4점): 신뢰 뉴스 (Reuters, NYT), 전문가 분석│
-│                 │ ⭐⭐⭐ (3점): 일반 뉴스, 업계 블로그          │
-│                 │ ⭐⭐ (2점): 개인 블로그, 오래된 자료          │
-│                 │ ⭐ (1점): 출처 불명, 검증 어려움              │
-│                 └──────────────────────────────┘                │
-│                           │                                     │
-│                           ▼                                     │
-│     ┌─────────────────────┬─────────────────────┐               │
-│     │                     │                     │               │
-│     ▼                     ▼                     ▼               │
-│ ┌───────────┐       ┌───────────┐       ┌─────────────┐        │
-│ │  Report   │       │  Summary  │       │  Comparison │        │
-│ │  5-10p    │       │   1-2p    │       │    2-5p     │        │
-│ │           │       │           │       │             │        │
-│ │ 구조:     │       │ 구조:     │       │ 구조:       │        │
-│ │ -요약     │       │ -요약     │       │ -비교표     │        │
-│ │ -배경     │       │ -포인트   │       │ -상세비교   │        │
-│ │ -분석     │       │ -테이블   │       │ -장단점     │        │
-│ │ -전망     │       │ -소스     │       │ -추천       │        │
-│ │ -결론     │       └───────────┘       └─────────────┘        │
-│ │ -참고     │                                                   │
-│ └───────────┘                                                   │
-│                           │                                     │
-│                           ▼                                     │
-│                 ┌──────────────────────────────┐                │
-│                 │         최종 출력            │                │
-│                 │                              │                │
-│                 │ ■ 메타데이터                 │                │
-│                 │  - 깊이: [level]            │                │
-│                 │  - 소스: [N]개              │                │
-│                 │  - 신뢰도: ⭐⭐⭐⭐          │                │
-│                 │  - 교차검증: ✅/❌          │                │
-│                 │                              │                │
-│                 │ 📄 본문                      │                │
-│                 │ [선택된 형식 내용]           │                │
-│                 │                              │                │
-│                 │ 🔗 참고문헌                  │                │
-│                 │ [신뢰도별 정렬]              │                │
-│                 │                              │                │
-│                 │ 💡 추가 조사 제안            │                │
-│                 │ [관련 주제 추천]             │                │
-│                 └──────────────────────────────┘                │
+│                                                                  │
+│                 ┌──────────────────────────────┐                 │
+│                 │      Reliability Rating      │                 │
+│                 │                              │                 │
+│                 │ ⭐⭐⭐⭐⭐ (5): Official docs, academic papers│   │
+│                 │ ⭐⭐⭐⭐ (4): Trusted news (Reuters, NYT)    │   │
+│                 │ ⭐⭐⭐ (3): General news, industry blogs    │   │
+│                 │ ⭐⭐ (2): Personal blogs, outdated sources  │   │
+│                 │ ⭐ (1): Unknown sources, hard to verify     │   │
+│                 └──────────────────────────────┘                 │
+│                           │                                      │
+│                           ▼                                      │
+│     ┌─────────────────────┬─────────────────────┐                │
+│     │                     │                     │                │
+│     ▼                     ▼                     ▼                │
+│ ┌───────────┐       ┌───────────┐       ┌─────────────┐         │
+│ │  Report   │       │  Summary  │       │  Comparison │         │
+│ │  5-10p    │       │   1-2p    │       │    2-5p     │         │
+│ │           │       │           │       │             │         │
+│ │ Structure:│       │ Structure:│       │ Structure:  │         │
+│ │ -Summary  │       │ -Summary  │       │ -Comp table │         │
+│ │ -Background│      │ -Points   │       │ -Details    │         │
+│ │ -Analysis │       │ -Table    │       │ -Pros/cons  │         │
+│ │ -Forecast │       │ -Sources  │       │ -Recommend  │         │
+│ │ -Conclusion│      └───────────┘       └─────────────┘         │
+│ │ -References│                                                   │
+│ └───────────┘                                                    │
+│                           │                                      │
+│                           ▼                                      │
+│                 ┌──────────────────────────────┐                 │
+│                 │         Final Output         │                 │
+│                 │                              │                 │
+│                 │ ■ Metadata                   │                 │
+│                 │  - Depth: [level]            │                 │
+│                 │  - Sources: [N]              │                 │
+│                 │  - Reliability: ⭐⭐⭐⭐      │                 │
+│                 │  - Cross-validated: ✅/❌    │                 │
+│                 │                              │                 │
+│                 │ Content                      │                 │
+│                 │ [Selected format content]    │                 │
+│                 │                              │                 │
+│                 │ References                   │                 │
+│                 │ [Sorted by reliability]      │                 │
+│                 │                              │                 │
+│                 │ Further Research Suggestions │                 │
+│                 │ [Related topic recommendations]│               │
+│                 └──────────────────────────────┘                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 시퀀스 다이어그램
+## Sequence Diagram
 
 ```
 ┌──────────┐  ┌─────────────┐  ┌────────────────┐  ┌───────────┐  ┌───────────┐
 │   User   │  │Skill Router │  │Preset Detector │  │ WebSearch │  │ WebFetch  │
 └────┬─────┘  └──────┬──────┘  └───────┬────────┘  └─────┬─────┘  └─────┬─────┘
      │               │                 │                 │               │
-     │ "ds AI 시장"  │                 │                 │               │
+     │ "ds AI market"│                 │                 │               │
      │──────────────▶│                 │                 │               │
      │               │                 │                 │               │
      │               │ detect_preset() │                 │               │
@@ -223,10 +225,10 @@
      │               │ market_research │                 │               │
      │               │◀────────────────│                 │               │
      │               │                 │                 │               │
-     │ AI 아이디어   │                 │                 │               │
+     │ AI ideas      │                 │                 │               │
      │◀──────────────│                 │                 │               │
      │               │                 │                 │               │
-     │ "진행해"      │                 │                 │               │
+     │ "proceed"     │                 │                 │               │
      │──────────────▶│                 │                 │               │
      │               │                 │                 │               │
      │               │ search_queries (parallel)        │               │
@@ -241,87 +243,87 @@
      │               │                 │                 │   content[]   │
      │               │◀─────────────────────────────────────────────────│
      │               │                 │                 │               │
-     │ 최종 리포트   │                 │                 │               │
+     │ Final report  │                 │                 │               │
      │◀──────────────│                 │                 │               │
      │               │                 │                 │               │
 ```
 
 ---
 
-## 프리셋
+## Presets
 
-| 프리셋 | 설명 | 기본 깊이 | 기본 형식 |
-|--------|------|----------|----------|
-| market_research | 시장 규모, 트렌드, 경쟁사 | deep | report |
-| competitor_analysis | A vs B 비교 분석 | deep | comparison |
-| tech_research | 기술 스택, 프레임워크 | medium | report |
-| academic_research | 학술 연구, 논문 | deep | report |
-| decision_support | 의사결정 지원 | medium | comparison |
-| general_inquiry | 일반 질문 | quick | summary |
-| product_review | 제품 리뷰, 사용기 | medium | comparison |
-| how_to | 방법론, 튜토리얼 | quick | summary |
-| news_analysis | 뉴스, 시사 분석 | medium | report |
-| troubleshooting | 문제 해결, 디버깅 | quick | summary |
+| Preset | Description | Default Depth | Default Format |
+|--------|-------------|---------------|----------------|
+| market_research | Market size, trends, competitors | deep | report |
+| competitor_analysis | A vs B comparison | deep | comparison |
+| tech_research | Tech stack, frameworks | medium | report |
+| academic_research | Academic research, papers | deep | report |
+| decision_support | Decision support | medium | comparison |
+| general_inquiry | General questions | quick | summary |
+| product_review | Product reviews | medium | comparison |
+| how_to | Methods, tutorials | quick | summary |
+| news_analysis | News, current affairs | medium | report |
+| troubleshooting | Problem solving, debugging | quick | summary |
 
-상세 프리셋 정의: [references/presets.md](references/presets.md)
-
----
-
-## 깊이 수준 (Depth)
-
-| 수준 | 쿼리 수 | 소스 수 | 교차검증 | 설명 |
-|------|--------|--------|---------|------|
-| quick | 3 | 5 | ❌ | 빠른 개요 |
-| medium | 5 | 10 | ❌ | 균형 잡힌 분석 |
-| deep | 8 | 20 | ✅ | 심층 리서치 |
-| exhaustive | 12 | 30+ | ✅ | 포괄적 조사 |
+Detailed preset definitions: [references/presets.md](references/presets.md)
 
 ---
 
-## 출력 형식 (Format)
+## Depth Levels
 
-| 형식 | 길이 | 구조 |
-|------|------|------|
-| summary | 1-2p | 요약, 포인트, 테이블, 소스 |
-| report | 5-10p | 요약, 배경, 분석, 전망, 결론, 참고 |
-| comparison | 2-5p | 비교표, 상세비교, 장단점, 추천 |
-
-상세 형식 정의: [references/formats.md](references/formats.md)
+| Level | Queries | Sources | Cross-validation | Description |
+|-------|---------|---------|------------------|-------------|
+| quick | 3 | 5 | No | Quick overview |
+| medium | 5 | 10 | No | Balanced analysis |
+| deep | 8 | 20 | Yes | In-depth research |
+| exhaustive | 12 | 30+ | Yes | Comprehensive investigation |
 
 ---
 
-## 사용 예시
+## Output Formats
 
-### 기본 사용
+| Format | Length | Structure |
+|--------|--------|-----------|
+| summary | 1-2p | Summary, points, table, sources |
+| report | 5-10p | Summary, background, analysis, forecast, conclusion, references |
+| comparison | 2-5p | Comparison table, detailed comparison, pros/cons, recommendation |
+
+Detailed format definitions: [references/formats.md](references/formats.md)
+
+---
+
+## Usage Examples
+
+### Basic Usage
 ```
-/research AI 에이전트 시장 동향
+/research AI agent market trends
 ```
 
-### 빠른 모드 (질문 스킵)
+### Quick Mode (Skip Questions)
 ```
 ds quick WebSocket vs SSE
 ```
-→ 즉시 비교 분석 실행 (사전 질문 없음)
+→ Execute comparison analysis immediately (no pre-questions)
 
-### 비교 분석 (자동 감지 → competitor_analysis)
+### Comparison Analysis (Auto-detect → competitor_analysis)
 ```
-ds Notion vs Obsidian 비교해줘
+ds Compare Notion vs Obsidian
 ```
-→ Comparison 형식으로 출력
-- 비교표
-- 상세 비교 (동기화, 플러그인, 가격 등)
-- 장단점
-- 추천
+→ Output in Comparison format
+- Comparison table
+- Detailed comparison (sync, plugins, pricing, etc.)
+- Pros/cons
+- Recommendation
 
 ---
 
-## 키워드 트리거 연결
+## Keyword Trigger Connection
 
-`/research` / `ds` 키워드는 `~/.claude/scripts/hooks/keyword-detector.ts`에서 감지:
+`/research` / `ds` keywords detected in `~/.claude/scripts/hooks/keyword-detector.ts`:
 
 ```typescript
 research: {
-  description: '범용 딥리서치 (코드베이스 + 일반)',
+  description: 'General deep research (codebase + general)',
   personas: ['explorer'],
   triggers: ['ds', 'deepsearch', 'research'],
   skill: '/research'
@@ -330,7 +332,7 @@ research: {
 
 ---
 
-## 참조
+## References
 
-- [프리셋 상세](references/presets.md)
-- [출력 형식 상세](references/formats.md)
+- [Preset Details](references/presets.md)
+- [Output Format Details](references/formats.md)

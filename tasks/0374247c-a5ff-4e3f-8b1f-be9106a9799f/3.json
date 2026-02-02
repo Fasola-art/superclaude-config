@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "subject": "JARVIS 모듈 구현: PTCoach",
+  "description": "운동 기록, 프로그램 관리 모듈 구현 (폼 가이드, 세트/횟수)",
+  "activeForm": "PTCoach 모듈 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

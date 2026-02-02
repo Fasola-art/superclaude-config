@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
 jarvis-morning-briefing.py
-모닝 브리핑 생성 훅
+Morning briefing generation hook
 
-트리거: UserPromptSubmit
-타임아웃: 5000ms
+Trigger: UserPromptSubmit
+Timeout: 5000ms
 """
 
 import json
@@ -18,11 +18,11 @@ BRIEFING_FILE = CLAUDE_DIR / 'cache' / 'last-briefing.json'
 TODOS_DIR = CLAUDE_DIR / 'todos'
 SESSIONS_DIR = CLAUDE_DIR / 'sessions'
 
-BRIEFING_INTERVAL_HOURS = 8  # 8시간마다 브리핑
+BRIEFING_INTERVAL_HOURS = 8  # Briefing every 8 hours
 
 
 def should_show_briefing() -> bool:
-    """브리핑을 보여줘야 하는지 확인"""
+    """Check if briefing should be shown"""
     try:
         if BRIEFING_FILE.exists():
             data = json.loads(BRIEFING_FILE.read_text())
@@ -35,7 +35,7 @@ def should_show_briefing() -> bool:
 
 
 def save_briefing_time():
-    """브리핑 시간 저장"""
+    """Save briefing time"""
     BRIEFING_FILE.parent.mkdir(parents=True, exist_ok=True)
     BRIEFING_FILE.write_text(json.dumps({
         'lastBriefing': datetime.now().isoformat()
@@ -43,7 +43,7 @@ def save_briefing_time():
 
 
 def get_incomplete_todos() -> list:
-    """미완료 태스크 조회"""
+    """Get incomplete tasks"""
     todos = []
     try:
         if TODOS_DIR.exists():
@@ -60,16 +60,16 @@ def get_incomplete_todos() -> list:
                     continue
     except Exception:
         pass
-    return todos[:5]  # 최대 5개
+    return todos[:5]  # Max 5
 
 
 def get_recent_sessions() -> list:
-    """최근 세션 조회"""
+    """Get recent sessions"""
     sessions = []
     try:
         if SESSIONS_DIR.exists():
             files = sorted(SESSIONS_DIR.glob('*.json'), key=os.path.getmtime, reverse=True)
-            for file in files[:3]:  # 최근 3개
+            for file in files[:3]:  # Recent 3
                 try:
                     data = json.loads(file.read_text())
                     sessions.append({
@@ -84,27 +84,27 @@ def get_recent_sessions() -> list:
 
 
 def generate_briefing() -> dict:
-    """브리핑 생성"""
+    """Generate briefing"""
     now = datetime.now()
-    greeting = "좋은 아침" if now.hour < 12 else ("좋은 오후" if now.hour < 18 else "좋은 저녁")
+    greeting = "Good morning" if now.hour < 12 else ("Good afternoon" if now.hour < 18 else "Good evening")
 
     incomplete_todos = get_incomplete_todos()
     recent_sessions = get_recent_sessions()
 
-    briefing_parts = [f"🌅 {greeting}입니다!"]
+    briefing_parts = [f"{greeting}!"]
 
     if incomplete_todos:
-        briefing_parts.append(f"\n📋 미완료 태스크 {len(incomplete_todos)}개:")
+        briefing_parts.append(f"\nIncomplete tasks: {len(incomplete_todos)}")
         for todo in incomplete_todos:
-            status_icon = "🔄" if todo.get('status') == 'in_progress' else "⏳"
+            status_icon = "[in progress]" if todo.get('status') == 'in_progress' else "[pending]"
             briefing_parts.append(f"  {status_icon} {todo.get('subject', 'Unknown')}")
 
     if recent_sessions:
-        briefing_parts.append(f"\n📂 최근 세션:")
+        briefing_parts.append(f"\nRecent sessions:")
         for session in recent_sessions:
             briefing_parts.append(f"  - {session['name']}")
 
-    briefing_parts.append("\n💡 '계속' 키워드로 이전 작업을 이어갈 수 있습니다.")
+    briefing_parts.append("\nUse 'continue' keyword to resume previous work.")
 
     return {
         'greeting': greeting,
@@ -116,13 +116,13 @@ def generate_briefing() -> dict:
 
 def main():
     try:
-        # stdin은 무시 (브리핑은 입력과 무관)
+        # Ignore stdin (briefing is unrelated to input)
         sys.stdin.read()
 
         if not should_show_briefing():
             print(json.dumps({
                 'status': 'skipped',
-                'message': '브리핑 생략 (최근 표시됨)'
+                'message': 'Briefing skipped (recently shown)'
             }, ensure_ascii=False))
             sys.exit(0)
 

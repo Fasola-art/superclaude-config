@@ -1,6 +1,6 @@
 ---
 name: claude-md-improver
-description: CLAUDE.md 파일 감사 및 개선 (Audit and improve CLAUDE.md files)
+description: Audit and improve CLAUDE.md files. Evaluate quality, identify gaps, and suggest targeted improvements.
 tools: Read, Glob, Grep, Bash, Edit
 ---
 

@@ -1,0 +1,9 @@
+{
+  "id": "8",
+  "subject": "대시보드 차트 기능 강화",
+  "description": "Chart.js로 시계열 차트 추가: 1) 섹터별 등락률 추이, 2) 운임지수 히스토리, 3) 경제지표 트렌드",
+  "activeForm": "차트 기능 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,6 +1,6 @@
 ---
 name: command-development
-description: 슬래시 명령어 개발 가이드 (Command development for Claude Code)
+description: Slash command development guide for Claude Code. Covers file format, frontmatter options, dynamic arguments, and best practices.
 version: 0.2.0
 ---
 

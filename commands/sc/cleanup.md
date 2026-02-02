@@ -1,24 +1,24 @@
 ---
-description: "코드 정리 (Cleanup code)"
+description: "Cleanup code"
 argument-hint: "[target]"
 ---
 
-# 정리
+# Cleanup
 
-코드를 정리하고 불필요한 요소를 제거합니다.
+Clean up code and remove unnecessary elements.
 
-## 사용
+## Usage
 
 ```
-/sc:cleanup            # 전체 프로젝트
-/sc:cleanup src/       # 특정 디렉토리
-/sc:cleanup --imports  # 미사용 import만
-/sc:cleanup --logs     # console.log만
+/sc:cleanup            # Full project
+/sc:cleanup src/       # Specific directory
+/sc:cleanup --imports  # Unused imports only
+/sc:cleanup --logs     # console.log only
 ```
 
-## 정리 항목
+## Cleanup Items
 
-- 미사용 import 제거
-- console.log/debug 제거
-- 미사용 변수 경고
-- 포매팅 정리
+- Remove unused imports
+- Remove console.log/debug statements
+- Warn about unused variables
+- Format cleanup

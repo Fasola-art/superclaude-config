@@ -1,6 +1,6 @@
 ---
 name: example-skill
-description: 스킬 개발 템플릿 예제 (Example skill template for plugins)
+description: Example skill template for Claude Code plugins. Demonstrates skill structure and format.
 version: 1.0.0
 ---
 

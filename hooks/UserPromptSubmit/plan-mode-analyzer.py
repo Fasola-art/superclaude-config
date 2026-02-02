@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
 plan-mode-analyzer.py
-PRD 감지 및 플랜 모드 진입 훅
+PRD detection and plan mode entry hook
 
-트리거: UserPromptSubmit
-타임아웃: 3000ms
+Trigger: UserPromptSubmit
+Timeout: 3000ms
 """
 
 import json
@@ -12,22 +12,22 @@ import sys
 import re
 
 PRD_KEYWORDS = [
-    'PRD', 'prd', '요구사항', '기획서', '스펙', 'spec',
-    '프로젝트 만들어', '앱 만들어', '서비스 만들어',
-    '개발해줘', '구현해줘'
+    'PRD', 'prd', 'requirements', 'spec', 'specification',
+    'create project', 'create app', 'create service',
+    'build', 'develop', 'implement'
 ]
 
 PRD_FILE_PATTERNS = [
     r'.*\.prd\.md$',
     r'.*PRD\.md$',
     r'.*requirements\.md$',
-    r'.*기획서\.md$'
+    r'.*spec\.md$'
 ]
 
 FEATURE_COUNT_THRESHOLD = 3
 
 def detect_prd_document(prompt: str) -> dict:
-    """PRD 문서 또는 관련 키워드 감지"""
+    """Detect PRD document or related keywords"""
     result = {
         'detected': False,
         'type': None,
@@ -37,14 +37,14 @@ def detect_prd_document(prompt: str) -> dict:
 
     prompt_lower = prompt.lower()
 
-    # 키워드 감지
+    # Keyword detection
     keyword_matches = sum(1 for kw in PRD_KEYWORDS if kw.lower() in prompt_lower)
     if keyword_matches > 0:
         result['detected'] = True
         result['type'] = 'keyword'
         result['confidence'] = min(keyword_matches * 0.25, 1.0)
 
-    # 파일 패턴 감지
+    # File pattern detection
     for pattern in PRD_FILE_PATTERNS:
         if re.search(pattern, prompt, re.IGNORECASE):
             result['detected'] = True
@@ -52,11 +52,11 @@ def detect_prd_document(prompt: str) -> dict:
             result['confidence'] = 0.9
             break
 
-    # 기능 목록 감지 (번호 매기기 패턴)
+    # Feature list detection (numbered pattern)
     feature_patterns = [
-        r'\d+\.\s+\w+',  # 1. 기능명
-        r'-\s+\w+',       # - 기능명
-        r'•\s+\w+',       # • 기능명
+        r'\d+\.\s+\w+',  # 1. Feature name
+        r'-\s+\w+',       # - Feature name
+        r'•\s+\w+',       # - Feature name
     ]
     for pattern in feature_patterns:
         matches = re.findall(pattern, prompt)
@@ -71,18 +71,18 @@ def detect_prd_document(prompt: str) -> dict:
 
 
 def determine_analysis_depth(prompt: str, detection: dict) -> str:
-    """분석 깊이 결정"""
+    """Determine analysis depth"""
     prompt_lower = prompt.lower()
 
-    # 빠르게 키워드가 있으면 간단 분석
-    if any(kw in prompt_lower for kw in ['빠르게', 'qk', 'quick']):
+    # Quick analysis if 'quick' keyword present
+    if any(kw in prompt_lower for kw in ['quick', 'qk', 'fast']):
         return 'quick'
 
-    # PRD 문서면 깊은 분석
+    # Deep analysis for PRD documents
     if detection['type'] in ['file', 'feature_list']:
         return 'think-hard'
 
-    # 기본 분석
+    # Default analysis
     return 'think'
 
 
@@ -97,7 +97,7 @@ def main():
         if not detection['detected']:
             output = {
                 'status': 'none',
-                'message': 'PRD 감지 안됨'
+                'message': 'No PRD detected'
             }
         else:
             depth = determine_analysis_depth(prompt, detection)
@@ -108,7 +108,7 @@ def main():
                 'features_count': detection['features_count'],
                 'analysis_depth': depth,
                 'action': 'enter_plan_mode',
-                'message': f"PRD 감지됨 (신뢰도: {detection['confidence']:.0%}) - 플랜 모드 진입 권장"
+                'message': f"PRD detected (confidence: {detection['confidence']:.0%}) - plan mode recommended"
             }
 
         print(json.dumps(output, ensure_ascii=False))

@@ -1,0 +1,9 @@
+{
+  "id": "7",
+  "subject": "실제 해운 API 연동 (MarineTraffic/VesselFinder)",
+  "description": "현재 샘플 물류 데이터 대신 실제 선박 추적 API 연동. MarineTraffic 또는 VesselFinder 무료 티어 검토.",
+  "activeForm": "해운 API 연동 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

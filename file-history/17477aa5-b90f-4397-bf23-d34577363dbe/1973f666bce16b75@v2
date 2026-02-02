@@ -1,0 +1,10 @@
+{
+  "language": "ko-KR",
+  "notion_parent_page_id": null,
+  "auto_upload": true,
+  "save_transcript": true,
+  "transcript_dir": "~/.claude/modules/music-lesson/transcripts",
+  "watch_path": "~/Library/CloudStorage/GoogleDrive-fasolaart@gmail.com/내 드라이브/클로바노트",
+  "processed_dir": null,
+  "recursive": false
+}

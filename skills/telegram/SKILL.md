@@ -1,53 +1,53 @@
 ---
 name: telegram
-description: 텔레그램 그룹 메시지 모니터링 및 AI 요약 기능.
+description: Telegram group message monitoring and AI summarization. Watch chats, collect messages, generate summaries.
 license: MIT
 ---
 
-텔레그램 그룹 메시지 모니터링 및 요약 기능
+Telegram group message monitoring and summarization.
 
-## 사용 가능한 명령어
+## Available Commands
 
-### 봇 실행
+### Run Bot
 ```bash
 cd /Users/reim/.claude/modules/telegram
 python3 monitor.py
 ```
 
-### 메시지 요약
+### Message Summary
 ```bash
 cd /Users/reim/.claude/modules/telegram
 
-# 채팅방 목록
+# List chat rooms
 python3 summarizer.py list
 
-# 전체 요약 (24시간)
+# Full summary (24 hours)
 python3 summarizer.py summary
 
-# 전체 요약 (48시간)
+# Full summary (48 hours)
 python3 summarizer.py summary 48
 
-# 특정 채팅방 요약
+# Specific chat room summary
 python3 summarizer.py chat <CHAT_ID>
 ```
 
-## 봇 명령어 (텔레그램 내)
+## Bot Commands (In Telegram)
 
-- `/summary` - 최근 24시간 요약
-- `/stats` - 메시지 통계
-- `/chats` - 모니터링 중인 채팅방
+- `/summary` - Last 24 hours summary
+- `/stats` - Message statistics
+- `/chats` - Monitored chat rooms
 
-## 설정
+## Configuration
 
-봇 정보:
-- 이름: FINANCIAL NEWS-LI
-- 유저네임: @FASOLASI_bot
+Bot Info:
+- Name: FINANCIAL NEWS-LI
+- Username: @FASOLASI_bot
 
-봇을 그룹에 추가하면 자동으로 메시지 수집 시작.
+Add bot to group to automatically start message collection.
 
-## 파일 위치
+## File Locations
 
-- 모니터: `/Users/reim/.claude/modules/telegram/monitor.py`
-- 요약기: `/Users/reim/.claude/modules/telegram/summarizer.py`
-- 메시지: `/Users/reim/.claude/modules/telegram/data/messages.json`
-- 요약: `/Users/reim/.claude/modules/telegram/data/summaries/`
+- Monitor: `/Users/reim/.claude/modules/telegram/monitor.py`
+- Summarizer: `/Users/reim/.claude/modules/telegram/summarizer.py`
+- Messages: `/Users/reim/.claude/modules/telegram/data/messages.json`
+- Summaries: `/Users/reim/.claude/modules/telegram/data/summaries/`

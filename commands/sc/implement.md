@@ -1,23 +1,23 @@
 ---
-description: "기능 구현 (Implement feature)"
+description: "Implement feature"
 argument-hint: "[feature]"
 ---
 
-# 구현
+# Implement
 
-기능이나 컴포넌트를 구현합니다.
+Implement features or components.
 
-## 사용
+## Usage
 
 ```
-/sc:implement LoginForm        # 컴포넌트 구현
-/sc:implement --api /users     # API 구현
-/sc:implement --hook useAuth   # 훅 구현
+/sc:implement LoginForm        # Component implementation
+/sc:implement --api /users     # API implementation
+/sc:implement --hook useAuth   # Hook implementation
 ```
 
-## 동작
+## Behavior
 
-1. 요구사항 분석
-2. 설계 검토
-3. 코드 생성 (Writer-Reviewer)
-4. 테스트 제안
+1. Analyze requirements
+2. Review design
+3. Generate code (Writer-Reviewer)
+4. Suggest tests

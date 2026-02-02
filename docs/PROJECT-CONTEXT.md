@@ -1,50 +1,50 @@
-# 프로젝트 컨텍스트 관리 (Project Context)
+# Project Context Management
 
-> 프로젝트 컨텍스트 유지 및 복원 전략
-
----
-
-## 개요
-
-프로젝트 컨텍스트는 작업의 연속성을 보장하고 효율적인 개발을 위해 필수적입니다.
+> Project context maintenance and restoration strategy
 
 ---
 
-## 컨텍스트 구성 요소
+## Overview
 
-### 1. 프로젝트 메타데이터
+Project context is essential for ensuring work continuity and efficient development.
+
+---
+
+## Context Components
+
+### 1. Project Metadata
 ```yaml
 project:
-  name: [프로젝트명]
-  path: [경로]
+  name: [project name]
+  path: [path]
   type: [nextjs | react | node | ...]
-  created: [생성일]
-  last_active: [마지막 활동일]
+  created: [creation date]
+  last_active: [last activity date]
 ```
 
-### 2. 작업 상태
+### 2. Work State
 ```yaml
 state:
-  current_task: [현재 태스크]
-  milestone: [현재 마일스톤]
-  progress: [진행률]
-  blockers: [차단 요소]
+  current_task: [current task]
+  milestone: [current milestone]
+  progress: [progress rate]
+  blockers: [blocking factors]
 ```
 
-### 3. 파일 컨텍스트
+### 3. File Context
 ```yaml
 files:
   recently_modified:
-    - path: [파일경로]
-      modified: [수정일]
+    - path: [file path]
+      modified: [modification date]
   frequently_accessed:
-    - path: [파일경로]
-      count: [접근횟수]
+    - path: [file path]
+      count: [access count]
 ```
 
 ---
 
-## 컨텍스트 저장 위치
+## Context Storage Location
 
 ```
 ~/.claude/
@@ -62,29 +62,29 @@ files:
 
 ---
 
-## 컨텍스트 복원
+## Context Restoration
 
-### 자동 복원
-세션 시작 시 마지막 프로젝트 컨텍스트 자동 로드
+### Auto Restoration
+Auto-load last project context on session start
 
-### 수동 복원
+### Manual Restoration
 ```
-/project-continue    # 마지막 프로젝트 계속
-/recover            # 세션 복구
-/sc:load --project  # 프로젝트 컨텍스트 로드
+/project-continue    # Continue last project
+/recover            # Session recovery
+/sc:load --project  # Load project context
 ```
 
 ---
 
-## 컨텍스트 정리
+## Context Cleanup
 
 ### DCP (Dynamic Context Pruning)
-- 75%: 경고
-- 90%: 자동 압축
-- 95%: 강제 압축
+- 75%: Warning
+- 90%: Auto compression
+- 95%: Forced compression
 
-### 보존 항목
-- 현재 태스크
-- 활성 TodoWrite
-- 최근 수정 파일
-- CLAUDE.md 규칙
+### Preserved Items
+- Current task
+- Active TodoWrite
+- Recently modified files
+- CLAUDE.md rules

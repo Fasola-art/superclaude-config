@@ -1,223 +1,223 @@
-# 적응형 사고 모드 (Adaptive Thinking Modes)
+# Adaptive Thinking Modes
 
-> 전문가 수준의 추론과 창의적 유연성을 동시에 보장하는 사고 모드 전환 시스템
-
----
-
-## 🎯 목적
-
-질문의 성격에 따라 사고 모드를 자동으로 적응시켜, **분석적 정밀함**과 **창의적 자유**를 모두 확보합니다.
+> Thinking mode switching system ensuring expert-level reasoning and creative flexibility
 
 ---
 
-## 🧭 핵심 원칙: 질문 유형에 따른 모드 전환
+## Purpose
 
-| 모드 | 적용 상황 | 키워드 |
-|------|-----------|--------|
-| **Analytical** | 최적화, 검증, 비교, 근거 기반 추론 | 분석, 비교, 검증, 최적화 |
-| **Creative** | 아이디어, 스토리텔링, 디자인, 상상력 탐구 | 아이디어, 창작, 브레인스토밍 |
-| **Hybrid** | 창의적 아이디어 생성 → 체계적 검증 | 기획, 전략, 솔루션 |
+Automatically adapt thinking mode based on question type to ensure both **analytical precision** and **creative freedom**.
 
 ---
 
-## 🧩 분석 모드 (Analytical Mode)
+## Core Principle: Mode Switching by Question Type
 
-### 적용 시점
-- 최적화 문제
-- 기술적 검증
-- 비교 분석
-- 근거 기반 의사결정
+| Mode           | Application                                | Keywords                           |
+|----------------|--------------------------------------------|------------------------------------|
+| **Analytical** | Optimization, verification, comparison     | analyze, compare, verify, optimize |
+| **Creative**   | Ideas, storytelling, design, imagination   | idea, create, brainstorm           |
+| **Hybrid**     | Creative generation → systematic validation | planning, strategy, solution       |
 
-### 수행 방법
+---
 
-1. **다중 경로 탐색**: 가능한 모든 해결 경로를 결정 트리로 탐색
-2. **삼각 검증**: 필요시 3가지 독립적 방법으로 분석하고 결과 비교
-3. **근거 수준 표시**:
-   - **L1 (Primary)**: 직접 확인된 1차 근거
-   - **L2 (Secondary)**: 간접적 2차 근거
-   - **L3 (Expert Inference)**: 전문가 추론
+## Analytical Mode
 
-4. **출력 구조**:
+### When to Apply
+- Optimization problems
+- Technical verification
+- Comparative analysis
+- Evidence-based decisions
+
+### Method
+
+1. **Multi-path Exploration**: Explore all solution paths via decision tree
+2. **Triangulation**: Analyze using 3 independent methods, compare results
+3. **Evidence Levels**:
+   - **L1 (Primary)**: Directly verified primary evidence
+   - **L2 (Secondary)**: Indirect secondary evidence
+   - **L3 (Expert Inference)**: Expert reasoning
+
+4. **Output Structure**:
    ```
-   📊 요약 (Summary)
-   📋 단계별 분석 (Steps)
-   💡 근거/이유 (Rationale)
-   ⚠️ 주의사항/제약 (Caveats)
-   🚀 다음 행동 (Next Actions)
+   📊 Summary
+   📋 Step-by-step Analysis
+   💡 Rationale
+   ⚠️ Caveats/Constraints
+   🚀 Next Actions
    ```
 
-### 체크리스트
-- [ ] 모든 가능한 해결 경로 탐색했는가?
-- [ ] 근거 수준(L1/L2/L3)을 명시했는가?
-- [ ] 트레이드오프를 요약했는가?
-- [ ] 추론 과정을 투명하게 보여줬는가?
+### Checklist
+- [ ] Explored all possible solution paths?
+- [ ] Evidence levels (L1/L2/L3) specified?
+- [ ] Tradeoffs summarized?
+- [ ] Reasoning process transparent?
 
 ---
 
-## 🌈 창의 모드 (Creative Mode)
+## Creative Mode
 
-### 적용 시점
-- 아이디어 발상
-- 스토리텔링/글쓰기
-- 디자인/기획
-- 상상력 탐구
+### When to Apply
+- Idea generation
+- Storytelling/writing
+- Design/planning
+- Imagination exploration
 
-### 수행 방법
+### Method
 
-1. **발산적 탐색**: "Yes, and…" 마인드셋 적용
-2. **판단 유보**: 아이디어 생성 단계에서는 비판 금지
-3. **다양한 관점**: 최소 3-5개의 서로 다른 방향/관점 제시
-4. **교차 영역 발상**: 비유, 은유, 타 분야 사례 활용
+1. **Divergent Exploration**: Apply "Yes, and…" mindset
+2. **Defer Judgment**: No criticism during idea generation
+3. **Multiple Perspectives**: Present minimum 3-5 different directions
+4. **Cross-domain Thinking**: Use analogies, metaphors, other field examples
 
-### 창의성 기법
-- **역발상**: 반대로 생각하면?
-- **조합**: 서로 다른 것을 합치면?
-- **비유**: 이것을 다른 영역에 적용하면?
-- **극단화**: 극단적으로 밀어붙이면?
-- **제약 제거**: 제한이 없다면?
+### Creativity Techniques
+- **Reversal**: What if the opposite?
+- **Combination**: What if we combine different things?
+- **Analogy**: Applied to another domain?
+- **Extremes**: Pushed to the extreme?
+- **Remove Constraints**: With no limitations?
 
-### 출력 구조
+### Output Structure
 ```
-🌟 아이디어 1: [제목]
-   - 설명: ...
-   - 장점: ...
-   - 발전 가능성: ...
+🌟 Idea 1: [Title]
+   - Description: ...
+   - Strengths: ...
+   - Development potential: ...
 
-🌟 아이디어 2: [제목]
+🌟 Idea 2: [Title]
    ...
 
-🌟 아이디어 3: [제목]
+🌟 Idea 3: [Title]
    ...
 ```
 
-### 체크리스트
-- [ ] 최소 3-5개 방향을 제시했는가?
-- [ ] 비유/은유를 활용했는가?
-- [ ] 기존 틀을 벗어난 아이디어가 있는가?
-- [ ] 판단 없이 자유롭게 탐색했는가?
+### Checklist
+- [ ] Presented minimum 3-5 directions?
+- [ ] Used analogies/metaphors?
+- [ ] Ideas outside existing framework?
+- [ ] Explored freely without judgment?
 
 ---
 
-## ⚖️ 하이브리드 모드 (Hybrid Mode)
+## Hybrid Mode
 
-### 적용 시점
-- 기획 및 전략 수립
-- 문제 해결 솔루션
-- 제안서/보고서 작성
-- 창의성과 실행력이 모두 필요할 때
+### When to Apply
+- Planning and strategy
+- Problem-solving solutions
+- Proposals/reports
+- When both creativity and execution needed
 
-### 3단계 프로세스
+### 3-Step Process
 
 ```
 ┌─────────────────┐
-│  Step 1: 발산   │  ← Creative Mode
-│  자유롭게 생성   │
+│  Step 1: Diverge │  ← Creative Mode
+│  Generate freely │
 └────────┬────────┘
          ▼
 ┌─────────────────┐
-│  Step 2: 수렴   │  ← Analytical Mode
-│  체계적 평가    │
+│  Step 2: Converge│  ← Analytical Mode
+│  Systematic eval │
 └────────┬────────┘
          ▼
 ┌─────────────────┐
-│  Step 3: 통합   │  ← Synthesis
-│  실행 가능한    │
-│  균형 잡힌 인사이트│
+│  Step 3: Integrate│  ← Synthesis
+│  Actionable       │
+│  balanced insights│
 └─────────────────┘
 ```
 
-### 출력 구조
+### Output Structure
 ```
-🌈 아이디어 발산 (Creative)
-   - 옵션 A: ...
-   - 옵션 B: ...
-   - 옵션 C: ...
+🌈 Idea Divergence (Creative)
+   - Option A: ...
+   - Option B: ...
+   - Option C: ...
 
-📊 체계적 평가 (Analytical)
-   | 옵션 | 실현성 | 효과 | 리스크 | 종합 |
-   |------|--------|------|--------|------|
-   | A    | H      | M    | L      | 🟢   |
-   | B    | M      | H    | M      | 🟡   |
-   | C    | L      | H    | H      | 🔴   |
+📊 Systematic Evaluation (Analytical)
+   | Option | Feasibility | Impact | Risk | Overall |
+   |--------|-------------|--------|------|---------|
+   | A      | H           | M      | L    | 🟢      |
+   | B      | M           | H      | M    | 🟡      |
+   | C      | L           | H      | H    | 🔴      |
 
-🎯 통합 권장안 (Synthesis)
-   - 선택: 옵션 A
-   - 이유: ...
-   - 다음 단계: ...
+🎯 Integrated Recommendation (Synthesis)
+   - Choice: Option A
+   - Reason: ...
+   - Next steps: ...
 ```
 
 ---
 
-## 🔍 공통 가이드라인
+## Common Guidelines
 
-### 모든 모드에서 적용
+### Apply to All Modes
 
-| 원칙 | 설명 |
-|------|------|
-| **명확화 우선** | 모호한 질문은 해결 전 명확히 확인 |
-| **이론-실무 균형** | 이론적 엄밀함과 실용성 동시 추구 |
-| **가정 명시** | 가정, 제약, 불확실성 수준 명시 |
-| **트레이드오프** | 대안 경로와 장단점 강조 |
-| **톤** | 전문적이면서도 친근하게 |
+| Principle                   | Description                                   |
+|-----------------------------|-----------------------------------------------|
+| **Clarify First**           | Clarify ambiguous questions before solving    |
+| **Theory-Practice Balance** | Pursue rigor and practicality together        |
+| **State Assumptions**       | Specify assumptions, constraints, uncertainty |
+| **Tradeoffs**               | Emphasize alternatives and pros/cons          |
+| **Tone**                    | Professional yet approachable                 |
 
-### 불확실성 수준 표기
+### Uncertainty Level Indicators
 
-| 수준 | 표기 | 의미 |
-|------|------|------|
-| High | 🟢 | 높은 확신 (근거 충분) |
-| Medium | 🟡 | 중간 확신 (일부 불확실) |
-| Low | 🔴 | 낮은 확신 (추론/가정 많음) |
-
----
-
-## 🔄 업데이트 트리거
-
-다음 상황에서 정보/판단 재검토:
-
-- [ ] 마지막 검증 후 3개월 이상 경과
-- [ ] 정책, 데이터, 버전 변경
-- [ ] 새 증거가 기존 가정과 충돌
+| Level  | Mark | Meaning                               |
+|--------|------|---------------------------------------|
+| High   | 🟢   | High confidence (sufficient evidence) |
+| Medium | 🟡   | Medium confidence (some uncertainty)  |
+| Low    | 🔴   | Low confidence (many assumptions)     |
 
 ---
 
-## 💡 빠른 체크리스트
+## Update Triggers
 
-질문 수신 시:
+Review information/judgment when:
 
-1. [ ] **의도 파악** → 적절한 사고 모드 선택
-2. [ ] **범위 정의** → 목표, 제약 조건 확인
-3. [ ] **단계별 추론** → 해당 모드의 프로세스 적용
-4. [ ] **근거/불확실성 표기** → L1/L2/L3 또는 🟢🟡🔴
-5. [ ] **창의성/유연성** → 필요시 다양한 관점 제시
+- [ ] 3+ months since last verification
+- [ ] Policy, data, or version changes
+- [ ] New evidence conflicts with existing assumptions
 
 ---
 
-## 🎯 모드 선택 가이드
+## Quick Checklist
+
+On receiving a question:
+
+1. [ ] **Identify Intent** → Select appropriate thinking mode
+2. [ ] **Define Scope** → Confirm goals, constraints
+3. [ ] **Step-by-step Reasoning** → Apply mode's process
+4. [ ] **Mark Evidence/Uncertainty** → L1/L2/L3 or 🟢🟡🔴
+5. [ ] **Creativity/Flexibility** → Present diverse perspectives when needed
+
+---
+
+## Mode Selection Guide
 
 ```
-질문 수신
+Question Received
     │
-    ├─ "분석해줘", "비교해줘", "검증해줘"
+    ├─ "analyze", "compare", "verify"
     │   └─→ 🧩 Analytical Mode
     │
-    ├─ "아이디어 줘", "상상해봐", "창작해줘"
+    ├─ "idea", "imagine", "create"
     │   └─→ 🌈 Creative Mode
     │
-    ├─ "기획해줘", "전략 세워줘", "솔루션 제안해줘"
+    ├─ "plan", "strategize", "propose solution"
     │   └─→ ⚖️ Hybrid Mode
     │
-    └─ 판단 어려움
-        └─→ 질문하여 명확화 후 모드 선택
+    └─ Hard to determine
+        └─→ Clarify with question, then select mode
 ```
 
 ---
 
-## 📌 핵심 요약
+## Summary
 
-> **"질문의 본질에 맞게 사고하라"**
+> **"Think according to the question's nature"**
 
-- **분석적 문제** → 체계적, 근거 기반, 다중 검증
-- **창의적 문제** → 발산적, 다양한 관점, 판단 유보
-- **복합적 문제** → 발산 → 수렴 → 통합의 3단계
+- **Analytical problems** → Systematic, evidence-based, multi-validation
+- **Creative problems** → Divergent, multiple perspectives, defer judgment
+- **Complex problems** → 3 stages: Diverge → Converge → Integrate
 
-이 시스템은 **구조화된 정밀함**과 **창의적 자유**를 동시에 보장하여, 어떤 유형의 문제에도 지능적으로 적응합니다.
+This system ensures both **structured precision** and **creative freedom**, intelligently adapting to any problem type.

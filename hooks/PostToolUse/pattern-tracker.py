@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-패턴 추적/학습 Hook
-- 성공/실패 패턴 기록
-- 학습 데이터 축적
+Pattern Tracking/Learning Hook
+- Record success/failure patterns
+- Accumulate learning data
 """
 
 import os
@@ -15,7 +15,7 @@ PATTERNS_DIR = Path.home() / ".claude" / "patterns"
 PATTERNS_FILE = PATTERNS_DIR / "learned-patterns.json"
 
 def load_patterns() -> dict:
-    """저장된 패턴 로드"""
+    """Load saved patterns"""
     if PATTERNS_FILE.exists():
         try:
             with open(PATTERNS_FILE, 'r') as f:
@@ -25,13 +25,13 @@ def load_patterns() -> dict:
     return {"success": [], "failure": [], "stats": {}}
 
 def save_patterns(patterns: dict):
-    """패턴 저장"""
+    """Save patterns"""
     PATTERNS_DIR.mkdir(parents=True, exist_ok=True)
     with open(PATTERNS_FILE, 'w') as f:
         json.dump(patterns, f, indent=2)
 
 def record_pattern(tool_name: str, success: bool, context: dict = None):
-    """패턴 기록"""
+    """Record pattern"""
     patterns = load_patterns()
 
     pattern = {
@@ -43,10 +43,10 @@ def record_pattern(tool_name: str, success: bool, context: dict = None):
     category = "success" if success else "failure"
     patterns[category].append(pattern)
 
-    # 최근 100개만 유지
+    # Keep only recent 100 entries
     patterns[category] = patterns[category][-100:]
 
-    # 통계 업데이트
+    # Update statistics
     if tool_name not in patterns["stats"]:
         patterns["stats"][tool_name] = {"success": 0, "failure": 0}
 
@@ -70,15 +70,15 @@ def main():
 
     record_pattern(tool_name, success, context)
 
-    # 실패율이 높으면 경고
+    # Warn if failure rate is high
     patterns = load_patterns()
     stats = patterns["stats"].get(tool_name, {})
     total = stats.get("success", 0) + stats.get("failure", 0)
 
-    if total >= 10:  # 임계치 상향
+    if total >= 10:  # Threshold raised
         failure_rate = stats.get("failure", 0) / total
-        if failure_rate > 0.6:  # 60% 이상만 경고
-            print(f"⚠️ {tool_name}:{failure_rate:.0%}실패")
+        if failure_rate > 0.6:  # Only warn if above 60%
+            print(f"Warning: {tool_name}: {failure_rate:.0%} failure rate")
 
 if __name__ == "__main__":
     main()

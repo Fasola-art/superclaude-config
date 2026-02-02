@@ -1,82 +1,82 @@
-# Rust 언어 프로필
+# Rust Language Profile
 
-> **버전**: 1.0.0
-> **적용 대상**: Rust 2021 Edition+
-> **자동 감지**: `Cargo.toml` 존재 시
+> **Version**: 1.0.0
+> **Target**: Rust 2021 Edition+
+> **Auto-detect**: Presence of `Cargo.toml`
 
 ---
 
-## 🎯 목표
+## Goal
 
-**Primary Outcome**: 메모리 안전하고 성능 최적화된 Rust 코드 생성
+**Primary Outcome**: Generate memory-safe and performance-optimized Rust code
 
 **Success Criteria**:
-- [ ] `panic!` 발생 가능 코드 0개 (Never Panics)
-- [ ] 모든 에러는 `Result<T, E>`로 처리
-- [ ] `clippy` 경고 0개
-- [ ] 불필요한 `clone()` 0개
+- [ ] Zero `panic!` possible code (Never Panics)
+- [ ] All errors handled with `Result<T, E>`
+- [ ] Zero `clippy` warnings
+- [ ] Zero unnecessary `clone()`
 
 **Failure Cases**:
-- 🔴 `unwrap()` 프로덕션 코드에 사용 → `?` 연산자로 교체
-- 🔴 `unsafe` 블록 → 안전한 대안 검토 필수
+- `unwrap()` in production code → Replace with `?` operator
+- `unsafe` block → Must review safe alternatives
 
 ---
 
-## 🚀 빠른 참조
+## Quick Reference
 
-### Never Panics 원칙
+### Never Panics Principle
 
-| 금지 패턴 | 대안 | 이유 |
-|----------|------|------|
-| `.unwrap()` | `.ok()`, `?`, `unwrap_or()` | 런타임 panic |
-| `.expect()` | `?` + context | 런타임 panic |
-| `panic!()` | `Result::Err()` | 복구 불가 |
-| `array[index]` | `.get(index)` | 범위 초과 panic |
-| `slice[..]` | `.get(..)` | 범위 초과 panic |
+| Prohibited Pattern | Alternative | Reason |
+|--------------------|-------------|--------|
+| `.unwrap()` | `.ok()`, `?`, `unwrap_or()` | Runtime panic |
+| `.expect()` | `?` + context | Runtime panic |
+| `panic!()` | `Result::Err()` | Unrecoverable |
+| `array[index]` | `.get(index)` | Out of bounds panic |
+| `slice[..]` | `.get(..)` | Out of bounds panic |
 
-### 필수 명령어
+### Required Commands
 
 ```bash
-# 빌드 전 필수 검사
-cargo clippy -- -D warnings     # 경고 = 에러 처리
-cargo fmt --check               # 포맷팅 검사
-cargo test                      # 테스트 실행
-cargo miri test                 # UB 검사 (nightly)
+# Pre-build required checks
+cargo clippy -- -D warnings     # Warnings = Errors
+cargo fmt --check               # Format check
+cargo test                      # Run tests
+cargo miri test                 # UB check (nightly)
 ```
 
 ---
 
-## 📋 섹션 1: 에러 처리 규칙
+## Section 1: Error Handling Rules
 
-### 📊 에러 처리 패턴
+### Error Handling Patterns
 
-| 패턴 | 사용 시점 | 예시 |
-|------|----------|------|
-| `Result<T, E>` | 모든 실패 가능 연산 | 파일 I/O, 파싱, API |
-| `Option<T>` | 값이 없을 수 있음 | 검색 결과, 설정값 |
-| `?` 연산자 | 에러 전파 | `file.read()?` |
-| `anyhow` | 애플리케이션 에러 | CLI, 웹 서버 |
-| `thiserror` | 라이브러리 에러 | 커스텀 에러 타입 |
+| Pattern | When to Use | Example |
+|---------|-------------|---------|
+| `Result<T, E>` | All fallible operations | File I/O, parsing, API |
+| `Option<T>` | Value may be absent | Search results, config |
+| `?` operator | Error propagation | `file.read()?` |
+| `anyhow` | Application errors | CLI, web servers |
+| `thiserror` | Library errors | Custom error types |
 
-### ✅ 에러 처리 패턴
+### Error Handling Patterns
 
 ```rust
-// ✅ GOOD: thiserror로 커스텀 에러
+// GOOD: Custom error with thiserror
 use thiserror::Error;
 
 #[derive(Error, Debug)]
 pub enum AppError {
-    #[error("파일을 찾을 수 없습니다: {0}")]
+    #[error("File not found: {0}")]
     FileNotFound(String),
 
-    #[error("파싱 실패: {0}")]
+    #[error("Parse failed: {0}")]
     ParseError(#[from] serde_json::Error),
 
-    #[error("네트워크 에러: {0}")]
+    #[error("Network error: {0}")]
     NetworkError(#[from] reqwest::Error),
 }
 
-// ✅ GOOD: Result 반환
+// GOOD: Return Result
 pub fn load_config(path: &str) -> Result<Config, AppError> {
     let content = std::fs::read_to_string(path)
         .map_err(|_| AppError::FileNotFound(path.to_string()))?;
@@ -85,69 +85,69 @@ pub fn load_config(path: &str) -> Result<Config, AppError> {
     Ok(config)
 }
 
-// ✅ GOOD: Option 처리
+// GOOD: Option handling
 fn find_user(id: u64) -> Option<User> {
     users.iter().find(|u| u.id == id).cloned()
 }
 
-// 사용부
+// Usage
 let user = find_user(42).ok_or(AppError::UserNotFound)?;
 ```
 
-### ❌ 에러 처리 안티패턴
+### Error Handling Anti-patterns
 
 ```rust
-// ❌ BAD: unwrap() 사용
+// BAD: unwrap() usage
 let config = load_config("config.json").unwrap();
 
-// ❌ BAD: expect() 프로덕션 사용
-let file = File::open("data.txt").expect("파일 열기 실패");
+// BAD: expect() in production
+let file = File::open("data.txt").expect("Failed to open file");
 
-// ❌ BAD: panic! 사용
+// BAD: panic! usage
 if value < 0 {
-    panic!("음수는 허용되지 않습니다");
+    panic!("Negative values not allowed");
 }
 
-// ❌ BAD: 인덱스 직접 접근
-let first = items[0];  // 빈 벡터면 panic
+// BAD: Direct index access
+let first = items[0];  // Panics on empty vec
 ```
 
-### ⚠️ 예외 처리
+### Exception Handling
 
-| 상황 | 허용되는 패턴 |
-|------|--------------|
-| 테스트 코드 | `unwrap()`, `expect()` 허용 |
-| 초기화 (main 시작) | `expect()` + 명확한 메시지 |
-| 불변 조건 (invariant) | `debug_assert!()` |
-| 예제/프로토타입 | `unwrap()` 허용, 주석 필수 |
+| Situation | Allowed Pattern |
+|-----------|-----------------|
+| Test code | `unwrap()`, `expect()` allowed |
+| Initialization (main start) | `expect()` + clear message |
+| Invariant | `debug_assert!()` |
+| Example/prototype | `unwrap()` allowed, comment required |
 
 ---
 
-## 📋 섹션 2: 소유권과 빌림 규칙
+## Section 2: Ownership and Borrowing Rules
 
-### 📊 소유권 패턴
+### Ownership Patterns
 
-| 상황 | 사용 패턴 | 예시 |
-|------|----------|------|
-| 소유권 이전 필요 | `T` (값) | `fn consume(s: String)` |
-| 읽기만 필요 | `&T` (불변 참조) | `fn read(s: &str)` |
-| 수정 필요 | `&mut T` (가변 참조) | `fn modify(v: &mut Vec<i32>)` |
-| 선택적 소유권 | `Cow<'a, T>` | 복사 최소화 |
+| Situation | Pattern | Example |
+|-----------|---------|---------|
+| Ownership transfer needed | `T` (value) | `fn consume(s: String)` |
+| Read only needed | `&T` (immutable ref) | `fn read(s: &str)` |
+| Modification needed | `&mut T` (mutable ref) | `fn modify(v: &mut Vec<i32>)` |
+| Optional ownership | `Cow<'a, T>` | Minimize copies |
 
-### ✅ 소유권 패턴
+### Ownership Patterns
 
 ```rust
-// ✅ GOOD: 불변 참조 사용 (복사 방지)
+// GOOD: Use immutable reference (prevent copy)
 fn calculate_length(s: &str) -> usize {
     s.len()
 }
 
-// ✅ GOOD: 가변 참조 명시
+// GOOD: Explicit mutable reference
 fn push_item(items: &mut Vec<i32>, item: i32) {
     items.push(item);
 }
 
-// ✅ GOOD: Cow로 불필요한 복사 방지
+// GOOD: Cow to prevent unnecessary copies
 use std::borrow::Cow;
 
 fn process_name(name: &str) -> Cow<'_, str> {
@@ -160,7 +160,7 @@ fn process_name(name: &str) -> Cow<'_, str> {
     }
 }
 
-// ✅ GOOD: 빌더 패턴으로 소유권 이전
+// GOOD: Builder pattern for ownership transfer
 struct Config {
     name: String,
     value: i32,
@@ -192,44 +192,44 @@ impl ConfigBuilder {
 }
 ```
 
-### ❌ 소유권 안티패턴
+### Ownership Anti-patterns
 
 ```rust
-// ❌ BAD: 불필요한 clone
+// BAD: Unnecessary clone
 fn process(items: Vec<String>) {
-    for item in items.clone() {  // clone 불필요
+    for item in items.clone() {  // clone unnecessary
         println!("{}", item);
     }
 }
 
-// ❌ BAD: String 대신 &str 사용 가능
-fn greet(name: String) {  // &str로 충분
+// BAD: String when &str sufficient
+fn greet(name: String) {  // &str sufficient
     println!("Hello, {}", name);
 }
 
-// ❌ BAD: 과도한 Box 사용
-fn small_value() -> Box<i32> {  // 그냥 i32 반환
+// BAD: Excessive Box usage
+fn small_value() -> Box<i32> {  // Just return i32
     Box::new(42)
 }
 ```
 
 ---
 
-## 📋 섹션 3: 구조체와 트레잇 규칙
+## Section 3: Struct and Trait Rules
 
-### 📊 구조체 설계 패턴
+### Struct Design Patterns
 
-| 패턴 | 사용 시점 | 예시 |
-|------|----------|------|
-| **Newtype** | 타입 안전성 강화 | `struct UserId(u64)` |
-| **Builder** | 복잡한 생성 | `Config::builder().build()` |
-| **TypeState** | 상태 기계 | `Connection<Connected>` |
-| **Wrapper** | 기존 타입 확장 | `struct Wrapper<T>(T)` |
+| Pattern | When to Use | Example |
+|---------|-------------|---------|
+| **Newtype** | Strengthen type safety | `struct UserId(u64)` |
+| **Builder** | Complex construction | `Config::builder().build()` |
+| **TypeState** | State machine | `Connection<Connected>` |
+| **Wrapper** | Extend existing type | `struct Wrapper<T>(T)` |
 
-### ✅ 구조체 패턴
+### Struct Patterns
 
 ```rust
-// ✅ GOOD: Newtype 패턴
+// GOOD: Newtype pattern
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct UserId(u64);
 
@@ -243,7 +243,7 @@ impl UserId {
     }
 }
 
-// ✅ GOOD: TypeState 패턴
+// GOOD: TypeState pattern
 pub struct Connection<S> {
     addr: String,
     state: std::marker::PhantomData<S>,
@@ -261,7 +261,7 @@ impl Connection<Disconnected> {
     }
 
     pub fn connect(self) -> Result<Connection<Connected>, Error> {
-        // 연결 로직...
+        // Connection logic...
         Ok(Connection {
             addr: self.addr,
             state: std::marker::PhantomData,
@@ -271,30 +271,30 @@ impl Connection<Disconnected> {
 
 impl Connection<Connected> {
     pub fn send(&self, data: &[u8]) -> Result<(), Error> {
-        // Connected 상태에서만 send 가능
+        // Only available in Connected state
         Ok(())
     }
 }
 ```
 
-### 📊 트레잇 구현 우선순위
+### Trait Implementation Priority
 
-| 트레잇 | 필수 여부 | 용도 |
-|--------|----------|------|
-| `Debug` | 필수 | 디버깅 출력 |
-| `Clone` | 권장 | 값 복사 |
-| `PartialEq`, `Eq` | 권장 | 비교 연산 |
-| `Hash` | 조건부 | HashMap 키 사용 시 |
-| `Default` | 권장 | 기본값 생성 |
-| `Display` | 조건부 | 사용자 출력 |
-| `Serialize`, `Deserialize` | 조건부 | 직렬화 필요 시 |
+| Trait | Required | Purpose |
+|-------|----------|---------|
+| `Debug` | Required | Debug output |
+| `Clone` | Recommended | Value copy |
+| `PartialEq`, `Eq` | Recommended | Comparison |
+| `Hash` | Conditional | When used as HashMap key |
+| `Default` | Recommended | Default value creation |
+| `Display` | Conditional | User output |
+| `Serialize`, `Deserialize` | Conditional | When serialization needed |
 
-### ✅ derive 매크로 순서
+### derive Macro Order
 
 ```rust
-// ✅ GOOD: 일관된 derive 순서
+// GOOD: Consistent derive order
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-#[derive(Serialize, Deserialize)]  // serde는 별도 줄
+#[derive(Serialize, Deserialize)]  // serde on separate line
 pub struct Point {
     pub x: i32,
     pub y: i32,
@@ -303,20 +303,20 @@ pub struct Point {
 
 ---
 
-## 📋 섹션 4: 비동기 프로그래밍 규칙
+## Section 4: Async Programming Rules
 
-### 📊 비동기 런타임 선택
+### Async Runtime Selection
 
-| 런타임 | 사용 시점 | 특징 |
-|--------|----------|------|
-| **tokio** | 웹 서버, 고성능 | 멀티스레드, 풍부한 생태계 |
-| **async-std** | 간단한 비동기 | std 유사 API |
-| **smol** | 임베디드, 경량 | 최소 의존성 |
+| Runtime | When to Use | Features |
+|---------|-------------|----------|
+| **tokio** | Web servers, high performance | Multi-threaded, rich ecosystem |
+| **async-std** | Simple async | std-like API |
+| **smol** | Embedded, lightweight | Minimal dependencies |
 
-### ✅ 비동기 패턴
+### Async Patterns
 
 ```rust
-// ✅ GOOD: 병렬 실행
+// GOOD: Parallel execution
 use tokio::try_join;
 
 async fn fetch_all() -> Result<(User, Posts, Stats), Error> {
@@ -328,18 +328,18 @@ async fn fetch_all() -> Result<(User, Posts, Stats), Error> {
     Ok((user, posts, stats))
 }
 
-// ✅ GOOD: 스트림 처리
+// GOOD: Stream processing
 use futures::stream::{self, StreamExt};
 
 async fn process_items(items: Vec<Item>) -> Vec<Result<Processed, Error>> {
     stream::iter(items)
         .map(|item| async move { process(item).await })
-        .buffer_unordered(10)  // 동시 실행 10개
+        .buffer_unordered(10)  // 10 concurrent
         .collect()
         .await
 }
 
-// ✅ GOOD: 타임아웃 처리
+// GOOD: Timeout handling
 use tokio::time::{timeout, Duration};
 
 async fn fetch_with_timeout() -> Result<Data, Error> {
@@ -349,48 +349,48 @@ async fn fetch_with_timeout() -> Result<Data, Error> {
 }
 ```
 
-### ❌ 비동기 안티패턴
+### Async Anti-patterns
 
 ```rust
-// ❌ BAD: 순차 실행 (불필요한 대기)
+// BAD: Sequential execution (unnecessary wait)
 let user = fetch_user().await?;
-let posts = fetch_posts().await?;  // 병렬 가능
+let posts = fetch_posts().await?;  // Can parallelize
 
-// ❌ BAD: async 블록 내 블로킹 호출
+// BAD: Blocking call in async block
 async fn bad_example() {
-    std::thread::sleep(Duration::from_secs(1));  // 블로킹!
-    // tokio::time::sleep().await 사용
+    std::thread::sleep(Duration::from_secs(1));  // Blocking!
+    // Use tokio::time::sleep().await
 }
 
-// ❌ BAD: spawn 없이 무한 루프
+// BAD: Infinite loop without spawn
 async fn bad_loop() {
     loop {
-        process().await;  // yield point 없으면 문제
+        process().await;  // Problem if no yield point
     }
 }
 ```
 
 ---
 
-## 📋 섹션 5: 테스트 규칙
+## Section 5: Testing Rules
 
-### 📊 테스트 전략
+### Test Strategy
 
-| 테스트 유형 | 위치 | 커버리지 목표 |
-|------------|------|--------------|
-| 단위 테스트 | `mod tests` 내부 | 80% |
-| 통합 테스트 | `tests/` 디렉토리 | 핵심 경로 100% |
-| 문서 테스트 | `///` 주석 | 공개 API 100% |
-| Property 테스트 | `proptest` | 엣지 케이스 |
+| Test Type | Location | Coverage Target |
+|-----------|----------|-----------------|
+| Unit test | `mod tests` inside | 80% |
+| Integration test | `tests/` directory | 100% critical paths |
+| Doc test | `///` comments | 100% public API |
+| Property test | `proptest` | Edge cases |
 
-### ✅ 테스트 패턴
+### Test Patterns
 
 ```rust
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    // ✅ GOOD: 명확한 테스트명
+    // GOOD: Clear test name
     #[test]
     fn parse_valid_json_returns_config() {
         let json = r#"{"name": "test", "value": 42}"#;
@@ -399,7 +399,7 @@ mod tests {
         assert_eq!(result.unwrap().name, "test");
     }
 
-    // ✅ GOOD: 에러 케이스 테스트
+    // GOOD: Error case test
     #[test]
     fn parse_invalid_json_returns_error() {
         let json = "not valid json";
@@ -407,7 +407,7 @@ mod tests {
         assert!(result.is_err());
     }
 
-    // ✅ GOOD: proptest로 속성 테스트
+    // GOOD: Property test with proptest
     use proptest::prelude::*;
 
     proptest! {
@@ -420,8 +420,8 @@ mod tests {
     }
 }
 
-// ✅ GOOD: 문서 테스트
-/// 두 숫자를 더합니다.
+// GOOD: Doc test
+/// Adds two numbers.
 ///
 /// # Examples
 ///
@@ -436,31 +436,31 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 ---
 
-## 📋 섹션 6: 성능 최적화 규칙
+## Section 6: Performance Optimization Rules
 
-### 📊 최적화 체크리스트
+### Optimization Checklist
 
-| 항목 | 도구 | 목표 |
-|------|------|------|
-| 불필요한 할당 | `cargo clippy` | 0개 |
-| clone 최소화 | 코드 리뷰 | 필수만 |
-| 인라인 | `#[inline]` | 핫 경로만 |
-| SIMD | `packed_simd` | 성능 핵심부 |
+| Item | Tool | Target |
+|------|------|--------|
+| Unnecessary allocations | `cargo clippy` | Zero |
+| Minimize clone | Code review | Only when necessary |
+| Inline | `#[inline]` | Hot paths only |
+| SIMD | `packed_simd` | Performance critical sections |
 
-### ✅ 최적화 패턴
+### Optimization Patterns
 
 ```rust
-// ✅ GOOD: 사전 할당
+// GOOD: Pre-allocation
 let mut items = Vec::with_capacity(1000);
 
-// ✅ GOOD: 반복자 체이닝 (lazy evaluation)
+// GOOD: Iterator chaining (lazy evaluation)
 let sum: i32 = items
     .iter()
     .filter(|x| **x > 0)
     .map(|x| x * 2)
     .sum();
 
-// ✅ GOOD: Cow로 조건부 복사
+// GOOD: Conditional copy with Cow
 use std::borrow::Cow;
 
 fn normalize(s: &str) -> Cow<'_, str> {
@@ -471,34 +471,34 @@ fn normalize(s: &str) -> Cow<'_, str> {
     }
 }
 
-// ✅ GOOD: Box<[T]>로 크기 고정
+// GOOD: Fixed size with Box<[T]>
 let fixed: Box<[i32]> = vec![1, 2, 3].into_boxed_slice();
 ```
 
 ---
 
-## 📋 섹션 7: Clippy 규칙
+## Section 7: Clippy Rules
 
-### 📊 필수 Clippy lint
+### Required Clippy Lints
 
 ```toml
-# Cargo.toml 또는 clippy.toml
+# Cargo.toml or clippy.toml
 [lints.clippy]
-# 필수 (deny)
+# Required (deny)
 unwrap_used = "deny"
 expect_used = "deny"
 panic = "deny"
 todo = "deny"
 unimplemented = "deny"
 
-# 경고 (warn)
+# Warning (warn)
 clone_on_ref_ptr = "warn"
 inefficient_to_string = "warn"
 large_types_passed_by_value = "warn"
 needless_pass_by_value = "warn"
 ```
 
-### ✅ CI 설정
+### CI Configuration
 
 ```yaml
 # .github/workflows/rust.yml
@@ -532,33 +532,33 @@ jobs:
 
 ---
 
-## ✅ 자가 진단 체크리스트
+## Self-Diagnosis Checklist
 
-### 🔴 Critical (반드시 완료)
-- [ ] `unwrap()` / `expect()` 프로덕션 코드에 0개
-- [ ] `panic!()` 사용 0개
-- [ ] `clippy -- -D warnings` 통과
-- [ ] 모든 에러는 `Result<T, E>` 반환
+### Critical (Must Complete)
+- [ ] Zero `unwrap()` / `expect()` in production code
+- [ ] Zero `panic!()` usage
+- [ ] `clippy -- -D warnings` passes
+- [ ] All errors return `Result<T, E>`
 
-### 🟡 Important (80% 이상)
-- [ ] 불필요한 `clone()` 제거
-- [ ] `&str` vs `String` 적절히 선택
-- [ ] 문서 테스트 작성
-- [ ] 의미 있는 에러 메시지
+### Important (80%+)
+- [ ] Removed unnecessary `clone()`
+- [ ] Appropriate `&str` vs `String` selection
+- [ ] Written doc tests
+- [ ] Meaningful error messages
 
-### 🟢 Nice-to-have
-- [ ] Property-based 테스트
-- [ ] Miri로 UB 검사
-- [ ] 벤치마크 작성
+### Nice-to-have
+- [ ] Property-based tests
+- [ ] UB check with Miri
+- [ ] Written benchmarks
 
-**합격 기준**: Critical 100% + Important 80% 이상
+**Pass Criteria**: Critical 100% + Important 80%+
 
 ---
 
-## 📚 참조
+## References
 
-| 문서 | 링크 |
-|------|------|
+| Document | Link |
+|----------|------|
 | The Rust Book | https://doc.rust-lang.org/book/ |
 | Rust API Guidelines | https://rust-lang.github.io/api-guidelines/ |
 | Clippy Lints | https://rust-lang.github.io/rust-clippy/ |

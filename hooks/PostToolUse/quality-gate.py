@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-8단계 품질 검증 Hook
-- 코드 변경 후 품질 게이트 실행
-- Syntax → Type → Lint → Security → Test → Performance → Docs → Integration
+8-Stage Quality Verification Hook
+- Execute quality gates after code changes
+- Syntax -> Type -> Lint -> Security -> Test -> Performance -> Docs -> Integration
 """
 
 import os
@@ -24,7 +24,7 @@ QUALITY_GATES = [
 STATE_FILE = Path.home() / ".claude" / "cache" / "quality-state.json"
 
 def get_file_type(file_path: str) -> str:
-    """파일 타입 감지"""
+    """Detect file type"""
     ext = Path(file_path).suffix.lower()
     type_map = {
         ".ts": "typescript",
@@ -38,7 +38,7 @@ def get_file_type(file_path: str) -> str:
     return type_map.get(ext, "unknown")
 
 def suggest_gates(file_path: str, file_type: str) -> list:
-    """파일 타입에 따른 게이트 제안"""
+    """Suggest gates based on file type"""
     suggestions = []
 
     if file_type == "typescript":
@@ -60,7 +60,7 @@ def main():
     tool_name = os.environ.get("TOOL_NAME", "")
     file_path = os.environ.get("FILE_PATH", "")
 
-    # Write/Edit 도구에서만 실행
+    # Only run for Write/Edit tools
     if tool_name not in ["Write", "Edit", "MultiEdit"]:
         return
 
@@ -72,7 +72,7 @@ def main():
     if file_type == "unknown":
         return
 
-    # 품질 게이트 상태
+    # Quality gate state
     state = {
         "file": file_path,
         "type": file_type,
@@ -80,10 +80,10 @@ def main():
         "gates": {g["name"]: "pending" for g in QUALITY_GATES}
     }
 
-    # 1줄 알림
-    print(f"🔍 QG:{file_type} → '확인해'로 검증")
+    # 1-line notification
+    print(f"QG:{file_type} -> type 'verify' to run checks")
 
-    # 상태 저장
+    # Save state
     STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(STATE_FILE, 'w') as f:
         json.dump(state, f, indent=2)

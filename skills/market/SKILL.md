@@ -1,59 +1,59 @@
 ---
 name: market
-description: 오늘의 경제 시황 보고서를 조회하고 표시. 없으면 새로 생성.
+description: Display today's economic outlook report. Generate new report if none exists.
 license: MIT
 ---
 
-오늘의 경제 시황 보고서를 조회하고 표시합니다.
+Display today's economic outlook report.
 
-## 실행 방법
+## Execution Steps
 
-1. 최신 시황 파일 확인
-2. 없으면 새로 생성
-3. 시황 내용 출력
+1. Check for latest outlook file
+2. Generate new report if not found
+3. Output outlook content
 
-## 실행 스크립트
+## Execution Script
 
 ```bash
 cd /Users/reim/.claude/modules/trading
 
-# 오늘 날짜
+# Today's date
 TODAY=$(date +%Y-%m-%d)
 
-# 시황 파일 확인
+# Check outlook file
 OUTLOOK_FILE="reports/daily/outlook_${TODAY}.json"
 
 if [ -f "$OUTLOOK_FILE" ]; then
-    echo "=== 경제 시황 ($TODAY) ==="
+    echo "=== Economic Outlook ($TODAY) ==="
     python3 -c "
 import json
 with open('$OUTLOOK_FILE', 'r') as f:
     data = json.load(f)
-print(data.get('text', '시황 없음'))
+print(data.get('text', 'No outlook available'))
 print()
-print(f\"생성: {data.get('timestamp', 'N/A')}\")
-print(f\"비용: \${data.get('cost', 0):.4f}\")
+print(f\"Generated: {data.get('timestamp', 'N/A')}\")
+print(f\"Cost: \${data.get('cost', 0):.4f}\")
 "
 else
-    echo "오늘 시황 없음. 생성 중..."
+    echo "No outlook for today. Generating..."
     export ANTHROPIC_API_KEY=$(grep -o '"sk-ant[^"]*"' /Users/reim/.claude/credentials/api-keys.json | tr -d '"')
     python3 reports/market_outlook.py
 fi
 ```
 
-## 출력 예시
+## Output Example
 
 ```
-=== 경제 시황 (2026-01-29) ===
+=== Economic Outlook (2026-01-29) ===
 
-## 시장 현황
-주식시장 소폭 약세. VIX 16.91 유지로 변동성 보통 수준...
+## Market Status
+Stock market slightly weak. VIX at 16.91, moderate volatility...
 
-## 주요 포인트
-1. 채권시장 변동성 급락세 둔화
-2. SOFR 횡보 지속
-3. 수익률 곡선 정상화 진행
+## Key Points
+1. Bond market volatility decline slowing
+2. SOFR continues sideways
+3. Yield curve normalization progressing
 
-## 내일 전망
-PCE, GDP 발표로 변동성 확대 예상...
+## Tomorrow's Outlook
+Volatility expansion expected due to PCE, GDP releases...
 ```

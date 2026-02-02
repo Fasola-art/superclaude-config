@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
 jarvis-work-tracker.py
-Jarvis 작업 추적 훅
+Jarvis work tracking hook
 
-트리거: PostToolUse
-매처: Edit|Write|Bash|Task
-타임아웃: 5000ms
+Trigger: PostToolUse
+Matcher: Edit|Write|Bash|Task
+Timeout: 5000ms
 """
 
 import json
@@ -19,15 +19,15 @@ JARVIS_DIR = CLAUDE_DIR / 'jarvis'
 WORK_LOG_DIR = JARVIS_DIR / 'work-logs'
 
 def ensure_dirs():
-    """디렉토리 생성"""
+    """Create directories"""
     WORK_LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 def get_today_log_path() -> Path:
-    """오늘 날짜의 로그 파일 경로"""
+    """Get today's log file path"""
     return WORK_LOG_DIR / f"work_{date.today().isoformat()}.json"
 
 def load_today_log() -> Dict:
-    """오늘 작업 로그 로드"""
+    """Load today's work log"""
     log_path = get_today_log_path()
     if log_path.exists():
         try:
@@ -50,13 +50,13 @@ def load_today_log() -> Dict:
     }
 
 def save_today_log(log: Dict):
-    """오늘 작업 로그 저장"""
+    """Save today's work log"""
     ensure_dirs()
     log_path = get_today_log_path()
     log_path.write_text(json.dumps(log, indent=2, ensure_ascii=False))
 
 def categorize_operation(tool: str, data: Dict) -> str:
-    """작업 유형 분류"""
+    """Categorize operation type"""
     categories = {
         'Edit': 'code_modification',
         'Write': 'file_creation',
@@ -69,11 +69,11 @@ def categorize_operation(tool: str, data: Dict) -> str:
     return categories.get(tool, 'other')
 
 def extract_file_info(data: Dict) -> Optional[str]:
-    """파일 경로 추출"""
+    """Extract file path"""
     return data.get('file_path') or data.get('path')
 
 def is_error_result(data: Dict) -> bool:
-    """에러 결과 여부 확인"""
+    """Check if result is an error"""
     if data.get('exitCode', 0) != 0:
         return True
     if data.get('stderr', '').strip():
@@ -81,11 +81,11 @@ def is_error_result(data: Dict) -> bool:
     return False
 
 def track_work(data: Dict) -> Dict:
-    """작업 추적"""
+    """Track work"""
     log = load_today_log()
     tool = data.get('tool', 'unknown')
 
-    # 타임라인 항목 생성
+    # Create timeline entry
     entry = {
         'timestamp': datetime.now().isoformat(),
         'tool': tool,
@@ -93,7 +93,7 @@ def track_work(data: Dict) -> Dict:
         'success': not is_error_result(data)
     }
 
-    # 파일 정보 추가
+    # Add file info
     file_path = extract_file_info(data)
     if file_path:
         entry['file'] = file_path
@@ -101,10 +101,10 @@ def track_work(data: Dict) -> Dict:
             log['filesChanged'].append(file_path)
             log['summary']['filesModified'] += 1
 
-    # 명령어 정보 추가
+    # Add command info
     if tool == 'Bash':
         command = data.get('command', '')
-        entry['command'] = command[:100]  # 최대 100자
+        entry['command'] = command[:100]  # Max 100 chars
         log['commandHistory'].append({
             'timestamp': entry['timestamp'],
             'command': command[:200],
@@ -112,20 +112,20 @@ def track_work(data: Dict) -> Dict:
         })
         log['summary']['commandsExecuted'] += 1
 
-    # Task 완료 추적
+    # Track Task completion
     if tool == 'Task':
         log['summary']['tasksCompleted'] += 1
 
-    # 에러 추적
+    # Track errors
     if is_error_result(data):
         log['summary']['errorsEncountered'] += 1
         entry['error'] = True
 
-    # 타임라인에 추가
+    # Add to timeline
     log['timeline'].append(entry)
     log['summary']['totalOperations'] += 1
 
-    # 최근 100개 항목만 유지
+    # Keep only recent 100 entries
     log['timeline'] = log['timeline'][-100:]
     log['commandHistory'] = log['commandHistory'][-50:]
 
@@ -143,9 +143,9 @@ def main():
         output = {
             'status': 'tracked',
             'summary': summary,
-            'message': f"📊 오늘 작업: {summary['totalOperations']}개 작업, "
-                      f"{summary['filesModified']}개 파일, "
-                      f"{summary['errorsEncountered']}개 에러"
+            'message': f"Today's work: {summary['totalOperations']} operations, "
+                      f"{summary['filesModified']} files, "
+                      f"{summary['errorsEncountered']} errors"
         }
 
         print(json.dumps(output, ensure_ascii=False))

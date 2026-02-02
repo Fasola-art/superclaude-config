@@ -1,6 +1,6 @@
 ---
 allowed-tools: Bash(gh issue view:*), Bash(gh search:*), Bash(gh issue list:*), Bash(gh pr comment:*), Bash(gh pr diff:*), Bash(gh pr view:*), Bash(gh pr list:*)
-description: 풀 리퀘스트 코드 리뷰 (Code review a pull request)
+description: Code review a pull request
 disable-model-invocation: false
 ---
 

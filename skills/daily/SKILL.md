@@ -1,49 +1,49 @@
 ---
 name: daily
-description: 자주 쓰는 경로 모음. 경제 시황, 트레이딩 모듈, 페르소나, API 키 등 주요 폴더 경로를 빠르게 확인.
+description: Quick reference for frequently used paths. Economic outlook, trading module, personas, API keys, and other key folder paths.
 license: MIT
 ---
 
-자주 쓰는 경로 모음을 보여줍니다.
+Quick reference for frequently used paths.
 
-## 주요 경로
+## Key Paths
 
-| 용도 | 경로 |
-|------|------|
-| **경제 시황** | `/Users/reim/.claude/modules/trading/reports/daily/` |
-| **트레이딩 모듈** | `/Users/reim/.claude/modules/trading/` |
-| **뉴스 모듈** | `/Users/reim/.claude/modules/news-collector/` |
-| **텔레그램 모듈** | `/Users/reim/.claude/modules/telegram/` |
-| **페르소나** | `/Users/reim/.claude/personas/` |
-| **스킬** | `/Users/reim/.claude/skills/` |
-| **API 키** | `/Users/reim/.claude/credentials/api-keys.json` |
-| **설정** | `/Users/reim/.claude/settings.json` |
+| Purpose | Path |
+|---------|------|
+| **Economic Outlook** | `/Users/reim/.claude/modules/trading/reports/daily/` |
+| **Trading Module** | `/Users/reim/.claude/modules/trading/` |
+| **News Module** | `/Users/reim/.claude/modules/news-collector/` |
+| **Telegram Module** | `/Users/reim/.claude/modules/telegram/` |
+| **Personas** | `/Users/reim/.claude/personas/` |
+| **Skills** | `/Users/reim/.claude/skills/` |
+| **API Keys** | `/Users/reim/.claude/credentials/api-keys.json` |
+| **Settings** | `/Users/reim/.claude/settings.json` |
 
-## 빠른 열기
+## Quick Open
 
 ```bash
-# 경제 시황 폴더
+# Economic outlook folder
 open /Users/reim/.claude/modules/trading/reports/daily/
 
-# 트레이딩 모듈
+# Trading module
 open /Users/reim/.claude/modules/trading/
 
-# 페르소나 폴더
+# Personas folder
 open /Users/reim/.claude/personas/
 
-# 스킬 폴더
+# Skills folder
 open /Users/reim/.claude/skills/
 
-# API 키 파일
+# API keys file
 open /Users/reim/.claude/credentials/api-keys.json
 ```
 
-## 오늘 시황 파일
+## Today's Outlook File
 
 ```bash
-# 오늘 날짜 시황
+# Today's outlook
 cat /Users/reim/.claude/modules/trading/reports/daily/outlook_$(date +%Y-%m-%d).json
 
-# 최신 시황
+# Latest outlook
 ls -t /Users/reim/.claude/modules/trading/reports/daily/outlook_*.json | head -1
 ```

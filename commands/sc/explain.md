@@ -1,23 +1,23 @@
 ---
-description: "코드/개념 설명 (Explain code or concept)"
+description: "Explain code or concept"
 argument-hint: "[target]"
 ---
 
-# 설명
+# Explain
 
-코드나 개념을 상세히 설명합니다.
+Provide detailed explanation of code or concepts.
 
-## 사용
+## Usage
 
 ```
-/sc:explain src/hooks/useAuth.ts   # 파일 설명
-/sc:explain "React Server Components"  # 개념 설명
-/sc:explain --flow login           # 흐름 설명
+/sc:explain src/hooks/useAuth.ts   # Explain file
+/sc:explain "React Server Components"  # Explain concept
+/sc:explain --flow login           # Explain flow
 ```
 
-## 설명 포함
+## Explanation Includes
 
-- 동작 원리
-- 사용 목적
-- 주요 구성 요소
-- 관련 개념
+- How it works
+- Purpose
+- Key components
+- Related concepts

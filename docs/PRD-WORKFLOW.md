@@ -1,103 +1,103 @@
-# PRD 워크플로우 (PRD Workflow)
+# PRD Workflow
 
-> 제품 요구사항 문서 작성 및 관리 워크플로우
-
----
-
-## 개요
-
-PRD(Product Requirements Document)는 프로젝트의 요구사항, 목표, 범위를 정의하는 핵심 문서입니다.
+> Product Requirements Document creation and management workflow
 
 ---
 
-## PRD 생성 프로세스
+## Overview
 
-### 1단계: 아이디어 수집
+PRD (Product Requirements Document) is a core document defining project requirements, goals, and scope.
+
+---
+
+## PRD Creation Process
+
+### Step 1: Idea Collection
 ```
-/prd-create [아이디어]
+/prd-create [idea]
 ```
 
-- 사업성 검토
-- 시장 분석
-- 기술 타당성 평가
+- Business viability review
+- Market analysis
+- Technical feasibility evaluation
 
-### 2단계: 요구사항 정의
+### Step 2: Requirements Definition
 
 ```markdown
-## 요구사항
+## Requirements
 
-### 기능 요구사항 (Functional)
-- FR-001: [기능 설명]
-- FR-002: [기능 설명]
+### Functional Requirements
+- FR-001: [Feature description]
+- FR-002: [Feature description]
 
-### 비기능 요구사항 (Non-Functional)
-- NFR-001: 성능 - [요구사항]
-- NFR-002: 보안 - [요구사항]
+### Non-Functional Requirements
+- NFR-001: Performance - [Requirement]
+- NFR-002: Security - [Requirement]
 ```
 
-### 3단계: 범위 설정
+### Step 3: Scope Setting
 
 ```yaml
 in_scope:
-  - 핵심 기능 A
-  - 핵심 기능 B
+  - Core feature A
+  - Core feature B
 
 out_of_scope:
-  - 추후 개발 기능
-  - 제외 항목
+  - Future development features
+  - Excluded items
 ```
 
-### 4단계: 마일스톤 정의
+### Step 4: Milestone Definition
 
 ```markdown
-## 마일스톤
+## Milestones
 
-| 단계 | 목표 | 산출물 |
-|------|------|--------|
-| M1   | MVP  | 핵심 기능 |
-| M2   | Beta | 확장 기능 |
-| M3   | GA   | 완전한 제품 |
+| Phase | Goal | Deliverables      |
+|-------|------|-------------------|
+| M1    | MVP  | Core features     |
+| M2    | Beta | Extended features |
+| M3    | GA   | Complete product  |
 ```
 
 ---
 
-## PRD 템플릿
+## PRD Template
 
 ```markdown
-# [프로젝트명] PRD
+# [Project Name] PRD
 
-## 1. 개요
-### 1.1 목적
-### 1.2 배경
-### 1.3 목표
+## 1. Overview
+### 1.1 Purpose
+### 1.2 Background
+### 1.3 Goals
 
-## 2. 사용자
-### 2.1 타겟 사용자
-### 2.2 사용자 스토리
+## 2. Users
+### 2.1 Target Users
+### 2.2 User Stories
 
-## 3. 요구사항
-### 3.1 기능 요구사항
-### 3.2 비기능 요구사항
+## 3. Requirements
+### 3.1 Functional Requirements
+### 3.2 Non-Functional Requirements
 
-## 4. 설계
-### 4.1 시스템 아키텍처
-### 4.2 데이터 모델
+## 4. Design
+### 4.1 System Architecture
+### 4.2 Data Model
 
-## 5. 마일스톤
-### 5.1 일정
-### 5.2 산출물
+## 5. Milestones
+### 5.1 Schedule
+### 5.2 Deliverables
 
-## 6. 리스크
-### 6.1 기술적 리스크
-### 6.2 완화 전략
+## 6. Risks
+### 6.1 Technical Risks
+### 6.2 Mitigation Strategies
 ```
 
 ---
 
-## 관련 명령어
+## Related Commands
 
-| 명령어 | 설명 |
-|--------|------|
-| `/prd-create` | PRD 생성 |
-| `/project-plan` | 프로젝트 계획 |
-| `/project-status` | 진행 상태 |
+| Command           | Description      |
+|-------------------|------------------|
+| `/prd-create`     | Create PRD       |
+| `/project-plan`   | Project planning |
+| `/project-status` | Check progress   |

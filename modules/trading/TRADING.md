@@ -1,45 +1,45 @@
 # Trading Module
 
-> SuperClaude 트레이딩 분석 및 자동화 모듈
+> SuperClaude trading analysis and automation module
 
 ---
 
-## 개요
+## Overview
 
-트레이딩 모듈은 금융 시장 분석, 전략 백테스팅, 실시간 알림을 제공합니다.
-Mac Studio Ultra M2의 성능을 활용하여 대규모 데이터 처리와 병렬 분석이 가능합니다.
+Trading module provides financial market analysis, strategy backtesting, and real-time alerts.
+Leverages Mac Studio Ultra M2 performance for large-scale data processing and parallel analysis.
 
 ---
 
-## 폴더 구조
+## Folder Structure
 
 ```
 ~/.claude/modules/trading/
-├── TRADING.md          # 이 파일 (모듈 가이드)
-├── config.json         # 모듈 설정
-├── strategies/         # 트레이딩 전략
+├── TRADING.md          # This file (module guide)
+├── config.json         # Module configuration
+├── strategies/         # Trading strategies
 │   ├── momentum.ts
 │   ├── mean-reversion.ts
 │   └── custom/
-├── indicators/         # 기술적 지표
+├── indicators/         # Technical indicators
 │   ├── moving-average.ts
 │   ├── rsi.ts
 │   ├── macd.ts
 │   └── custom/
-├── backtesting/        # 백테스팅
+├── backtesting/        # Backtesting
 │   ├── engine.ts
 │   ├── results/
 │   └── reports/
-└── alerts/             # 알림
+└── alerts/             # Alerts
     ├── rules.json
     └── history/
 ```
 
 ---
 
-## 기능
+## Features
 
-### 1. 기술적 분석
+### 1. Technical Analysis
 
 ```yaml
 indicators:
@@ -66,40 +66,40 @@ indicators:
     - Accumulation/Distribution
 ```
 
-### 2. 트레이딩 전략
+### 2. Trading Strategies
 
 ```yaml
 built_in_strategies:
   momentum:
-    description: "추세 추종 전략"
+    description: "Trend following strategy"
     indicators: [EMA, MACD, RSI]
     signals:
-      buy: "EMA 골든크로스 + RSI < 70"
-      sell: "EMA 데드크로스 + RSI > 30"
+      buy: "EMA golden cross + RSI < 70"
+      sell: "EMA death cross + RSI > 30"
 
   mean_reversion:
-    description: "평균 회귀 전략"
+    description: "Mean reversion strategy"
     indicators: [Bollinger Bands, RSI]
     signals:
-      buy: "가격 < 하단 밴드 + RSI < 30"
-      sell: "가격 > 상단 밴드 + RSI > 70"
+      buy: "Price < lower band + RSI < 30"
+      sell: "Price > upper band + RSI > 70"
 
   breakout:
-    description: "돌파 전략"
+    description: "Breakout strategy"
     indicators: [ATR, Volume]
     signals:
-      buy: "신고가 + 거래량 급증"
-      sell: "신저가 + 거래량 급증"
+      buy: "New high + volume spike"
+      sell: "New low + volume spike"
 ```
 
-### 3. 백테스팅
+### 3. Backtesting
 
 ```yaml
 backtesting:
   data_sources:
     - Yahoo Finance
     - Alpha Vantage
-    - Binance (암호화폐)
+    - Binance (cryptocurrency)
 
   metrics:
     - Total Return
@@ -112,10 +112,10 @@ backtesting:
 
   parallel_execution:
     enabled: true
-    max_concurrent: 24  # M2 Ultra 최적화
+    max_concurrent: 24  # M2 Ultra optimized
 ```
 
-### 4. 알림 시스템
+### 4. Alert System
 
 ```yaml
 alerts:
@@ -126,27 +126,27 @@ alerts:
     - Email
 
   trigger_conditions:
-    - price_cross_ma: "가격이 이동평균 돌파"
-    - rsi_oversold: "RSI 30 이하"
-    - rsi_overbought: "RSI 70 이상"
-    - volume_spike: "거래량 급증"
-    - custom_condition: "사용자 정의 조건"
+    - price_cross_ma: "Price crosses moving average"
+    - rsi_oversold: "RSI below 30"
+    - rsi_overbought: "RSI above 70"
+    - volume_spike: "Volume spike detected"
+    - custom_condition: "User-defined condition"
 ```
 
 ---
 
-## 스킬 명령어
+## Skill Commands
 
-| 명령어 | 설명 |
-|--------|------|
-| /trade-analyze [종목] | 기술적 분석 실행 |
-| /trade-strategy [전략] | 전략 시뮬레이션 |
-| /backtest [전략] [기간] | 백테스팅 실행 |
-| /trade-alert [조건] | 알림 설정 |
+| Command | Description |
+|---------|-------------|
+| /trade-analyze [symbol] | Run technical analysis |
+| /trade-strategy [strategy] | Run strategy simulation |
+| /backtest [strategy] [period] | Run backtesting |
+| /trade-alert [condition] | Set up alerts |
 
 ---
 
-## 설정 (config.json)
+## Configuration (config.json)
 
 ```json
 {
@@ -170,24 +170,24 @@ alerts:
 
 ---
 
-## 사용 예시
+## Usage Examples
 
 ```bash
-# 삼성전자 기술적 분석
+# Samsung Electronics technical analysis
 /trade-analyze 005930.KS
 
-# 모멘텀 전략으로 백테스팅
+# Backtest with momentum strategy
 /backtest momentum 2023-01-01:2024-01-01
 
-# RSI 과매도 알림 설정
+# Set RSI oversold alert
 /trade-alert "RSI < 30" --ticker AAPL --channel telegram
 ```
 
 ---
 
-## 향후 계획
+## Roadmap
 
-- [ ] 머신러닝 기반 예측 모델
-- [ ] 자동 매매 연동 (API)
-- [ ] 포트폴리오 최적화
-- [ ] 뉴스 센티멘트 통합
+- [ ] Machine learning prediction models
+- [ ] Automated trading API integration
+- [ ] Portfolio optimization
+- [ ] News sentiment integration

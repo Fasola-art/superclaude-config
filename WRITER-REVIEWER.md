@@ -1,22 +1,22 @@
-# Writer-Reviewer v2.0 시스템
+# Writer-Reviewer v2.0 System
 
-> 4-Agent 병렬 코드 검토 시스템
+> 4-Agent Parallel Code Review System
 
 ---
 
-## 기본 설정
+## Default Settings
 
 ```yaml
-target_score: 0.85           # 목표 점수
-max_iterations: 10           # 최대 반복
-convergence_threshold: 0.015 # 수렴 임계값
+target_score: 0.85           # Target score
+max_iterations: 10           # Maximum iterations
+convergence_threshold: 0.015 # Convergence threshold
 ```
 
 ---
 
-## 코드 타입별 적응형 가중치
+## Adaptive Weights by Code Type
 
-| 타입 | Quality | Security | Performance | Accessibility |
+| Type | Quality | Security | Performance | Accessibility |
 |------|---------|----------|-------------|---------------|
 | frontend_component | 0.25 | 0.25 | 0.20 | **0.30** |
 | backend_api | 0.25 | **0.40** | 0.25 | 0.10 |
@@ -25,7 +25,7 @@ convergence_threshold: 0.015 # 수렴 임계값
 
 ---
 
-## 타입 감지
+## Type Detection
 
 ```yaml
 frontend:
@@ -47,86 +47,86 @@ database:
 
 ---
 
-## 에이전트 상세
+## Agent Details
 
 ### Quality Agent (30%)
 
-**검사 항목**
-- 코드 가독성 (네이밍, 구조)
-- 타입 안전성 (TypeScript 활용)
-- 에러 처리 (try-catch, 엣지 케이스)
-- SOLID 원칙 준수
-- 코드 중복 최소화 (DRY)
+**Checks**
+- Code readability (naming, structure)
+- Type safety (TypeScript usage)
+- Error handling (try-catch, edge cases)
+- SOLID principles compliance
+- Code duplication minimization (DRY)
 
-**감점 규칙**
-| 항목 | 감점 |
-|------|------|
-| react-hook-form 미사용 | -0.15 |
-| 인라인 상수 정의 | -0.10 |
-| Zod 검증 누락 | -0.20 |
-| 권한 검사 누락 | -0.30 |
-| 패턴 불일치 | -0.10 |
+**Deduction Rules**
+| Item | Deduction |
+|------|-----------|
+| react-hook-form not used | -0.15 |
+| Inline constant definition | -0.10 |
+| Missing Zod validation | -0.20 |
+| Missing permission check | -0.30 |
+| Pattern mismatch | -0.10 |
 
 ---
 
 ### Security Agent (30%)
 
-**검사 항목**
-- XSS 취약점 방지
-- SQL/Command Injection 방지
-- 인증/권한 처리
-- 민감 정보 노출 방지
-- 입력 검증
+**Checks**
+- XSS vulnerability prevention
+- SQL/Command Injection prevention
+- Authentication/Authorization handling
+- Sensitive information exposure prevention
+- Input validation
 
-**치명적 이슈 (즉시 수정 필요)**
-- SQL Injection 가능성
-- XSS 취약점
-- 하드코딩된 비밀번호/API 키
-- 인증 우회 가능성
-- CSRF 취약점
+**Critical Issues (Immediate Fix Required)**
+- SQL Injection possibility
+- XSS vulnerability
+- Hardcoded password/API key
+- Authentication bypass possibility
+- CSRF vulnerability
 
-**치명적 발견 시: max_score = 0.3**
+**When critical found: max_score = 0.3**
 
 ---
 
 ### Performance Agent (20%)
 
-**검사 항목**
-- 알고리즘 효율성 (시간/공간 복잡도)
-- 불필요한 렌더링 (React)
-- 메모리 누수 가능성
-- N+1 쿼리 문제
-- 번들 크기 영향
+**Checks**
+- Algorithm efficiency (time/space complexity)
+- Unnecessary rendering (React)
+- Memory leak possibility
+- N+1 query problem
+- Bundle size impact
 
-**React 전용**
-- useMemo/useCallback 적절한 사용
-- 불필요한 state 업데이트
-- React.memo 필요성
-- Lazy loading 기회
+**React Specific**
+- Appropriate useMemo/useCallback usage
+- Unnecessary state updates
+- React.memo necessity
+- Lazy loading opportunities
 
 ---
 
 ### Accessibility Agent (20%)
 
-**검사 항목**
-- 시맨틱 HTML 사용
-- ARIA 레이블 적절성
-- 키보드 네비게이션
-- 색상 대비
-- 포커스 관리
+**Checks**
+- Semantic HTML usage
+- ARIA label appropriateness
+- Keyboard navigation
+- Color contrast
+- Focus management
 
-**표준: WCAG 2.1 AA**
+**Standard: WCAG 2.1 AA**
 
 ---
 
-## 수렴 조건
+## Convergence Conditions
 
-### 조기 종료 조건
-- 목표 점수 (0.85) 달성
-- 모든 카테고리 0.80 이상
-- 2회 연속 점수 변화 < 0.015
+### Early Exit Conditions
+- Target score (0.85) achieved
+- All categories 0.80 or above
+- 2 consecutive iterations with score change < 0.015
 
-### 보안 최소 점수
+### Security Minimum Score
 
 ```yaml
 security_minimum:
@@ -139,23 +139,23 @@ security_minimum:
 
 ---
 
-## 출력 형식
+## Output Format
 
 ```
 [Code Block]
 ---
 Quality Score: 86% (3 iterations)
 ├── Quality: 87% | Security: 88% | Performance: 83% | Accessibility: 86%
-└── Issues: [해결된 이슈 요약]
+└── Issues: [Resolved issues summary]
 ```
 
 ---
 
-## 플래그
+## Flags
 
-| 플래그 | 효과 |
-|--------|------|
-| --no-review | Writer-Reviewer 비활성화 (보안 코드 제외) |
-| --review-strict | 목표 점수 0.90으로 상향 |
-| --review-quick | 최대 3회 반복 |
-| --review-verbose | 각 반복 상세 출력 |
+| Flag | Effect |
+|------|--------|
+| --no-review | Disable Writer-Reviewer (except security code) |
+| --review-strict | Raise target score to 0.90 |
+| --review-quick | Maximum 3 iterations |
+| --review-verbose | Verbose output for each iteration |

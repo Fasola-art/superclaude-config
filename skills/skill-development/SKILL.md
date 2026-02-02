@@ -1,6 +1,6 @@
 ---
 name: skill-development
-description: 스킬 개발 가이드 (Skill development for Claude Code plugins)
+description: Skill development guide for Claude Code plugins. Covers skill structure, progressive disclosure, and best practices.
 version: 0.1.0
 ---
 

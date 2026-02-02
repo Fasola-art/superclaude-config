@@ -8,27 +8,27 @@ language: "{language}"
 
 # {title}
 
-> **버전**: {version}
-> **언어**: {language}
-> **갱신일**: {date}
+> **Version**: {version}
+> **Language**: {language}
+> **Updated**: {date}
 
 ---
 
-## 📋 개요
+## Overview
 
 {overview}
 
 ---
 
-## 🎯 사용법
+## Usage
 
-### 기본 사용
+### Basic Usage
 
 ```{language}
 {basic_example}
 ```
 
-### 고급 사용
+### Advanced Usage
 
 ```{language}
 {advanced_example}
@@ -36,15 +36,15 @@ language: "{language}"
 
 ---
 
-## 📖 API 레퍼런스
+## API Reference
 
-### 함수/메서드
+### Functions/Methods
 
-| 이름 | 매개변수 | 반환값 | 설명 |
-|------|---------|--------|------|
+| Name | Parameters | Return | Description |
+|------|------------|--------|-------------|
 | {func_name} | {params} | {return_type} | {description} |
 
-### 타입 정의
+### Type Definitions
 
 ```{language}
 {type_definitions}
@@ -52,37 +52,37 @@ language: "{language}"
 
 ---
 
-## ⚙️ 설정
+## Configuration
 
-| 옵션 | 타입 | 기본값 | 설명 |
-|------|------|--------|------|
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
 | {option} | {type} | {default} | {description} |
 
 ---
 
-## 📊 예제
+## Examples
 
-### 예제 1: {example1_title}
+### Example 1: {example1_title}
 
 ```{language}
 {example1_code}
 ```
 
-**결과**:
+**Result**:
 ```
 {example1_output}
 ```
 
 ---
 
-## ⚠️ 주의사항
+## Caveats
 
 - {caveat_1}
 - {caveat_2}
 
 ---
 
-## 📚 참고 자료
+## References
 
 - {reference_1}
 - {reference_2}

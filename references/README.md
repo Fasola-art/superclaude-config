@@ -1,26 +1,26 @@
-# References (참조 자료)
+# References
 
-> 개발 시 참조하는 외부 라이브러리, SDK 및 가이드 모음
-
----
-
-## 폴더 구조
-
-| 폴더 | 설명 |
-|------|------|
-| `claude-agent-sdk-typescript` | TypeScript용 Claude 에이전트 SDK 참조 |
-| `claude-code-action` | Claude 코드 액션 관련 정의 및 예시 |
-| `claude-code-security-review` | 코드 보안 검토 가이드 및 체크리스트 |
-| `claude-cookbooks` | 다양한 구현 사례를 담은 쿡북 레시피 |
-| `claude-quickstarts` | 빠른 시작을 위한 튜토리얼 및 샘플 프로젝트 |
-| `devcontainer-features` | 개발 컨테이너 환경 설정 및 기능 참조 |
-| `rhi-rhf` | React Hook Form / React Hook Interface 참조 |
+> Collection of external libraries, SDKs, and guides for development reference
 
 ---
 
-## 사용법
+## Folder Structure
 
-각 폴더에 관련 문서나 예제 코드를 저장합니다.
+| Folder | Description |
+|--------|-------------|
+| `claude-agent-sdk-typescript` | TypeScript Claude Agent SDK reference |
+| `claude-code-action` | Claude code action definitions and examples |
+| `claude-code-security-review` | Code security review guides and checklists |
+| `claude-cookbooks` | Cookbook recipes with various implementation examples |
+| `claude-quickstarts` | Quick start tutorials and sample projects |
+| `devcontainer-features` | Development container environment configuration reference |
+| `rhi-rhf` | React Hook Form / React Hook Interface reference |
+
+---
+
+## Usage
+
+Store related documents or example code in each folder.
 
 ```
 ~/.claude/references/
@@ -35,6 +35,6 @@
 
 ---
 
-## 업데이트
+## Updates
 
-외부 SDK나 라이브러리 업데이트 시 해당 폴더의 문서도 함께 업데이트합니다.
+When external SDKs or libraries are updated, update the documents in the corresponding folder as well.

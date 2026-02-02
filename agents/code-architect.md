@@ -1,6 +1,6 @@
 ---
 name: code-architect
-description: 기능 아키텍처 설계 (Design feature architectures with implementation blueprints)
+description: Feature architecture design (Design feature architectures with implementation blueprints)
 tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillShell, BashOutput
 model: sonnet
 color: green

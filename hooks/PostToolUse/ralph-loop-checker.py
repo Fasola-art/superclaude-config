@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-무한 루프 감지 Hook
-- 연속 실패 감지
-- 강제 중단 트리거
+Infinite Loop Detection Hook
+- Detect consecutive failures
+- Trigger forced stop
 """
 
 import os
@@ -15,7 +15,7 @@ MAX_CONSECUTIVE_FAILURES = 5
 TIME_WINDOW_MINUTES = 5
 
 def load_state() -> dict:
-    """상태 로드"""
+    """Load state"""
     if STATE_FILE.exists():
         try:
             with open(STATE_FILE, 'r') as f:
@@ -25,17 +25,17 @@ def load_state() -> dict:
     return {"failures": [], "warned": False}
 
 def save_state(state: dict):
-    """상태 저장"""
+    """Save state"""
     STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(STATE_FILE, 'w') as f:
         json.dump(state, f)
 
 def check_loop():
-    """무한 루프 체크"""
+    """Check for infinite loop"""
     exit_code = os.environ.get("EXIT_CODE", "0")
     tool_name = os.environ.get("TOOL_NAME", "")
 
-    # 성공이면 상태 리셋
+    # Reset state on success
     if exit_code == "0":
         save_state({"failures": [], "warned": False})
         return
@@ -43,14 +43,14 @@ def check_loop():
     state = load_state()
     now = datetime.now()
 
-    # 시간 윈도우 내 실패만 유지
+    # Keep only failures within time window
     cutoff = now - timedelta(minutes=TIME_WINDOW_MINUTES)
     recent_failures = [
         f for f in state["failures"]
         if datetime.fromisoformat(f["time"]) > cutoff
     ]
 
-    # 현재 실패 추가
+    # Add current failure
     recent_failures.append({
         "time": now.isoformat(),
         "tool": tool_name
@@ -60,10 +60,10 @@ def check_loop():
 
     if len(recent_failures) >= MAX_CONSECUTIVE_FAILURES:
         if not state["warned"]:
-            print(f"🛑 Loop:{len(recent_failures)}회 → 수동 개입")
+            print(f"Loop: {len(recent_failures)} failures -> manual intervention needed")
             state["warned"] = True
     elif len(recent_failures) >= 3:
-        print(f"⚠️ Loop:{len(recent_failures)}/{MAX_CONSECUTIVE_FAILURES}")
+        print(f"Loop: {len(recent_failures)}/{MAX_CONSECUTIVE_FAILURES}")
 
     save_state(state)
 

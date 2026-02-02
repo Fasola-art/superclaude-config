@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-백그라운드 작업 알림 Hook
-- 백그라운드 작업 완료 감지
-- macOS 알림 전송
+Background Task Notification Hook
+- Detect background task completion
+- Send macOS notification
 """
 
 import os
@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 
 def send_notification(title: str, message: str):
-    """macOS 알림 전송"""
+    """Send macOS notification"""
     try:
         script = f'''
         display notification "{message}" with title "{title}" sound name "Glass"
@@ -23,11 +23,11 @@ def main():
     tool_name = os.environ.get("TOOL_NAME", "")
     exit_code = os.environ.get("EXIT_CODE", "0")
 
-    # Task 도구에서만 (백그라운드 에이전트)
+    # Only for Task tool (background agent)
     if tool_name != "Task":
         return
 
-    # 백그라운드 실행 여부 확인
+    # Check if running in background
     is_background = os.environ.get("RUN_IN_BACKGROUND", "false") == "true"
 
     if not is_background:
@@ -38,12 +38,12 @@ def main():
     if success:
         send_notification(
             "Claude Code",
-            "✅ 백그라운드 작업 완료"
+            "Background task completed"
         )
     else:
         send_notification(
             "Claude Code",
-            "❌ 백그라운드 작업 실패"
+            "Background task failed"
         )
 
 if __name__ == "__main__":

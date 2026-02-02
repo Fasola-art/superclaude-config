@@ -1,5 +1,5 @@
 ---
-description: 세션 학습 내용으로 CLAUDE.md 업데이트 (Update CLAUDE.md with learnings)
+description: Update CLAUDE.md with session learnings
 allowed-tools: Read, Edit, Glob
 ---
 

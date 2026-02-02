@@ -1,22 +1,22 @@
-# Go 규칙 퀵 레퍼런스
+# Go Rules Quick Reference
 
-## 🔴 CRITICAL (반드시 적용)
+## CRITICAL (Must Apply)
 
-### 에러 처리
+### Error Handling
 ```go
-// ✅ 에러 래핑
+// Wrap errors with context
 if err != nil {
     return fmt.Errorf("context: %w", err)
 }
 ```
 
-### 에러 무시 금지
+### Never Ignore Errors
 ```go
-// ❌ data, _ := os.ReadFile(...)
-// ✅ data, err := os.ReadFile(...)
+// BAD: data, _ := os.ReadFile(...)
+// GOOD: data, err := os.ReadFile(...)
 ```
 
-### context 전파
+### Propagate Context
 ```go
 func Fetch(ctx context.Context, url string) error {
     req, _ := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -26,7 +26,7 @@ func Fetch(ctx context.Context, url string) error {
 
 ---
 
-## 🟠 HIGH (강력 권장)
+## HIGH (Strongly Recommended)
 
 ### errgroup
 ```go
@@ -43,7 +43,7 @@ return g.Wait()
 func NewServer(addr string, opts ...Option) *Server
 ```
 
-### 작은 인터페이스
+### Small Interfaces
 ```go
 type Reader interface {
     Read(p []byte) (n int, err error)
@@ -52,17 +52,17 @@ type Reader interface {
 
 ---
 
-## 🟡 MEDIUM (권장)
+## MEDIUM (Recommended)
 
-### 조기 반환
+### Early Return
 ```go
 if err != nil {
     return err
 }
-// 정상 로직
+// Main logic
 ```
 
-### 테이블 테스트
+### Table-Driven Tests
 ```go
 tests := []struct{ name string; input, expected int }{...}
 for _, tt := range tests {
@@ -70,14 +70,14 @@ for _, tt := range tests {
 }
 ```
 
-### 슬라이스 사전 할당
+### Preallocate Slices
 ```go
 items := make([]Item, 0, cap)
 ```
 
 ---
 
-## 🟢 LOW (선택)
+## LOW (Optional)
 
 ### sync.Pool
 ```go
@@ -92,15 +92,15 @@ sb.WriteString("...")
 
 ---
 
-## 검사 명령어
+## Validation Commands
 
 ```bash
-# 필수 검사
+# Required checks
 go fmt ./...
 go vet ./...
 golangci-lint run
 go test -race ./...
 
-# 벤치마크
+# Benchmark
 go test -bench=. -benchmem
 ```

@@ -1,0 +1,9 @@
+{
+  "id": "11",
+  "subject": "JARVIS 기능: 자율 작업 실행 (Do)",
+  "description": "\"/j 이력서 작성해줘\" \"/j 코드 리뷰 좀\" - 작업 분석 → 계획 수립 → 실행 → 결과, 문서 생성/코드 작성/분석",
+  "activeForm": "자율 작업 실행 기능 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

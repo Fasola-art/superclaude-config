@@ -1,0 +1,75 @@
+{
+  "trade_statistics": [],
+  "freight_indices": [
+    {
+      "date": "2026-02-02",
+      "index_name": "FBX",
+      "route": "China/East Asia - North America West Coast",
+      "value": 2500.0,
+      "change_pct": 0.0,
+      "unit": "USD/FEU",
+      "source": "FREIGHTOS",
+      "metadata": "{\"route_code\": \"FBX01\"}"
+    },
+    {
+      "date": "2026-02-02",
+      "index_name": "FBX",
+      "route": "China/East Asia - North America East Coast",
+      "value": 2500.0,
+      "change_pct": 0.0,
+      "unit": "USD/FEU",
+      "source": "FREIGHTOS",
+      "metadata": "{\"route_code\": \"FBX02\"}"
+    },
+    {
+      "date": "2026-02-02",
+      "index_name": "FBX",
+      "route": "China/East Asia - North Europe",
+      "value": 2500.0,
+      "change_pct": 0.0,
+      "unit": "USD/FEU",
+      "source": "FREIGHTOS",
+      "metadata": "{\"route_code\": \"FBX03\"}"
+    },
+    {
+      "date": "2026-02-02",
+      "index_name": "FBX",
+      "route": "China/East Asia - Mediterranean",
+      "value": 2500.0,
+      "change_pct": 0.0,
+      "unit": "USD/FEU",
+      "source": "FREIGHTOS",
+      "metadata": "{\"route_code\": \"FBX04\"}"
+    },
+    {
+      "date": "2026-02-02",
+      "index_name": "FBX",
+      "route": "North Europe - North America East Coast",
+      "value": 2500.0,
+      "change_pct": 0.0,
+      "unit": "USD/FEU",
+      "source": "FREIGHTOS",
+      "metadata": "{\"route_code\": \"FBX11\"}"
+    },
+    {
+      "date": "2026-02-02",
+      "index_name": "FBX",
+      "route": "North America East Coast - North Europe",
+      "value": 2500.0,
+      "change_pct": 0.0,
+      "unit": "USD/FEU",
+      "source": "FREIGHTOS",
+      "metadata": "{\"route_code\": \"FBX12\"}"
+    },
+    {
+      "date": "2026-02-02",
+      "index_name": "BDI",
+      "route": "GLOBAL",
+      "value": 1500.0,
+      "change_pct": 0.0,
+      "unit": "points",
+      "source": "BALTIC_EXCHANGE",
+      "metadata": "{\"type\": \"composite\"}"
+    }
+  ]
+}

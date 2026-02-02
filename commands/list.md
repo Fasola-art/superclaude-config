@@ -1,5 +1,5 @@
 ---
-description: hookify 규칙 목록 조회 (List all configured hookify rules)
+description: List all configured hookify rules
 allowed-tools: ["Glob", "Read", "Skill"]
 ---
 

@@ -1,5 +1,5 @@
 ---
-description: "Ralph Loop 플러그인 설명 (Explain Ralph Loop plugin and commands)"
+description: "Explain Ralph Loop plugin and commands"
 ---
 
 # Ralph Loop Plugin Help

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚢 SQL Trading - Live Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #e1f5fe 50%, #f3e5f5 100%);
+            color: #2d3436;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #81c784 0%, #4fc3f7 100%);
+            padding: 15px 25px;
+            border-bottom: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header h1 { font-size: 20px; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+        .header-right { display: flex; align-items: center; gap: 15px; }
+        .status { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #fff; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: pulse 2s infinite; box-shadow: 0 0 8px rgba(255,255,255,0.8); }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .stats { display: flex; gap: 20px; font-size: 13px; color: rgba(255,255,255,0.9); }
+        .stats span { color: #fff; font-weight: 600; }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto auto auto;
+            gap: 15px;
+            padding: 15px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            padding: 15px;
+            border: 1px solid rgba(129, 199, 132, 0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
+        }
+        .card h2 {
+            font-size: 13px;
+            color: #66bb6a;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .card.wide { grid-column: span 2; }
+        .sector-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .sector-card {
+            background: linear-gradient(135deg, #c8e6c9 0%, #b3e5fc 100%);
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .sector-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+        .sector-card .emoji { font-size: 20px; }
+        .sector-card .name { font-size: 11px; color: #5f6368; margin-top: 4px; }
+        .sector-card .value { font-size: 18px; font-weight: 700; margin-top: 4px; }
+        .sector-card .count { font-size: 10px; color: #78909c; }
+        .positive { color: #2e7d32 !important; }
+        .negative { color: #c62828 !important; }
+        .signal-list { list-style: none; max-height: 280px; overflow-y: auto; }
+        .signal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            margin: 6px 0;
+            background: linear-gradient(135deg, #f1f8e9 0%, #e3f2fd 100%);
+            border-radius: 10px;
+            border-left: 4px solid transparent;
+            transition: all 0.2s;
+        }
+        .signal-item:hover { background: linear-gradient(135deg, #dcedc8 0%, #bbdefb 100%); }
+        .signal-item.buy { border-left-color: #66bb6a; }
+        .signal-item.sell { border-left-color: #ef5350; }
+        .signal-item .symbol { font-weight: 600; font-size: 14px; color: #37474f; }
+        .signal-item .price { color: #78909c; font-size: 12px; }
+        .signal-item .meta { text-align: right; }
+        .signal-badge {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .signal-badge.buy { background: rgba(102, 187, 106, 0.25); color: #2e7d32; }
+        .signal-badge.sell { background: rgba(239, 83, 80, 0.2); color: #c62828; }
+        .confidence { font-size: 10px; color: #90a4ae; margin-top: 2px; }
+        .stock-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; max-height: 280px; overflow-y: auto; }
+        .stock-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            background: linear-gradient(135deg, #f1f8e9 0%, #e3f2fd 100%);
+            border-radius: 10px;
+            border: 1px solid rgba(129, 199, 132, 0.2);
+        }
+        .stock-item .symbol { font-weight: 600; font-size: 12px; color: #37474f; }
+        .stock-item .name { font-size: 10px; color: #78909c; }
+        .stock-item .commodity { font-size: 9px; color: #4fc3f7; margin-top: 2px; }
+        .stock-item .change {
+            font-weight: 600;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        .stock-item .change.positive { background: rgba(102, 187, 106, 0.2); }
+        .stock-item .change.negative { background: rgba(239, 83, 80, 0.15); }
+        .indicator-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .indicator-item {
+            background: linear-gradient(135deg, #e8f5e9 0%, #e1f5fe 100%);
+            padding: 12px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(129, 199, 132, 0.2);
+        }
+        .indicator-item .name { font-size: 11px; color: #5f6368; }
+        .indicator-item .value { font-size: 16px; font-weight: 600; color: #37474f; }
+        .indicator-item .change { font-size: 11px; margin-top: 2px; }
+        .indicator-item .category { font-size: 9px; color: #90a4ae; }
+        #map { height: 400px; border-radius: 12px; border: 1px solid rgba(129, 199, 132, 0.3); }
+        .route-tooltip {
+            background: rgba(255,255,255,0.95) !important;
+            border: 1px solid #81c784 !important;
+            border-radius: 8px !important;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15) !important;
+            padding: 8px 12px !important;
+        }
+        .route-tooltip::before { border-right-color: #81c784 !important; }
+        /* 항로 애니메이션 (SVG path) */
+        .leaflet-interactive.animated-route {
+            animation: dash-flow 8s linear infinite;
+        }
+        @keyframes dash-flow {
+            from { stroke-dashoffset: 0; }
+            to { stroke-dashoffset: -40; }
+        }
+        .arrow-icon { background: none !important; border: none !important; }
+        .chart-container { height: 200px; }
+        .loading { text-align: center; padding: 40px; color: #90a4ae; }
+        .error { color: #ef5350; text-align: center; padding: 20px; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(129, 199, 132, 0.1); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: rgba(79, 195, 247, 0.4); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(79, 195, 247, 0.6); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚢 원자재 물류 트레이딩</h1>
+        <div class="header-right">
+            <div class="stats">
+                데이터: <span id="totalRecords">-</span>건 |
+                📈 매수: <span id="buySignals">-</span> |
+                📉 매도: <span id="sellSignals">-</span>
+            </div>
+            <div class="status">
+                <div class="status-dot"></div>
+                <span id="lastUpdate">연결 중...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 섹터 현황 -->
+        <div class="card">
+            <h2>📊 섹터별 현황 (물류 유형)</h2>
+            <div class="sector-grid" id="sectorGrid">
+                <div class="loading">로딩 중...</div>
+            </div>
+        </div>
+
+        <!-- 트레이딩 신호 -->
+        <div class="card">
+            <h2>🎯 트레이딩 신호</h2>
+            <ul class="signal-list" id="signalList">
+                <div class="loading">로딩 중...</div>
+            </ul>
+        </div>
+
+        <!-- 물류 지도 -->
+        <div class="card wide">
+            <h2>🗺️ 물류 추적</h2>
+            <div id="map"></div>
+        </div>
+
+        <!-- 종목 현황 -->
+        <div class="card wide">
+            <h2>📈 종목별 원자재 현황</h2>
+            <div class="stock-grid" id="stockGrid">
+                <div class="loading">로딩 중...</div>
+            </div>
+        </div>
+
+        <!-- 경제지표 -->
+        <div class="card">
+            <h2>🏛️ 경제지표 (FRED)</h2>
+            <div class="indicator-grid" id="indicatorGrid">
+                <div class="loading">로딩 중...</div>
+            </div>
+        </div>
+
+        <!-- 운임 차트 -->
+        <div class="card">
+            <h2>📉 운임 지수</h2>
+            <div class="chart-container">
+                <canvas id="freightChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '';  // 같은 서버
+        let freightChart = null;
+        let map = null;
+        let markers = [];
+
+        // 섹터 이름 매핑 (한글)
+        const sectorNames = {
+            'dry_bulk': { emoji: '🏭', name: '벌크선 (철광석/석탄/곡물)', desc: '원자재 운송' },
+            'container': { emoji: '📦', name: '컨테이너선 (소비재/전자)', desc: '완제품 운송' },
+            'tanker': { emoji: '🛢️', name: '유조선 (원유/LNG)', desc: '에너지 운송' },
+            'commodity': { emoji: '💎', name: '원자재 ETF', desc: '원자재 가격' },
+            'index': { emoji: '📊', name: '주요 지수', desc: '시장 전체' }
+        };
+
+        // 종목별 상세 설명 (한글)
+        const stockInfo = {
+            // Dry Bulk - 벌크선 (철광석, 석탄, 곡물 운송)
+            'SBLK': { name: 'Star Bulk', desc: '🏭 철광석/석탄 벌크선', commodity: '철광석, 석탄, 곡물' },
+            'DSX': { name: 'Diana Shipping', desc: '🏭 건화물 벌크선', commodity: '철광석, 석탄' },
+            'EGLE': { name: 'Eagle Bulk', desc: '🏭 중형 벌크선', commodity: '곡물, 시멘트, 비료' },
+            'NMM': { name: 'Navios Partners', desc: '🏭 대형 벌크선', commodity: '철광석, 석탄' },
+            'GNK': { name: 'Genco Shipping', desc: '🏭 건화물 전문', commodity: '철광석, 곡물, 보크사이트' },
+            'GOGL': { name: 'Golden Ocean', desc: '🏭 초대형 벌크선', commodity: '철광석' },
+
+            // Tanker - 유조선 (원유, 정제유, LNG)
+            'FRO': { name: 'Frontline', desc: '🛢️ 초대형 유조선', commodity: '원유 (VLCC)' },
+            'STNG': { name: 'Scorpio Tankers', desc: '🛢️ 정제유 운반선', commodity: '휘발유, 경유, 제트유' },
+            'TNK': { name: 'Teekay Tankers', desc: '🛢️ 중형 유조선', commodity: '원유, 정제유' },
+
+            // Container - 컨테이너선 (완제품, 소비재)
+            'ZIM': { name: 'ZIM Shipping', desc: '📦 컨테이너선', commodity: '전자제품, 의류, 소비재' },
+            'MATX': { name: 'Matson', desc: '📦 태평양 컨테이너', commodity: '소비재 (미국-아시아)' },
+            'DAC': { name: 'Danaos Corp', desc: '📦 컨테이너 용선', commodity: '소비재, 전자제품' },
+
+            // Commodity ETF - 원자재 가격 추적
+            'DBC': { name: 'DB Commodity', desc: '💎 원자재 종합', commodity: '원유, 금, 농산물 종합' },
+            'GSG': { name: 'S&P GSCI', desc: '💎 원자재 지수', commodity: '에너지 비중 높음' },
+            'DBA': { name: 'DB Agriculture', desc: '🌾 농산물 ETF', commodity: '옥수수, 대두, 밀, 설탕' },
+            'DBB': { name: 'DB Base Metals', desc: '⚙️ 비철금속 ETF', commodity: '구리, 알루미늄, 아연' },
+
+            // Index
+            '^GSPC': { name: 'S&P 500', desc: '📊 미국 대형주', commodity: '시장 전체' },
+            '^DJI': { name: '다우존스', desc: '📊 미국 우량주', commodity: '산업주 30개' },
+            '^IXIC': { name: '나스닥', desc: '📊 기술주 중심', commodity: '기술/성장주' },
+        };
+
+        // 지도 초기화
+        function initMap() {
+            map = L.map('map', {
+                zoomSnap: 0.25,      // 0.25 단위로 줌 조절
+                zoomDelta: 0.5,      // 휠/버튼 클릭시 0.5씩 변경
+                wheelPxPerZoomLevel: 120  // 휠 감도 조절
+            }).setView([20, 100], 2);
+            // 밝은 지도 타일 (Carto Voyager)
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '© OpenStreetMap © CARTO',
+                maxZoom: 19,
+                subdomains: 'abcd'
+            }).addTo(map);
+
+            // 주요 항구 (한글)
+            const ports = [
+                { name: "🇨🇳 상하이", lat: 31.2, lng: 121.5, color: "#66bb6a" },
+                { name: "🇺🇸 로스앤젤레스", lat: 33.7, lng: -118.2, color: "#4fc3f7" },
+                { name: "🇳🇱 로테르담", lat: 51.9, lng: 4.5, color: "#ba68c8" },
+                { name: "🇸🇬 싱가포르", lat: 1.3, lng: 103.8, color: "#ffb74d" },
+                { name: "🇰🇷 부산", lat: 35.1, lng: 129.0, color: "#f06292" },
+            ];
+
+            ports.forEach(port => {
+                L.circleMarker([port.lat, port.lng], {
+                    radius: 8,
+                    fillColor: port.color,
+                    color: "#fff",
+                    weight: 2,
+                    fillOpacity: 0.85
+                }).addTo(map).bindPopup(`<b>${port.name}</b>`);
+            });
+        }
+
+        // 섹터 데이터 로드
+        async function loadSectors() {
+            try {
+                const res = await fetch(`${API_BASE}/api/sectors`);
+                const data = await res.json();
+
+                const grid = document.getElementById('sectorGrid');
+                grid.innerHTML = data.map(s => {
+                    const info = sectorNames[s.sector] || { emoji: '📊', name: s.sector, desc: '' };
+                    const changeClass = s.change >= 0 ? 'positive' : 'negative';
+                    const sign = s.change >= 0 ? '+' : '';
+                    return `
+                        <div class="sector-card" title="${info.desc}">
+                            <div class="emoji">${info.emoji}</div>
+                            <div class="name">${info.name}</div>
+                            <div class="value ${changeClass}">${sign}${s.change}%</div>
+                            <div class="count">${s.count}종목</div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (e) {
+                document.getElementById('sectorGrid').innerHTML = '<div class="error">데이터 로드 실패</div>';
+            }
+        }
+
+        // 신호 데이터 로드
+        async function loadSignals() {
+            try {
+                const res = await fetch(`${API_BASE}/api/signals`);
+                const data = await res.json();
+
+                const list = document.getElementById('signalList');
+                if (data.length === 0) {
+                    list.innerHTML = '<div class="loading">신호 없음</div>';
+                    return;
+                }
+
+                list.innerHTML = data.map(s => {
+                    const isBuy = s.signal.includes('BUY');
+                    const signalClass = isBuy ? 'buy' : 'sell';
+                    const info = stockInfo[s.symbol] || { desc: s.symbol, commodity: '' };
+                    const signalText = {
+                        'STRONG_BUY': '🔥 강력 매수',
+                        'BUY': '📈 매수',
+                        'STRONG_SELL': '💥 강력 매도',
+                        'SELL': '📉 매도',
+                        'OVERSOLD': '🔄 과매도'
+                    }[s.signal] || s.signal;
+                    return `
+                        <li class="signal-item ${signalClass}" title="${info.commodity}">
+                            <div>
+                                <div class="symbol">${s.symbol}</div>
+                                <div class="price">${info.desc} · $${s.price}</div>
+                            </div>
+                            <div class="meta">
+                                <div class="signal-badge ${signalClass}">${signalText}</div>
+                                <div class="confidence">${s.confidence}% 신뢰도</div>
+                            </div>
+                        </li>
+                    `;
+                }).join('');
+            } catch (e) {
+                document.getElementById('signalList').innerHTML = '<div class="error">데이터 로드 실패</div>';
+            }
+        }
+
+        // 종목 데이터 로드
+        async function loadStocks() {
+            try {
+                const res = await fetch(`${API_BASE}/api/stocks`);
+                const data = await res.json();
+
+                const grid = document.getElementById('stockGrid');
+                const sorted = data.sort((a, b) => Math.abs(b.change) - Math.abs(a.change));
+
+                grid.innerHTML = sorted.slice(0, 12).map(s => {
+                    const changeClass = s.change >= 0 ? 'positive' : 'negative';
+                    const sign = s.change >= 0 ? '+' : '';
+                    const info = stockInfo[s.symbol] || { name: s.name, desc: s.name, commodity: '' };
+                    return `
+                        <div class="stock-item">
+                            <div>
+                                <div class="symbol">${s.symbol} <span style="color:#666;font-weight:normal;font-size:11px">$${s.price}</span></div>
+                                <div class="name">${info.desc}</div>
+                                ${info.commodity ? `<div class="commodity">→ ${info.commodity}</div>` : ''}
+                            </div>
+                            <div class="change ${changeClass}">${sign}${s.change}%</div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (e) {
+                document.getElementById('stockGrid').innerHTML = '<div class="error">데이터 로드 실패</div>';
+            }
+        }
+
+        // 경제지표 로드
+        async function loadIndicators() {
+            try {
+                const res = await fetch(`${API_BASE}/api/indicators`);
+                const data = await res.json();
+
+                const grid = document.getElementById('indicatorGrid');
+                if (data.length === 0) {
+                    grid.innerHTML = '<div class="loading">데이터 없음</div>';
+                    return;
+                }
+
+                const icons = {
+                    '금리': '📊',
+                    '신용': '💳',
+                    '에너지': '🛢️'
+                };
+
+                grid.innerHTML = data.map(ind => {
+                    const changeClass = ind.change >= 0 ? 'positive' : 'negative';
+                    const sign = ind.change >= 0 ? '+' : '';
+                    const icon = icons[ind.category] || '📈';
+                    const unit = ind.category === '에너지' ? '$' : '';
+                    return `
+                        <div class="indicator-item">
+                            <div>
+                                <div class="name">${icon} ${ind.name}</div>
+                                <div class="category">${ind.date} 기준</div>
+                            </div>
+                            <div style="text-align:right">
+                                <div class="value">${unit}${ind.value.toFixed(2)}</div>
+                                <div class="change ${changeClass}">${sign}${ind.change.toFixed(2)}%</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (e) {
+                document.getElementById('indicatorGrid').innerHTML = '<div class="error">로드 실패</div>';
+            }
+        }
+
+        // 운임 차트 로드
+        async function loadFreight() {
+            try {
+                const res = await fetch(`${API_BASE}/api/freight`);
+                const data = await res.json();
+
+                const labels = data.map(d => d.index === 'BDI' ? 'BDI' : d.route.split(' - ')[0].substring(0, 15));
+                const values = data.map(d => d.value);
+                const colors = data.map(d => d.change >= 0 ? 'rgba(102, 187, 106, 0.75)' : 'rgba(239, 154, 154, 0.85)');
+
+                const ctx = document.getElementById('freightChart').getContext('2d');
+
+                if (freightChart) freightChart.destroy();
+
+                freightChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: values,
+                            backgroundColor: colors,
+                            borderRadius: 4,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(102, 187, 106, 0.15)' },
+                                ticks: { color: '#78909c', font: { size: 10 } }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: '#78909c', font: { size: 9 }, maxRotation: 45 }
+                            }
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error('Freight load error:', e);
+            }
+        }
+
+        // 항로 라인 저장
+        let routeLines = [];
+
+        // 주요 항구 좌표
+        const portCoords = {
+            'Shanghai': [31.2, 121.5],
+            'Los Angeles': [33.7, -118.2],
+            'Long Beach': [33.75, -118.2],
+            'Rotterdam': [51.9, 4.5],
+            'Singapore': [1.3, 103.8],
+            'Busan': [35.1, 129.0],
+            'Tokyo': [35.6, 139.7],
+            'Seattle': [47.6, -122.3],
+            'New York': [40.7, -74.0],
+            'Hamburg': [53.5, 10.0],
+            'Savannah': [32.0, -81.0],
+            'Chennai': [13.0, 80.3],
+            'Antwerp': [51.2, 4.4],
+            'Port Said': [31.2, 32.3],
+            'Genoa': [44.4, 8.9],
+            'Ras Tanura': [26.6, 50.0],
+            'Yokohama': [35.4, 139.6],
+            'Kuwait': [29.3, 48.0],
+            'Port Hedland': [-20.3, 118.6],
+            'Qingdao': [36.0, 120.3],
+            'Newcastle': [-32.9, 151.8],
+            'Hong Kong': [22.3, 114.2]
+        };
+
+        // 주요 해상 경유지 (실제 항로)
+        const seaWaypoints = {
+            'malacca': [1.3, 103.8],      // 말라카 해협
+            'suez_n': [31.2, 32.3],        // 수에즈 운하 북쪽
+            'suez_s': [29.9, 32.5],        // 수에즈 운하 남쪽
+            'aden': [12.8, 45.0],          // 아덴만
+            'hormuz': [26.5, 56.5],        // 호르무즈 해협
+            'pacific_mid': [25.0, 180.0],  // 태평양 중간
+            'pacific_n': [40.0, -170.0],   // 북태평양
+            'atlantic_n': [45.0, -40.0],   // 북대서양
+            'cape_good': [-34.0, 18.5],    // 희망봉
+            'indian_mid': [0.0, 75.0],     // 인도양 중간
+            'south_china': [15.0, 115.0],  // 남중국해
+            'east_china': [30.0, 125.0],   // 동중국해
+            'japan_south': [30.0, 135.0],  // 일본 남쪽
+            'med_east': [35.0, 25.0],      // 지중해 동쪽
+            'med_west': [36.0, 5.0],       // 지중해 서쪽
+            'biscay': [45.0, -5.0],        // 비스케이만
+        };
+
+        // 항로별 경유지 정의 (출발지_도착지: [경유지들])
+        const routeWaypoints = {
+            // ===== 아시아 → 미국 서해안 (북태평양) =====
+            'Shanghai_Los Angeles': ['east_china', 'japan_south', [35, 160], [38, -160], [35, -140]],
+            'Shanghai_Long Beach': ['east_china', 'japan_south', [35, 160], [38, -160], [35, -140]],
+            'Busan_Seattle': ['japan_south', [40, 170], [45, -170], [48, -140]],
+            'Busan_Long Beach': ['japan_south', [35, 160], [38, -160], [35, -140]],
+            'Tokyo_Los Angeles': [[35, 150], [38, 170], [40, -170], [38, -140]],
+            'Hong Kong_Los Angeles': ['south_china', 'east_china', 'japan_south', [35, 160], [38, -160], [35, -140]],
+
+            // ===== 아시아 → 유럽 (수에즈 경유) =====
+            'Singapore_Rotterdam': ['indian_mid', 'aden', 'suez_s', 'suez_n', 'med_east', 'med_west', 'biscay'],
+            'Chennai_Antwerp': ['indian_mid', 'aden', 'suez_s', 'suez_n', 'med_east', 'med_west', 'biscay'],
+            'Hong Kong_Rotterdam': ['south_china', 'malacca', 'indian_mid', 'aden', 'suez_s', 'suez_n', 'med_east', 'med_west', 'biscay'],
+            'Shanghai_Rotterdam': ['east_china', 'south_china', 'malacca', 'indian_mid', 'aden', 'suez_s', 'suez_n', 'med_east', 'med_west', 'biscay'],
+            'Busan_Rotterdam': ['east_china', 'south_china', 'malacca', 'indian_mid', 'aden', 'suez_s', 'suez_n', 'med_east', 'med_west', 'biscay'],
+            'Singapore_Hamburg': ['indian_mid', 'aden', 'suez_s', 'suez_n', 'med_east', 'med_west', 'biscay'],
+
+            // ===== 중동 → 아시아 (탱커) =====
+            'Ras Tanura_Yokohama': ['hormuz', [20, 65], 'indian_mid', 'malacca', 'south_china', 'east_china'],
+            'Ras Tanura_Singapore': ['hormuz', [20, 65], 'indian_mid'],
+            'Ras Tanura_Shanghai': ['hormuz', [20, 65], 'indian_mid', 'malacca', 'south_china', 'east_china'],
+            'Kuwait_Singapore': ['hormuz', [20, 60], 'indian_mid'],
+            'Kuwait_Yokohama': ['hormuz', [20, 65], 'indian_mid', 'malacca', 'south_china', 'east_china'],
+
+            // ===== 호주 → 아시아 (벌크/철광석) =====
+            'Port Hedland_Qingdao': [[-15, 115], [0, 115], 'south_china', 'east_china'],
+            'Port Hedland_Shanghai': [[-15, 115], [0, 115], 'south_china', 'east_china'],
+            'Newcastle_Shanghai': [[-30, 155], [-20, 140], [0, 130], 'south_china', 'east_china'],
+            'Newcastle_Busan': [[-30, 155], [-20, 140], [0, 130], 'south_china', 'east_china'],
+
+            // ===== 유럽 → 미국 동해안 (대서양) =====
+            'Rotterdam_New York': ['biscay', [48, -20], [45, -40], [42, -60]],
+            'Rotterdam_Savannah': ['biscay', [48, -20], [42, -40], [35, -60]],
+            'Hamburg_New York': ['biscay', [50, -10], [48, -30], [45, -50], [42, -65]],
+            'Hamburg_Savannah': ['biscay', [48, -20], [42, -40], [35, -60]],
+            'Antwerp_New York': ['biscay', [48, -20], [45, -40], [42, -60]],
+
+            // ===== 미국 → 유럽 (역방향) =====
+            'New York_Rotterdam': [[42, -60], [45, -40], [48, -20], 'biscay'],
+            'Savannah_Rotterdam': [[35, -65], [40, -50], [45, -30], 'biscay'],
+            'Los Angeles_Rotterdam': [[30, -120], [20, -110], [10, -85], [10, -60], [10, -30], 'cape_good', 'aden', 'suez_s', 'suez_n', 'med_west', 'biscay'],
+
+            // ===== 미국 → 아시아 =====
+            'Los Angeles_Shanghai': [[35, -135], [38, -160], [40, 175], [35, 150], 'japan_south', 'east_china'],
+            'Los Angeles_Tokyo': [[35, -135], [38, -160], [40, 175], [35, 150]],
+            'Seattle_Busan': [[48, -135], [50, -170], [45, 175], [40, 150], 'japan_south'],
+            'Long Beach_Hong Kong': [[35, -135], [35, -160], [35, 180], [30, 150], 'east_china', 'south_china'],
+
+            // ===== 남미 =====
+            'Santos_Rotterdam': [[-25, -45], [-10, -30], [10, -25], [30, -15], 'biscay'],
+            'Santos_Shanghai': [[-25, -45], [-35, -20], 'cape_good', 'indian_mid', 'malacca', 'south_china', 'east_china'],
+
+            // ===== 지중해 =====
+            'Port Said_Genoa': ['med_east', [36, 15]],
+            'Port Said_Rotterdam': ['med_east', 'med_west', 'biscay'],
+            'Genoa_New York': ['med_west', [38, -5], [38, -30], [40, -55]],
+
+            // ===== 아프리카 =====
+            'Durban_Rotterdam': [[-30, 35], 'cape_good', [-20, 0], [0, -10], [20, -15], 'biscay'],
+            'Lagos_Rotterdam': [[5, 5], [20, -15], 'biscay'],
+        };
+
+        // 실제 해상 항로 생성
+        function createSeaRoute(origin, dest) {
+            const start = portCoords[origin];
+            const end = portCoords[dest];
+            if (!start || !end) return null;
+
+            const routeKey = `${origin}_${dest}`;
+            const waypoints = routeWaypoints[routeKey];
+
+            let points = [start];
+
+            if (waypoints) {
+                waypoints.forEach(wp => {
+                    if (Array.isArray(wp)) {
+                        points.push(wp);
+                    } else if (seaWaypoints[wp]) {
+                        points.push(seaWaypoints[wp]);
+                    }
+                });
+            }
+
+            points.push(end);
+
+            // 각 구간을 부드럽게 연결
+            const smoothedPoints = [];
+            for (let i = 0; i < points.length - 1; i++) {
+                const segmentPoints = smoothSegment(points[i], points[i + 1], 10);
+                smoothedPoints.push(...segmentPoints);
+            }
+            smoothedPoints.push(end);
+
+            return smoothedPoints;
+        }
+
+        // 구간 부드럽게 연결
+        function smoothSegment(start, end, numPoints) {
+            const points = [];
+            for (let i = 0; i < numPoints; i++) {
+                const t = i / numPoints;
+                const lat = start[0] + (end[0] - start[0]) * t;
+                const lng = start[1] + (end[1] - start[1]) * t;
+                points.push([lat, lng]);
+            }
+            return points;
+        }
+
+        // 화물 유형 한글
+        const cargoKr = {
+            'container': '📦 컨테이너',
+            'tanker': '🛢️ 유조선',
+            'bulk': '🏭 벌크'
+        };
+
+        // 물류 추적 로드
+        async function loadLogistics() {
+            try {
+                const res = await fetch(`${API_BASE}/api/logistics`);
+                const data = await res.json();
+
+                // 기존 마커/라인 제거
+                markers.forEach(m => map.removeLayer(m));
+                routeLines.forEach(l => map.removeLayer(l));
+                markers = [];
+                routeLines = [];
+
+                // 상태/화물 유형별 색상
+                const statusColors = {
+                    'delivered': '#66bb6a',
+                    'delayed': '#ef5350',
+                    'in_transit': '#4fc3f7'
+                };
+                const cargoIcons = {
+                    'container': '📦',
+                    'tanker': '🛢️',
+                    'bulk': '🏭'
+                };
+                const statusKr = {
+                    'delivered': '도착 완료',
+                    'delayed': '지연',
+                    'in_transit': '운항 중'
+                };
+
+                data.forEach(ship => {
+                    if (ship.lat && ship.lng) {
+                        const color = statusColors[ship.status] || '#ffb74d';
+                        const icon = cargoIcons[ship.cargo] || '🚢';
+
+                        const originCoord = portCoords[ship.origin];
+                        const destCoord = portCoords[ship.dest];
+                        const shipCoord = [ship.lat, ship.lng];
+
+                        // 툴팁 내용
+                        const tooltipContent = `
+                            <div style="font-size:12px;line-height:1.5;min-width:160px;">
+                                <b>${cargoKr[ship.cargo] || '🚢 화물'}</b><br>
+                                <hr style="margin:4px 0;border:none;border-top:1px solid #ddd;">
+                                🚀 <b>출발:</b> ${ship.origin}<br>
+                                　 ${ship.departure || '-'} (KST)<br>
+                                🎯 <b>도착:</b> ${ship.dest}<br>
+                                　 ${ship.arrival || '-'} (KST)
+                            </div>
+                        `;
+
+                        // 실제 해상 항로로 경로 생성
+                        if (originCoord && destCoord) {
+                            const seaRoute = createSeaRoute(ship.origin, ship.dest);
+                            const routePoints = seaRoute || [originCoord, destCoord];
+
+                            // 기본 라인 (얇은 배경)
+                            const baseLine = L.polyline(routePoints, {
+                                color: color,
+                                weight: 1.5,
+                                opacity: 0.3
+                            }).addTo(map);
+                            routeLines.push(baseLine);
+
+                            // 화살표 데코레이터 (->->->)
+                            const arrowDecorator = L.polylineDecorator(routePoints, {
+                                patterns: [
+                                    {
+                                        offset: 25,
+                                        repeat: 50,
+                                        symbol: L.Symbol.arrowHead({
+                                            pixelSize: 8,
+                                            polygon: false,
+                                            pathOptions: {
+                                                color: color,
+                                                weight: 2,
+                                                opacity: 0.8
+                                            }
+                                        })
+                                    }
+                                ]
+                            }).addTo(map);
+                            routeLines.push(arrowDecorator);
+
+                            // 마우스 호버시 툴팁 표시
+                            baseLine.bindTooltip(tooltipContent, {
+                                sticky: true,
+                                opacity: 0.95,
+                                className: 'route-tooltip'
+                            });
+                        }
+
+                        // 선박 마커
+                        const marker = L.circleMarker(shipCoord, {
+                            radius: 7,
+                            fillColor: color,
+                            color: '#fff',
+                            weight: 2,
+                            fillOpacity: 0.9
+                        }).addTo(map);
+
+                        marker.bindPopup(`
+                            <div style="font-size:13px;">
+                                <b>${icon} ${ship.vessel || ship.id}</b><br>
+                                <span style="color:#666;">📍 ${ship.origin} → ${ship.dest}</span><br>
+                                <span style="color:${color};font-weight:600;">● ${statusKr[ship.status] || ship.status}</span>
+                            </div>
+                        `);
+                        markers.push(marker);
+                    }
+                });
+
+                // 선박 수 표시
+                if (data.length > 0) {
+                    document.querySelector('.card:has(#map) h2').innerHTML =
+                        `🗺️ 물류 추적 <span style="color:#4fc3f7;font-size:11px;">(${data.length}척 운항중)</span>`;
+                }
+            } catch (e) {
+                console.error('Logistics load error:', e);
+            }
+        }
+
+        // 요약 로드
+        async function loadSummary() {
+            try {
+                const res = await fetch(`${API_BASE}/api/summary`);
+                const data = await res.json();
+
+                document.getElementById('totalRecords').textContent = data.total_records.toLocaleString();
+                document.getElementById('buySignals').textContent = data.buy_signals;
+                document.getElementById('sellSignals').textContent = data.sell_signals;
+                document.getElementById('lastUpdate').textContent =
+                    new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            } catch (e) {
+                document.getElementById('lastUpdate').textContent = '연결 실패';
+            }
+        }
+
+        // 전체 로드
+        async function loadAll() {
+            await Promise.all([
+                loadSummary(),
+                loadSectors(),
+                loadSignals(),
+                loadStocks(),
+                loadIndicators(),
+                loadFreight(),
+                loadLogistics()
+            ]);
+        }
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', () => {
+            initMap();
+            loadAll();
+            // 10초마다 자동 갱신
+            setInterval(loadAll, 10000);
+        });
+    </script>
+</body>
+</html>

@@ -12,33 +12,33 @@ type: "document"
 
 ---
 
-## 목차
+## Table of Contents
 
-1. [개요](#개요)
-2. [상세](#상세)
-3. [결론](#결론)
+1. [Overview](#overview)
+2. [Details](#details)
+3. [Conclusion](#conclusion)
 
 ---
 
-## 개요
+## Overview
 
 {overview}
 
 ---
 
-## 상세
+## Details
 
-### 핵심 내용
+### Key Content
 
 {main_content}
 
-### 추가 정보
+### Additional Information
 
 {additional_info}
 
 ---
 
-## 결론
+## Conclusion
 
 {conclusion}
 

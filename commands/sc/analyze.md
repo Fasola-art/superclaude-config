@@ -1,24 +1,24 @@
 ---
-description: "코드/프로젝트 분석 (Analyze code or project)"
+description: "Analyze code or project"
 argument-hint: "[target]"
 ---
 
-# 분석
+# Analyze
 
-지정된 코드, 파일, 또는 프로젝트를 분석합니다.
+Analyze specified code, files, or projects.
 
-## 사용
+## Usage
 
 ```
-/sc:analyze src/           # 디렉토리 분석
-/sc:analyze ./api/route.ts # 파일 분석
-/sc:analyze --deps         # 의존성 분석
-/sc:analyze --perf         # 성능 분석
+/sc:analyze src/           # Analyze directory
+/sc:analyze ./api/route.ts # Analyze file
+/sc:analyze --deps         # Analyze dependencies
+/sc:analyze --perf         # Analyze performance
 ```
 
-## 분석 항목
+## Analysis Items
 
-- 코드 구조 및 패턴
-- 의존성 관계
-- 복잡도 측정
-- 잠재적 이슈 탐지
+- Code structure and patterns
+- Dependency relationships
+- Complexity metrics
+- Potential issue detection

@@ -1,5 +1,5 @@
 ---
-description: Claude Agent SDK 앱 생성 (Create Claude Agent SDK application)
+description: Create Claude Agent SDK application
 argument-hint: [project-name]
 ---
 

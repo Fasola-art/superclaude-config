@@ -1,17 +1,17 @@
-# React 규칙 퀵 레퍼런스
+# React Rules Quick Reference
 
-## 🔴 CRITICAL (반드시 적용)
+## CRITICAL (Must Apply)
 
-### 병렬 fetch
+### Parallel Fetch
 ```typescript
-// ✅ Promise.all 사용
+// Use Promise.all
 const [a, b, c] = await Promise.all([fetchA(), fetchB(), fetchC()]);
 ```
 
-### Barrel Import 금지
+### No Barrel Imports
 ```typescript
-// ❌ import { Button } from '@/components';
-// ✅ import { Button } from '@/components/Button';
+// BAD: import { Button } from '@/components';
+// GOOD: import { Button } from '@/components/Button';
 ```
 
 ### Dynamic Import
@@ -21,18 +21,18 @@ const Chart = dynamic(() => import('@/components/Chart'), { ssr: false });
 
 ---
 
-## 🟠 HIGH (강력 권장)
+## HIGH (Strongly Recommended)
 
-### Server Component 기본
+### Server Component Default
 ```typescript
-// app/page.tsx - 'use client' 없으면 Server Component
+// app/page.tsx - Server Component without 'use client'
 async function Page() {
   const data = await fetchData();
   return <div>{data}</div>;
 }
 ```
 
-### Suspense 경계
+### Suspense Boundary
 ```typescript
 <Suspense fallback={<Loading />}>
   <AsyncComponent />
@@ -47,26 +47,26 @@ export async function action(formData: FormData) { ... }
 
 ---
 
-## 🟡 MEDIUM (권장)
+## MEDIUM (Recommended)
 
-### next/image 사용
+### Use next/image
 ```typescript
 <Image src="/img.jpg" width={800} height={600} alt="..." />
 ```
 
-### 캐시 설정
+### Cache Configuration
 ```typescript
 fetch(url, { next: { revalidate: 3600 } });
 ```
 
-### memo 사용
+### Use memo
 ```typescript
 const Item = React.memo(function Item({ data }) { ... });
 ```
 
 ---
 
-## 🟢 LOW (선택)
+## LOW (Optional)
 
 ### useMemo / useCallback
 ```typescript
@@ -74,19 +74,19 @@ const sorted = useMemo(() => items.sort(...), [items]);
 const handler = useCallback(() => {...}, []);
 ```
 
-### 고유 key 사용
+### Unique Key
 ```typescript
 {items.map(item => <Item key={item.id} />)}
 ```
 
 ---
 
-## 검사 명령어
+## Validation Commands
 
 ```bash
-# 프로젝트 검사
+# Project check
 python3 ~/.claude/rules/react/react-checker.py /path/to/project
 
-# ESLint 검사
+# ESLint check
 npx eslint . --config ~/.claude/rules/react/eslint-react.json
 ```

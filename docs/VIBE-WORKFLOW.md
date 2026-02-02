@@ -1,225 +1,225 @@
-# Vibe 워크플로우 가이드
+# Vibe Workflow Guide
 
-> 키워드 기반 동작 제어 시스템
-
----
-
-## 개요
-
-Vibe 시스템은 자연어 키워드로 Claude의 동작 방식을 제어합니다.
-13개의 Vibe Keywords와 4개의 Mode Keywords를 제공합니다.
+> Keyword-based behavior control system
 
 ---
 
-## Vibe Keywords 워크플로우
+## Overview
 
-### 1. 빠르게 (qk)
+The Vibe system controls Claude's behavior via natural language keywords.
+Provides 13 Vibe Keywords and 4 Mode Keywords.
+
+---
+
+## Vibe Keywords Workflow
+
+### 1. fast (qk)
 
 ```
-사용자: "빠르게 로그인 폼 만들어줘"
+User: "fast create a login form"
          │
          ▼
 ┌─────────────────────────────┐
-│ 키워드 감지: "빠르게"         │
+│ Keyword detected: "fast"    │
 ├─────────────────────────────┤
-│ 동작:                        │
-│ ├── Writer-Reviewer: 3회 제한 │
-│ ├── 검증 단계: 생략           │
-│ └── 즉시 코드 생성            │
+│ Actions:                    │
+│ ├── Writer-Reviewer: 3 max  │
+│ ├── Validation: skip        │
+│ └── Immediate code gen      │
 └─────────────────────────────┘
          │
          ▼
-   [결과물 바로 출력]
+   [Output result directly]
 ```
 
-### 2. 실험 (exp)
+### 2. experiment (exp)
 
 ```
-사용자: "실험 모드로 새 알고리즘 적용해봐"
+User: "experiment mode apply new algorithm"
          │
          ▼
 ┌─────────────────────────────┐
-│ 1. 현재 상태 스냅샷 생성      │
+│ 1. Create current snapshot  │
 ├─────────────────────────────┤
-│ 2. 실험 코드 적용             │
+│ 2. Apply experimental code  │
 ├─────────────────────────────┤
-│ 3. 결과 확인                  │
-│    ├── 성공: "유지할까요?"    │
-│    └── 실패: "롤백할까요?"    │
+│ 3. Check result             │
+│    ├── Success: "Keep it?"  │
+│    └── Failure: "Rollback?" │
 └─────────────────────────────┘
 ```
 
-### 3. 동시에 (para)
+### 3. parallel (para)
 
 ```
-사용자: "동시에 3개 API 만들어줘"
+User: "parallel create 3 APIs"
          │
          ▼
 ┌─────────────────────────────┐
-│ 1. 태스크 분해                │
-│    ├── API 1: /users         │
-│    ├── API 2: /posts         │
-│    └── API 3: /comments      │
+│ 1. Task decomposition       │
+│    ├── API 1: /users        │
+│    ├── API 2: /posts        │
+│    └── API 3: /comments     │
 ├─────────────────────────────┤
-│ 2. 의존성 분석                │
-│    └── 독립적 → 병렬 가능     │
+│ 2. Dependency analysis      │
+│    └── Independent → parallel│
 ├─────────────────────────────┤
-│ 3. 적응형 병렬 실행           │
-│    └── 10개 동시 시작         │
+│ 3. Adaptive parallel exec   │
+│    └── Start 10 concurrent  │
 └─────────────────────────────┘
 ```
 
-### 4. 고쳐 (fix)
+### 4. fix
 
 ```
-사용자: "이 에러 고쳐줘"
+User: "fix this error"
          │
          ▼
 ┌─────────────────────────────┐
-│ 1. Error KB 검색              │
-│    └── Jaccard 70%+ 유사 에러 │
+│ 1. Search Error KB          │
+│    └── Jaccard 70%+ similar │
 ├─────────────────────────────┤
-│ 2. 유사 에러 발견?            │
-│    ├── Yes: 이전 솔루션 적용  │
-│    └── No: 새로운 분석        │
+│ 2. Similar error found?     │
+│    ├── Yes: Apply prev fix  │
+│    └── No: New analysis     │
 ├─────────────────────────────┤
-│ 3. Ralph Loop (최대 10회)     │
-│    └── 자동 수정 시도         │
+│ 3. Ralph Loop (max 10)      │
+│    └── Auto fix attempts    │
 ├─────────────────────────────┤
-│ 4. 성공 시 KB 학습            │
+│ 4. On success: KB learns    │
 └─────────────────────────────┘
 ```
 
-### 5. 되돌려 (undo)
+### 5. undo
 
 ```
-사용자: "방금 변경 되돌려줘"
+User: "undo recent changes"
          │
          ▼
 ┌─────────────────────────────┐
-│ 1. 스냅샷 목록 조회           │
+│ 1. Query snapshot list      │
 ├─────────────────────────────┤
-│ 2. 마지막 스냅샷 선택         │
+│ 2. Select last snapshot     │
 ├─────────────────────────────┤
-│ 3. 롤백 실행                  │
-│    └── 파일 복원              │
+│ 3. Execute rollback         │
+│    └── Restore files        │
 ├─────────────────────────────┤
-│ 4. "복원 완료"                │
+│ 4. "Restoration complete"   │
 └─────────────────────────────┘
 ```
 
-### 6. 계속 (cont)
+### 6. continue (cont)
 
 ```
-사용자: "어제 작업 계속해줘"
+User: "continue yesterday's work"
          │
          ▼
 ┌─────────────────────────────┐
-│ 1. STATE.md 로드              │
+│ 1. Load STATE.md            │
 ├─────────────────────────────┤
-│ 2. TodoWrite 항목 복원        │
+│ 2. Restore TodoWrite items  │
 ├─────────────────────────────┤
-│ 3. 컨텍스트 요약 로드         │
+│ 3. Load context summary     │
 ├─────────────────────────────┤
-│ 4. 중단점 확인                │
-│    └── "여기서 계속합니다"    │
+│ 4. Confirm resume point     │
+│    └── "Continuing here"    │
 └─────────────────────────────┘
 ```
 
 ---
 
-## Mode Keywords 워크플로우
+## Mode Keywords Workflow
 
 ### ultrawork (ulw)
 
 ```
-사용자: "ultrawork 모드로 전체 리팩토링해줘"
+User: "ultrawork mode full refactoring"
          │
          ▼
 ┌─────────────────────────────┐
-│ 페르소나 활성화:              │
-│ ├── explorer: 코드 탐색       │
-│ ├── librarian: 문서 참조      │
-│ └── analyzer: 분석            │
+│ Personas activated:         │
+│ ├── explorer: code explore  │
+│ ├── librarian: doc reference│
+│ └── analyzer: analysis      │
 ├─────────────────────────────┤
-│ 동작:                         │
-│ ├── 병렬 실행 최대화          │
-│ ├── 모든 분석 도구 활성화     │
-│ └── 깊은 검색 모드            │
+│ Actions:                    │
+│ ├── Maximize parallel       │
+│ ├── All analysis tools on   │
+│ └── Deep search mode        │
 └─────────────────────────────┘
 ```
 
 ### deepsearch (ds)
 
 ```
-사용자: "deepsearch로 React 19 새 기능 조사해줘"
+User: "deepsearch React 19 new features"
          │
          ▼
 ┌─────────────────────────────┐
-│ /research 스킬 활성화         │
+│ /research skill activated   │
 ├─────────────────────────────┤
-│ 1. 웹 검색 실행               │
+│ 1. Execute web search       │
 ├─────────────────────────────┤
-│ 2. 문서 크롤링                │
+│ 2. Crawl documentation      │
 ├─────────────────────────────┤
-│ 3. 요약 및 분석               │
+│ 3. Summarize and analyze    │
 ├─────────────────────────────┤
-│ 4. 출처 정리                  │
+│ 4. Organize sources         │
 └─────────────────────────────┘
 ```
 
 ### strategic (str)
 
 ```
-사용자: "strategic 모드로 아키텍처 검토해줘"
+User: "strategic mode review architecture"
          │
          ▼
 ┌─────────────────────────────┐
-│ architect 페르소나 활성화     │
+│ architect persona activated │
 ├─────────────────────────────┤
-│ 분석:                         │
-│ ├── 트레이드오프 분석         │
-│ ├── 장기 영향 고려            │
-│ └── Red/Blue Team 분석        │
+│ Analysis:                   │
+│ ├── Tradeoff analysis       │
+│ ├── Long-term impact        │
+│ └── Red/Blue Team analysis  │
 ├─────────────────────────────┤
-│ 출력:                         │
-│ ├── 🔵 Blue Team (강점)       │
-│ └── 🔴 Red Team (약점)        │
+│ Output:                     │
+│ ├── 🔵 Blue Team (strengths)│
+│ └── 🔴 Red Team (weaknesses)│
 └─────────────────────────────┘
 ```
 
 ### visual (vis)
 
 ```
-사용자: "visual 모드로 이 스크린샷 분석해줘"
+User: "visual mode analyze this screenshot"
          │
          ▼
 ┌─────────────────────────────┐
-│ 페르소나 활성화:              │
-│ ├── multimodal: 시각 분석     │
-│ └── frontend: UI 전문가       │
+│ Personas activated:         │
+│ ├── multimodal: visual      │
+│ └── frontend: UI expert     │
 ├─────────────────────────────┤
-│ 분석:                         │
-│ ├── 이미지 인식               │
-│ ├── UI 요소 식별              │
-│ └── 개선점 제안               │
+│ Analysis:                   │
+│ ├── Image recognition       │
+│ ├── UI element detection    │
+│ └── Improvement suggestions │
 └─────────────────────────────┘
 ```
 
 ---
 
-## 키워드 조합 예시
+## Keyword Combination Examples
 
 ```yaml
-# 빠른 병렬 실행
-"빠르게 동시에 3개 컴포넌트 만들어줘"
-→ Writer-Reviewer 최소 + 병렬 실행
+# Fast parallel execution
+"fast parallel create 3 components"
+→ Writer-Reviewer minimal + parallel execution
 
-# 전략적 분석 후 수정
-"strategic 모드로 분석하고 고쳐줘"
-→ 트레이드오프 분석 + Error KB 자동 수정
+# Strategic analysis then fix
+"strategic mode analyze then fix"
+→ Tradeoff analysis + Error KB auto-fix
 
-# 실험 후 테스트
-"실험 모드로 적용하고 테스트해줘"
-→ 스냅샷 생성 + 코드 적용 + 테스트 실행
+# Experiment then test
+"experiment mode apply and test"
+→ Snapshot create + apply code + run tests
 ```

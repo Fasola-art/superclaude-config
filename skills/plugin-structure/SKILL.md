@@ -1,6 +1,6 @@
 ---
 name: plugin-structure
-description: 플러그인 구조 가이드 (Plugin structure for Claude Code)
+description: Plugin structure guide for Claude Code. Covers directory layout, manifest configuration, and component organization.
 version: 0.1.0
 ---
 

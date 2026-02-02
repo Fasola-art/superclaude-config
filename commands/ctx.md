@@ -1,12 +1,12 @@
-# 컨텍스트 요약
+# Context Summary
 
-간단한 컨텍스트 사용량 표시
+Display a simple context usage indicator.
 
 ---
 
-**실행:** `/context` 명령어 결과에서 첫 2줄(토큰 사용량)만 표시해주세요.
+**Execution:** Show only the first 2 lines (token usage) from `/context` command output.
 
-예시 출력:
+Example output:
 ```
-🔋 133k/200k (66%) | 남은 공간: 31k
+🔋 133k/200k (66%) | Remaining: 31k
 ```

@@ -1,46 +1,46 @@
 ---
-description: 뉴스 수집 및 요약 실행
+description: News collection and summary
 ---
 
-# /news 명령어
+# /news Command
 
-뉴스 및 시장 데이터를 수집하고 요약합니다.
+Collect and summarize news and market data.
 
-## 실행 내용
+## Execution
 
-1. **Bloomberg 뉴스** - 시장, 경제, 기술 카테고리 속보
-2. **Finviz 뉴스** - 주식 시장 뉴스 및 가격
-3. **FRED 지표** - 주요 경제 지표 체크
+1. **Bloomberg News** - Market, economy, tech category breaking news
+2. **Finviz News** - Stock market news and prices
+3. **FRED Indicators** - Key economic indicator check
 
-## 사용법
+## Usage
 
 ```
-/news           # 전체 뉴스 수집
-/news market    # 시장 뉴스만
-/news breaking  # 속보만
+/news           # Full news collection
+/news market    # Market news only
+/news breaking  # Breaking news only
 ```
 
-## 실행 스크립트
+## Execution Script
 
-아래 명령을 실행하여 뉴스를 수집합니다:
+Execute the following command to collect news:
 
 ```bash
 python3 ~/.claude/scripts/scheduled_collectors.py all
 ```
 
-## 출력 형식
+## Output Format
 
-### 속보 (있는 경우)
-- 🚨 [카테고리] 헤드라인
+### Breaking News (if any)
+- Breaking [Category] Headline
 
-### 시장 요약
-- 📈/📉 주요 지수 변동
-- 섹터별 동향
+### Market Summary
+- Major index movements
+- Sector trends
 
-### 뉴스 하이라이트
-- 긍정/부정/중립 분류
-- 중요도별 정렬
+### News Highlights
+- Positive/Negative/Neutral classification
+- Sorted by importance
 
-## 데이터 저장 위치
+## Data Storage Location
 - Bloomberg: `~/.claude/modules/news-collector/archive/bloomberg/`
 - Finviz: `~/.claude/modules/news-collector/archive/finviz/`

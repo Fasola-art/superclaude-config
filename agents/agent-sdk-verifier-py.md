@@ -1,6 +1,6 @@
 ---
 name: agent-sdk-verifier-py
-description: Python Agent SDK 앱 검증 (Verify Python Agent SDK application)
+description: Python Agent SDK application verification (Verify Python Agent SDK application)
 model: sonnet
 ---
 

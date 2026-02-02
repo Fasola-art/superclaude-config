@@ -1,0 +1,169 @@
+"""
+CLOVA Speech STT 모듈
+녹음 파일(mp3/m4a/wav)을 텍스트로 변환
+
+사용법:
+    from clova_stt import transcribe_audio
+
+    result = transcribe_audio("/path/to/audio.mp3")
+    print(result["text"])
+"""
+
+from __future__ import annotations
+
+import json
+import requests
+from pathlib import Path
+from typing import TypedDict, List, Dict, Union
+
+
+class STTResult(TypedDict):
+    """STT 결과 타입"""
+    text: str
+    confidence: float
+    segments: List[Dict]
+    language: str
+
+
+def load_api_key() -> dict:
+    """API 키 로드"""
+    key_path = Path.home() / ".claude" / "credentials" / "api-keys.json"
+    if not key_path.exists():
+        raise FileNotFoundError(f"API 키 파일 없음: {key_path}")
+
+    with open(key_path) as f:
+        keys = json.load(f)
+
+    if "clova_speech" not in keys:
+        raise KeyError("clova_speech 키가 api-keys.json에 없음")
+
+    return keys["clova_speech"]
+
+
+def transcribe_audio(
+    audio_path: Union[str, Path],
+    language: str = "Kor"
+) -> STTResult:
+    """
+    오디오 파일을 텍스트로 변환
+
+    Args:
+        audio_path: 오디오 파일 경로 (mp3, m4a, wav, flac)
+        language: 언어 코드 (기본: ko-KR)
+
+    Returns:
+        STTResult: 변환 결과 (text, confidence, segments)
+
+    Raises:
+        FileNotFoundError: 오디오 파일 없음
+        ValueError: 지원하지 않는 파일 형식
+        requests.HTTPError: API 호출 실패
+    """
+    audio_path = Path(audio_path)
+
+    # 파일 존재 확인
+    if not audio_path.exists():
+        raise FileNotFoundError(f"오디오 파일 없음: {audio_path}")
+
+    # 지원 형식 확인
+    supported = {".mp3", ".m4a", ".wav", ".flac", ".aac", ".ogg"}
+    if audio_path.suffix.lower() not in supported:
+        raise ValueError(f"지원하지 않는 형식: {audio_path.suffix}")
+
+    # API 키 로드
+    config = load_api_key()
+    secret_key = config["secret_key"]
+    invoke_url = config["invoke_url"]
+
+    # 요청 헤더 (CSR API 형식)
+    # CSR: X-NCP-APIGW-API-KEY-ID, X-NCP-APIGW-API-KEY 사용
+    # CLOVA Speech (도메인): X-CLOVASPEECH-API-KEY 사용
+    headers = {
+        "Content-Type": "application/octet-stream",
+    }
+
+    # API 키 유형에 따라 헤더 설정
+    if "client_id" in config:
+        # CSR API (단문 인식)
+        headers["X-NCP-APIGW-API-KEY-ID"] = config["client_id"]
+        headers["X-NCP-APIGW-API-KEY"] = config["client_secret"]
+    else:
+        # CLOVA Speech 도메인 API (장문 인식)
+        headers["X-CLOVASPEECH-API-KEY"] = secret_key
+
+    # 요청 파라미터 (CLOVA Speech API)
+    params = {
+        "lang": language,
+    }
+
+    # API 호출
+    with open(audio_path, "rb") as f:
+        response = requests.post(
+            invoke_url,
+            headers=headers,
+            params=params,
+            data=f,
+            timeout=300  # 5분 타임아웃 (긴 오디오 대응)
+        )
+
+    response.raise_for_status()
+    result = response.json()
+
+    # 결과 파싱
+    return STTResult(
+        text=result.get("text", ""),
+        confidence=result.get("confidence", 0.0),
+        segments=result.get("segments", []),
+        language=language
+    )
+
+
+def transcribe_with_retry(
+    audio_path: Union[str, Path],
+    language: str = "ko-KR",
+    max_retries: int = 3
+) -> STTResult:
+    """
+    재시도 로직이 포함된 STT 변환
+
+    Args:
+        audio_path: 오디오 파일 경로
+        language: 언어 코드
+        max_retries: 최대 재시도 횟수
+
+    Returns:
+        STTResult: 변환 결과
+    """
+    import time
+
+    last_error = None
+    for attempt in range(max_retries):
+        try:
+            return transcribe_audio(audio_path, language)
+        except requests.RequestException as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                wait_time = 2 ** attempt  # 지수 백오프
+                time.sleep(wait_time)
+
+    raise last_error
+
+
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) < 2:
+        print("사용법: python clova_stt.py <오디오 파일 경로>")
+        sys.exit(1)
+
+    audio_file = sys.argv[1]
+
+    try:
+        result = transcribe_audio(audio_file)
+        print(f"✅ STT 완료")
+        print(f"텍스트 길이: {len(result['text'])}자")
+        print(f"신뢰도: {result['confidence']:.2%}")
+        print(f"\n--- 변환 결과 ---\n{result['text'][:500]}...")
+    except Exception as e:
+        print(f"❌ 오류: {e}")
+        sys.exit(1)

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
 jarvis-task-completion.py
-Jarvis 태스크 완료 처리 훅
+Jarvis task completion handling hook
 
-트리거: PostToolUse
-매처: TaskUpdate|TodoWrite
-타임아웃: 5000ms
+Trigger: PostToolUse
+Matcher: TaskUpdate|TodoWrite
+Timeout: 5000ms
 """
 
 import json
@@ -20,12 +20,12 @@ COMPLETIONS_FILE = JARVIS_DIR / 'task-completions.json'
 DAILY_REPORT_DIR = JARVIS_DIR / 'daily-reports'
 
 def ensure_dirs():
-    """디렉토리 생성"""
+    """Create directories"""
     JARVIS_DIR.mkdir(parents=True, exist_ok=True)
     DAILY_REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
 def load_completions() -> Dict:
-    """완료 기록 로드"""
+    """Load completion records"""
     if COMPLETIONS_FILE.exists():
         try:
             return json.loads(COMPLETIONS_FILE.read_text())
@@ -45,27 +45,27 @@ def load_completions() -> Dict:
     }
 
 def save_completions(data: Dict):
-    """완료 기록 저장"""
+    """Save completion records"""
     ensure_dirs()
     COMPLETIONS_FILE.write_text(json.dumps(data, indent=2, ensure_ascii=False))
 
 def update_streaks(completions: Dict) -> Dict:
-    """연속 완료 기록 업데이트"""
+    """Update consecutive completion records"""
     today = datetime.now().date().isoformat()
     streaks = completions['streaks']
 
     if streaks['lastDate'] == today:
-        # 오늘 이미 업데이트됨
+        # Already updated today
         return streaks
 
     from datetime import timedelta
     yesterday = (datetime.now().date() - timedelta(days=1)).isoformat()
 
     if streaks['lastDate'] == yesterday:
-        # 연속 유지
+        # Streak continues
         streaks['current'] += 1
     elif streaks['lastDate'] != today:
-        # 연속 끊김
+        # Streak broken
         streaks['current'] = 1
 
     streaks['lastDate'] = today
@@ -76,12 +76,12 @@ def update_streaks(completions: Dict) -> Dict:
     return streaks
 
 def is_completion_event(data: Dict) -> bool:
-    """완료 이벤트인지 확인"""
-    # TaskUpdate로 completed 상태 변경
+    """Check if this is a completion event"""
+    # TaskUpdate with completed status
     if data.get('tool') == 'TaskUpdate':
         return data.get('status') == 'completed'
 
-    # TodoWrite에서 완료 항목 확인
+    # Check completed items in TodoWrite
     if data.get('tool') == 'TodoWrite':
         todos = data.get('todos', [])
         return any(t.get('status') == 'completed' for t in todos)
@@ -89,7 +89,7 @@ def is_completion_event(data: Dict) -> bool:
     return False
 
 def extract_task_info(data: Dict) -> Optional[Dict]:
-    """태스크 정보 추출"""
+    """Extract task information"""
     if data.get('tool') == 'TaskUpdate':
         return {
             'taskId': data.get('taskId'),
@@ -109,64 +109,64 @@ def extract_task_info(data: Dict) -> Optional[Dict]:
     return None
 
 def generate_completion_message(completions: Dict, task_info: Optional[Dict]) -> str:
-    """완료 메시지 생성"""
+    """Generate completion message"""
     today_count = completions['todayCompleted']
     streak = completions['streaks']['current']
 
     messages = []
 
     if task_info:
-        messages.append(f"✅ 태스크 완료: {task_info['subject'][:50]}")
+        messages.append(f"Task completed: {task_info['subject'][:50]}")
 
-    messages.append(f"오늘 {today_count}개 완료")
+    messages.append(f"Today: {today_count} completed")
 
     if streak > 1:
-        messages.append(f"🔥 {streak}일 연속 달성!")
+        messages.append(f"{streak} day streak!")
 
-    # 마일스톤 축하
+    # Milestone celebration
     total = completions['totalCompleted']
     milestones = [10, 50, 100, 500, 1000]
     for m in milestones:
         if total == m:
-            messages.append(f"🎉 {m}개 태스크 완료 달성!")
+            messages.append(f"{m} tasks completed milestone!")
             break
 
     return ' | '.join(messages)
 
 def process_completion(data: Dict) -> Dict:
-    """완료 이벤트 처리"""
+    """Process completion event"""
     completions = load_completions()
 
     if not is_completion_event(data):
         return {
             'status': 'skipped',
-            'message': '완료 이벤트 아님'
+            'message': 'Not a completion event'
         }
 
     task_info = extract_task_info(data)
     now = datetime.now()
     today = now.date().isoformat()
 
-    # 오늘 카운트 리셋 체크
+    # Reset today's count check
     last_date = completions.get('lastCompletedAt', '')[:10]
     if last_date != today:
         completions['todayCompleted'] = 0
 
-    # 완료 기록 업데이트
+    # Update completion records
     completions['totalCompleted'] += 1
     completions['todayCompleted'] += 1
     completions['lastCompletedAt'] = now.isoformat()
 
-    # 히스토리 추가
+    # Add to history
     if task_info:
         completions['completionHistory'].append({
             'timestamp': now.isoformat(),
             **task_info
         })
-        # 최근 100개만 유지
+        # Keep only recent 100 entries
         completions['completionHistory'] = completions['completionHistory'][-100:]
 
-    # 연속 기록 업데이트
+    # Update streak records
     completions['streaks'] = update_streaks(completions)
 
     save_completions(completions)

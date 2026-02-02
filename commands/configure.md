@@ -1,5 +1,5 @@
 ---
-description: hookify 규칙 활성화/비활성화 (Enable or disable hookify rules)
+description: Enable or disable hookify rules
 allowed-tools: ["Glob", "Read", "Edit", "AskUserQuestion", "Skill"]
 ---
 

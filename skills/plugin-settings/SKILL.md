@@ -1,6 +1,6 @@
 ---
 name: plugin-settings
-description: 플러그인 설정 패턴 가이드 (Plugin settings with .local.md files)
+description: Plugin settings pattern guide. Store user-configurable settings in .local.md files with YAML frontmatter.
 version: 0.1.0
 ---
 

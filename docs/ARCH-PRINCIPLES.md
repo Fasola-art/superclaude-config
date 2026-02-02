@@ -1,68 +1,68 @@
-# 시스템 아키텍처 설계 원칙
+# System Architecture Design Principles
 
-> SuperClaude v2.0.9 아키텍처 가이드라인
-
----
-
-## 핵심 원칙
-
-### 1. 단일 진실 공급원 (SSOT)
-```yaml
-principle: "모든 데이터는 단 하나의 출처를 가진다"
-application:
-  - 상태 관리: 중앙 저장소 사용
-  - 설정: settings.json 단일 파일
-  - 타입: 공유 타입 정의
-```
-
-### 2. 관심사 분리 (SoC)
-```yaml
-principle: "각 모듈은 하나의 책임만 가진다"
-application:
-  - UI: 표현 로직만
-  - 비즈니스: 도메인 로직만
-  - 데이터: 저장/조회 로직만
-```
-
-### 3. 느슨한 결합 (Loose Coupling)
-```yaml
-principle: "모듈 간 의존성을 최소화한다"
-application:
-  - 인터페이스 기반 설계
-  - 이벤트 기반 통신
-  - 의존성 주입
-```
-
-### 4. 높은 응집도 (High Cohesion)
-```yaml
-principle: "관련된 기능은 함께 모은다"
-application:
-  - 기능별 폴더 구조
-  - 컴포넌트 단위 모듈화
-  - 관련 로직 동일 파일
-```
+> SuperClaude v2.0.9 Architecture Guidelines
 
 ---
 
-## 계층 구조
+## Core Principles
+
+### 1. Single Source of Truth (SSOT)
+```yaml
+principle: "All data has exactly one authoritative source"
+application:
+  - State management: Use centralized store
+  - Configuration: Single settings.json file
+  - Types: Shared type definitions
+```
+
+### 2. Separation of Concerns (SoC)
+```yaml
+principle: "Each module has only one responsibility"
+application:
+  - UI: Presentation logic only
+  - Business: Domain logic only
+  - Data: Storage/retrieval logic only
+```
+
+### 3. Loose Coupling
+```yaml
+principle: "Minimize dependencies between modules"
+application:
+  - Interface-based design
+  - Event-driven communication
+  - Dependency injection
+```
+
+### 4. High Cohesion
+```yaml
+principle: "Keep related functionality together"
+application:
+  - Feature-based folder structure
+  - Component-level modularization
+  - Related logic in same file
+```
+
+---
+
+## Layer Architecture
 
 ```
 ┌─────────────────────────────────────┐
-│           Presentation              │  UI 컴포넌트
+│           Presentation              │  UI Components
 ├─────────────────────────────────────┤
-│           Application               │  유즈케이스, 서비스
+│           Application               │  Use Cases, Services
 ├─────────────────────────────────────┤
-│             Domain                  │  비즈니스 로직, 엔티티
+│             Domain                  │  Business Logic, Entities
 ├─────────────────────────────────────┤
-│          Infrastructure             │  DB, API, 외부 서비스
+│          Infrastructure             │  DB, API, External Services
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## 파일 구조 패턴
+## File Structure Patterns
 
-### Feature-First (권장)
+### Feature-First (Recommended)
 ```
 src/
 ├── features/
@@ -86,44 +86,44 @@ src/
 
 ---
 
-## 코드 품질 기준
+## Code Quality Standards
 
-### 복잡도 제한
-| 지표 | 최대값 |
-|------|--------|
-| 함수 라인 수 | 50 |
-| 파일 라인 수 | 300 |
-| 순환 복잡도 | 10 |
-| 매개변수 수 | 5 |
+### Complexity Limits
+| Metric                | Max Value |
+|-----------------------|-----------|
+| Function lines        | 50        |
+| File lines            | 300       |
+| Cyclomatic complexity | 10        |
+| Parameter count       | 5         |
 
-### 네이밍 규칙
-| 타입 | 규칙 | 예시 |
-|------|------|------|
-| 컴포넌트 | PascalCase | UserProfile |
-| 함수 | camelCase | getUserById |
-| 상수 | UPPER_SNAKE | MAX_RETRIES |
-| 타입 | PascalCase | UserResponse |
+### Naming Conventions
+| Type      | Convention  | Example      |
+|-----------|-------------|--------------|
+| Component | PascalCase  | UserProfile  |
+| Function  | camelCase   | getUserById  |
+| Constant  | UPPER_SNAKE | MAX_RETRIES  |
+| Type      | PascalCase  | UserResponse |
 
 ---
 
-## 에러 처리 원칙
+## Error Handling Principles
 
-### Never Throws 패턴
+### Never Throws Pattern
 ```typescript
-// ❌ 잘못된 방식
+// BAD
 function getUser(id: string): User {
   if (!id) throw new Error('ID required')
   return fetch(...)
 }
 
-// ✅ 올바른 방식
+// GOOD
 function getUser(id: string): Result<User, UserError> {
   if (!id) return err(UserError.InvalidId)
   return ok(await fetch(...))
 }
 ```
 
-### 에러 타입 정의
+### Error Type Definition
 ```typescript
 type Result<T, E> = Ok<T> | Err<E>
 type Ok<T> = { ok: true; value: T }
@@ -132,19 +132,19 @@ type Err<E> = { ok: false; error: E }
 
 ---
 
-## 성능 원칙
+## Performance Principles
 
-### 지연 로딩
-- 라우트 단위 코드 스플리팅
-- 이미지 lazy loading
-- 컴포넌트 동적 import
+### Lazy Loading
+- Route-level code splitting
+- Image lazy loading
+- Dynamic component imports
 
-### 캐싱 전략
-- API 응답 캐싱
-- 계산 결과 메모이제이션
-- 정적 자산 브라우저 캐시
+### Caching Strategy
+- API response caching
+- Computed result memoization
+- Static asset browser caching
 
-### 최적화 우선순위
-1. 측정 (성능 병목 식별)
-2. 최적화 (가장 큰 영향부터)
-3. 검증 (개선 확인)
+### Optimization Priority
+1. Measure (identify performance bottlenecks)
+2. Optimize (start with highest impact)
+3. Verify (confirm improvements)

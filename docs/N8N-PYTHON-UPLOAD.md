@@ -1,121 +1,121 @@
-# n8n Python Upload 가이드
+# n8n Python Upload Guide
 
-> **버전**: 1.1.0
-> **최종 수정**: 2026-01-30
-> **목적**: SNS 자동화를 위한 n8n 워크플로우 설정 및 활용
+> **Version**: 1.1.0
+> **Last Modified**: 2026-01-30
+> **Purpose**: n8n workflow setup and usage for SNS automation
 
 ---
 
-## 🚀 5분 퀵스타트
+## 5-Minute Quickstart
 
-### Step 1: n8n 접속
+### Step 1: Access n8n
 ```bash
-# Docker로 실행 중인 경우
+# If running with Docker
 docker start n8n
 
-# 브라우저에서 접속
+# Access in browser
 open http://localhost:5678
 ```
 
-### Step 2: 워크플로우 Import
-1. Workflows → **Import from File** 클릭
-2. `~/.claude/modules/sns-automation/n8n-workflows/` 에서 JSON 선택
-3. Credentials 연결 (아래 체크리스트 참조)
+### Step 2: Import Workflow
+1. Workflows → Click **Import from File**
+2. Select JSON from `~/.claude/modules/sns-automation/n8n-workflows/`
+3. Connect Credentials (see checklist below)
 
-### Step 3: 테스트 실행
-1. 워크플로우 열기 → **Test Workflow** 클릭
-2. 결과 확인 후 **Active** 토글 ON
-
----
-
-## 📋 워크플로우 요약
-
-| # | 워크플로우 | 트리거 | Python 코드 기능 | 상태 |
-|---|-----------|--------|-----------------|------|
-| 1 | 콘텐츠 배포 | Webhook | 플랫폼 설정, AI 캡션 파싱, API 호출 | ✅ |
-| 2 | 인게이지먼트 | 15분마다 | 댓글 수집, 분류, 자동 응답 | ✅ |
-| 3 | 트렌드 분석 | 매일 06:00 | 트렌드 수집, 브리핑, 아이디어 | ✅ |
-
-> ✅ = 워크플로우 JSON 생성 완료 (`~/.claude/modules/sns-automation/n8n-workflows/`)
+### Step 3: Test Run
+1. Open workflow → Click **Test Workflow**
+2. Verify results → Toggle **Active** ON
 
 ---
 
-## ✅ Credentials 설정 체크리스트
+## Workflow Summary
 
-### 필수 (Required)
+| #   | Workflow             | Trigger     | Python Code Function                            | Status |
+|-----|----------------------|-------------|-------------------------------------------------|--------|
+| 1   | Content Distribution | Webhook     | Platform config, AI caption parsing, API calls  | ✅     |
+| 2   | Engagement           | Every 15min | Comment collection, classification, auto-response | ✅     |
+| 3   | Trend Analysis       | Daily 06:00 | Trend collection, briefing, ideas               | ✅     |
 
-| Credential | 설정 방법 | 확인 |
-|------------|----------|------|
-| **OpenAI API** | Settings → Credentials → OpenAI | ☐ |
-| **Telegram Bot** | @BotFather에서 토큰 발급 | ☐ |
-| **Google Sheets** | OAuth2 또는 Service Account | ☐ |
-
-### 선택 (Optional)
-
-| Credential | 설정 방법 | 확인 |
-|------------|----------|------|
-| **Instagram** | Meta Business Suite에서 발급 | ☐ |
-| **TikTok** | TikTok for Developers에서 발급 | ☐ |
-| **Twitter** | Twitter Developer Portal | ☐ |
-| **YouTube** | Google Cloud Console | ☐ |
+> ✅ = Workflow JSON created (`~/.claude/modules/sns-automation/n8n-workflows/`)
 
 ---
 
-## 🔧 환경변수 설정
+## Credentials Setup Checklist
 
-### n8n Settings에서 설정
+### Required
+
+| Credential         | Setup Method                      | Check |
+|--------------------|-----------------------------------|-------|
+| **OpenAI API**     | Settings → Credentials → OpenAI   | ☐     |
+| **Telegram Bot**   | Get token from @BotFather         | ☐     |
+| **Google Sheets**  | OAuth2 or Service Account         | ☐     |
+
+### Optional
+
+| Credential    | Setup Method                   | Check |
+|---------------|--------------------------------|-------|
+| **Instagram** | Get from Meta Business Suite   | ☐     |
+| **TikTok**    | Get from TikTok for Developers | ☐     |
+| **Twitter**   | Twitter Developer Portal       | ☐     |
+| **YouTube**   | Google Cloud Console           | ☐     |
+
+---
+
+## Environment Variables Setup
+
+### Set in n8n Settings
 
 ```bash
-# 필수
+# Required
 OPENAI_API_KEY=sk-xxx
 
-# Instagram (선택)
+# Instagram (Optional)
 INSTAGRAM_ACCESS_TOKEN=xxx
 INSTAGRAM_BUSINESS_ID=xxx
 
-# Telegram (필수)
+# Telegram (Required)
 TELEGRAM_BOT_TOKEN=xxx
 TELEGRAM_CHAT_ID=xxx
 
-# Google Sheets (필수)
+# Google Sheets (Required)
 GOOGLE_SHEET_ID=xxx
 
-# TikTok (선택)
+# TikTok (Optional)
 TIKTOK_ACCESS_TOKEN=xxx
 
-# Twitter (선택)
+# Twitter (Optional)
 TWITTER_BEARER_TOKEN=xxx
 ```
 
-### .env 파일 템플릿
+### .env File Template
 
 ```bash
-# 경로: ~/.claude/modules/sns-automation/.env
+# Path: ~/.claude/modules/sns-automation/.env
 cp ~/.claude/modules/sns-automation/.env.example ~/.claude/modules/sns-automation/.env
 ```
 
 ---
 
-## 🐍 Python Code 노드 패턴
+## Python Code Node Patterns
 
-### 기본 구조
+### Basic Structure
 
 ```python
-# 입력 데이터 접근
+# Access input data
 data = _input.first().json
 
-# 환경변수 접근
+# Access environment variables
 token = _env.get('INSTAGRAM_ACCESS_TOKEN', '')
 
-# API 호출
+# API call
 import requests
 response = requests.post(url, headers=headers, json=payload)
 
-# 에러 처리
+# Error handling
 if response.status_code != 200:
     return {"json": {"error": response.text, "status": "failed"}}
 
-# 성공 반환
+# Success return
 return {
     "json": {
         "status": "success",
@@ -124,14 +124,14 @@ return {
 }
 ```
 
-### 에러 처리 패턴
+### Error Handling Pattern
 
 ```python
 try:
     result = api_call()
     return {"json": {"status": "success", "data": result}}
 except requests.exceptions.Timeout:
-    return {"json": {"status": "timeout", "error": "API 타임아웃"}}
+    return {"json": {"status": "timeout", "error": "API timeout"}}
 except requests.exceptions.RequestException as e:
     return {"json": {"status": "error", "error": str(e)}}
 except Exception as e:
@@ -140,113 +140,113 @@ except Exception as e:
 
 ---
 
-## 📁 파일 구조
+## File Structure
 
 ```
 ~/.claude/modules/sns-automation/
 ├── n8n-workflows/
-│   ├── 01-content-distributor.json    # 콘텐츠 배포
-│   ├── 02-engagement-automation.json  # 인게이지먼트
-│   ├── 03-trend-analyzer.json         # 트렌드 분석
-│   └── README.md                      # 워크플로우 설명
-├── .env.example                       # 환경변수 템플릿
-├── SKILL.md                           # 스킬 문서
-└── README.md                          # 모듈 개요
+│   ├── 01-content-distributor.json    # Content distribution
+│   ├── 02-engagement-automation.json  # Engagement
+│   ├── 03-trend-analyzer.json         # Trend analysis
+│   └── README.md                      # Workflow description
+├── .env.example                       # Environment variable template
+├── SKILL.md                           # Skill document
+└── README.md                          # Module overview
 ```
 
 ---
 
-## 📝 워크플로우 상세
+## Workflow Details
 
-### 01. 콘텐츠 배포 (content-distributor)
+### 01. Content Distribution (content-distributor)
 
-| 항목 | 내용 |
-|------|------|
-| **트리거** | Webhook (POST) |
-| **입력** | `{media_url, caption, platforms[]}` |
-| **처리** | AI 캡션 최적화 → 플랫폼별 변환 → API 호출 |
-| **출력** | 각 플랫폼 업로드 결과 |
+| Item           | Content                                                    |
+|----------------|------------------------------------------------------------|
+| **Trigger**    | Webhook (POST)                                             |
+| **Input**      | `{media_url, caption, platforms[]}`                        |
+| **Processing** | AI caption optimization → Platform conversion → API call   |
+| **Output**     | Upload results for each platform                           |
 
-**테스트 방법**:
+**Test Method**:
 ```bash
 curl -X POST http://localhost:5678/webhook/content \
   -H "Content-Type: application/json" \
-  -d '{"media_url": "https://...", "caption": "테스트", "platforms": ["instagram"]}'
+  -d '{"media_url": "https://...", "caption": "Test", "platforms": ["instagram"]}'
 ```
 
-### 02. 인게이지먼트 자동화 (engagement-automation)
+### 02. Engagement Automation (engagement-automation)
 
-| 항목 | 내용 |
-|------|------|
-| **트리거** | Schedule (15분) |
-| **입력** | 없음 (자동 수집) |
-| **처리** | 댓글 수집 → AI 분류 → 자동 응답 |
-| **출력** | 처리된 댓글 수, 응답 내역 |
+| Item           | Content                                              |
+|----------------|------------------------------------------------------|
+| **Trigger**    | Schedule (15min)                                     |
+| **Input**      | None (auto-collect)                                  |
+| **Processing** | Collect comments → AI classification → Auto-response |
+| **Output**     | Processed comment count, response history            |
 
-### 03. 트렌드 분석 (trend-analyzer)
+### 03. Trend Analysis (trend-analyzer)
 
-| 항목 | 내용 |
-|------|------|
-| **트리거** | Schedule (매일 06:00) |
-| **입력** | 없음 (자동 수집) |
-| **처리** | 트렌드 수집 → 통합 → AI 브리핑 |
-| **출력** | Telegram 알림 + Google Sheets 기록 |
-
----
-
-## ⚠️ 트러블슈팅
-
-### 자주 발생하는 오류
-
-| 오류 | 원인 | 해결 |
-|------|------|------|
-| `401 Unauthorized` | API 키 만료/잘못됨 | Credentials 재설정 |
-| `429 Too Many Requests` | Rate Limit 초과 | 호출 간격 늘리기 |
-| `500 Internal Error` | 플랫폼 서버 오류 | 재시도 로직 추가 |
-| `Timeout` | 네트워크 지연 | 타임아웃 값 증가 |
-
-### 디버깅 방법
-
-1. **n8n 로그 확인**: `docker logs n8n`
-2. **노드별 실행**: Execute Node로 단계별 확인
-3. **Webhook 테스트**: Postman 또는 curl 사용
+| Item           | Content                                      |
+|----------------|----------------------------------------------|
+| **Trigger**    | Schedule (Daily 06:00)                       |
+| **Input**      | None (auto-collect)                          |
+| **Processing** | Collect trends → Integrate → AI briefing     |
+| **Output**     | Telegram notification + Google Sheets record |
 
 ---
 
-## 🔗 관련 문서
+## Troubleshooting
 
-| 문서 | 경로 | 설명 |
-|------|------|------|
-| SNS 자동화 스킬 | `~/.claude/skills/sns-automation/SKILL.md` | 전체 아키텍처 |
-| 지침 체크리스트 | `~/.claude/docs/INSTRUCTION-FILE-CHECKLIST.md` | 문서 품질 기준 |
-| n8n 공식 문서 | https://docs.n8n.io | n8n 레퍼런스 |
+### Common Errors
 
----
+| Error                   | Cause                   | Solution                  |
+|-------------------------|-------------------------|---------------------------|
+| `401 Unauthorized`      | API key expired/invalid | Re-configure Credentials  |
+| `429 Too Many Requests` | Rate Limit exceeded     | Increase call interval    |
+| `500 Internal Error`    | Platform server error   | Add retry logic           |
+| `Timeout`               | Network delay           | Increase timeout value    |
 
-## 📊 자가 진단 체크리스트
+### Debugging Methods
 
-### 설정 완료 확인
-
-- [ ] n8n이 정상 실행 중
-- [ ] 필수 Credentials 설정 완료 (OpenAI, Telegram, Google Sheets)
-- [ ] 환경변수 설정 완료
-- [ ] 워크플로우 Import 완료
-- [ ] 테스트 실행 성공
-
-### 운영 점검
-
-- [ ] 워크플로우 Active 상태
-- [ ] Telegram 알림 수신 확인
-- [ ] 에러 로그 모니터링 설정
+1. **Check n8n logs**: `docker logs n8n`
+2. **Execute node by node**: Step-by-step verification with Execute Node
+3. **Webhook test**: Use Postman or curl
 
 ---
 
-## 변경 이력
+## Related Documents
 
-| 버전 | 날짜 | 변경 내용 |
-|------|------|----------|
-| 1.1.0 | 2026-01-30 | 퀵스타트, 체크리스트, 트러블슈팅 추가 |
-| 1.0.0 | 2026-01-30 | 초기 버전 |
+| Document              | Path                                         | Description                |
+|-----------------------|----------------------------------------------|----------------------------|
+| SNS Automation Skill  | `~/.claude/skills/sns-automation/SKILL.md`   | Full architecture          |
+| Instruction Checklist | `~/.claude/docs/INSTRUCTION-FILE-CHECKLIST.md` | Document quality standards |
+| n8n Official Docs     | https://docs.n8n.io                          | n8n reference              |
+
+---
+
+## Self-Diagnostic Checklist
+
+### Setup Completion Check
+
+- [ ] n8n running normally
+- [ ] Required Credentials configured (OpenAI, Telegram, Google Sheets)
+- [ ] Environment variables configured
+- [ ] Workflow Import completed
+- [ ] Test run successful
+
+### Operations Check
+
+- [ ] Workflow in Active state
+- [ ] Telegram notification reception confirmed
+- [ ] Error log monitoring configured
+
+---
+
+## Changelog
+
+| Version | Date       | Changes                                      |
+|---------|------------|----------------------------------------------|
+| 1.1.0   | 2026-01-30 | Added quickstart, checklist, troubleshooting |
+| 1.0.0   | 2026-01-30 | Initial version                              |
 
 ---
 

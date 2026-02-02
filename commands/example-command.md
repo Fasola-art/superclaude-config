@@ -1,5 +1,5 @@
 ---
-description: 슬래시 명령어 예제 (Example slash command demonstration)
+description: Example slash command demonstration
 argument-hint: <required-arg> [optional-arg]
 allowed-tools: [Read, Glob, Grep, Bash]
 ---

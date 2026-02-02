@@ -1,53 +1,53 @@
 ---
-description: "프로젝트 진행 상태 확인 (Check project status)"
+description: "Check project status"
 ---
 
-# 프로젝트 상태
+# Project Status
 
-현재 프로젝트의 진행 상황을 확인합니다.
+Check current project progress.
 
-## 동작
+## Behavior
 
-1. `.planning/STATE.md` 파일 로드
-2. `todo.md` 태스크 상태 집계
-3. 마일스톤별 진행률 계산
-4. 최근 변경 파일 분석
-5. 다음 우선순위 태스크 제안
+1. Load `.planning/STATE.md` file
+2. Aggregate task status from `todo.md`
+3. Calculate progress per milestone
+4. Analyze recently modified files
+5. Suggest next priority tasks
 
-## 표시 정보
+## Displayed Information
 
-- 전체 진행률
-- 마일스톤별 상태
-- Steel Thread 완료율
-- 최근 완료 태스크
-- 다음 작업 제안
+- Overall progress
+- Status per milestone
+- Steel Thread completion rate
+- Recently completed tasks
+- Next work suggestions
 
-## 사용 예시
+## Usage Example
 
 ```
 /project-status
 ```
 
-## 출력 형식
+## Output Format
 
 ```
-📊 프로젝트 상태
+📊 Project Status
 
-프로젝트: [프로젝트명]
-전체 진행률: ████████░░░░░░░░░░░░ 43%
+Project: [Project name]
+Overall Progress: ████████░░░░░░░░░░░░ 43%
 
-마일스톤:
-├── M1: 기초 설정 ████████████████████ 100%
-├── M2: 핵심 기능 ████████████░░░░░░░░ 60%
-└── M3: 통합/테스트 ░░░░░░░░░░░░░░░░░░░░ 0%
+Milestones:
+├── M1: Foundation    ████████████████████ 100%
+├── M2: Core Features ████████████░░░░░░░░ 60%
+└── M3: Integration   ░░░░░░░░░░░░░░░░░░░░ 0%
 
 Steel Thread: ████████████████░░░░ 80%
 
-최근 완료:
-- [x] API 엔드포인트 구현
-- [x] 데이터베이스 스키마
+Recently Completed:
+- [x] API endpoint implementation
+- [x] Database schema
 
-다음 우선순위:
-1. [ ] 프론트엔드 컴포넌트 (M2)
-2. [ ] 테스트 작성 (M2)
+Next Priority:
+1. [ ] Frontend components (M2)
+2. [ ] Write tests (M2)
 ```

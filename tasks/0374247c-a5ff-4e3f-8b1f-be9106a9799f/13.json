@@ -1,0 +1,9 @@
+{
+  "id": "13",
+  "subject": "JARVIS 기능: 이벤트 계획 (Plan)",
+  "description": "\"/j 데이트 코스 짜줘\" \"/j 제주도 여행 플랜\" - 선호도 분석, 시간대별 코스 구성, 체크리스트 생성",
+  "activeForm": "이벤트 계획 기능 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

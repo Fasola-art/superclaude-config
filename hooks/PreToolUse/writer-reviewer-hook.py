@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
 writer-reviewer-hook.py
-Writer-Reviewer Loop 활성화 훅
+Writer-Reviewer Loop activation hook
 
-트리거: PreToolUse
-매처: Edit|Write|MultiEdit
-타임아웃: 30000ms
+Trigger: PreToolUse
+Matcher: Edit|Write|MultiEdit
+Timeout: 30000ms
 """
 
 import json
@@ -18,7 +18,7 @@ from typing import List, Dict, Optional
 CLAUDE_DIR = Path.home() / '.claude'
 SETTINGS_FILE = CLAUDE_DIR / 'settings.json'
 
-# 기본 설정
+# Default configuration
 DEFAULT_CONFIG = {
     'targetScore': 0.85,
     'maxIterations': 10,
@@ -31,7 +31,7 @@ DEFAULT_CONFIG = {
     }
 }
 
-# 코드 타입 감지 패턴
+# Code type detection patterns
 CODE_TYPE_PATTERNS = {
     'frontend': {
         'keywords': ['component', 'tsx', 'jsx', 'ui', 'form', 'button', 'modal'],
@@ -55,7 +55,7 @@ CODE_TYPE_PATTERNS = {
     }
 }
 
-# 스킵 조건
+# Skip conditions
 SKIP_CONDITIONS = [
     'git', 'config', '.md', '.json', '.env', 'package.json',
     'tsconfig', 'eslint', 'prettier', '.lock'
@@ -63,7 +63,7 @@ SKIP_CONDITIONS = [
 
 
 def load_settings() -> dict:
-    """설정 로드"""
+    """Load settings"""
     try:
         if SETTINGS_FILE.exists():
             data = json.loads(SETTINGS_FILE.read_text())
@@ -74,32 +74,32 @@ def load_settings() -> dict:
 
 
 def detect_code_type(file_path: str, content: str = '') -> str:
-    """코드 타입 감지"""
+    """Detect code type"""
     combined = f"{file_path} {content}".lower()
 
     for code_type, patterns in CODE_TYPE_PATTERNS.items():
-        # 키워드 매칭
+        # Keyword matching
         if any(kw in combined for kw in patterns['keywords']):
             return code_type
-        # 파일 패턴 매칭
+        # File pattern matching
         if any(re.search(p, file_path) for p in patterns['file_patterns']):
             return code_type
 
-    return 'utility'  # 기본값
+    return 'utility'  # Default
 
 
 def should_skip_review(file_path: str, tool_name: str) -> bool:
-    """리뷰 스킵 여부 결정"""
-    # 특정 파일 유형 스킵
+    """Determine whether to skip review"""
+    # Skip certain file types
     if any(skip in file_path.lower() for skip in SKIP_CONDITIONS):
         return True
 
-    # 단일 라인 수정은 스킵 (실제 구현에서 확인)
+    # Skip single line edits (checked in actual implementation)
     return False
 
 
 def get_weights_for_type(code_type: str) -> dict:
-    """코드 타입에 따른 가중치 반환"""
+    """Return weights based on code type"""
     if code_type in CODE_TYPE_PATTERNS:
         return CODE_TYPE_PATTERNS[code_type]['weights']
     return DEFAULT_CONFIG['agents']
@@ -116,12 +116,12 @@ class ReviewConfig:
 
 
 def analyze_tool_call(data: dict) -> ReviewConfig:
-    """도구 호출 분석 및 리뷰 설정 결정"""
+    """Analyze tool call and determine review configuration"""
     tool_name = data.get('tool', '')
     file_path = data.get('file_path', data.get('path', ''))
     content = data.get('content', data.get('new_string', ''))
 
-    # 스킵 여부 확인
+    # Check skip condition
     if should_skip_review(file_path, tool_name):
         return ReviewConfig(
             enabled=False,
@@ -129,7 +129,7 @@ def analyze_tool_call(data: dict) -> ReviewConfig:
             weights={},
             targetScore=0,
             maxIterations=0,
-            message='리뷰 스킵 (설정/문서 파일)'
+            message='Review skipped (config/doc file)'
         )
 
     settings = load_settings()
@@ -142,7 +142,7 @@ def analyze_tool_call(data: dict) -> ReviewConfig:
         weights=weights,
         targetScore=settings.get('targetScore', 0.85),
         maxIterations=settings.get('maxIterations', 10),
-        message=f'Writer-Reviewer 활성화: {code_type} 타입'
+        message=f'Writer-Reviewer enabled: {code_type} type'
     )
 
 

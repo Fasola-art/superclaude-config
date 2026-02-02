@@ -1,23 +1,23 @@
 ---
-description: "문제 해결 (Troubleshoot issues)"
+description: "Troubleshoot issues"
 argument-hint: "[issue]"
 ---
 
-# 문제 해결
+# Troubleshoot
 
-발생한 문제를 진단하고 해결합니다.
+Diagnose and resolve issues.
 
-## 사용
+## Usage
 
 ```
-/sc:troubleshoot           # 최근 에러 분석
+/sc:troubleshoot           # Analyze recent errors
 /sc:troubleshoot "build failed"
-/sc:troubleshoot --logs    # 로그 분석
+/sc:troubleshoot --logs    # Analyze logs
 ```
 
-## 동작
+## Behavior
 
-1. 에러 분석
-2. Error KB 검색
-3. 해결책 제안
-4. 자동 수정 시도
+1. Analyze error
+2. Search Error KB
+3. Suggest solutions
+4. Attempt auto-fix

@@ -1,26 +1,26 @@
-# React 에러 패턴
+# React Error Patterns
 
-> **카테고리**: react
-> **갱신일**: 2026-01-30
+> **Category**: react
+> **Updated**: 2026-01-30
 
 ---
 
-## 🔴 Critical 에러
+## 🔴 Critical Errors
 
 ### Hydration Mismatch
 
-**메시지**: `Text content does not match server-rendered HTML`
+**Message**: `Text content does not match server-rendered HTML`
 
-**원인**: 서버/클라이언트 렌더링 불일치
+**Cause**: Server/client rendering mismatch
 
-**해결책**:
+**Solutions**:
 ```typescript
-// ❌ 원인: 클라이언트 전용 값
+// ❌ Cause: Client-only values
 function Component() {
-  return <div>{new Date().toLocaleString()}</div>;  // 서버/클라이언트 다름
+  return <div>{new Date().toLocaleString()}</div>;  // Different on server/client
 }
 
-// ✅ 해결 1: useEffect
+// ✅ Fix 1: useEffect
 function Component() {
   const [time, setTime] = useState<string>();
   useEffect(() => {
@@ -29,104 +29,104 @@ function Component() {
   return <div>{time}</div>;
 }
 
-// ✅ 해결 2: suppressHydrationWarning
+// ✅ Fix 2: suppressHydrationWarning
 <time suppressHydrationWarning>
   {new Date().toLocaleString()}
 </time>
 
-// ✅ 해결 3: dynamic import (ssr: false)
+// ✅ Fix 3: dynamic import (ssr: false)
 const ClientOnly = dynamic(() => import('./ClientComponent'), {
   ssr: false
 });
 ```
 
-**예방**: 서버/클라이언트 분기 명확히
+**Prevention**: Clearly separate server/client logic
 
 ---
 
 ### Invalid Hook Call
 
-**메시지**: `Hooks can only be called inside of the body of a function component`
+**Message**: `Hooks can only be called inside of the body of a function component`
 
-**원인**: Hook 규칙 위반
+**Cause**: Hook rules violation
 
-**해결책**:
+**Solutions**:
 ```typescript
-// ❌ 원인 1: 조건문 안에서 Hook
+// ❌ Cause 1: Hook inside conditional
 if (condition) {
-  const [state, setState] = useState();  // 에러
+  const [state, setState] = useState();  // Error
 }
 
-// ✅ 해결: 최상위에서 호출
+// ✅ Fix: Call at top level
 const [state, setState] = useState();
 if (condition) {
-  // state 사용
+  // use state
 }
 
-// ❌ 원인 2: 일반 함수에서 Hook
+// ❌ Cause 2: Hook in regular function
 function helper() {
-  const [state, setState] = useState();  // 에러
+  const [state, setState] = useState();  // Error
 }
 
-// ✅ 해결: 커스텀 훅으로 변경 (use 접두사)
+// ✅ Fix: Convert to custom hook (use prefix)
 function useHelper() {
   const [state, setState] = useState();
   return state;
 }
 ```
 
-**예방**: ESLint `react-hooks/rules-of-hooks` 활성화
+**Prevention**: Enable ESLint `react-hooks/rules-of-hooks`
 
 ---
 
 ### Too Many Re-renders
 
-**메시지**: `Too many re-renders. React limits the number of renders`
+**Message**: `Too many re-renders. React limits the number of renders`
 
-**원인**: 렌더링 중 setState 호출
+**Cause**: setState called during render
 
-**해결책**:
+**Solutions**:
 ```typescript
-// ❌ 원인: 렌더링 중 상태 변경
+// ❌ Cause: State change during render
 function Component() {
   const [count, setCount] = useState(0);
-  setCount(count + 1);  // 무한 루프
+  setCount(count + 1);  // Infinite loop
   return <div>{count}</div>;
 }
 
-// ✅ 해결 1: useEffect 사용
+// ✅ Fix 1: Use useEffect
 useEffect(() => {
   setCount(c => c + 1);
 }, [dependency]);
 
-// ✅ 해결 2: 이벤트 핸들러로 이동
+// ✅ Fix 2: Move to event handler
 <button onClick={() => setCount(c => c + 1)}>Increment</button>
 
-// ❌ 원인 2: 인라인 함수가 상태 변경
-<Child onChange={setData(newData)} />  // 즉시 실행됨
+// ❌ Cause 2: Inline function changes state
+<Child onChange={setData(newData)} />  // Executes immediately
 
-// ✅ 해결: 화살표 함수로 래핑
+// ✅ Fix: Wrap in arrow function
 <Child onChange={() => setData(newData)} />
 ```
 
 ---
 
-## 🟠 Common 에러
+## 🟠 Common Errors
 
 ### Cannot update unmounted component
 
-**메시지**: `Can't perform a React state update on an unmounted component`
+**Message**: `Can't perform a React state update on an unmounted component`
 
-**원인**: 언마운트 후 setState 호출
+**Cause**: setState called after unmount
 
-**해결책**:
+**Solutions**:
 ```typescript
-// ❌ 원인: cleanup 없음
+// ❌ Cause: No cleanup
 useEffect(() => {
   fetchData().then(data => setData(data));
 }, []);
 
-// ✅ 해결 1: AbortController
+// ✅ Fix 1: AbortController
 useEffect(() => {
   const controller = new AbortController();
 
@@ -139,7 +139,7 @@ useEffect(() => {
   return () => controller.abort();
 }, []);
 
-// ✅ 해결 2: isMounted 플래그 (덜 권장)
+// ✅ Fix 2: isMounted flag (less recommended)
 useEffect(() => {
   let isMounted = true;
   fetchData().then(data => {
@@ -153,17 +153,17 @@ useEffect(() => {
 
 ### Each child should have a unique key
 
-**원인**: 리스트 렌더링 시 key 누락
+**Cause**: Missing key in list rendering
 
-**해결책**:
+**Solutions**:
 ```typescript
-// ❌ 에러
+// ❌ Error
 {items.map(item => <Item {...item} />)}
 
-// ❌ 안티패턴: index를 key로
+// ❌ Anti-pattern: index as key
 {items.map((item, index) => <Item key={index} {...item} />)}
 
-// ✅ 해결: 고유 ID 사용
+// ✅ Fix: Use unique ID
 {items.map(item => <Item key={item.id} {...item} />)}
 ```
 
@@ -171,23 +171,23 @@ useEffect(() => {
 
 ### Cannot read property of undefined
 
-**원인**: 데이터 로딩 전 접근
+**Cause**: Accessing data before loaded
 
-**해결책**:
+**Solutions**:
 ```typescript
-// ❌ 에러
+// ❌ Error
 function Component({ user }) {
-  return <div>{user.name}</div>;  // user가 undefined일 수 있음
+  return <div>{user.name}</div>;  // user may be undefined
 }
 
-// ✅ 해결 1: optional chaining
+// ✅ Fix 1: Optional chaining
 return <div>{user?.name}</div>;
 
-// ✅ 해결 2: 조기 반환
+// ✅ Fix 2: Early return
 if (!user) return <Loading />;
 return <div>{user.name}</div>;
 
-// ✅ 해결 3: 기본값
+// ✅ Fix 3: Default value
 function Component({ user = { name: 'Guest' } }) {
   return <div>{user.name}</div>;
 }
@@ -195,21 +195,21 @@ function Component({ user = { name: 'Guest' } }) {
 
 ---
 
-## 🟡 Warning
+## 🟡 Warnings
 
 ### React does not recognize the X prop
 
-**원인**: DOM 요소에 커스텀 prop 전달
+**Cause**: Custom prop passed to DOM element
 
-**해결책**:
+**Solutions**:
 ```typescript
-// ❌ 경고
-<div isActive={true}>...</div>  // isActive는 DOM 속성이 아님
+// ❌ Warning
+<div isActive={true}>...</div>  // isActive is not a DOM attribute
 
-// ✅ 해결 1: data- 접두사
+// ✅ Fix 1: data- prefix
 <div data-active={true}>...</div>
 
-// ✅ 해결 2: 구조분해로 필터링
+// ✅ Fix 2: Filter with destructuring
 const { isActive, ...domProps } = props;
 <div {...domProps}>...</div>
 ```
@@ -218,54 +218,54 @@ const { isActive, ...domProps } = props;
 
 ### useEffect has missing dependencies
 
-**원인**: 의존성 배열 누락
+**Cause**: Missing dependency array items
 
-**해결책**:
+**Solutions**:
 ```typescript
-// ⚠️ 경고
+// ⚠️ Warning
 useEffect(() => {
   fetchUser(userId);
-}, []);  // userId 누락
+}, []);  // userId missing
 
-// ✅ 해결 1: 의존성 추가
+// ✅ Fix 1: Add dependency
 useEffect(() => {
   fetchUser(userId);
 }, [userId]);
 
-// ✅ 해결 2: 의도적 생략 (주석 필수)
+// ✅ Fix 2: Intentional omission (comment required)
 useEffect(() => {
   fetchUser(userId);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);  // 초기 로드만 의도
+}, []);  // Intentional: initial load only
 ```
 
 ---
 
-## 📊 에러 빈도
+## 📊 Error Frequency
 
-| 에러 | 빈도 | 심각도 |
-|------|------|--------|
-| Hydration Mismatch | 높음 | 높음 |
-| Invalid Hook Call | 중간 | 높음 |
-| Too Many Re-renders | 중간 | 높음 |
-| Missing Key | 높음 | 낮음 |
-| Missing Dependencies | 높음 | 낮음 |
+| Error | Frequency | Severity |
+|-------|-----------|----------|
+| Hydration Mismatch | High | High |
+| Invalid Hook Call | Medium | High |
+| Too Many Re-renders | Medium | High |
+| Missing Key | High | Low |
+| Missing Dependencies | High | Low |
 
 ---
 
-## 🔧 디버깅 도구
+## 🔧 Debugging Tools
 
 ```bash
 # React DevTools
-# 크롬 확장 설치
+# Install Chrome extension
 
-# Strict Mode 활성화 (이중 렌더링으로 버그 발견)
+# Strict Mode (detects bugs via double rendering)
 <StrictMode>
   <App />
 </StrictMode>
 
-# 프로파일러
-# React DevTools > Profiler 탭
+# Profiler
+# React DevTools > Profiler tab
 ```
 
 ---

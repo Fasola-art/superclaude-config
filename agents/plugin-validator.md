@@ -1,6 +1,6 @@
 ---
 name: plugin-validator
-description: 플러그인 구조 검증 (Validate plugin structure and configuration)
+description: Plugin structure validation (Validate plugin structure and configuration)
 
 <example>
 Context: User finished creating a new plugin
@@ -179,6 +179,3 @@ Location: [path]
 - Multiple validation errors: Group by file, prioritize critical
 - Plugin not found: Clear error message with guidance
 - Corrupted files: Skip and report, continue validation
-```
-
-Excellent work! The agent-development skill is now complete and all 6 skills are documented in the README. Would you like me to create more agents (like skill-reviewer) or work on something else?

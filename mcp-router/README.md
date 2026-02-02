@@ -1,24 +1,24 @@
 # MCP Router
 
-SuperClaude v2.0.9 MCP 라우터 시스템
+SuperClaude v2.0.9 MCP Router System
 
-## 개요
+## Overview
 
-MCP (Model Context Protocol) 서버들을 관리하고 요청을 라우팅하는 시스템입니다.
-Mac Studio Ultra M2의 24 CPU 코어를 활용한 병렬 처리를 지원합니다.
+A system that manages MCP (Model Context Protocol) servers and routes requests.
+Supports parallel processing utilizing Mac Studio Ultra M2's 24 CPU cores.
 
-## 구성 요소
+## Components
 
 ```
 mcp-router/
-├── server.py     # 메인 라우터 서버
-├── client.py     # 클라이언트 유틸리티
-└── README.md     # 이 문서
+├── server.py     # Main router server
+├── client.py     # Client utility
+└── README.md     # This document
 ```
 
-## 설정
+## Configuration
 
-`~/.claude/mcp.json` 파일에서 MCP 서버를 설정합니다:
+Configure MCP servers in `~/.claude/mcp.json`:
 
 ```json
 {
@@ -40,41 +40,41 @@ mcp-router/
 }
 ```
 
-## 사용법
+## Usage
 
-### 서버 시작
+### Starting the Server
 
 ```bash
 python ~/.claude/mcp-router/server.py
 ```
 
-### 클라이언트 사용
+### Using the Client
 
 ```bash
-# 상태 확인
+# Check status
 python ~/.claude/mcp-router/client.py status
 
-# 기능 호출
+# Call function
 python ~/.claude/mcp-router/client.py call filesystem '{"action": "list"}'
 ```
 
-## 로드 밸런싱 전략
+## Load Balancing Strategies
 
-- **weighted_round_robin**: 우선순위 기반 라운드 로빈 (기본값)
-- **least_latency**: 가장 낮은 지연시간 서버 선택
+- **weighted_round_robin**: Priority-based round robin (default)
+- **least_latency**: Select server with lowest latency
 
-## 상태 코드
+## Status Codes
 
-| 상태 | 설명 |
-|------|------|
-| HEALTHY | 정상 동작 |
-| DEGRADED | 일부 기능 저하 |
-| UNHEALTHY | 비정상 상태 |
-| OFFLINE | 오프라인 |
-| UNKNOWN | 상태 미확인 |
+| Status | Description |
+|--------|-------------|
+| HEALTHY | Operating normally |
+| DEGRADED | Partial functionality |
+| UNHEALTHY | Abnormal state |
+| OFFLINE | Offline |
+| UNKNOWN | Status unknown |
 
-## Mac Studio 최적화
+## Mac Studio Optimization
 
-- 동시 서버 수: 최대 24개 (CPU 코어 수)
-- 비동기 I/O 활용
-- 메모리 효율적 상태 관리
+- Max concurrent servers: 24 (CPU core count)
+- Async I/O utilization
+- Memory-efficient state management

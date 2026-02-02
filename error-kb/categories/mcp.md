@@ -1,40 +1,40 @@
-# MCP 에러 패턴
+# MCP Error Patterns
 
-> **카테고리**: mcp-protocol
-> **갱신일**: 2026-01-30
+> **Category**: mcp-protocol
+> **Updated**: 2026-01-30
 
 ---
 
-## 🔴 Critical 에러
+## 🔴 Critical Errors
 
-### 서버 시작 실패
+### Server Start Failed
 
-**메시지**: `MCP 서버 시작 실패 [서버명]`
+**Message**: `MCP server start failed [server-name]`
 
-**원인**:
-1. 패키지 미설치
-2. 잘못된 설정
-3. 권한 문제
+**Causes**:
+1. Package not installed
+2. Invalid configuration
+3. Permission issue
 
-**해결책**:
+**Solutions**:
 ```bash
-# 1. 패키지 확인
+# 1. Check package
 npm list -g | grep mcp
 
-# 2. 수동 실행 테스트
-npx @서버명/mcp --debug
+# 2. Manual execution test
+npx @server-name/mcp --debug
 
-# 3. 설정 확인
+# 3. Check configuration
 cat ~/.claude/mcp.json
 
-# 4. 로그 확인
+# 4. Check logs
 tail -f ~/.claude/logs/mcp.log
 ```
 
-**예시 해결**:
+**Example fix**:
 ```json
-// 문제: gdrive 서버 실패
-// 해결: @isaacphi/mcp-gdrive로 대체
+// Problem: gdrive server failed
+// Fix: Replace with @isaacphi/mcp-gdrive
 
 // mcp-router/servers.json
 {
@@ -47,113 +47,113 @@ tail -f ~/.claude/logs/mcp.log
 
 ---
 
-### 요청 타임아웃
+### Request Timeout
 
-**메시지**: `요청 타임아웃: initialize`
+**Message**: `Request timeout: initialize`
 
-**원인**:
-1. 네트워크 문제
-2. 서버 과부하
-3. 잘못된 설정
+**Causes**:
+1. Network issue
+2. Server overload
+3. Invalid configuration
 
-**해결책**:
+**Solutions**:
 ```bash
-# 1. 네트워크 확인
+# 1. Check network
 ping registry.npmjs.org
 
-# 2. 서버 재시작
-# Claude Code 재시작
+# 2. Restart server
+# Restart Claude Code
 
-# 3. 타임아웃 설정 조정
+# 3. Adjust timeout settings
 # mcp-router/config.json
 {
-  "timeout": 60000,  # 60초로 증가
+  "timeout": 60000,  # Increase to 60 seconds
   "retries": 3
 }
 ```
 
 ---
 
-### 연결 거부
+### Connection Refused
 
-**메시지**: `연결 거부됨: ECONNREFUSED`
+**Message**: `Connection refused: ECONNREFUSED`
 
-**원인**:
-1. 서버 미실행
-2. 포트 충돌
-3. 방화벽
+**Causes**:
+1. Server not running
+2. Port conflict
+3. Firewall
 
-**해결책**:
+**Solutions**:
 ```bash
-# 1. 프로세스 확인
+# 1. Check process
 ps aux | grep mcp
 
-# 2. 포트 확인
-lsof -i :포트번호
+# 2. Check port
+lsof -i :port_number
 
-# 3. 방화벽 확인 (macOS)
+# 3. Check firewall (macOS)
 sudo pfctl -s rules
 ```
 
 ---
 
-## 🟠 Common 에러
+## 🟠 Common Errors
 
-### 도구 호출 실패
+### Tool Call Failed
 
-**메시지**: `도구 호출 실패: [도구명]`
+**Message**: `Tool call failed: [tool-name]`
 
-**원인**:
-1. 잘못된 매개변수
-2. 인증 만료
-3. 서버 에러
+**Causes**:
+1. Invalid parameters
+2. Authentication expired
+3. Server error
 
-**해결책**:
+**Solutions**:
 ```typescript
-// 매개변수 확인
+// Check parameters
 {
   "tool": "context7.get-library-docs",
   "params": {
-    "libraryId": "올바른-ID",  // 필수
-    "query": "검색어"         // 선택
+    "libraryId": "valid-ID",  // Required
+    "query": "search term"    // Optional
   }
 }
 
-// 인증 갱신
-// 해당 서버의 인증 토큰 재설정
+// Refresh authentication
+// Re-configure authentication token for the server
 ```
 
 ---
 
-### 직렬화 오류
+### Serialization Error
 
-**메시지**: `JSON 직렬화 실패`
+**Message**: `JSON serialization failed`
 
-**원인**: 응답 데이터 파싱 실패
+**Cause**: Response data parsing failed
 
-**해결책**:
+**Solutions**:
 ```bash
-# 원본 응답 확인
-npx @서버명/mcp --debug
+# Check raw response
+npx @server-name/mcp --debug
 
-# 서버 버전 업데이트
-npm update -g @서버명/mcp
+# Update server version
+npm update -g @server-name/mcp
 ```
 
 ---
 
-## 🟡 설정 에러
+## 🟡 Configuration Errors
 
-### mcp.json 파싱 에러
+### mcp.json Parsing Error
 
-**원인**: JSON 문법 오류
+**Cause**: JSON syntax error
 
-**해결책**:
+**Solutions**:
 ```bash
-# 문법 검사
+# Syntax check
 cat ~/.claude/mcp.json | jq .
 
-# 올바른 형식
+# Correct format
 {
   "mcpServers": {
     "mcp-router": {
@@ -166,21 +166,21 @@ cat ~/.claude/mcp.json | jq .
 
 ---
 
-### 서버 중복 등록
+### Duplicate Server Registration
 
-**원인**: 같은 서버 여러 번 등록
+**Cause**: Same server registered multiple times
 
-**해결책**:
+**Solutions**:
 ```json
-// ❌ 잘못된 설정
+// ❌ Wrong configuration
 {
   "mcpServers": {
-    "context7": { ... },    // 직접 등록
-    "mcp-router": { ... }   // 라우터도 context7 포함
+    "context7": { ... },    // Direct registration
+    "mcp-router": { ... }   // Router also includes context7
   }
 }
 
-// ✅ 올바른 설정 (라우터만)
+// ✅ Correct configuration (router only)
 {
   "mcpServers": {
     "mcp-router": {
@@ -193,58 +193,58 @@ cat ~/.claude/mcp.json | jq .
 
 ---
 
-## 📊 에러 빈도
+## 📊 Error Frequency
 
-| 에러 | 빈도 | 심각도 |
-|------|------|--------|
-| 서버 시작 실패 | 높음 | 높음 |
-| 타임아웃 | 중간 | 중간 |
-| 도구 호출 실패 | 중간 | 중간 |
-| 설정 오류 | 낮음 | 낮음 |
+| Error | Frequency | Severity |
+|-------|-----------|----------|
+| Server start failed | High | High |
+| Timeout | Medium | Medium |
+| Tool call failed | Medium | Medium |
+| Config error | Low | Low |
 
 ---
 
-## 🔧 디버깅
+## 🔧 Debugging
 
 ```bash
-# 전체 로그
+# Full logs
 tail -f ~/.claude/logs/mcp.log
 
-# 특정 서버 상태
+# Specific server status
 cat ~/.claude/mcp-router/status.json
 
-# 수동 테스트
-echo '{"method":"tools/list"}' | npx @서버명/mcp
+# Manual test
+echo '{"method":"tools/list"}' | npx @server-name/mcp
 ```
 
 ---
 
-## 🔄 복구 절차
+## 🔄 Recovery Procedures
 
-### 전체 MCP 재설정
+### Full MCP Reset
 
 ```bash
-# 1. 캐시 정리
+# 1. Clear cache
 rm -rf ~/.claude/mcp-router/cache/*
 
-# 2. 상태 초기화
+# 2. Reset status
 rm ~/.claude/mcp-router/status.json
 
-# 3. Claude Code 재시작
-# 터미널에서 claude 재실행
+# 3. Restart Claude Code
+# Run claude again in terminal
 ```
 
-### 개별 서버 재설정
+### Individual Server Reset
 
 ```bash
-# 1. 서버 제거
-# mcp-router/servers.json에서 해당 서버 삭제
+# 1. Remove server
+# Delete server entry from mcp-router/servers.json
 
-# 2. 캐시 정리
-rm ~/.claude/mcp-router/cache/서버명.*
+# 2. Clear cache
+rm ~/.claude/mcp-router/cache/server-name.*
 
-# 3. 다시 추가
-# mcp-router/servers.json에 재등록
+# 3. Re-add
+# Re-register in mcp-router/servers.json
 ```
 
 ---

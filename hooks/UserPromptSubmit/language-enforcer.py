@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-한국어 응답 강제 Hook
-- 한국어 응답 설정 확인
-- 코드 주석도 한국어로
+Korean Response Enforcement Hook
+- Check Korean response setting
+- Code comments also in Korean
 """
 
 import os
@@ -12,17 +12,17 @@ from pathlib import Path
 SETTINGS_FILE = Path.home() / ".claude" / "settings.json"
 
 def check_language_setting():
-    """언어 설정 확인 및 알림"""
-    # 첫 프롬프트에서만 표시
+    """Check language setting and notify"""
+    # Show only on first prompt
     state_file = Path.home() / ".claude" / "cache" / "lang-reminded.json"
 
     if state_file.exists():
         return
 
-    # 알림 표시
-    print("🌏 응답 언어: 한국어 (코드 주석 포함)")
+    # Show notification
+    print("Response language: Korean (including code comments)")
 
-    # 상태 저장
+    # Save state
     state_file.parent.mkdir(parents=True, exist_ok=True)
     with open(state_file, 'w') as f:
         json.dump({"reminded": True}, f)

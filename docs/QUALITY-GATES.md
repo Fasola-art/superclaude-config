@@ -1,10 +1,10 @@
-# Quality Gates (8단계 품질 검증)
+# Quality Gates (8-Stage Verification)
 
-> 코드 품질 검증 체크포인트
+> Code quality verification checkpoints
 
 ---
 
-## 검증 파이프라인
+## Verification Pipeline
 
 ```
 1.Syntax → 2.Type → 3.Lint → 4.Security → 5.Test → 6.Performance → 7.Docs → 8.Integration
@@ -12,106 +12,106 @@
 
 ---
 
-## 단계별 상세
+## Stage Details
 
-### 1단계: Syntax (구문 검사)
+### Stage 1: Syntax
 ```yaml
 tool: TypeScript Compiler
 command: tsc --noEmit
-pass_condition: 컴파일 성공
+pass_condition: Compilation success
 blocking: true
 ```
 
-### 2단계: Type (타입 검사)
+### Stage 2: Type
 ```yaml
 tool: tsc --noEmit
 command: npx tsc --noEmit --strict
-pass_condition: 0 에러
+pass_condition: 0 errors
 blocking: true
 ```
 
-### 3단계: Lint (정적 분석)
+### Stage 3: Lint
 ```yaml
 tool: ESLint
 command: npm run lint
-pass_condition: 0 에러
-blocking: true (에러), false (경고)
+pass_condition: 0 errors
+blocking: true (errors), false (warnings)
 ```
 
-### 4단계: Security (보안 검사)
+### Stage 4: Security
 ```yaml
 tools:
   - npm audit
-  - 수동 보안 검토
+  - Manual security review
 command: npm audit --audit-level=high
-pass_condition: 0 고위험 취약점
+pass_condition: 0 high-risk vulnerabilities
 blocking: true
 ```
 
-### 5단계: Test (테스트)
+### Stage 5: Test
 ```yaml
 tools:
   - Vitest (Unit)
   - Playwright (E2E)
 command: npm run test:coverage
 pass_condition:
-  - 커버리지 ≥ 80%
-  - 모든 테스트 통과
+  - Coverage >= 80%
+  - All tests pass
 blocking: true
 ```
 
-### 6단계: Performance (성능)
+### Stage 6: Performance
 ```yaml
 tools:
   - Lighthouse
-  - 번들 분석기
+  - Bundle analyzer
 command: npm run lighthouse
 pass_condition:
   - LCP < 2.5s
   - FID < 100ms
   - CLS < 0.1
-  - 번들 크기 < 500KB
-blocking: false (경고)
+  - Bundle size < 500KB
+blocking: false (warning)
 ```
 
-### 7단계: Docs (문서화)
+### Stage 7: Docs
 ```yaml
 tool: TSDoc
 command: npm run docs:check
 pass_condition:
-  - Public API 100% 문서화
-  - JSDoc 주석 완성
-blocking: false (경고)
+  - 100% Public API documented
+  - JSDoc comments complete
+blocking: false (warning)
 ```
 
-### 8단계: Integration (통합)
+### Stage 8: Integration
 ```yaml
 tool: Playwright
 command: npm run test:e2e
 pass_condition:
-  - 크리티컬 패스 100% 통과
-  - 주요 시나리오 테스트 통과
+  - 100% critical path pass
+  - Main scenario tests pass
 blocking: true
 ```
 
 ---
 
-## 게이트별 우선순위
+## Gate Priority
 
-| 게이트 | 우선순위 | 차단 여부 |
-|--------|---------|----------|
-| Syntax | P0 | 🔴 차단 |
-| Type | P0 | 🔴 차단 |
-| Lint | P0 | 🔴 차단 (에러) |
-| Security | P0 | 🔴 차단 |
-| Test | P1 | 🔴 차단 |
-| Performance | P1 | 🟡 경고 |
-| Docs | P2 | 🟡 경고 |
-| Integration | P1 | 🔴 차단 |
+| Gate        | Priority | Blocking             |
+|-------------|----------|----------------------|
+| Syntax      | P0       | 🔴 Blocking          |
+| Type        | P0       | 🔴 Blocking          |
+| Lint        | P0       | 🔴 Blocking (errors) |
+| Security    | P0       | 🔴 Blocking          |
+| Test        | P1       | 🔴 Blocking          |
+| Performance | P1       | 🟡 Warning           |
+| Docs        | P2       | 🟡 Warning           |
+| Integration | P1       | 🔴 Blocking          |
 
 ---
 
-## 자동화 설정
+## Automation Setup
 
 ### Pre-commit Hook
 ```bash
@@ -120,7 +120,7 @@ npm run lint-staged
 npm run type-check
 ```
 
-### CI/CD 파이프라인
+### CI/CD Pipeline
 ```yaml
 # .github/workflows/quality.yml
 jobs:
@@ -140,37 +140,37 @@ jobs:
 
 ---
 
-## 면제 조건
+## Exemption Conditions
 
-| 조건 | 면제 게이트 | 사유 |
-|------|------------|------|
-| 핫픽스 | Performance, Docs | 긴급 수정 |
-| 프로토타입 | Test, Docs | 실험 코드 |
-| 설정 변경 | Test | 코드 변경 없음 |
+| Condition     | Exempt Gates      | Reason         |
+|---------------|-------------------|----------------|
+| Hotfix        | Performance, Docs | Emergency fix  |
+| Prototype     | Test, Docs        | Experimental   |
+| Config change | Test              | No code change |
 
 ---
 
-## 실패 시 대응
+## Failure Response
 
 ```yaml
 failure_response:
   syntax_error:
-    action: "컴파일 에러 수정"
-    escalation: "즉시"
+    action: "Fix compilation errors"
+    escalation: "Immediate"
 
   type_error:
-    action: "타입 오류 수정"
-    escalation: "즉시"
+    action: "Fix type errors"
+    escalation: "Immediate"
 
   lint_error:
-    action: "npm run lint --fix 실행"
-    escalation: "PR 블록"
+    action: "Run npm run lint --fix"
+    escalation: "PR blocked"
 
   security_error:
-    action: "취약점 패치 또는 의존성 업데이트"
-    escalation: "보안팀 알림"
+    action: "Patch vulnerability or update dependency"
+    escalation: "Notify security team"
 
   test_failure:
-    action: "실패 테스트 수정"
-    escalation: "PR 블록"
+    action: "Fix failing tests"
+    escalation: "PR blocked"
 ```

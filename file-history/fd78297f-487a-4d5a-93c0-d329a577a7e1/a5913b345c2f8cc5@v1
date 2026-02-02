@@ -1,0 +1,273 @@
+# TDD/E2E 지침 구현 계획
+
+> **목표**: TDD/E2E 테스트 방법론을 Claude Code에 통합하여 기능 개발 시 자동 제안
+
+**Version**: 1.0 | **Date**: 2026-02-01
+
+---
+
+## 📋 Quick Summary
+
+| 항목 | 내용 |
+|------|------|
+| **생성 파일** | Rules 2개 + Commands 2개 + CLAUDE.md 수정 |
+| **언어 지원** | TypeScript, Python, Go (자동 감지) |
+| **E2E 도구** | Playwright/Cypress (프로젝트별 선택) |
+| **제안 시점** | 항상 + 복잡한 기능 강조 + 명시적 요청 |
+
+---
+
+## 🎯 구현 범위
+
+### 1. Rules 파일 (영문)
+
+| 파일 | 경로 | 내용 |
+|------|------|------|
+| **TDD-RULES.md** | `~/.claude/rules/testing/TDD-RULES.md` | TDD 방법론, Red-Green-Refactor, 언어별 패턴 |
+| **E2E-RULES.md** | `~/.claude/rules/testing/E2E-RULES.md` | E2E 테스트 전략, Playwright/Cypress 패턴 |
+
+### 2. Commands 파일
+
+| 파일 | 경로 | 용도 |
+|------|------|------|
+| **tdd.md** | `~/.claude/commands/tdd.md` | `/tdd` 커맨드 - TDD 워크플로우 |
+| **e2e.md** | `~/.claude/commands/e2e.md` | `/e2e` 커맨드 - E2E 테스트 작성 |
+
+### 3. CLAUDE.md 수정
+
+- Core Rules에 TDD/E2E 제안 규칙 추가
+- Slash Commands 테이블에 `/tdd`, `/e2e` 추가
+
+### 4. User Guide (한글)
+
+| 파일 | 경로 |
+|------|------|
+| **TDD-RULES.md** | `~/.claude/user-guide/docs/TDD-RULES.md` |
+| **E2E-RULES.md** | `~/.claude/user-guide/docs/E2E-RULES.md` |
+
+---
+
+## 📝 상세 설계
+
+### TDD-RULES.md 구조
+
+```markdown
+# TDD Rules (Test-Driven Development)
+
+> **Version**: 2026.01
+> **Target**: TypeScript, Python, Go
+> **Goal**: Write tests first, code second
+
+---
+
+## ⚡ Quick Start (3-Step TDD)
+
+| Step | Action | Output |
+|------|--------|--------|
+| 1 | 🔴 Red | Write failing test |
+| 2 | 🟢 Green | Write minimal code to pass |
+| 3 | 🔵 Refactor | Clean up, keep tests passing |
+
+---
+
+## Priority Summary
+
+| Priority | Category | Rules | Effect |
+|----------|----------|-------|--------|
+| CRITICAL | CYCLE | 4 | TDD 사이클 준수 |
+| CRITICAL | TEST-FIRST | 3 | 테스트 우선 작성 |
+| HIGH | STRUCTURE | 4 | 테스트 구조화 |
+| HIGH | COVERAGE | 3 | 커버리지 전략 |
+| MEDIUM | LANG | 9 | 언어별 패턴 (TS/Py/Go 각 3개) |
+| LOW | PERF | 3 | 테스트 성능 |
+
+---
+
+## CRITICAL: CYCLE (TDD 사이클)
+
+### CYCLE-001: Red First
+[실패하는 테스트 먼저 작성]
+
+### CYCLE-002: Minimal Green
+[테스트 통과하는 최소 코드]
+
+### CYCLE-003: Refactor Safely
+[테스트 유지하며 리팩토링]
+
+### CYCLE-004: Small Steps
+[작은 단위로 반복]
+
+---
+
+## HIGH: STRUCTURE (테스트 구조)
+
+### STRUCT-001: Arrange-Act-Assert
+### STRUCT-002: One Assertion Per Test
+### STRUCT-003: Descriptive Names
+### STRUCT-004: Test Isolation
+
+---
+
+## MEDIUM: LANG (언어별 패턴)
+
+### TypeScript (Jest/Vitest)
+### Python (pytest)
+### Go (testing)
+
+---
+
+## Checklist
+## META
+```
+
+### E2E-RULES.md 구조
+
+```markdown
+# E2E Rules (End-to-End Testing)
+
+> **Version**: 2026.01
+> **Target**: Playwright, Cypress
+> **Goal**: Test complete user workflows
+
+---
+
+## ⚡ Quick Start
+
+| Phase | Action |
+|-------|--------|
+| 1 | Identify critical user flows |
+| 2 | Write test scenarios |
+| 3 | Implement with page objects |
+| 4 | Run in CI pipeline |
+
+---
+
+## Priority Summary
+
+| Priority | Category | Rules | Effect |
+|----------|----------|-------|--------|
+| CRITICAL | FLOW | 4 | 핵심 플로우 커버 |
+| CRITICAL | SELECTOR | 3 | 안정적 셀렉터 |
+| HIGH | PATTERN | 4 | 페이지 오브젝트 등 |
+| HIGH | WAIT | 3 | 대기 전략 |
+| MEDIUM | TOOL | 6 | Playwright/Cypress 패턴 |
+| LOW | CI | 3 | CI 통합 |
+
+---
+
+## CRITICAL: FLOW
+## CRITICAL: SELECTOR
+## HIGH: PATTERN
+## HIGH: WAIT
+## MEDIUM: TOOL (Playwright/Cypress)
+## LOW: CI
+
+---
+
+## Checklist
+## META
+```
+
+### tdd.md Command 구조
+
+```markdown
+---
+description: TDD workflow - write tests first
+argument-hint: "[feature-description]"
+allowed-tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep", "TodoWrite", "AskUserQuestion"]
+---
+
+# TDD Workflow
+
+## Core Principles
+- Test FIRST, code SECOND
+- Small steps (Red → Green → Refactor)
+- Use TodoWrite for 3+ steps
+
+---
+
+## Phase 1: Understand
+## Phase 2: Write Failing Test
+## Phase 3: Implement Minimal Code
+## Phase 4: Refactor
+## Phase 5: Repeat / Summary
+```
+
+### e2e.md Command 구조
+
+```markdown
+---
+description: E2E test creation for user workflows
+argument-hint: "[flow-description]"
+allowed-tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep", "TodoWrite", "AskUserQuestion"]
+---
+
+# E2E Test Workflow
+
+## Core Principles
+- Test critical user journeys
+- Use stable selectors (data-testid)
+- Page Object pattern
+
+---
+
+## Phase 1: Identify Flow
+## Phase 2: Plan Test Scenarios
+## Phase 3: Implement Tests
+## Phase 4: Run & Validate
+## Phase 5: CI Integration
+```
+
+### CLAUDE.md 수정 내용
+
+```markdown
+## Core Rules (6 → 7)
+
+| Rule | Instruction |
+|------|-------------|
+| ... (기존) ... |
+| TDD/E2E Suggestion | On feature request, ask "TDD/E2E로 진행할까요?" |
+
+## Slash Commands
+
+| Command | Action |
+|---------|--------|
+| ... (기존) ... |
+| /tdd | Start TDD workflow |
+| /e2e | Create E2E tests |
+```
+
+---
+
+## 📁 파일 생성 순서
+
+1. `~/.claude/rules/testing/` 디렉토리 생성
+2. `TDD-RULES.md` 작성 (영문)
+3. `E2E-RULES.md` 작성 (영문)
+4. `~/.claude/commands/tdd.md` 작성
+5. `~/.claude/commands/e2e.md` 작성
+6. `~/.claude/CLAUDE.md` 수정
+7. `~/.claude/user-guide/docs/TDD-RULES.md` 작성 (한글)
+8. `~/.claude/user-guide/docs/E2E-RULES.md` 작성 (한글)
+
+---
+
+## ✅ 검증 방법
+
+1. `/tdd` 커맨드 실행 → Phase별 진행 확인
+2. `/e2e` 커맨드 실행 → E2E 테스트 생성 확인
+3. "로그인 기능 만들어줘" 요청 → TDD/E2E 제안 확인
+4. Rules 파일이 체크리스트 기준 충족하는지 확인:
+   - [ ] Quick Start 섹션 있음
+   - [ ] 우선순위 테이블 있음
+   - [ ] 언어별 코드 예시 있음
+   - [ ] Checklist 섹션 있음
+
+---
+
+## 📊 예상 결과
+
+- **Rules**: 2개 파일 × 2버전(영/한) = 4개 파일
+- **Commands**: 2개 파일
+- **CLAUDE.md**: 2줄 추가
+- **총**: 7개 파일 생성/수정

@@ -1,6 +1,6 @@
 ---
 name: stripe-best-practices
-description: Stripe 결제 통합 모범 사례 (Best practices for Stripe integrations)
+description: Best practices for Stripe payment integrations. Covers CheckoutSessions, PaymentIntents, Connect, and recommended APIs.
 ---
 
 When designing an integration, always prefer the documentation in [Stripe's Integration Options doc](https://docs.stripe.com/payments/payment-methods/integration-options.md)

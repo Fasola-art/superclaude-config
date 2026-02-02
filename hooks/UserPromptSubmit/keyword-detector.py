@@ -1,38 +1,38 @@
 #!/usr/bin/env python3
 """
-Vibe/Mode 키워드 감지 Hook
-- 13개 Vibe Keywords 감지
-- 4개 Mode Keywords 감지
-- 해당 동작 트리거
+Vibe/Mode Keyword Detection Hook
+- Detect 13 Vibe Keywords
+- Detect 4 Mode Keywords
+- Trigger corresponding actions
 """
 
 import sys
 import json
 import re
 
-# Vibe Keywords (13개)
+# Vibe Keywords (13)
 VIBE_KEYWORDS = {
-    # 실행 제어
-    "빠르게": {"aliases": ["qk", "quick"], "action": "skip_validation"},
-    "실험": {"aliases": ["exp"], "action": "snapshot_experiment"},
-    "동시에": {"aliases": ["para"], "action": "parallel_agents"},
-    # 수정/복구
-    "고쳐": {"aliases": ["fix"], "action": "error_kb_healing"},
-    "되돌려": {"aliases": ["undo"], "action": "rollback_snapshot"},
-    "계속": {"aliases": ["cont"], "action": "continue_state"},
-    # 검증
-    "확인해": {"aliases": ["chk"], "action": "full_validation"},
-    "테스트해": {"aliases": ["tst"], "action": "run_tests"},
-    # 배포/정리
-    "배포해": {"aliases": ["dep"], "action": "deploy_checklist"},
-    "정리해": {"aliases": ["clean"], "action": "code_cleanup"},
-    # 분석/계획
-    "성능": {"aliases": ["perf"], "action": "performance_analysis"},
-    "계획": {"aliases": ["plan"], "action": "planning_docs"},
-    "분석": {"aliases": ["map"], "action": "codebase_analysis"},
+    # Execution control
+    "quick": {"aliases": ["qk", "fast"], "action": "skip_validation"},
+    "experiment": {"aliases": ["exp"], "action": "snapshot_experiment"},
+    "parallel": {"aliases": ["para"], "action": "parallel_agents"},
+    # Modification/Recovery
+    "fix": {"aliases": [], "action": "error_kb_healing"},
+    "undo": {"aliases": ["rollback"], "action": "rollback_snapshot"},
+    "continue": {"aliases": ["cont"], "action": "continue_state"},
+    # Verification
+    "verify": {"aliases": ["chk", "check"], "action": "full_validation"},
+    "test": {"aliases": ["tst"], "action": "run_tests"},
+    # Deploy/Cleanup
+    "deploy": {"aliases": ["dep"], "action": "deploy_checklist"},
+    "cleanup": {"aliases": ["clean"], "action": "code_cleanup"},
+    # Analysis/Planning
+    "performance": {"aliases": ["perf"], "action": "performance_analysis"},
+    "plan": {"aliases": [], "action": "planning_docs"},
+    "analyze": {"aliases": ["map"], "action": "codebase_analysis"},
 }
 
-# Mode Keywords (4개)
+# Mode Keywords (4)
 MODE_KEYWORDS = {
     "ultrawork": {"aliases": ["ulw"], "personas": ["explorer", "librarian", "analyzer"]},
     "deepsearch": {"aliases": ["ds"], "personas": ["explorer"]},
@@ -41,7 +41,7 @@ MODE_KEYWORDS = {
 }
 
 def detect_keywords(prompt: str) -> dict:
-    """프롬프트에서 키워드 감지"""
+    """Detect keywords from prompt"""
     prompt_lower = prompt.lower()
     result = {
         "vibe": [],
@@ -50,7 +50,7 @@ def detect_keywords(prompt: str) -> dict:
         "personas": []
     }
 
-    # Vibe 키워드 검사
+    # Check Vibe keywords
     for keyword, config in VIBE_KEYWORDS.items():
         all_forms = [keyword] + config.get("aliases", [])
         for form in all_forms:
@@ -59,7 +59,7 @@ def detect_keywords(prompt: str) -> dict:
                 result["actions"].append(config["action"])
                 break
 
-    # Mode 키워드 검사
+    # Check Mode keywords
     for keyword, config in MODE_KEYWORDS.items():
         all_forms = [keyword] + config.get("aliases", [])
         for form in all_forms:
@@ -68,18 +68,18 @@ def detect_keywords(prompt: str) -> dict:
                 result["personas"].extend(config["personas"])
                 break
 
-    # 중복 제거
+    # Remove duplicates
     result["personas"] = list(set(result["personas"]))
 
     return result
 
 def main():
-    # 환경 변수에서 프롬프트 가져오기
+    # Get prompt from environment variable
     import os
     prompt = os.environ.get("PROMPT", "")
 
     if not prompt:
-        # stdin에서 읽기 시도
+        # Try reading from stdin
         if not sys.stdin.isatty():
             prompt = sys.stdin.read()
 
@@ -94,7 +94,7 @@ def main():
             parts.append(f"vibe:{','.join(detected['vibe'])}")
         if detected["mode"]:
             parts.append(f"mode:{','.join(detected['mode'])}")
-        print(f"🎯 {' | '.join(parts)}")
+        print(f"Detected: {' | '.join(parts)}")
 
 if __name__ == "__main__":
     main()

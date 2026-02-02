@@ -1,50 +1,50 @@
 #!/usr/bin/env python3
 """
-페르소나 자동 활성화 Hook
-- 컨텍스트 분석으로 적절한 페르소나 선택
-- 최대 3개 동시 활성화
+Persona Auto-Activation Hook
+- Select appropriate persona through context analysis
+- Activate up to 3 simultaneously
 """
 
 import os
 import sys
 import re
 
-# 페르소나 키워드 매핑
+# Persona keyword mapping
 PERSONA_KEYWORDS = {
     "security": {
-        "keywords": ["auth", "login", "password", "token", "jwt", "oauth", "보안", "인증", "권한"],
+        "keywords": ["auth", "login", "password", "token", "jwt", "oauth", "security", "authentication", "permission"],
         "priority": 1
     },
     "architect": {
-        "keywords": ["설계", "아키텍처", "구조", "패턴", "design", "architecture", "structure"],
+        "keywords": ["design", "architecture", "structure", "pattern", "system"],
         "priority": 2
     },
     "frontend": {
-        "keywords": ["react", "vue", "css", "html", "컴포넌트", "ui", "ux", "스타일"],
+        "keywords": ["react", "vue", "css", "html", "component", "ui", "ux", "style"],
         "priority": 3
     },
     "backend": {
-        "keywords": ["api", "서버", "database", "db", "쿼리", "rest", "graphql"],
+        "keywords": ["api", "server", "database", "db", "query", "rest", "graphql"],
         "priority": 3
     },
     "devops": {
-        "keywords": ["docker", "k8s", "kubernetes", "ci", "cd", "배포", "deploy", "aws", "gcp"],
+        "keywords": ["docker", "k8s", "kubernetes", "ci", "cd", "deploy", "aws", "gcp"],
         "priority": 4
     },
     "performance": {
-        "keywords": ["성능", "최적화", "optimize", "performance", "속도", "메모리"],
+        "keywords": ["performance", "optimize", "speed", "memory"],
         "priority": 3
     },
     "tester": {
-        "keywords": ["테스트", "test", "jest", "vitest", "cypress", "e2e", "unit"],
+        "keywords": ["test", "jest", "vitest", "cypress", "e2e", "unit"],
         "priority": 4
     },
     "analyzer": {
-        "keywords": ["분석", "analyze", "리뷰", "review", "검토"],
+        "keywords": ["analyze", "review", "examine"],
         "priority": 5
     },
     "explorer": {
-        "keywords": ["찾아", "검색", "search", "find", "어디", "where"],
+        "keywords": ["find", "search", "where", "locate"],
         "priority": 5
     }
 }
@@ -52,7 +52,7 @@ PERSONA_KEYWORDS = {
 MAX_CONCURRENT = 3
 
 def detect_personas(prompt: str) -> list:
-    """프롬프트에서 적절한 페르소나 감지"""
+    """Detect appropriate personas from prompt"""
     prompt_lower = prompt.lower()
     detected = []
 
@@ -66,7 +66,7 @@ def detect_personas(prompt: str) -> list:
                 })
                 break
 
-    # 우선순위로 정렬 후 상위 3개 선택
+    # Sort by priority and select top 3
     detected.sort(key=lambda x: x["priority"])
     return detected[:MAX_CONCURRENT]
 
@@ -83,7 +83,7 @@ def main():
 
     if personas:
         names = [p['name'] for p in personas]
-        print(f"🎭 {','.join(names)}")
+        print(f"Personas: {','.join(names)}")
 
 if __name__ == "__main__":
     main()

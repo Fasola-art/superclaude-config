@@ -1,0 +1,9 @@
+{
+  "id": "5",
+  "subject": "JARVIS 모듈 구현: ProjectMonitor",
+  "description": "빌드/테스트 상태 모니터링, 실패 시 자동 알림",
+  "activeForm": "ProjectMonitor 모듈 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

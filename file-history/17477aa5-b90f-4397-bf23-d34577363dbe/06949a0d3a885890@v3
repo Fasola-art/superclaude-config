@@ -1,0 +1,525 @@
+# Claude Code 사용 설명서
+
+> SuperClaude v2.0.9 | Mac Studio Ultra M2
+> 생성일: 2026-02-01
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 목차
+
+ 1. 빠른 시작
+ 2. 슬래시 명령어
+ 3. Vibe/Mode 키워드
+ 4. 병렬 에이전트
+ 5. 오케스트레이터
+ 6. 플랜 모드
+ 7. 페르소나 시스템
+ 8. 훅 시스템
+ 9. JARVIS 시스템
+10. 스킬 목록
+11. 단축키 및 트리거
+12. 자동화 서비스
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 1. 빠른 시작
+
+### 기본 원칙
+
+  🇰🇷 응답 언어    모든 응답은 한국어
+  ⚡ 효율성        즉시 실행, 결과 3줄 이내 요약
+  🔄 자동화        훅이 자동으로 검증/포맷팅 수행
+
+### 자주 쓰는 명령어
+
+  /j               JARVIS 브리핑 (오늘 할 일, 어제 작업)
+  /commit          Git 커밋 생성
+  /market          경제 시황 보고서
+  /project-status  프로젝트 진행 상황
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 2. 슬래시 명령어
+
+### 프로젝트 관리
+
+  /project-plan      PRD로 프로젝트 계획 수립
+  /project-status    현재 진행 상황 확인
+  /project-continue  이전 작업 이어서 진행
+
+### 개발 도구
+
+  /commit            Git 커밋 생성
+  /commit-push-pr    커밋 → 푸시 → PR 생성
+  /code-review       PR 코드 리뷰
+  /generate-tests    테스트 자동 생성
+  /review-pr         전문 에이전트 PR 리뷰
+
+### 리서치 & 분석
+
+  /orchestrator      종합 리서치 (병렬 에이전트)
+  /ideation          다중 페르소나 아이디어 토론
+  /research          딥 리서치
+
+### 유틸리티
+
+  /j                 JARVIS 브리핑
+  /market            경제 시황 보고서
+  /recover           세션/시스템 복구
+  /error-search      Error KB 검색
+  /ctx               컨텍스트 요약
+  /vibe              현재 Vibe 설정 확인/변경
+  /daily             자주 쓰는 경로 모음
+  /telegram          텔레그램 모니터링
+
+### SuperClaude 전용 (sc:)
+
+  /sc:analyze        코드/프로젝트 분석
+  /sc:implement      기능 구현
+  /sc:test           테스트 실행
+  /sc:build          프로젝트 빌드
+  /sc:git            Git 작업 도우미
+  /sc:task           태스크 관리
+  /sc:design         시스템/컴포넌트 설계
+  /sc:explain        코드/개념 설명
+  /sc:improve        코드 개선
+  /sc:cleanup        코드 정리
+  /sc:document       문서 생성
+  /sc:workflow       워크플로우 실행
+  /sc:spawn          에이전트 생성
+  /sc:estimate       작업 규모 추정
+  /sc:troubleshoot   문제 해결
+  /sc:news           뉴스 수집 및 요약
+  /sc:report         일일 경제 보고서 생성
+  /sc:calendar       경제 지표 발표 일정
+  /sc:index          SC 명령어 목록
+  /sc:load           컨텍스트 로드
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 3. Vibe/Mode 키워드
+
+프롬프트에 포함하면 자동 감지됩니다.
+
+### Vibe 키워드 (자연어 트리거)
+
+  키워드      Alias    동작
+  ─────────────────────────────────────────────────
+  빠르게      qk       검증 스킵, 즉시 실행
+  실험        exp      스냅샷 → 실행 → 롤백 옵션
+  동시에      para     병렬 에이전트 실행
+  고쳐        fix      Error KB + Self-Healing
+  되돌려      undo     마지막 스냅샷으로 롤백
+  계속        cont     이전 작업 계속
+  확인해      chk      Type + Lint + Build 검증
+  자세히      det      상세 분석 모드
+  요약해      sum      핵심만 간략히
+  비교해      cmp      A/B 비교 분석
+  최적화      opt      성능 최적화
+  보안        sec      보안 검토 강화
+  문서화      doc      문서 자동 생성
+
+### Mode 키워드
+
+  키워드           동작
+  ─────────────────────────────────────────────────
+  plan / 설계      플랜 모드 진입
+  yolo             검증 없이 즉시 실행
+  strategic        전략적 분석 모드
+  visual           시각화 중심
+
+### 사용 예시
+
+  "빠르게 로그인 페이지 만들어줘"     → 검증 스킵, 즉시 구현
+  "동시에 3개 API 테스트해줘"         → 병렬 에이전트 실행
+  "이 코드 고쳐줘"                    → Error KB 참조 + 자동 수정
+  "계속"                              → 이전 작업 재개
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 4. 병렬 에이전트
+
+### 기본 사용법
+
+"동시에" 키워드를 사용하면 자동으로 병렬 실행됩니다:
+
+  "동시에 테스트, 린트, 빌드 실행해줘"
+
+### 사용 가능한 에이전트 타입
+
+  에이전트                  설명
+  ─────────────────────────────────────────────────
+  Explore                   코드베이스 탐색
+  Plan                      구현 계획 수립
+  Bash                      명령어 실행
+  code-reviewer             코드 리뷰
+  code-explorer             코드베이스 분석
+  code-architect            아키텍처 설계
+  code-simplifier           코드 간소화
+  silent-failure-hunter     조용한 실패 탐지
+  type-design-analyzer      타입 설계 분석
+  pr-test-analyzer          PR 테스트 분석
+  comment-analyzer          주석 분석
+
+### 병렬 실행 설정
+
+  max_agents: unlimited (무제한)
+  smart_grouping: true (종속성 자동 감지)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 5. 오케스트레이터
+
+### 사용법
+
+  /orchestrator <연구 주제>
+
+### 예시
+
+  /orchestrator AI가 암호화에 미치는 영향
+  /orchestrator 2026년 한국 부동산 시장 전망
+  /orchestrator 양자컴퓨팅의 금융 산업 적용
+
+### 워크플로우
+
+  1. Query Analysis     질문 명확화
+  2. Research Brief     연구 질문 구조화
+  3. Strategy           연구 전략 수립
+  4. Parallel Research  병렬 리서치 실행
+  5. Synthesis          결과 종합
+  6. Report             최종 보고서 생성
+
+### 사용 에이전트
+
+  에이전트                역할
+  ─────────────────────────────────────────────────
+  research-orchestrator   전체 조율
+  academic-researcher     학술 연구
+  technical-researcher    기술 조사
+  data-analyst            데이터 분석
+  fact-checker            팩트체크
+  research-synthesizer    결과 종합
+  report-generator        보고서 생성
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 6. 플랜 모드
+
+### 진입 방법
+
+  1. 자동     PRD 문서 전송 시 자동 진입
+  2. 수동     "plan" 또는 "설계" 키워드 사용
+  3. 명시적   "플랜 모드로 ~해줘"
+
+### 플랜 모드 워크플로우
+
+  PRD 수신 → 플랜 모드 진입 → 코드베이스 탐색 → 계획 작성 → 사용자 승인 → 구현
+
+### 플랜 모드 종료
+
+  - "플랜모드 종료" 또는 "승인" 입력
+  - ExitPlanMode 도구 자동 호출
+
+### 플랜 파일 위치
+
+  ~/.claude/plans/<plan-name>.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 7. 페르소나 시스템
+
+### 페르소나 카테고리
+
+#### 개발 (dev) - 14개
+
+  페르소나       전문 분야
+  ─────────────────────────────────────────────────
+  backend        백엔드 개발
+  frontend       프론트엔드 개발
+  architect      시스템 아키텍처
+  devops         DevOps/인프라
+  security       보안
+  qa             테스트/품질
+  performance    성능 최적화
+  analyzer       코드 분석
+  refactorer     리팩토링
+  explorer       코드베이스 탐색
+  librarian      라이브러리 관리
+  mentor         코드 교육
+  multimodal     멀티모달
+  scribe         문서화
+
+#### 금융 (finance) - 13개
+
+  페르소나                전문 분야
+  ─────────────────────────────────────────────────
+  macro_economist         거시경제 분석
+  chart_analyst           차트 분석
+  bond_analyst            채권 분석
+  fx_trader               외환 트레이딩
+  commodity_specialist    원자재 전문
+  derivatives_specialist  파생상품 전문
+  quant_strategist        퀀트 전략
+  risk_manager            리스크 관리
+  sentiment_analyst       센티먼트 분석
+  onchain_analyst         온체인 분석
+  kr_stock_analyst        한국 주식
+  us_stock_analyst        미국 주식
+
+#### 아이디어 (ideation) - 27개
+
+  페르소나        역할
+  ─────────────────────────────────────────────────
+  ceo             최고경영자 관점
+  cfo             재무 관점
+  coo             운영 관점
+  marketing       마케팅 전략
+  sales           영업 전략
+  bd              사업개발
+  designer        디자인 관점
+  ux              사용자 경험
+  futurist        미래 전망
+  visionary       비전 제시
+  innovator       혁신 아이디어
+  inventor        발명가 관점
+  disruptor       파괴적 혁신
+  critic          비판적 검토
+  devil_advocate  반대 논거
+  realist         현실적 분석
+  risk_analyst    리스크 분석
+  moderator       토론 진행
+  researcher      리서치 관점
+  user_advocate   사용자 대변
+  ethnographer    사용자 연구
+  competitor      경쟁자 관점
+  content         콘텐츠 전략
+  community       커뮤니티 관리
+  growth          성장 전략
+  pr              홍보 전략
+  legal           법률 관점
+
+### 페르소나 활성화
+
+자동 활성화: 프롬프트 키워드 감지 시 자동 적용
+
+  "백엔드 API 설계해줘"     → backend 페르소나 활성화
+  "거시경제 분석해줘"       → macro_economist 활성화
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 8. 훅 시스템
+
+### 훅 이벤트 타입
+
+  이벤트              발생 시점            용도
+  ─────────────────────────────────────────────────────────────
+  UserPromptSubmit    프롬프트 전송 직후   키워드 감지, 모드 설정
+  PreToolUse          도구 실행 직전       권한 확인, W-R 설정
+  PostToolUse         도구 실행 직후       포맷팅, 테스트, 품질 검사
+  Stop                세션 종료 시         세션 저장
+
+### 현재 활성 훅
+
+#### UserPromptSubmit (7개)
+
+  훅                        목적
+  ─────────────────────────────────────────────────
+  jarvis-morning-briefing   JARVIS 아침 브리핑
+  keyword-detector          Vibe/Mode 키워드 감지
+  context-cleaner           컨텍스트 자동 정리
+  plan-mode-analyzer        PRD 감지 → 플랜 모드
+  todo-continuation         미완료 작업 복원
+  language-enforcer         한국어 응답 강제
+  persona-activator         페르소나 자동 활성화
+
+#### PreToolUse (1개)
+
+  훅                    목적
+  ─────────────────────────────────────────────────
+  writer-reviewer-hook  4-agent 품질 검토
+
+#### PostToolUse (10개)
+
+  훅                        매처              목적
+  ─────────────────────────────────────────────────────────────
+  jarvis-work-tracker       Edit|Write|Bash   작업 추적
+  jarvis-task-completion    TodoWrite         태스크 완료 추적
+  session-snapshot          Edit|Write        세션 스냅샷
+  format-python             Edit|Write        Python ruff 포맷
+  format-js-ts              Edit|Write        JS/TS 포맷
+  run-tests                 Edit|Write        자동 테스트
+  quality-gate              Edit|Write        8단계 품질 검증
+  pattern-tracker           Edit|Write        패턴 학습
+  background-notification   Bash              백그라운드 완료 알림
+  error-auto-resolver       Bash              Ralph Loop 에러 해결
+  ralph-loop-checker        Task              무한 루프 감지
+
+### Writer-Reviewer 시스템
+
+  코드 작성 → 4개 Reviewer 병렬 검수 → Score < 85%? → 반복 (최대 10회)
+
+  Agent           가중치   검사 항목
+  ─────────────────────────────────────────────────────────────
+  Quality         30%      가독성, 타입, SOLID, DRY
+  Security        30%      XSS, 인젝션, OWASP Top 10
+  Performance     20%      알고리즘, 렌더링, 메모리
+  Accessibility   20%      시맨틱 HTML, ARIA, WCAG
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 9. JARVIS 시스템
+
+### 브리핑 명령어
+
+  /j              브리핑 표시
+  /j briefing     브리핑 표시
+
+### 브리핑 내용
+
+  1. 어제 작업 요약     완료된 작업 목록
+  2. 오늘 일정          예정된 작업
+  3. 미완료 작업        진행 중인 태스크
+  4. 실행 중 서비스     LaunchAgent 상태
+  5. 다음 작업 제안     ML 기반 추천
+
+### JARVIS 훅
+
+  훅                        기능
+  ─────────────────────────────────────────────────
+  jarvis-morning-briefing   아침 브리핑 자동 표시
+  jarvis-work-tracker       작업 내역 추적
+  jarvis-task-completion    태스크 완료 기록
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 10. 스킬 목록
+
+### 개발 도구
+
+  스킬                          설명
+  ─────────────────────────────────────────────────
+  agent-development             에이전트 개발 가이드
+  command-development           슬래시 명령어 개발
+  skill-development             스킬 개발 가이드
+  hook-development              훅 개발 가이드
+  plugin-structure              플러그인 구조 가이드
+  mcp-integration               MCP 서버 통합
+  frontend-design               프론트엔드 디자인
+
+### 프로젝트 관리
+
+  스킬                          설명
+  ─────────────────────────────────────────────────
+  claude-automation-recommender 자동화 추천
+  claude-md-improver            CLAUDE.md 개선
+  prd-create                    PRD 생성
+  project-scaffold              프로젝트 스캐폴드
+
+### 금융/데이터
+
+  스킬             설명
+  ─────────────────────────────────────────────────
+  market           경제 시황 보고서
+  daily            자주 쓰는 경로 모음
+  telegram         텔레그램 모니터링
+  sns-automation   SNS 자동화
+
+### Stripe 전용
+
+  스킬                    설명
+  ─────────────────────────────────────────────────
+  stripe-best-practices   Stripe 모범 사례
+  test-cards              Stripe 테스트 카드
+  explain-error           Stripe 에러 설명
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 11. 단축키 및 트리거
+
+### 키보드 단축키
+
+  단축키       동작
+  ─────────────────────────────────────────────────
+  Ctrl + C     실행 취소
+  Ctrl + D     세션 종료
+  Ctrl + L     화면 클리어
+  Tab          자동 완성
+  ↑ / ↓        히스토리 탐색
+
+### 자연어 트리거
+
+  트리거       동작
+  ─────────────────────────────────────────────────
+  "빠르게"     즉시 실행 모드
+  "동시에"     병렬 에이전트
+  "고쳐"       에러 수정 모드
+  "계속"       이전 작업 재개
+  "확인해"     검증 모드
+
+### PRD 자동 감지
+
+PRD 문서를 전송하면 자동으로 플랜 모드 진입:
+
+  # 프로젝트명
+  ## 목표
+  ## 기능 요구사항
+  ## 기술 스택
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 12. 자동화 서비스
+
+### LaunchAgent 스케줄
+
+  서비스                 시간       설명
+  ─────────────────────────────────────────────────────────────
+  fred-monitor           21:55      FRED 경제지표
+  evening-report         22:00      저녁 리포트
+  cot-report             토 06:00   COT 주간 리포트
+  music-lesson-watcher   상시       음악 레슨 요약 (GAS)
+  mcp-router             상시       MCP 서버 라우팅
+
+### 알림 설정
+
+  텔레그램   FRED, COT, 저녁 리포트 완료 알림
+  macOS      백그라운드 작업 완료 알림
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 파일 구조
+
+  ~/.claude/
+  ├── CLAUDE.md                  메인 설정
+  ├── settings.json              권한, Hooks
+  ├── CLAUDE-CODE-USER-GUIDE.md  이 파일
+  ├── docs/                      상세 문서
+  ├── skills/                    스킬 정의 (22개)
+  ├── personas/                  페르소나 (45개+)
+  │   ├── dev/                   개발 (14개)
+  │   ├── finance/               금융 (13개)
+  │   └── ideation/              아이디어 (27개)
+  ├── hooks/                     훅 스크립트
+  ├── modules/                   자동화 모듈
+  │   ├── trading/               트레이딩
+  │   ├── music-lesson/          음악 레슨
+  │   └── news-collector/        뉴스 수집
+  ├── scripts/                   스크립트
+  ├── credentials/               API 키
+  ├── mcp-router/                MCP 라우터
+  └── plans/                     플랜 파일
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 도움말
+
+  /help      Claude Code 도움말
+  /tasks     실행 중인 태스크
+  /compact   컨텍스트 압축
+  /clear     화면 클리어
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+META
+- Generated: 2026-02-01
+- Version: SuperClaude v2.0.9
+- Tool: Claude Code

@@ -1,6 +1,6 @@
 ---
 name: type-design-analyzer
-description: 타입 설계 분석 (Analyze type design for encapsulation and invariants)
+description: Type design analysis (Analyze type design for encapsulation and invariants)
 model: inherit
 color: pink
 ---
@@ -58,13 +58,13 @@ Provide your analysis in this structure:
 ### Ratings
 - **Encapsulation**: X/10
   [Brief justification]
-  
+
 - **Invariant Expression**: X/10
   [Brief justification]
-  
+
 - **Invariant Usefulness**: X/10
   [Brief justification]
-  
+
 - **Invariant Enforcement**: X/10
   [Brief justification]
 

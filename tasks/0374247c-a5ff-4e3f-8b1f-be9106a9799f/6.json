@@ -1,0 +1,9 @@
+{
+  "id": "6",
+  "subject": "JARVIS 모듈 구현: ClientWorkTracker",
+  "description": "클라이언트 작업 관리, 외부인 문서 분석 요청 감지 시 자동 활성화, 6개 문서 체계적 생성",
+  "activeForm": "ClientWorkTracker 모듈 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

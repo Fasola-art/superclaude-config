@@ -1,24 +1,24 @@
 ---
-description: "Git 작업 도우미 (Git operations helper)"
+description: "Git operations helper"
 argument-hint: "[action]"
 ---
 
-# Git 도우미
+# Git Helper
 
-Git 작업을 지원합니다.
+Assist with Git operations.
 
-## 사용
+## Usage
 
 ```
-/sc:git status     # 상태 확인
-/sc:git diff       # 변경 사항 확인
-/sc:git log        # 커밋 이력
-/sc:git branch     # 브랜치 관리
+/sc:git status     # Check status
+/sc:git diff       # View changes
+/sc:git log        # Commit history
+/sc:git branch     # Branch management
 ```
 
-## 지원 작업
+## Supported Operations
 
-- 상태 확인 및 분석
-- 변경 사항 요약
-- 커밋 메시지 제안
-- 브랜치 전략 조언
+- Status check and analysis
+- Change summary
+- Commit message suggestions
+- Branch strategy advice

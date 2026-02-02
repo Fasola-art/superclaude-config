@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 JARVIS Work Tracker Hook
-도구 사용을 SQLite에 기록하고 패턴 학습
+Record tool usage in SQLite and learn patterns
 Hook Type: PostToolUse
 """
 
@@ -11,13 +11,13 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-# JARVIS 모듈 경로 추가
+# Add JARVIS module path
 JARVIS_DIR = Path.home() / ".claude" / "jarvis"
 sys.path.insert(0, str(JARVIS_DIR / "memory"))
 
 
 def main():
-    # 환경변수에서 도구 정보 가져오기
+    # Get tool information from environment variables
     tool_name = os.environ.get('CLAUDE_TOOL_NAME', '')
     tool_input = os.environ.get('CLAUDE_TOOL_INPUT', '{}')
 
@@ -29,7 +29,7 @@ def main():
     except:
         input_data = {}
 
-    # 파일 경로 추출 (여러 도구에서 사용되는 파라미터명)
+    # Extract file path (parameter names used by various tools)
     file_path = (
         input_data.get('file_path', '') or
         input_data.get('path', '') or
@@ -43,14 +43,14 @@ def main():
 
         init_database()
 
-        # 작업 유형 분류
+        # Classify work type
         work_type = classify_work_type(tool_name, file_path)
 
-        # 패턴 기록
+        # Record pattern
         UsagePatternTracker.record_usage(work_type)
 
     except Exception as e:
-        # 훅 실패는 조용히 처리 (사용자 경험 방해 금지)
+        # Hook failure handled silently (don't disrupt user experience)
         pass
 
 

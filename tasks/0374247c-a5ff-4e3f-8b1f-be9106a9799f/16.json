@@ -1,0 +1,9 @@
+{
+  "id": "16",
+  "subject": "JARVIS 기술: 자연어 파싱 (NLU)",
+  "description": "명령어 없이 의도 파악 - 사용자의 자연어 입력을 분석하여 적절한 기능 매핑",
+  "activeForm": "NLU 시스템 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

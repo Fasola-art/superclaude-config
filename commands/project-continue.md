@@ -1,46 +1,46 @@
 ---
-description: "중단된 프로젝트 이어서 진행 (Continue interrupted project)"
+description: "Continue interrupted project"
 ---
 
-# 프로젝트 계속
+# Project Continue
 
-이전에 중단된 프로젝트 작업을 이어서 진행합니다.
+Resume work on a previously interrupted project.
 
-## 동작
+## Behavior
 
-1. `~/.claude/session-env/` 에서 마지막 세션 상태 로드
-2. `.planning/STATE.md` 파일 확인
-3. `todo.md` 에서 진행 중인 태스크 확인
-4. 마지막 작업 지점부터 자동 재개
+1. Load last session state from `~/.claude/session-env/`
+2. Check `.planning/STATE.md` file
+3. Check in-progress tasks from `todo.md`
+4. Auto-resume from last work point
 
-## 복원 항목
+## Restored Items
 
-- 현재 프로젝트 경로
-- 진행 중인 태스크 목록
-- 마지막 수정 파일
-- 활성화된 페르소나
-- 컨텍스트 상태
+- Current project path
+- In-progress task list
+- Last modified files
+- Active personas
+- Context state
 
-## 사용 예시
+## Usage Example
 
 ```
 /project-continue
 ```
 
-## 출력 형식
+## Output Format
 
 ```
-🔄 프로젝트 복원
+🔄 Project Restored
 
-프로젝트: [프로젝트명]
-경로: [프로젝트 경로]
+Project: [Project name]
+Path: [Project path]
 
-📋 복원된 태스크:
-- [x] 완료된 태스크 1
-- [ ] 진행 중: 태스크 2 ← 여기서 재개
-- [ ] 대기: 태스크 3
+📋 Restored Tasks:
+- [x] Completed task 1
+- [ ] In progress: Task 2 ← Resume here
+- [ ] Pending: Task 3
 
-마지막 작업: [파일명] (수정일시)
+Last work: [Filename] (modified date)
 
-계속 진행할까요?
+Continue?
 ```

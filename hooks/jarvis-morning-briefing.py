@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 JARVIS Morning Briefing Hook
-첫 실행 시 어제 작업 요약, 오늘 일정, 미완료 작업 표시
+Display yesterday's work summary, today's schedule, and incomplete tasks on first execution
 Hook Type: UserPromptSubmit
 """
 
@@ -11,16 +11,16 @@ import json
 from datetime import datetime, date
 from pathlib import Path
 
-# JARVIS 모듈 경로 추가
+# Add JARVIS module path
 JARVIS_DIR = Path.home() / ".claude" / "jarvis"
 sys.path.insert(0, str(JARVIS_DIR / "memory"))
 
-# 마커 파일 (오늘 첫 실행 체크용)
+# Marker file (for checking first execution today)
 MARKER_FILE = JARVIS_DIR / ".last_execution"
 
 
 def is_first_execution_today() -> bool:
-    """오늘 첫 실행인지 확인"""
+    """Check if this is the first execution today"""
     if not MARKER_FILE.exists():
         return True
 
@@ -31,13 +31,13 @@ def is_first_execution_today() -> bool:
 
 
 def update_marker():
-    """마커 파일 업데이트"""
+    """Update marker file"""
     MARKER_FILE.parent.mkdir(parents=True, exist_ok=True)
     MARKER_FILE.write_text(date.today().isoformat())
 
 
 def get_token_stats() -> str:
-    """오늘 토큰 사용량"""
+    """Get today's token usage"""
     try:
         stats_file = Path.home() / ".claude" / "stats-cache.json"
         if stats_file.exists():
@@ -47,14 +47,14 @@ def get_token_stats() -> str:
             for day in data.get('dailyModelTokens', []):
                 if day.get('date') == today_str:
                     tokens = sum(day.get('tokensByModel', {}).values())
-                    return f"오늘 {tokens:,} 토큰 | /context로 상세 확인"
-        return "오늘 0 토큰 | /context로 상세 확인"
+                    return f"Today {tokens:,} tokens | Check details with /context"
+        return "Today 0 tokens | Check details with /context"
     except:
-        return "/context로 확인"
+        return "Check with /context"
 
 
 def get_morning_briefing() -> str:
-    """아침 브리핑 생성"""
+    """Generate morning briefing"""
     try:
         from manager import (
             init_database, WorkSessionManager, TaskManager,
@@ -66,50 +66,50 @@ def get_morning_briefing() -> str:
 
         lines = []
         lines.append("=" * 50)
-        lines.append("🤖 JARVIS 브리핑")
+        lines.append("JARVIS Briefing")
         lines.append("=" * 50)
 
-        # 토큰 통계
+        # Token stats
         token_info = get_token_stats()
-        lines.append(f"\n🔋 {token_info}")
+        lines.append(f"\n{token_info}")
 
-        # 어제 작업 요약
+        # Yesterday's work summary
         yesterday = WorkSessionManager.get_yesterday_summary()
         if yesterday:
-            lines.append(f"\n📊 어제 작업 ({yesterday['date']})")
-            lines.append(f"   세션 수: {yesterday['total_sessions']}개")
+            lines.append(f"\nYesterday's Work ({yesterday['date']})")
+            lines.append(f"   Sessions: {yesterday['total_sessions']}")
             for session in yesterday['sessions'][:3]:
                 if session.get('summary'):
-                    lines.append(f"   • {session['summary'][:50]}...")
+                    lines.append(f"   - {session['summary'][:50]}...")
         else:
-            lines.append("\n📊 어제 작업: 기록 없음")
+            lines.append("\nYesterday's Work: No records")
 
-        # 오늘 일정
+        # Today's schedule
         today_events = CalendarManager.get_today_events()
-        lines.append(f"\n📅 오늘 일정 ({len(today_events)}개)")
+        lines.append(f"\nToday's Schedule ({len(today_events)} events)")
         if today_events:
             for event in today_events[:5]:
                 time_str = event.get('event_time', '')[:16]
-                lines.append(f"   • {time_str} - {event['title']}")
+                lines.append(f"   - {time_str} - {event['title']}")
         else:
-            lines.append("   일정이 없습니다.")
+            lines.append("   No scheduled events.")
 
-        # 미완료 작업
+        # Incomplete tasks
         pending_tasks = TaskManager.get_pending_tasks()
-        lines.append(f"\n📋 미완료 작업 ({len(pending_tasks)}개)")
+        lines.append(f"\nIncomplete Tasks ({len(pending_tasks)})")
         if pending_tasks:
             for task in pending_tasks[:5]:
-                priority_icon = "🔴" if task['priority'] == 1 else "🟡" if task['priority'] == 2 else "🟢"
-                lines.append(f"   {priority_icon} {task['title']}")
+                priority_icon = "HIGH" if task['priority'] == 1 else "MED" if task['priority'] == 2 else "LOW"
+                lines.append(f"   [{priority_icon}] {task['title']}")
         else:
-            lines.append("   미완료 작업이 없습니다! 🎉")
+            lines.append("   No incomplete tasks!")
 
-        # ML 예측 기반 제안
+        # ML prediction-based suggestions
         try:
             predictor = get_predictor()
             suggestion = predictor.suggest_next_action()
             if suggestion:
-                lines.append(f"\n💡 예측 기반 제안")
+                lines.append(f"\nPrediction-Based Suggestion")
                 lines.append(f"   {suggestion}")
         except:
             pass
@@ -119,17 +119,17 @@ def get_morning_briefing() -> str:
         return "\n".join(lines)
 
     except Exception as e:
-        return f"JARVIS 브리핑 생성 실패: {e}"
+        return f"JARVIS briefing generation failed: {e}"
 
 
 def main():
-    # 환경변수에서 프롬프트 가져오기
+    # Get prompt from environment variable
     user_prompt = os.environ.get('CLAUDE_USER_PROMPT', '')
 
-    # /j briefing 명령이면 강제로 브리핑 표시
+    # Force briefing display if /j briefing command
     force_briefing = '/j briefing' in user_prompt.lower() or '/j 브리핑' in user_prompt.lower()
 
-    # 첫 실행이거나 강제 브리핑인 경우에만 표시
+    # Display only on first execution or forced briefing
     if force_briefing or is_first_execution_today():
         briefing = get_morning_briefing()
         print(briefing)

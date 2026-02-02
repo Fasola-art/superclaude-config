@@ -1,6 +1,6 @@
 ---
 name: code-explorer
-description: 코드베이스 분석 (Analyze codebase patterns and architecture)
+description: Codebase analysis (Analyze codebase patterns and architecture)
 tools: Glob, Grep, LS, Read, NotebookRead, WebFetch, TodoWrite, WebSearch, KillShell, BashOutput
 model: sonnet
 color: yellow

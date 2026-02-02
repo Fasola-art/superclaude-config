@@ -1,0 +1,145 @@
+# SuperClaude v2.0.9 - Mac Studio Ultra M2
+
+> **플랫폼**: macOS (Mac Studio Ultra M2) | **버전**: 2.0.9
+
+---
+
+## 🚨 최우선 규칙: 한국어 응답
+
+**모든 응답은 반드시 한국어로 작성합니다.**
+- 질문, 설명, 가이드, 코드 주석, 에러 설명: 한국어
+- 예외: 코드, 명령어, 파일명, 기술 용어는 원어 사용
+
+---
+
+## ⚡ 효율성 원칙
+
+| 규칙 | 내용 |
+|------|------|
+| 실행 | 도구 호출 전 설명 금지, 명확 → 즉시 실행, 모호 → 1회 질문 |
+| 출력 | 결과 요약 3줄 이내, 성공 시 "✅ 완료" + 핵심 정보만 |
+| 컨텍스트 | 훅 주입 1줄, 상시 로드 비활성화 |
+| **파일 내보내기** | 파일 생성/내보내기 후 `open -R` 명령으로 Finder에서 열기 |
+
+---
+
+## 필수 규칙 (6개)
+
+| 규칙 | 설명 |
+|------|------|
+| Writer-Reviewer Loop | 코드 생성 시 4-agent 병렬 검토 |
+| TodoWrite 사용 | 3단계 이상 작업 시 태스크 관리 필수 |
+| 응답 언어 | 한국어 (코드 주석 포함) |
+| Project Planning | PRD 수신 시 플랜 모드 자동 진입 |
+| PRD Creation | /prd-create로 아이디어 → PRD 변환 |
+| **Skill Capture** | 개발 작업 완료 시 재사용 가능한 스킬로 저장 |
+
+### 📦 Skill Capture 규칙
+
+**트리거 조건** (하나 이상 충족 시 스킬 생성):
+- 새 프로젝트/도구 생성 완료
+- 반복 가능한 워크플로우 구현
+- 복잡한 통합 작업 완료 (API 연동 등)
+- 사용자가 "나중에 재사용" 언급
+
+**스킬 저장 위치**: `~/.claude/skills/<skill-name>.md`
+
+**스킬 파일 구조**:
+```markdown
+---
+name: <skill-name>
+description: <한줄 설명>
+version: "1.0.0"
+triggers:
+  - /<command>
+  - <자연어 트리거>
+---
+# <Skill Name>
+## 사용법
+## 실행 지침
+## 참고
+```
+
+**완료 후 안내**: "이 작업을 `/스킬명`으로 재사용할 수 있습니다."
+
+---
+
+## 스킬 명령어
+
+| 명령어 | 설명 |
+|--------|------|
+| /prd-create | 아이디어 → PRD 생성 |
+| /project-plan | PRD로 프로젝트 시작 |
+| /project-status | 현재 진행 상황 확인 |
+| /project-continue | 이전 작업 계속 |
+| /scaffold | TypeScript CLI 프로젝트 빠른 생성 |
+| /ideation | 다중 페르소나 아이디어 토론 |
+| /research | 범용 딥리서치 |
+| /error-search | Error KB 검색 |
+| /recover | 세션 복구 |
+
+---
+
+## 🛡️ Safety Rules
+
+**Auto-Allowed**: Git read/write (except push), npm, File read/write/edit, supabase
+**Requires Approval**: `git push`, `.env`, `rm -rf`, `sudo`
+
+---
+
+## 🔑 API Key 규칙
+
+**API 키 필요 시 자동 체크 우선**:
+1. `~/.claude/credentials/api-keys.json` 먼저 확인
+2. 있으면 자동 사용, 없으면 사용자에게 요청
+3. 새 키 획득 시 `api-keys.json`에 추가 제안
+
+---
+
+## 🔌 MCP Router (필수)
+
+**NEVER** suggest direct MCP server registration in mcp.json.
+항상 MCP Router를 통해 등록: `~/.claude/mcp-router/servers.json`
+
+---
+
+## 📁 파일 구조
+
+```
+~/.claude/
+├── CLAUDE.md                 # 이 파일
+├── superclaude-config.json   # 설정 (병렬 실행, W-R 등)
+├── settings.json             # Claude Code 공식 설정
+├── docs/                     # 상세 문서 (필요 시 참조)
+├── hooks/                    # 자동화 훅
+├── personas/                 # 페르소나 (45개)
+├── skills/                   # 스킬 정의
+├── error-kb/                 # 에러 지식베이스
+├── modules/                  # trading, news-collector, realtime-analysis
+├── profiles/                 # 언어 프로필 (TypeScript, Rust, Python, Go)
+└── rules/                    # 언어별 코딩 규칙
+```
+
+---
+
+## 📖 상세 문서 참조
+
+| 주제 | 문서 경로 |
+|------|----------|
+| 전체 시스템 | `docs/SUPERCLAUDE-REFERENCE.md` |
+| Vibe/Mode 키워드 | `KEYWORD-TRIGGERS.md` |
+| 사고 모드 | `docs/THINKING-MODES.md` |
+| 프로젝트 플래닝 | `docs/PROJECT-PLANNING.md` |
+| 훅 시스템 | `docs/HOOKS-SYSTEM.md` |
+| 설정 가이드 | `docs/SETTINGS-GUIDE.md` |
+| 페르소나 | `docs/PERSONAS.md` |
+| 아키텍처 원칙 | `docs/ARCH-PRINCIPLES.md` |
+| 품질 게이트 | `docs/QUALITY-GATES.md` |
+
+---
+
+## META
+
+- **Version**: 2.0.9
+- **Response Language**: Korean
+- **Environment**: macOS (Mac Studio Ultra M2)

@@ -1,239 +1,239 @@
-# 슬래시 명령어 치트시트
+# Slash Commands Cheatsheet
 
-> **버전**: 1.0.0
-> **갱신일**: 2026-01-30
-
----
-
-## 🚀 빠른 참조
-
-### 가장 많이 쓰는 명령어 (Top 10)
-
-| 명령어 | 설명 | 단축키 |
-|--------|------|--------|
-| `/commit` | Git 커밋 생성 | - |
-| `/project-status` | 프로젝트 진행 상황 | - |
-| `/project-continue` | 중단된 작업 이어서 | - |
-| `/recover` | 세션 복구 | - |
-| `/error-search` | Error KB 검색 | - |
-| `/help` | 도움말 | - |
-| `/market` | 오늘의 경제 시황 | - |
-| `/review-pr` | PR 코드 리뷰 | - |
-| `/vibe` | 세션 Vibe 설정 | - |
-| `/hookify` | 대화에서 훅 생성 | - |
+> **Version**: 1.0.0
+> **Updated**: 2026-01-30
 
 ---
 
-## 📋 카테고리별 명령어
+## Quick Reference
 
-### 🔧 프로젝트 관리
+### Most Used Commands (Top 10)
 
-| 명령어 | 설명 | 사용 예시 |
-|--------|------|----------|
-| `/project-plan` | 프로젝트 계획 수립 | PRD 기반 계획 생성 |
-| `/project-status` | 현재 진행 상황 | 태스크 상태 확인 |
-| `/project-continue` | 중단된 작업 이어서 | STATE.md 복원 |
-| `/recover` | 세션/시스템 복구 | 비정상 종료 후 |
-
-### 📝 Git 작업
-
-| 명령어 | 설명 | 옵션 |
-|--------|------|------|
-| `/commit` | Git 커밋 생성 | 자동 메시지 생성 |
-| `/commit-push-pr` | 커밋 → 푸시 → PR | 원스톱 |
-| `/clean_gone` | gone 브랜치 정리 | 로컬 정리 |
-| `/sc:git` | Git 작업 도우미 | 범용 |
-
-### 🔍 코드 분석
-
-| 명령어 | 설명 | 출력 |
-|--------|------|------|
-| `/code-review` | 풀 리퀘스트 리뷰 | 상세 리뷰 |
-| `/review-pr` | 에이전트 활용 PR 리뷰 | 병렬 검토 |
-| `/sc:analyze` | 코드/프로젝트 분석 | 구조 분석 |
-| `/sc:explain` | 코드/개념 설명 | 상세 설명 |
-
-### 🛠️ 개발 도구
-
-| 명령어 | 설명 | 대상 |
-|--------|------|------|
-| `/sc:implement` | 기능 구현 | 코드 생성 |
-| `/sc:improve` | 코드 개선 | 리팩토링 |
-| `/sc:cleanup` | 코드 정리 | 미사용 코드 제거 |
-| `/sc:test` | 테스트 실행 | 자동 테스트 |
-| `/sc:build` | 프로젝트 빌드 | 빌드 실행 |
-
-### 📊 경제/트레이딩
-
-| 명령어 | 설명 | 출력 |
-|--------|------|------|
-| `/market` | 오늘의 경제 시황 | 보고서 |
-| `/sc:calendar` | 경제 지표 발표 일정 | 캘린더 |
-| `/sc:news` | 뉴스 수집 및 요약 | 요약 |
-| `/sc:report` | 일일 경제 보고서 | 보고서 |
-| `/telegram` | 텔레그램 모니터링 | AI 요약 |
-
-### 🔌 플러그인/스킬 개발
-
-| 명령어 | 설명 | 가이드 |
-|--------|------|--------|
-| `/create-plugin` | 플러그인 생성 | 워크플로우 |
-| `/new-sdk-app` | Agent SDK 앱 생성 | TS/Python |
-| `/hookify` | 훅 규칙 생성 | 대화 분석 |
-| `/feature-dev` | 기능 개발 가이드 | 아키텍처 |
-
-### 📚 문서/가이드
-
-| 명령어 | 설명 | 참조 |
-|--------|------|------|
-| `/help` | 플러그인 설명 | Ralph Loop |
-| `/daily` | 자주 쓰는 경로 모음 | 경로 확인 |
-| `/sc:document` | 문서 생성 | 자동 문서화 |
-| `/sc:index` | SC 명령어 목록 | 이 치트시트 |
-
-### ⚙️ 설정/관리
-
-| 명령어 | 설명 | 대상 |
-|--------|------|------|
-| `/vibe` | 세션 Vibe 설정 | 현재 세션 |
-| `/list` | hookify 규칙 목록 | 규칙 조회 |
-| `/configure` | hookify 규칙 활성화 | 활성/비활성 |
-| `/revise-claude-md` | CLAUDE.md 업데이트 | 학습 반영 |
-
-### 🔄 루프/자동화
-
-| 명령어 | 설명 | 동작 |
-|--------|------|------|
-| `/ralph-loop` | Ralph Loop 시작 | 자동 작업 |
-| `/cancel-ralph` | Ralph Loop 취소 | 중단 |
-| `/sc:workflow` | 워크플로우 실행 | 자동화 |
-| `/sc:spawn` | 에이전트 생성 | 병렬 처리 |
-
-### 💳 Stripe 관련
-
-| 명령어 | 설명 | 출력 |
-|--------|------|------|
-| `/test-cards` | Stripe 테스트 카드 | 카드 번호 |
-| `/explain-error` | Stripe 에러 설명 | 해결책 |
-| `/stripe-best-practices` | Stripe 모범 사례 | 가이드 |
-
-### 🔧 트러블슈팅
-
-| 명령어 | 설명 | 동작 |
-|--------|------|------|
-| `/error-search` | Error KB 검색 | 유사 에러 |
-| `/sc:troubleshoot` | 문제 해결 | 자동 진단 |
-| `/recover` | 세션 복구 | 상태 복원 |
+| Command | Description | Shortcut |
+|---------|-------------|----------|
+| `/commit` | Create git commit | - |
+| `/project-status` | Project progress status | - |
+| `/project-continue` | Continue interrupted work | - |
+| `/recover` | Session recovery | - |
+| `/error-search` | Search Error KB | - |
+| `/help` | Help | - |
+| `/market` | Today's economic outlook | - |
+| `/review-pr` | PR code review | - |
+| `/vibe` | Session Vibe settings | - |
+| `/hookify` | Create hooks from conversation | - |
 
 ---
 
-## 📊 SC (SuperClaude) 명령어 전체
+## Commands by Category
 
-### 개발
+### Project Management
 
-| 명령어 | 설명 |
-|--------|------|
-| `/sc:implement` | 기능 구현 |
-| `/sc:improve` | 코드 개선 |
-| `/sc:cleanup` | 코드 정리 |
-| `/sc:test` | 테스트 실행 |
-| `/sc:build` | 프로젝트 빌드 |
+| Command | Description | Usage Example |
+|---------|-------------|---------------|
+| `/project-plan` | Create project plan | PRD-based planning |
+| `/project-status` | Current progress | Task status check |
+| `/project-continue` | Continue interrupted work | Restore STATE.md |
+| `/recover` | Session/system recovery | After abnormal exit |
 
-### 분석
+### Git Operations
 
-| 명령어 | 설명 |
-|--------|------|
-| `/sc:analyze` | 코드/프로젝트 분석 |
-| `/sc:explain` | 코드/개념 설명 |
-| `/sc:design` | 시스템/컴포넌트 설계 |
-| `/sc:estimate` | 작업 규모 추정 |
+| Command | Description | Options |
+|---------|-------------|---------|
+| `/commit` | Create git commit | Auto message generation |
+| `/commit-push-pr` | Commit → Push → PR | One-stop |
+| `/clean_gone` | Clean gone branches | Local cleanup |
+| `/sc:git` | Git operations helper | General purpose |
 
-### 문서
+### Code Analysis
 
-| 명령어 | 설명 |
-|--------|------|
-| `/sc:document` | 문서 생성 |
-| `/sc:index` | SC 명령어 목록 |
-| `/sc:load` | 컨텍스트 로드 |
+| Command | Description | Output |
+|---------|-------------|--------|
+| `/code-review` | Pull request review | Detailed review |
+| `/review-pr` | Agent-powered PR review | Parallel review |
+| `/sc:analyze` | Code/project analysis | Structure analysis |
+| `/sc:explain` | Code/concept explanation | Detailed explanation |
 
-### 자동화
+### Development Tools
 
-| 명령어 | 설명 |
-|--------|------|
-| `/sc:workflow` | 워크플로우 실행 |
-| `/sc:spawn` | 에이전트 생성 |
-| `/sc:task` | 태스크 관리 |
-| `/sc:git` | Git 작업 도우미 |
+| Command | Description | Target |
+|---------|-------------|--------|
+| `/sc:implement` | Feature implementation | Code generation |
+| `/sc:improve` | Code improvement | Refactoring |
+| `/sc:cleanup` | Code cleanup | Remove unused code |
+| `/sc:test` | Run tests | Auto test |
+| `/sc:build` | Build project | Run build |
 
-### 경제
+### Finance/Trading
 
-| 명령어 | 설명 |
-|--------|------|
-| `/sc:calendar` | 경제 지표 발표 일정 |
-| `/sc:news` | 뉴스 수집 및 요약 |
-| `/sc:report` | 일일 경제 보고서 |
+| Command | Description | Output |
+|---------|-------------|--------|
+| `/market` | Today's economic outlook | Report |
+| `/sc:calendar` | Economic indicator schedule | Calendar |
+| `/sc:news` | News collection and summary | Summary |
+| `/sc:report` | Daily economic report | Report |
+| `/telegram` | Telegram monitoring | AI summary |
+
+### Plugin/Skill Development
+
+| Command | Description | Guide |
+|---------|-------------|-------|
+| `/create-plugin` | Create plugin | Workflow |
+| `/new-sdk-app` | Create Agent SDK app | TS/Python |
+| `/hookify` | Create hook rules | Conversation analysis |
+| `/feature-dev` | Feature development guide | Architecture |
+
+### Documentation/Guides
+
+| Command | Description | Reference |
+|---------|-------------|-----------|
+| `/help` | Plugin description | Ralph Loop |
+| `/daily` | Frequently used paths | Path lookup |
+| `/sc:document` | Generate documentation | Auto documentation |
+| `/sc:index` | SC command list | This cheatsheet |
+
+### Settings/Management
+
+| Command | Description | Target |
+|---------|-------------|--------|
+| `/vibe` | Session Vibe settings | Current session |
+| `/list` | hookify rules list | Rule lookup |
+| `/configure` | Enable/disable hookify rules | Enable/Disable |
+| `/revise-claude-md` | Update CLAUDE.md | Apply learnings |
+
+### Loops/Automation
+
+| Command | Description | Action |
+|---------|-------------|--------|
+| `/ralph-loop` | Start Ralph Loop | Auto work |
+| `/cancel-ralph` | Cancel Ralph Loop | Stop |
+| `/sc:workflow` | Execute workflow | Automation |
+| `/sc:spawn` | Spawn agent | Parallel processing |
+
+### Stripe Related
+
+| Command | Description | Output |
+|---------|-------------|--------|
+| `/test-cards` | Stripe test cards | Card numbers |
+| `/explain-error` | Stripe error explanation | Solutions |
+| `/stripe-best-practices` | Stripe best practices | Guide |
+
+### Troubleshooting
+
+| Command | Description | Action |
+|---------|-------------|--------|
+| `/error-search` | Search Error KB | Similar errors |
+| `/sc:troubleshoot` | Troubleshooting | Auto diagnosis |
+| `/recover` | Session recovery | State restore |
 
 ---
 
-## 🎯 사용 시나리오
+## SC (SuperClaude) Commands Overview
 
-### 새 프로젝트 시작
+### Development
+
+| Command | Description |
+|---------|-------------|
+| `/sc:implement` | Feature implementation |
+| `/sc:improve` | Code improvement |
+| `/sc:cleanup` | Code cleanup |
+| `/sc:test` | Run tests |
+| `/sc:build` | Build project |
+
+### Analysis
+
+| Command | Description |
+|---------|-------------|
+| `/sc:analyze` | Code/project analysis |
+| `/sc:explain` | Code/concept explanation |
+| `/sc:design` | System/component design |
+| `/sc:estimate` | Estimate task scope |
+
+### Documentation
+
+| Command | Description |
+|---------|-------------|
+| `/sc:document` | Generate documentation |
+| `/sc:index` | SC command list |
+| `/sc:load` | Load context |
+
+### Automation
+
+| Command | Description |
+|---------|-------------|
+| `/sc:workflow` | Execute workflow |
+| `/sc:spawn` | Spawn agent |
+| `/sc:task` | Task management |
+| `/sc:git` | Git operations helper |
+
+### Finance
+
+| Command | Description |
+|---------|-------------|
+| `/sc:calendar` | Economic indicator schedule |
+| `/sc:news` | News collection and summary |
+| `/sc:report` | Daily economic report |
+
+---
+
+## Usage Scenarios
+
+### Starting New Project
 
 ```
-1. /project-plan     → 계획 수립
-2. /sc:design        → 아키텍처 설계
-3. /sc:implement     → 기능 구현
-4. /sc:test          → 테스트 실행
-5. /commit           → 커밋
+1. /project-plan     → Create plan
+2. /sc:design        → Architecture design
+3. /sc:implement     → Feature implementation
+4. /sc:test          → Run tests
+5. /commit           → Commit
 ```
 
-### 코드 리뷰 플로우
+### Code Review Flow
 
 ```
-1. /review-pr        → PR 리뷰 (에이전트 활용)
-2. /sc:improve       → 개선 사항 적용
-3. /sc:test          → 테스트 확인
-4. /commit-push-pr   → 머지
+1. /review-pr        → PR review (agent-powered)
+2. /sc:improve       → Apply improvements
+3. /sc:test          → Verify tests
+4. /commit-push-pr   → Merge
 ```
 
-### 트러블슈팅 플로우
+### Troubleshooting Flow
 
 ```
-1. /error-search     → Error KB 검색
-2. /sc:troubleshoot  → 자동 진단
-3. /sc:improve       → 수정 적용
-4. /sc:test          → 확인
+1. /error-search     → Search Error KB
+2. /sc:troubleshoot  → Auto diagnosis
+3. /sc:improve       → Apply fixes
+4. /sc:test          → Verify
 ```
 
-### 경제 분석 플로우
+### Finance Analysis Flow
 
 ```
-1. /market           → 오늘의 시황
-2. /sc:calendar      → 발표 일정
-3. /sc:news          → 뉴스 수집
-4. /sc:report        → 보고서 생성
+1. /market           → Today's outlook
+2. /sc:calendar      → Release schedule
+3. /sc:news          → Collect news
+4. /sc:report        → Generate report
 ```
 
 ---
 
-## ⚠️ 주의사항
+## Cautions
 
-| 명령어 | 주의사항 |
-|--------|----------|
-| `/commit-push-pr` | 리모트 푸시 포함 |
-| `/ralph-loop` | 장시간 실행 가능 |
-| `/clean_gone` | 로컬 브랜치 삭제 |
-| `/hookify` | 훅 파일 생성 |
+| Command | Caution |
+|---------|---------|
+| `/commit-push-pr` | Includes remote push |
+| `/ralph-loop` | May run for extended time |
+| `/clean_gone` | Deletes local branches |
+| `/hookify` | Creates hook files |
 
 ---
 
-## 📚 참조
+## References
 
-| 문서 | 경로 |
-|------|------|
-| 스킬 가이드 | `~/.claude/CLAUDE_SKILLS_GUIDE.md` |
-| 설치된 스킬 | `~/.claude/INSTALLED_SKILLS.md` |
-| 훅 시스템 | `~/.claude/docs/HOOKS-SYSTEM.md` |
+| Document | Path |
+|----------|------|
+| Skills Guide | `~/.claude/CLAUDE_SKILLS_GUIDE.md` |
+| Installed Skills | `~/.claude/INSTALLED_SKILLS.md` |
+| Hook System | `~/.claude/docs/HOOKS-SYSTEM.md` |
 
 ---
 

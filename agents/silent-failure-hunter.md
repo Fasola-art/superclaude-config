@@ -1,6 +1,6 @@
 ---
 name: silent-failure-hunter
-description: 조용한 실패 탐지 (Identify silent failures and error handling issues)
+description: Silent failure detection (Identify silent failures and error handling issues)
 model: inherit
 color: yellow
 ---

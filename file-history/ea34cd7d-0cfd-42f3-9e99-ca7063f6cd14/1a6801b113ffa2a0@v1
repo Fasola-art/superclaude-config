@@ -1,0 +1,300 @@
+# Expert Instruction File Design Master Checklist
+
+> **Goal**: Design instructions that guarantee **consistent and predictable high-quality results** for users
+
+---
+
+## Phase 1: Pre-Design Strategy
+
+### Goal Definition
+- [ ] **Primary Outcome**: Is the final deliverable defined in one sentence?
+  - Example: "Investor-ready PRD document" / "Production-deployable code"
+- [ ] **Success Criteria**: Are success criteria measurable?
+  - Example: "12+ of 15 sections completed" / "Test coverage 80%+"
+- [ ] **Failure Cases**: Are failure scenarios defined?
+  - Example: "Halt if market size calculation fails" / "Warn on API spec conflicts"
+
+### User Segment Analysis
+- [ ] **Target User**: Is the primary user clearly defined?
+  - Example: "Startup PM", "Enterprise strategy team", "Investment analyst"
+- [ ] **Usage Context**: Is the usage situation defined?
+  - Example: "PRD for fundraising", "Internal approval proposal", "Team sharing document"
+
+### Constraint Identification
+- [ ] **Technical constraints**: Considered LLM context window / token limits?
+- [ ] **Time constraints**: Is expected work time realistic?
+- [ ] **Cognitive constraints**: Is information per chunk within 7±2 items?
+
+---
+
+## Phase 2: Structure Design (Architecture)
+
+### Modularity Principles
+
+#### 2.1 Independence
+- [ ] **Self-containment test**: Can each module be understood immediately if picked randomly?
+- [ ] **Dependency declaration**: Are prerequisites explicitly stated?
+- [ ] **Fallback strategy**: Are alternatives provided when data is missing?
+
+#### 2.2 Cohesion
+- [ ] **Single responsibility principle**: Does each section cover only one topic?
+- [ ] **Grouping logic**: Are related items logically grouped?
+
+#### 2.3 Hierarchy Design
+- [ ] **Depth limit**: Maximum 4 levels (# → ## → ### → ####)
+- [ ] **Width balancing**: 5-9 items per level (cognitive load optimization)
+- [ ] **Symmetry**: Do items at same level have similar importance/volume?
+
+---
+
+### Consistency
+
+#### 3.1 Structural Consistency
+- [ ] **Template pattern**: Do all analysis sections follow the same structure?
+- [ ] **Metadata uniformity**: Are evaluation criteria consistent throughout?
+  ```markdown
+  # Use consistently across all sections
+  Impact: H (High) / M (Medium) / L (Low)
+  Priority: P0 / P1 / P2
+  Status: ✅ Complete / 🔄 In Progress / ❌ Not Started
+  ```
+
+#### 3.2 Naming Consistency
+- [ ] **Glossary**: Are key terms defined and used consistently?
+- [ ] **Verb uniformity**: Are instruction verbs consistent?
+
+#### 3.3 Visual Consistency
+- [ ] **Emoji rules**: Is emoji usage systematic?
+  ```markdown
+  🎯 Goal
+  ⚠️ Warning
+  💡 Tip
+  ✅ Required
+  🔄 Optional
+  ```
+
+- [ ] **Table format**: Do all tables use the same style?
+
+---
+
+### Scalability
+
+#### 4.1 Version Management
+- [ ] **Explicit versioning**: Is the instruction file versioned?
+- [ ] **Backward compatibility**: Can previous version users migrate?
+
+#### 4.2 Module Addition/Removal
+- [ ] **Plugin structure**: Does adding new sections not affect existing ones?
+- [ ] **Conditional rendering**: Can sections be enabled/disabled by mode?
+
+#### 4.3 Customization Points
+- [ ] **Variable extraction**: Are frequently changing values separated as placeholders?
+- [ ] **Override capability**: Can users override defaults?
+
+---
+
+## Phase 3: Interface Design
+
+### Readability
+
+#### 5.1 Information Density Optimization
+- [ ] **Scannability**: Can 70% be understood by reading titles only?
+- [ ] **Table vs prose ratio**: Is table/list ratio 60%+?
+- [ ] **Whitespace usage**: Is there sufficient spacing between sections?
+
+#### 5.2 Cognitive Load Management
+- [ ] **Chunk size**: Is information presented within 7±2 items at a time?
+- [ ] **Progress indication**: Can users know their current position?
+- [ ] **Time estimates**: Is work time specified for each section?
+
+#### 5.3 Visual Hierarchy
+- [ ] **Markdown levels**: Does `#` count reflect importance?
+- [ ] **Emoji system**: Are functions distinguished?
+- [ ] **Color coding**: `🟢 Go / 🟡 Review / 🔴 Block`
+
+---
+
+### Usability
+
+#### 6.1 Progressive Disclosure
+- [ ] **Level separation**: Is complexity separated by stages?
+- [ ] **Selective detail**: Are required and optional clearly separated?
+
+#### 6.2 Error Prevention
+- [ ] **Required/optional marking**: Are required fields clear?
+- [ ] **Validity rules**: Are input constraints specified?
+- [ ] **Examples provided**: Do all placeholders have examples?
+
+#### 6.3 Feedback Mechanism
+- [ ] **Completeness check**: Is self-diagnosis possible?
+- [ ] **Quality criteria**: Are pass criteria specified?
+
+---
+
+## Phase 4: Quality Assurance
+
+### Completeness
+
+#### 7.1 Coverage
+- [ ] **Happy Path**: Is the ideal scenario 100% covered?
+- [ ] **Edge Cases**: Are exception handling methods provided?
+- [ ] **Negative Cases**: Are "don'ts" also specified?
+
+#### 7.2 Coherence
+- [ ] **No circular references**: No A→B→C→A dependencies?
+- [ ] **Contradiction removal**: No conflicting instructions?
+- [ ] **Term consistency**: Not using different names for same concept?
+
+---
+
+### Accuracy
+
+#### 8.1 Fact Check
+- [ ] **Numeric verification**: Are example numbers realistic?
+- [ ] **Source citation**: Are claims supported by evidence?
+
+#### 8.2 Currency
+- [ ] **Time-sensitive information**: Are dates specified?
+- [ ] **Deprecation warnings**: Is soon-to-be-removed content marked?
+
+---
+
+### Testability
+
+#### 9.1 Verifiable Results
+- [ ] **Measurable goals**: Can success be confirmed numerically?
+- [ ] **Sample output**: Are correct result examples provided?
+
+#### 9.2 Self-Diagnostic Tools
+- [ ] **Checklist**: Does each section have self-check items?
+- [ ] **Scoring Rubric**: Can quality be evaluated by score?
+
+---
+
+## Phase 5: Execution Optimization
+
+### Speed
+
+#### 10.1 Fast Path
+- [ ] **Rapid Start**: Can core deliverable be generated quickly?
+- [ ] **Templates**: Are frequently used patterns templated?
+
+#### 10.2 Shortcuts/Automation
+- [ ] **Copyable blocks**: Are frequently used tables immediately copyable?
+- [ ] **Script support**: Are auto-generatable parts indicated?
+
+---
+
+### Maintainability
+
+#### 11.1 Documentation
+- [ ] **Design intent**: Are there comments explaining why it was made this way?
+- [ ] **Change history**: Are modification reasons recorded?
+
+#### 11.2 Refactorability
+- [ ] **DRY principle**: Can duplication be removed?
+- [ ] **Separability**: Does it work if only parts are extracted?
+
+---
+
+## Phase 6: Meta Quality
+
+### Learning Curve
+
+#### 12.1 Usage Guide
+- [ ] **Clear starting point**: Is it specified where to start?
+- [ ] **Difficulty indication**: Is complexity of each section specified?
+
+#### 12.2 Progressive Mastery
+- [ ] **Improvement path**: Is continuous improvement method suggested?
+
+---
+
+### Adaptability
+
+#### 13.1 Domain Independence
+- [ ] **Universality**: Is it applicable to other industries?
+- [ ] **Customization guide**: Are industry-specific variation methods explained?
+
+#### 13.2 Collaboration Friendliness
+- [ ] **Role division**: Can it be divided for team work?
+- [ ] **Mergeable**: Can multiple people's results be combined?
+
+---
+
+## Final Checklist Summary
+
+### CRITICAL (Must Meet)
+```
+✅ Is goal measurable? (Phase 1)
+✅ Is each module independent? (Phase 2)
+✅ Is table/list ratio 60%+? (Phase 3)
+✅ Are required/optional clear? (Phase 3)
+✅ Do all placeholders have examples? (Phase 3)
+✅ Is there a self-diagnostic checklist? (Phase 4)
+✅ Is 5-minute quickstart possible? (Phase 5)
+```
+
+### IMPORTANT (Strongly Recommended)
+```
+✅ Complexity level separation? (Phase 2)
+✅ Version management strategy? (Phase 2)
+✅ Progress status display? (Phase 3)
+✅ Edge case handling? (Phase 4)
+✅ Auto-generatable parts marked? (Phase 5)
+✅ Usage guide provided? (Phase 6)
+```
+
+### NICE-TO-HAVE (Optional)
+```
+✅ Emoji system? (Phase 3)
+✅ Sample output? (Phase 4)
+✅ Role-based division guide? (Phase 6)
+```
+
+---
+
+## Key Principles Summary
+
+> **"Define 'user success' measurably, and design the path to that success clearly"**
+
+### 6 Key Principles
+
+1. **Goal-centered design**: Every element must contribute to "user's successful deliverable"
+2. **Modularization**: Each part provides independent value, synergy as a whole
+3. **Consistency**: Shortened learning curve through pattern repetition
+4. **Scalability**: Structure that flexibly responds to new requirements
+5. **Progressive disclosure**: Depth expansion by stages from beginner to expert
+6. **Verifiability**: Judge success/failure by measurable criteria
+
+---
+
+## Final Advice
+
+**3 Questions to Ask Before Design:**
+1. "What should the user gain from this instruction?" (Goal)
+2. "Can the core deliverable be created quickly?" (Efficiency)
+3. "Can this structure be easily modified a year from now?" (Sustainability)
+
+---
+
+## Expert Key Principles
+
+### 3 Keys to Creating 85+ Point Instruction Files
+
+**1. Modular Design (Phase 2) - Most Important**
+- Each section operates independently
+- Table-centered structure (minimize prose)
+- Unified metadata
+
+**2. Consistency Maintenance (Phase 2-3)**
+- Repeat same patterns
+- Define glossary first
+- Standardize visual elements
+
+**3. Scalability Consideration (Phase 2)**
+- Clear placeholders
+- Separate by version/mode
+- Structure considering future expansion
+
+> **Key**: Just perfecting Phase 1 (Strategy) and Phase 2 (Structure) guarantees 80 points.

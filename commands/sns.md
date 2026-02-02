@@ -1,57 +1,57 @@
 ---
-description: "SNS 자동화 워크플로우 설계 및 관리 (SNS automation workflow)"
+description: "SNS automation workflow design and management"
 argument-hint: "[workflow_name or action]"
 ---
 
-# SNS 자동화
+# SNS Automation
 
-SNS 콘텐츠 배포, 인게이지먼트, 트렌드 분석 자동화 워크플로우를 설계하고 관리합니다.
+Design and manage SNS content distribution, engagement, and trend analysis automation workflows.
 
-## 동작
+## Behavior
 
-1. 요청 분석 (워크플로우 설계 / n8n 설정 / 기존 워크플로우 수정)
-2. 기술 스택 확인 (n8n, API, AI)
-3. 워크플로우 설계 또는 수정
-4. 구현 가이드 제공
+1. Analyze request (workflow design / n8n setup / modify existing workflow)
+2. Check tech stack (n8n, API, AI)
+3. Design or modify workflow
+4. Provide implementation guide
 
-## 사용 가능한 액션
+## Available Actions
 
-| 액션 | 설명 |
-|------|------|
-| `design` | 새 워크플로우 설계 |
-| `setup` | n8n 환경 설정 가이드 |
-| `check` | 기존 워크플로우 점검 |
-| `improve` | 워크플로우 개선 제안 |
+| Action | Description |
+|--------|-------------|
+| `design` | Design new workflow |
+| `setup` | n8n environment setup guide |
+| `check` | Audit existing workflows |
+| `improve` | Workflow improvement suggestions |
 
-## 사용 예시
+## Usage Examples
 
 ```bash
-/sns                          # 전체 SNS 자동화 가이드
-/sns design content           # 콘텐츠 배포 워크플로우 설계
-/sns setup                    # n8n 설정 가이드
-/sns check                    # 기존 워크플로우 점검
+/sns                          # Full SNS automation guide
+/sns design content           # Design content distribution workflow
+/sns setup                    # n8n setup guide
+/sns check                    # Audit existing workflows
 ```
 
-## 워크플로우 종류
+## Workflow Types
 
-| # | 워크플로우 | 트리거 | 기능 |
-|---|-----------|--------|------|
-| 1 | 콘텐츠 배포 | Webhook | 멀티플랫폼 자동 업로드 |
-| 2 | 인게이지먼트 | 15분 스케줄 | 댓글/DM 자동 응답 |
-| 3 | 트렌드 분석 | 매일 06:00 | 트렌드 수집 + 아이디어 |
-| 4 | 분석 리포팅 | 매주 일요일 | 주간 성과 리포트 |
+| # | Workflow | Trigger | Function |
+|---|----------|---------|----------|
+| 1 | Content Distribution | Webhook | Multi-platform auto upload |
+| 2 | Engagement | 15min schedule | Auto-respond to comments/DMs |
+| 3 | Trend Analysis | Daily 06:00 | Trend collection + ideas |
+| 4 | Analytics Report | Weekly Sunday | Weekly performance report |
 
-## 관련 문서
+## Related Documentation
 
-- 스킬 상세: `~/.claude/skills/sns-automation/SKILL.md`
-- n8n 가이드: `~/.claude/docs/N8N-PYTHON-UPLOAD.md`
-- 모듈 폴더: `~/.claude/modules/sns-automation/`
+- Skill details: `~/.claude/skills/sns-automation/SKILL.md`
+- n8n guide: `~/.claude/docs/N8N-PYTHON-UPLOAD.md`
+- Module folder: `~/.claude/modules/sns-automation/`
 
-## 기술 스택
+## Tech Stack
 
-| 레이어 | 도구 |
-|--------|------|
-| 워크플로우 | n8n (셀프호스팅) |
+| Layer | Tool |
+|-------|------|
+| Workflow | n8n (self-hosted) |
 | AI | OpenAI / Claude |
-| 미디어 | FFmpeg / Cloudinary |
-| 알림 | Telegram / Slack |
+| Media | FFmpeg / Cloudinary |
+| Notifications | Telegram / Slack |

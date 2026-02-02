@@ -1,6 +1,6 @@
 ---
 name: writing-rules
-description: hookify 규칙 작성 가이드 (Writing hookify rules)
+description: Guide for writing hookify rules. Covers YAML frontmatter, regex patterns, event types, and rule file organization.
 version: 0.1.0
 ---
 

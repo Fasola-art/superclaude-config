@@ -1,296 +1,296 @@
-# PRD 템플릿
+# PRD Template
 
-## 기본 섹션 (1-10)
+## Basic Sections (1-10)
 
 ```markdown
-# [프로젝트명] PRD
+# [Project Name] PRD
 
-## 1. 개요
-- **한 줄 요약**:
-- **목적**:
-- **타겟 사용자**:
+## 1. Overview
+- **One-line Summary**:
+- **Purpose**:
+- **Target Users**:
 
-## 2. 배경
-### 해결하려는 문제
+## 2. Background
+### Problem to Solve
 -
 
-### 기존 솔루션의 한계
+### Limitations of Existing Solutions
 -
 
-### 기대 효과
+### Expected Benefits
 -
 
-## 3. 사업성 검토 결과
+## 3. Business Viability Review Results
 
-### 3.1 거시 환경 분석 (PESTLE)
+### 3.1 Macro Environment Analysis (PESTLE)
 
-#### Political (정치/정책)
-| 요소 | 현황 | 영향도 | 대응 방안 |
-|------|------|--------|-----------|
-| 정부 정책 | | H/M/L | |
-| 정치적 안정성 | | H/M/L | |
-| 규제 환경 | | H/M/L | |
+#### Political
+| Factor | Status | Impact | Response |
+|--------|--------|--------|----------|
+| Government Policy | | H/M/L | |
+| Political Stability | | H/M/L | |
+| Regulatory Environment | | H/M/L | |
 
-**핵심 인사이트**:
--
--
-
-#### Economic (경제)
-| 요소 | 현황 | 영향도 | 대응 방안 |
-|------|------|--------|-----------|
-| GDP 성장률 | | H/M/L | |
-| 실업률 | | H/M/L | |
-| 소비 트렌드 | | H/M/L | |
-| 환율 변동 | | H/M/L | |
-
-**핵심 인사이트**:
+**Key Insights**:
 -
 -
 
-#### Social (사회/문화)
-| 요소 | 현황 | 영향도 | 대응 방안 |
-|------|------|--------|-----------|
-| 인구 통계 변화 | | H/M/L | |
-| 라이프스타일 트렌드 | | H/M/L | |
-| 교육 수준 | | H/M/L | |
+#### Economic
+| Factor | Status | Impact | Response |
+|--------|--------|--------|----------|
+| GDP Growth Rate | | H/M/L | |
+| Unemployment Rate | | H/M/L | |
+| Consumer Trends | | H/M/L | |
+| Exchange Rate Fluctuation | | H/M/L | |
 
-**핵심 인사이트**:
+**Key Insights**:
 -
 -
 
-#### Technological (기술)
-| 요소 | 현황 | 영향도 | 대응 방안 |
-|------|------|--------|-----------|
-| 기술 혁신 속도 | | H/M/L | |
-| R&D 투자 | | H/M/L | |
-| 인프라 수준 | | H/M/L | |
+#### Social
+| Factor | Status | Impact | Response |
+|--------|--------|--------|----------|
+| Demographic Changes | | H/M/L | |
+| Lifestyle Trends | | H/M/L | |
+| Education Level | | H/M/L | |
 
-**핵심 인사이트**:
+**Key Insights**:
 -
 -
 
-#### Legal (법률/규제)
-| 요소 | 현황 | 영향도 | 대응 방안 |
-|------|------|--------|-----------|
-| 개인정보보호법 | | H/M/L | |
-| 산업별 규제 | | H/M/L | |
-| 지적재산권 | | H/M/L | |
+#### Technological
+| Factor | Status | Impact | Response |
+|--------|--------|--------|----------|
+| Innovation Speed | | H/M/L | |
+| R&D Investment | | H/M/L | |
+| Infrastructure Level | | H/M/L | |
 
-**핵심 인사이트**:
+**Key Insights**:
 -
 -
 
-#### Environmental (환경)
-| 요소 | 현황 | 영향도 | 대응 방안 |
-|------|------|--------|-----------|
-| 기후 변화 | | H/M/L | |
-| 지속가능성 요구 | | H/M/L | |
-| 탄소 배출 규제 | | H/M/L | |
+#### Legal
+| Factor | Status | Impact | Response |
+|--------|--------|--------|----------|
+| Privacy Laws | | H/M/L | |
+| Industry Regulations | | H/M/L | |
+| Intellectual Property | | H/M/L | |
 
-**핵심 인사이트**:
+**Key Insights**:
 -
 -
 
-### 3.2 산업 구조 분석 (Porter's 5 Forces)
+#### Environmental
+| Factor | Status | Impact | Response |
+|--------|--------|--------|----------|
+| Climate Change | | H/M/L | |
+| Sustainability Requirements | | H/M/L | |
+| Carbon Emission Regulations | | H/M/L | |
 
-#### 산업 내 경쟁 강도
-- **평가**: ⭐⭐⭐⭐⭐ (1-5점)
-- **주요 경쟁사 수**: XX개
-- **시장 집중도**: High / Medium / Low
-- **차별화 수준**: High / Medium / Low
-- **근거**:
+**Key Insights**:
+-
+-
+
+### 3.2 Industry Structure Analysis (Porter's 5 Forces)
+
+#### Industry Rivalry
+- **Score**: 1-5
+- **Major Competitors**: XX
+- **Market Concentration**: High / Medium / Low
+- **Differentiation Level**: High / Medium / Low
+- **Rationale**:
   -
   -
 
-#### 신규 진입자 위협
-- **평가**: ⭐⭐⭐⭐⭐ (1-5점)
-- **진입 장벽**: High / Medium / Low
-- **필요 자본**: $XXM
-- **규제 요구사항**:
-- **근거**:
+#### Threat of New Entrants
+- **Score**: 1-5
+- **Entry Barriers**: High / Medium / Low
+- **Required Capital**: $XXM
+- **Regulatory Requirements**:
+- **Rationale**:
   -
   -
 
-#### 대체재 위협
-- **평가**: ⭐⭐⭐⭐⭐ (1-5점)
-- **주요 대체재**:
-- **대체 용이성**: High / Medium / Low
-- **근거**:
+#### Threat of Substitutes
+- **Score**: 1-5
+- **Major Substitutes**:
+- **Substitution Ease**: High / Medium / Low
+- **Rationale**:
   -
   -
 
-#### 공급자 교섭력
-- **평가**: ⭐⭐⭐⭐⭐ (1-5점)
-- **주요 공급자**:
-- **공급자 집중도**: High / Medium / Low
-- **전환 비용**: High / Medium / Low
-- **근거**:
+#### Supplier Power
+- **Score**: 1-5
+- **Major Suppliers**:
+- **Supplier Concentration**: High / Medium / Low
+- **Switching Costs**: High / Medium / Low
+- **Rationale**:
   -
   -
 
-#### 구매자 교섭력
-- **평가**: ⭐⭐⭐⭐⭐ (1-5점)
-- **구매자 집중도**: High / Medium / Low
-- **전환 비용**: High / Medium / Low
-- **가격 민감도**: High / Medium / Low
-- **근거**:
+#### Buyer Power
+- **Score**: 1-5
+- **Buyer Concentration**: High / Medium / Low
+- **Switching Costs**: High / Medium / Low
+- **Price Sensitivity**: High / Medium / Low
+- **Rationale**:
   -
   -
 
-**종합 평가**:
-- **산업 매력도**: 🟢 High / 🟡 Medium / 🔴 Low
-- **전략적 권장사항**:
+**Overall Assessment**:
+- **Industry Attractiveness**: High / Medium / Low
+- **Strategic Recommendations**:
   -
   -
 
-### 3.3 시장 분석
+### 3.3 Market Analysis
 
-#### TAM/SAM/SOM 계산
+#### TAM/SAM/SOM Calculation
 
 **TAM (Total Addressable Market)**
-- **계산 방식**: Top-Down
-- **수식**: [인구/기업 수] × [침투율] × [ARPU]
-- **값**: $XXB
-- **계산 근거**:
-  - 전체 시장 규모:
-  - 침투율 가정: XX% (근거: )
-  - ARPU 추정: $XX/월 (근거: )
-- **출처**: Statista, Gartner, IDC 등
+- **Calculation Method**: Top-Down
+- **Formula**: [Population/Companies] x [Penetration Rate] x [ARPU]
+- **Value**: $XXB
+- **Calculation Basis**:
+  - Total market size:
+  - Penetration assumption: XX% (rationale: )
+  - ARPU estimate: $XX/month (rationale: )
+- **Sources**: Statista, Gartner, IDC, etc.
 
 **SAM (Serviceable Available Market)**
-- **계산 방식**: Bottom-Up
-- **수식**: TAM × [타겟 세그먼트 비율]
-- **값**: $XXM
-- **계산 근거**:
-  - 타겟 세그먼트:
-  - 타겟 비율: XX% (근거: )
-- **출처**:
+- **Calculation Method**: Bottom-Up
+- **Formula**: TAM x [Target Segment Ratio]
+- **Value**: $XXM
+- **Calculation Basis**:
+  - Target segment:
+  - Target ratio: XX% (rationale: )
+- **Sources**:
 
 **SOM (Serviceable Obtainable Market)**
-- **계산 방식**: 현실적 점유율 추정
-- **수식**: SAM × [현실적 점유율]
-- **값**: $XXM
-- **계산 근거**:
-  - Year 1 목표 점유율: XX% (근거: )
-  - Year 3 목표 점유율: XX% (근거: )
-- **벤치마크**: 유사 스타트업 사례
+- **Calculation Method**: Realistic market share estimate
+- **Formula**: SAM x [Realistic Market Share]
+- **Value**: $XXM
+- **Calculation Basis**:
+  - Year 1 target share: XX% (rationale: )
+  - Year 3 target share: XX% (rationale: )
+- **Benchmark**: Similar startup cases
 
-### 3.4 경쟁 분석
+### 3.4 Competitive Analysis
 
-#### 경쟁사 SWOT 분석
+#### Competitor SWOT Analysis
 
-**경쟁사 1: [이름]**
-| SWOT | 내용 |
-|------|------|
-| Strengths (강점) | - |
-| Weaknesses (약점) | - |
-| Opportunities (기회) | - |
-| Threats (위협) | - |
+**Competitor 1: [Name]**
+| SWOT | Details |
+|------|---------|
+| Strengths | - |
+| Weaknesses | - |
+| Opportunities | - |
+| Threats | - |
 
-**우리의 차별화 포인트**:
+**Our Differentiation Points**:
 -
 -
 
-### 3.5 고객 분석
+### 3.5 Customer Analysis
 
 #### Primary Persona
 
-**이름**: [페르소나 이름]
+**Name**: [Persona Name]
 
 **Demographics**:
-- 나이: XX세
-- 성별:
-- 직업:
-- 소득: $XX/년
-- 거주지:
+- Age: XX
+- Gender:
+- Occupation:
+- Income: $XX/year
+- Location:
 
-**Goals (목표)**:
--
--
-
-**Pain Points (불편함)**:
+**Goals**:
 -
 -
 
-### 3.6 비즈니스 모델
+**Pain Points**:
+-
+-
+
+### 3.6 Business Model
 
 #### Business Model Canvas
 
-**1. Customer Segments (고객 세그먼트)**
+**1. Customer Segments**
 -
 
-**2. Value Propositions (가치 제안)**
+**2. Value Propositions**
 -
 
-**3. Channels (채널)**
+**3. Channels**
 -
 
-**4. Customer Relationships (고객 관계)**
+**4. Customer Relationships**
 -
 
-**5. Revenue Streams (수익원)**
+**5. Revenue Streams**
 -
 
-**6. Key Resources (핵심 자원)**
+**6. Key Resources**
 -
 
-**7. Key Activities (핵심 활동)**
+**7. Key Activities**
 -
 
-**8. Key Partnerships (핵심 파트너십)**
+**8. Key Partnerships**
 -
 
-**9. Cost Structure (비용 구조)**
+**9. Cost Structure**
 -
 
-### 3.7 Go/No-Go 판정
+### 3.7 Go/No-Go Decision
 
-#### 정량 스코어링
+#### Quantitative Scoring
 
-| 지표 | 점수 (1-3) | 가중치 | 가중 점수 | 비고 |
-|------|-----------|--------|-----------|------|
-| 시장 규모 | X | 20% | X.X | TAM > $1B = 3점 |
-| 시장 성장률 | X | 15% | X.X | CAGR > 15% = 3점 |
-| 경쟁 강도 | X | 15% | X.X | 블루오션 = 3점 |
-| 차별화 가능성 | X | 20% | X.X | 강력 = 3점 |
-| 수익 모델 명확성 | X | 15% | X.X | 검증됨 = 3점 |
-| 기술적 실현 가능성 | X | 15% | X.X | 높음 = 3점 |
-| **총점** | - | **100%** | **X.X** | |
+| Metric | Score (1-3) | Weight | Weighted Score | Notes |
+|--------|-------------|--------|----------------|-------|
+| Market Size | X | 20% | X.X | TAM > $1B = 3 |
+| Market Growth | X | 15% | X.X | CAGR > 15% = 3 |
+| Competition | X | 15% | X.X | Blue ocean = 3 |
+| Differentiation | X | 20% | X.X | Strong = 3 |
+| Revenue Model Clarity | X | 15% | X.X | Validated = 3 |
+| Technical Feasibility | X | 15% | X.X | High = 3 |
+| **Total** | - | **100%** | **X.X** | |
 
-**판정 기준**:
-- 🟢 **Go** (2.4점 이상): 즉시 진행
-- 🟡 **Pivot** (1.6-2.4점): 방향 수정 후 재검토
-- 🔴 **No-Go** (1.6점 미만): 진행 중단
+**Decision Criteria**:
+- **Go** (2.4+): Proceed immediately
+- **Pivot** (1.6-2.4): Adjust direction and review
+- **No-Go** (below 1.6): Stop
 
-#### 최종 판정
+#### Final Decision
 
-- **판정**: 🟢 Go / 🟡 Pivot / 🔴 No-Go
-- **종합 점수**: X.X / 3.0점
-- **핵심 근거**:
+- **Decision**: Go / Pivot / No-Go
+- **Total Score**: X.X / 3.0
+- **Key Rationale**:
   1.
   2.
-- **다음 단계**:
+- **Next Steps**:
   -
 
-## 4. 핵심 기능
+## 4. Core Features
 
-| 우선순위 | 기능 | 설명 | MVP 포함 |
-|----------|------|------|----------|
-| P0 | | | ✅ |
-| P1 | | | ✅ |
-| P2 | | | ❌ |
+| Priority | Feature | Description | MVP |
+|----------|---------|-------------|-----|
+| P0 | | | Yes |
+| P1 | | | Yes |
+| P2 | | | No |
 
-## 5. 비기능 요구사항
+## 5. Non-Functional Requirements
 
-### 성능
-- 응답 시간:
-- 동시 사용자:
+### Performance
+- Response Time:
+- Concurrent Users:
 
-### 보안
-- 인증 방식:
-- 데이터 암호화:
+### Security
+- Authentication Method:
+- Data Encryption:
 
-## 6. 범위
+## 6. Scope
 
 ### In Scope (MVP)
 -
@@ -298,69 +298,69 @@
 ### Out of Scope
 -
 
-## 7. 제약사항
+## 7. Constraints
 
-### 기술적 제약
+### Technical Constraints
 -
 
-### 일정 제약
+### Schedule Constraints
 -
 
-## 8. 기술 리서치 (GitHub)
+## 8. Technical Research (GitHub)
 
-### 추천 라이브러리
-| 라이브러리 | 용도 | 스타 수 | 라이선스 |
-|------------|------|---------|----------|
+### Recommended Libraries
+| Library | Purpose | Stars | License |
+|---------|---------|-------|---------|
 | | | | |
 
-## 9. 디자인 레퍼런스
+## 9. Design References
 
-### UI/UX 참고
-| 출처 | 레퍼런스 | 참고 포인트 |
-|------|----------|-------------|
+### UI/UX References
+| Source | Reference | Key Points |
+|--------|-----------|------------|
 | Dribbble | | |
 | Figma | | |
 
-## 10. 기술 스택
+## 10. Tech Stack
 
-### 추천 스택
-| 영역 | 기술 | 선택 이유 |
-|------|------|-----------|
-| 프론트엔드 | | |
-| 백엔드 | | |
-| 데이터베이스 | | |
-| 인프라 | | |
+### Recommended Stack
+| Area | Technology | Selection Rationale |
+|------|------------|---------------------|
+| Frontend | | |
+| Backend | | |
+| Database | | |
+| Infrastructure | | |
 ```
 
 ---
 
-## 엔터프라이즈 섹션 (11-26)
+## Enterprise Sections (11-26)
 
-> Enterprise 모드에서만 사용
+> Used only in Enterprise mode
 
-- 11. 법률/규제 검토
-- 12. 비용 분석
-- 13. 리스크 매트릭스
-- 14. 이해관계자 분석
-- 15. KPI/성공 지표
-- 16. 운영 계획
-- 17. 보안/컴플라이언스
-- 18. 접근성/국제화
-- 19. 타임라인/로드맵
-- 20. PESTLE 분석 상세
-- 21. Porter's 5 Forces 상세
-- 22. 시장 세분화 전략
-- 23. Persona + JTBD 상세
+- 11. Legal/Regulatory Review
+- 12. Cost Analysis
+- 13. Risk Matrix
+- 14. Stakeholder Analysis
+- 15. KPI/Success Metrics
+- 16. Operations Plan
+- 17. Security/Compliance
+- 18. Accessibility/Internationalization
+- 19. Timeline/Roadmap
+- 20. PESTLE Analysis Details
+- 21. Porter's 5 Forces Details
+- 22. Market Segmentation Strategy
+- 23. Persona + JTBD Details
 - 24. Customer Journey Map
-- 25. 경쟁 포지셔닝 매트릭스
-- 26. API 설계 (Contract-First)
+- 25. Competitive Positioning Matrix
+- 26. API Design (Contract-First)
 
 ---
 
-## 모드별 포함 섹션
+## Sections by Mode
 
-| 모드 | 포함 섹션 |
-|------|-----------|
+| Mode | Included Sections |
+|------|-------------------|
 | quick | 1-5 |
 | standard | 1-10 |
 | thorough | 1-10 |

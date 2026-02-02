@@ -1,0 +1,229 @@
+#!/usr/bin/env python3
+"""
+실시간 시장 데이터 수집기 (Realtime Market Collector)
+
+데이터 소스:
+- Yahoo Finance (yfinance): 해운주, 원자재 ETF, 주요 지수
+- 무료, 실시간 (15분 지연)
+
+Version: 1.0.0
+"""
+
+import json
+import subprocess
+import sys
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+try:
+    import yfinance as yf
+except ImportError:
+    print("yfinance 설치 중...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "yfinance", "-q"])
+    import yfinance as yf
+
+
+# 추적 종목 정의
+WATCHLIST = {
+    # Dry Bulk 해운주 (BDI 연동) - 원자재 경기 민감
+    "dry_bulk": {
+        "SBLK": "Star Bulk Carriers",
+        "DSX": "Diana Shipping",
+        "EGLE": "Eagle Bulk Shipping",
+        "NMM": "Navios Maritime Partners",
+        "GNK": "Genco Shipping",
+    },
+    # 컨테이너 해운 - 소비재 경기
+    "container": {
+        "ZIM": "ZIM Integrated Shipping",
+        "MATX": "Matson Inc",
+        "DAC": "Danaos Corporation",
+    },
+    # 탱커 - 에너지 경기
+    "tanker": {
+        "FRO": "Frontline Ltd",
+        "STNG": "Scorpio Tankers",
+        "TNK": "Teekay Tankers",
+    },
+    # 원자재 ETF
+    "commodity": {
+        "DBC": "Invesco DB Commodity",
+        "GSG": "iShares S&P GSCI",
+        "DBA": "Invesco DB Agriculture",
+        "DBB": "Invesco DB Base Metals",
+    },
+    # 경기 지표
+    "index": {
+        "^GSPC": "S&P 500",
+        "^DJI": "Dow Jones",
+        "^IXIC": "NASDAQ",
+    },
+}
+
+
+def fetch_market_data(symbols: List[str]) -> List[Dict[str, Any]]:
+    """Yahoo Finance에서 시장 데이터 수집"""
+    results = []
+
+    for symbol in symbols:
+        try:
+            ticker = yf.Ticker(symbol)
+            hist = ticker.history(period="5d")
+
+            if hist.empty:
+                continue
+
+            current = hist['Close'].iloc[-1]
+            prev = hist['Close'].iloc[-2] if len(hist) > 1 else current
+            change_pct = ((current - prev) / prev) * 100
+            volume = int(hist['Volume'].iloc[-1]) if hist['Volume'].iloc[-1] else 0
+
+            # 섹터 찾기
+            sector = "unknown"
+            name = symbol
+            for sec, syms in WATCHLIST.items():
+                if symbol in syms:
+                    sector = sec
+                    name = syms[symbol]
+                    break
+
+            results.append({
+                "symbol": symbol,
+                "name": name,
+                "price": round(float(current), 4),
+                "change_pct": round(float(change_pct), 4),
+                "volume": volume,
+                "sector": sector,
+                "timestamp": datetime.now().isoformat(),
+            })
+
+        except Exception as e:
+            print(f"⚠️ {symbol} 수집 실패: {e}")
+
+    return results
+
+
+def generate_sql(data: List[Dict[str, Any]]) -> str:
+    """INSERT SQL 생성"""
+    if not data:
+        return ""
+
+    values = []
+    for d in data:
+        asset_type = "etf" if d["sector"] in ["commodity", "index"] else "stock"
+        metadata = json.dumps({"sector": d["sector"], "name": d["name"]})
+
+        values.append(
+            f"(NOW(), '{d['symbol']}', {d['price']}, {d['change_pct']}, "
+            f"{d['volume']}, '{asset_type}', 'yahoo', '{metadata}')"
+        )
+
+    sql = """INSERT INTO market_snapshots
+(timestamp, symbol, price, change_pct, volume, asset_type, source, metadata)
+VALUES
+""" + ",\n".join(values) + ";"
+
+    return sql
+
+
+def save_to_db(sql: str) -> bool:
+    """psql로 DB에 저장"""
+    if not sql:
+        return False
+
+    try:
+        result = subprocess.run(
+            ["psql", "-U", "reim", "-d", "claude_mcp", "-c", sql],
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
+        return result.returncode == 0
+    except Exception as e:
+        print(f"❌ DB 저장 실패: {e}")
+        return False
+
+
+def collect_all(save_db: bool = True, verbose: bool = True) -> Dict[str, Any]:
+    """전체 데이터 수집 및 저장"""
+    # 모든 심볼 수집
+    all_symbols = []
+    for sector_symbols in WATCHLIST.values():
+        all_symbols.extend(sector_symbols.keys())
+
+    if verbose:
+        print(f"🚢 {len(all_symbols)}개 종목 실시간 데이터 수집 중...")
+        print("=" * 60)
+
+    # 데이터 수집
+    data = fetch_market_data(all_symbols)
+
+    if verbose:
+        for d in data:
+            emoji = "📈" if d["change_pct"] > 0 else "📉" if d["change_pct"] < 0 else "➡️"
+            print(f"{emoji} {d['symbol']:5} | ${d['price']:10.2f} | {d['change_pct']:+7.2f}% | {d['name']}")
+        print("=" * 60)
+
+    # DB 저장
+    if save_db and data:
+        sql = generate_sql(data)
+        if save_to_db(sql):
+            if verbose:
+                print(f"✅ {len(data)}개 레코드 DB 저장 완료")
+        else:
+            if verbose:
+                print("❌ DB 저장 실패")
+
+    # 섹터별 요약
+    summary = {}
+    for d in data:
+        sector = d["sector"]
+        if sector not in summary:
+            summary[sector] = {"count": 0, "avg_change": 0, "symbols": []}
+        summary[sector]["count"] += 1
+        summary[sector]["avg_change"] += d["change_pct"]
+        summary[sector]["symbols"].append(d["symbol"])
+
+    for sector in summary:
+        summary[sector]["avg_change"] /= summary[sector]["count"]
+        summary[sector]["avg_change"] = round(summary[sector]["avg_change"], 2)
+
+    return {
+        "collected_at": datetime.now().isoformat(),
+        "total_records": len(data),
+        "data": data,
+        "summary": summary,
+    }
+
+
+def main():
+    """메인 실행"""
+    import argparse
+
+    parser = argparse.ArgumentParser(description="실시간 시장 데이터 수집기")
+    parser.add_argument("--no-db", action="store_true", help="DB 저장 안함")
+    parser.add_argument("--json", action="store_true", help="JSON 출력")
+    parser.add_argument("--quiet", action="store_true", help="출력 최소화")
+    args = parser.parse_args()
+
+    result = collect_all(
+        save_db=not args.no_db,
+        verbose=not args.quiet
+    )
+
+    if args.json:
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+
+    # 섹터 요약 출력
+    if not args.quiet:
+        print("\n📊 섹터별 요약:")
+        for sector, info in result["summary"].items():
+            emoji = "📈" if info["avg_change"] > 0 else "📉"
+            print(f"  {emoji} {sector:12} | 평균 {info['avg_change']:+6.2f}% | {info['count']}종목")
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

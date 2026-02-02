@@ -1,265 +1,265 @@
-# Vibe 키워드 치트시트
+# Vibe Keywords Cheatsheet
 
-> **버전**: 1.0.0
-> **갱신일**: 2026-01-30
-
----
-
-## 🚀 빠른 참조
-
-### 가장 많이 쓰는 키워드
-
-| 키워드 | 별칭 | 동작 | 사용 예시 |
-|--------|------|------|----------|
-| **빠르게** | qk, quick | 검증 생략, 즉시 실행 | "빠르게 이 함수 만들어줘" |
-| **고쳐** | fix | Error KB + 자동 복구 | "고쳐 이 에러" |
-| **확인해** | chk | Type + Lint + Build 검증 | "확인해 이 코드" |
-| **동시에** | para | 병렬 에이전트 실행 | "동시에 이 3개 작업 해줘" |
+> **Version**: 1.0.0
+> **Updated**: 2026-01-30
 
 ---
 
-## 📋 키워드 카테고리
+## Quick Reference
 
-### ⚡ 실행 제어
+### Most Used Keywords
 
-| 키워드 | 별칭 | 동작 | 상세 |
-|--------|------|------|------|
-| **빠르게** | `qk`, `quick` | 검증 생략, 즉시 실행 | Writer-Reviewer 생략 |
-| **실험** | `exp` | 스냅샷 → 실행 → 롤백 옵션 | 안전한 실험 |
-| **동시에** | `para` | 병렬 에이전트 실행 | 최대 24개 (M2 Ultra) |
-
-#### 사용 예시
-
-```
-"빠르게 console.log 추가해줘"
-→ 검증 없이 즉시 코드 수정
-
-"실험으로 새 알고리즘 적용해봐"
-→ 스냅샷 생성 후 실행, 실패 시 롤백
-
-"동시에 이 5개 파일 분석해줘"
-→ 병렬 에이전트로 동시 처리
-```
+| Keyword | Alias | Action | Usage Example |
+|---------|-------|--------|---------------|
+| **quick** | qk | Skip verification, execute immediately | "quick build this function" |
+| **fix** | - | Error KB + auto recovery | "fix this error" |
+| **check** | chk | Type + Lint + Build verification | "check this code" |
+| **parallel** | para | Parallel agent execution | "parallel do these 3 tasks" |
 
 ---
 
-### 🔧 수정/복구
+## Keywords by Category
 
-| 키워드 | 별칭 | 동작 | 상세 |
-|--------|------|------|------|
-| **고쳐** | `fix` | Error KB + Self-Healing | 최대 10회 자동 시도 |
-| **되돌려** | `undo` | 마지막 스냅샷 롤백 | git stash pop |
-| **계속** | `cont` | 이전 작업 계속 | STATE.md 복원 |
+### Execution Control
 
-#### 사용 예시
+| Keyword | Alias | Action | Details |
+|---------|-------|--------|---------|
+| **quick** | `qk` | Skip verification, execute immediately | Skip Writer-Reviewer |
+| **experiment** | `exp` | Snapshot → Execute → Rollback option | Safe experimentation |
+| **parallel** | `para` | Parallel agent execution | Max 24 (M2 Ultra) |
+
+#### Usage Examples
 
 ```
-"고쳐 이 TypeError"
-→ Error KB 검색 + 자동 수정 시도 (최대 10회)
+"quick add console.log"
+→ Immediately modify code without verification
 
-"되돌려"
-→ 마지막 변경사항 롤백
+"experiment with new algorithm"
+→ Create snapshot, execute, rollback on failure
 
-"계속"
-→ 이전 세션에서 중단된 작업 재개
+"parallel analyze these 5 files"
+→ Process concurrently with parallel agents
 ```
 
 ---
 
-### ✅ 검증
+### Fix/Recovery
 
-| 키워드 | 별칭 | 동작 | 검사 항목 |
-|--------|------|------|----------|
-| **확인해** | `chk` | 전체 검증 | Type + Lint + Build + Bundle |
-| **테스트해** | `tst` | 테스트 실행 | 관련 테스트 자동 식별 |
+| Keyword | Alias | Action | Details |
+|---------|-------|--------|---------|
+| **fix** | - | Error KB + Self-Healing | Max 10 auto attempts |
+| **undo** | - | Rollback to last snapshot | git stash pop |
+| **continue** | `cont` | Continue previous work | Restore STATE.md |
 
-#### 사용 예시
-
-```
-"확인해 이 컴포넌트"
-→ TypeScript + ESLint + Build + Bundle 크기 검사
-
-"테스트해"
-→ 변경된 코드와 관련된 테스트 자동 실행
-```
-
----
-
-### 🚀 배포/정리
-
-| 키워드 | 별칭 | 동작 | 상세 |
-|--------|------|------|------|
-| **배포해** | `dep` | 배포 체크리스트 | Performance + ROADMAP 업데이트 |
-| **정리해** | `clean` | 코드 정리 | 미사용 import, console.log 제거 |
-
-#### 사용 예시
+#### Usage Examples
 
 ```
-"배포해"
-→ 배포 전 체크리스트 실행 + 성능 검사
+"fix this TypeError"
+→ Search Error KB + auto-fix attempt (max 10)
 
-"정리해 이 파일"
-→ 미사용 코드, console.log, 주석 제거
+"undo"
+→ Rollback recent changes
+
+"continue"
+→ Resume work interrupted from previous session
 ```
 
 ---
 
-### 📊 분석/계획
+### Verification
 
-| 키워드 | 별칭 | 동작 | 출력 |
-|--------|------|------|------|
-| **성능** | `perf` | 성능 분석 | 자동 수정 제안 |
-| **계획** | `plan` | 문서 생성 | PROJECT, ROADMAP, STATE |
-| **분석** | `map` | 코드베이스 분석 | 7개 문서 생성 |
+| Keyword | Alias | Action | Checks |
+|---------|-------|--------|--------|
+| **check** | `chk` | Full verification | Type + Lint + Build + Bundle |
+| **test** | `tst` | Run tests | Auto-identify related tests |
 
-#### 사용 예시
+#### Usage Examples
 
 ```
-"성능 분석해줘"
-→ 전체 프로젝트 성능 분석 + 최적화 제안
+"check this component"
+→ TypeScript + ESLint + Build + Bundle size check
 
-"계획 세워줘"
-→ .planning/ 폴더에 프로젝트 문서 생성
-
-"분석해 이 코드베이스"
-→ 구조, 의존성, 복잡도 등 7개 문서 생성
+"test"
+→ Auto-run tests related to changed code
 ```
 
 ---
 
-## 🎭 Mode 키워드
+### Deploy/Cleanup
 
-| 키워드 | 별칭 | 동작 | 활성화 페르소나 |
-|--------|------|------|----------------|
-| **ultrawork** | `ulw` | 최대 성능 에이전트 | explorer, librarian, analyzer |
-| **deepsearch** | `ds` | 딥리서치 모드 | explorer |
-| **strategic** | `str` | 전략적 분석 | architect |
-| **visual** | `vis` | 이미지/스크린샷 분석 | multimodal, frontend |
+| Keyword | Alias | Action | Details |
+|---------|-------|--------|---------|
+| **deploy** | `dep` | Deployment checklist | Performance + ROADMAP update |
+| **cleanup** | `clean` | Code cleanup | Remove unused imports, console.log |
 
-#### 사용 예시
+#### Usage Examples
 
 ```
-"ultrawork으로 이 코드베이스 분석해"
-→ 3개 페르소나 병렬 활성화, 최대 성능
+"deploy"
+→ Run pre-deploy checklist + performance check
 
-"deepsearch로 이 라이브러리 조사해"
-→ 웹 검색 + 문서 분석 + 요약
-
-"strategic으로 아키텍처 검토해"
-→ 트레이드오프 분석 + 의사결정 지원
-
-"visual로 이 스크린샷 분석해"
-→ UI/UX 분석 + 개선 제안
+"cleanup this file"
+→ Remove unused code, console.log, comments
 ```
 
 ---
 
-## 🔀 키워드 조합
+### Analysis/Planning
 
-### 자주 쓰는 조합
+| Keyword | Alias | Action | Output |
+|---------|-------|--------|--------|
+| **performance** | `perf` | Performance analysis | Auto-fix suggestions |
+| **plan** | - | Generate documents | PROJECT, ROADMAP, STATE |
+| **analyze** | `map` | Codebase analysis | Generate 7 documents |
 
-| 조합 | 동작 |
-|------|------|
-| `빠르게 고쳐` | 검증 생략하고 즉시 에러 수정 |
-| `동시에 분석` | 병렬로 코드베이스 분석 |
-| `실험으로 성능` | 안전하게 성능 최적화 시도 |
-| `확인해 테스트해` | 검증 후 테스트 실행 |
-
-### 사용 예시
+#### Usage Examples
 
 ```
-"빠르게 고쳐 이 null 에러"
-→ Writer-Reviewer 생략 + 즉시 수정
+"performance analysis"
+→ Full project performance analysis + optimization suggestions
 
-"동시에 이 3개 모듈 분석해"
-→ 병렬 에이전트로 동시 분석
+"plan the project"
+→ Generate project documents in .planning/ folder
 
-"실험으로 성능 최적화해봐"
-→ 스냅샷 후 최적화 시도, 실패 시 롤백
+"analyze this codebase"
+→ Generate structure, dependencies, complexity docs (7 total)
 ```
 
 ---
 
-## 📊 키워드 동작 상세
+## Mode Keywords
 
-### 빠르게 (qk, quick)
+| Keyword | Alias | Action | Activated Personas |
+|---------|-------|--------|-------------------|
+| **ultrawork** | `ulw` | Maximum performance agents | explorer, librarian, analyzer |
+| **deepsearch** | `ds` | Deep research mode | explorer |
+| **strategic** | `str` | Strategic analysis | architect |
+| **visual** | `vis` | Image/screenshot analysis | multimodal, frontend |
+
+#### Usage Examples
+
+```
+"ultrawork analyze this codebase"
+→ Activate 3 personas in parallel, maximum performance
+
+"deepsearch this library"
+→ Web search + document analysis + summary
+
+"strategic review architecture"
+→ Trade-off analysis + decision support
+
+"visual analyze this screenshot"
+→ UI/UX analysis + improvement suggestions
+```
+
+---
+
+## Keyword Combinations
+
+### Frequently Used Combinations
+
+| Combination | Action |
+|-------------|--------|
+| `quick fix` | Skip verification and fix error immediately |
+| `parallel analyze` | Analyze codebase in parallel |
+| `experiment performance` | Safely attempt performance optimization |
+| `check test` | Verify then run tests |
+
+### Usage Examples
+
+```
+"quick fix this null error"
+→ Skip Writer-Reviewer + immediate fix
+
+"parallel analyze these 3 modules"
+→ Analyze concurrently with parallel agents
+
+"experiment with performance optimization"
+→ Snapshot then attempt optimization, rollback on failure
+```
+
+---
+
+## Keyword Action Details
+
+### quick (qk)
 
 ```yaml
-동작:
-  - Writer-Reviewer 루프 생략
-  - Quality Gate 최소화
-  - 즉시 코드 수정
+Action:
+  - Skip Writer-Reviewer loop
+  - Minimize Quality Gate
+  - Immediately modify code
 
-사용 시점:
-  - 단순한 수정
-  - 긴급한 핫픽스
-  - 프로토타이핑
+When to Use:
+  - Simple modifications
+  - Urgent hotfixes
+  - Prototyping
 
-주의:
-  - 품질 검증 생략됨
-  - 프로덕션 코드에는 비권장
+Caution:
+  - Quality verification skipped
+  - Not recommended for production code
 ```
 
-### 고쳐 (fix)
+### fix
 
 ```yaml
-동작:
-  1. Error KB에서 유사 에러 검색
-  2. 해결책 적용 시도
-  3. 빌드/테스트 확인
-  4. 실패 시 다른 해결책 시도 (최대 10회)
+Action:
+  1. Search Error KB for similar errors
+  2. Attempt to apply solution
+  3. Verify build/test
+  4. Try different solution on failure (max 10)
 
 Self-Healing:
-  - 자동 복구 최대 10회
-  - 각 시도마다 다른 접근법
-  - 성공 시 Error KB에 학습
+  - Max 10 auto recovery attempts
+  - Different approach each attempt
+  - Learn to Error KB on success
 
-출력:
-  - 적용된 해결책
-  - 수정된 파일 목록
-  - 검증 결과
+Output:
+  - Applied solution
+  - Modified files list
+  - Verification results
 ```
 
-### 동시에 (para)
+### parallel (para)
 
 ```yaml
-동작:
-  - 병렬 에이전트 실행
-  - 자동 동시 실행 수 조정
+Action:
+  - Parallel agent execution
+  - Auto-adjust concurrent count
 
-설정 (superclaude-config.json):
-  initial: 10        # 시작 동시 실행 수
-  scale_up: +5       # 연속 3성공 시 증가
-  scale_down: -3     # 1실패 시 감소
-  maximum: 24        # 최대 (M2 Ultra 코어 수)
-  minimum: 3         # 최소
+Settings (superclaude-config.json):
+  initial: 10        # Starting concurrent count
+  scale_up: +5       # Increase on 3 consecutive successes
+  scale_down: -3     # Decrease on 1 failure
+  maximum: 24        # Maximum (M2 Ultra core count)
+  minimum: 3         # Minimum
 
-적응형:
-  - 성공률에 따라 동시 실행 수 자동 조정
-  - 실패 시 즉시 감소, 성공 시 점진적 증가
+Adaptive:
+  - Auto-adjust based on success rate
+  - Decrease immediately on failure, increase gradually on success
 ```
 
 ---
 
-## ⚠️ 주의사항
+## Cautions
 
-| 키워드 | 주의사항 |
-|--------|----------|
-| `빠르게` | 품질 검증 생략 - 프로덕션 비권장 |
-| `실험` | 스냅샷 필요 - git 상태 확인 |
-| `동시에` | CPU 사용량 증가 |
-| `고쳐` | 최대 10회 시도 - 시간 소요 가능 |
-| `배포해` | 프로덕션 영향 - 신중히 사용 |
+| Keyword | Caution |
+|---------|---------|
+| `quick` | Quality verification skipped - not for production |
+| `experiment` | Requires snapshot - check git status |
+| `parallel` | CPU usage increases |
+| `fix` | Max 10 attempts - may take time |
+| `deploy` | Production impact - use carefully |
 
 ---
 
-## 📚 참조
+## References
 
-| 문서 | 경로 |
-|------|------|
-| 키워드 상세 | `~/.claude/KEYWORD-TRIGGERS.md` |
-| Vibe 워크플로우 | `~/.claude/docs/VIBE-WORKFLOW.md` |
-| 설정 가이드 | `~/.claude/docs/SETTINGS-GUIDE.md` |
+| Document | Path |
+|----------|------|
+| Keyword Details | `~/.claude/KEYWORD-TRIGGERS.md` |
+| Vibe Workflow | `~/.claude/docs/VIBE-WORKFLOW.md` |
+| Settings Guide | `~/.claude/docs/SETTINGS-GUIDE.md` |
 
 ---
 

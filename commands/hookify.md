@@ -1,5 +1,5 @@
 ---
-description: 대화 분석으로 훅 규칙 생성 (Create hooks from conversation analysis)
+description: Create hooks from conversation analysis
 argument-hint: Optional specific behavior to address
 allowed-tools: ["Read", "Write", "AskUserQuestion", "Task", "Grep", "TodoWrite", "Skill"]
 ---

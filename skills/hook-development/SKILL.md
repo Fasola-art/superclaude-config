@@ -1,6 +1,6 @@
 ---
 name: hook-development
-description: 훅 개발 가이드 (Hook development for Claude Code plugins)
+description: Hook development guide for Claude Code plugins. Covers event-driven automation scripts, validation, and integration patterns.
 version: 0.1.0
 ---
 

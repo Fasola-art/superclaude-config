@@ -1,0 +1,9 @@
+{
+  "id": "19",
+  "subject": "JARVIS 기술: 병렬 처리",
+  "description": "독립 작업 동시 실행 - 다중 모듈 병렬 처리",
+  "activeForm": "병렬 처리 시스템 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

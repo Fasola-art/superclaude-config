@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚢 SQL Trading Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 20px 30px;
+            border-bottom: 1px solid #333;
+        }
+        .header h1 { font-size: 24px; color: #fff; }
+        .header .subtitle { color: #888; font-size: 14px; margin-top: 5px; }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #333;
+        }
+        .card h2 {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .signal-list { list-style: none; }
+        .signal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            background: #252540;
+            border-radius: 8px;
+        }
+        .signal-item .symbol {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .signal-item .price { color: #888; }
+        .signal-item .change {
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        .change.positive { background: rgba(0, 200, 83, 0.2); color: #00c853; }
+        .change.negative { background: rgba(255, 82, 82, 0.2); color: #ff5252; }
+        .signal-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .signal-badge.buy { background: rgba(0, 200, 83, 0.2); color: #00c853; }
+        .signal-badge.sell { background: rgba(255, 82, 82, 0.2); color: #ff5252; }
+        .signal-badge.hold { background: rgba(255, 193, 7, 0.2); color: #ffc107; }
+        .sector-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .sector-card {
+            background: #252540;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .sector-card .name { font-size: 14px; color: #888; }
+        .sector-card .value { font-size: 24px; font-weight: 600; margin-top: 5px; }
+        #map { height: 300px; border-radius: 8px; }
+        .chart-container { height: 250px; }
+        .refresh-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .refresh-btn:hover { background: #3a7bc8; }
+        .timestamp { color: #666; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚢 SQL Trading Dashboard</h1>
+        <div class="subtitle">
+            원자재/물류 실시간 모니터링 |
+            <span class="timestamp" id="lastUpdate">업데이트: -</span>
+            <button class="refresh-btn" onclick="loadData()">🔄 새로고침</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 섹터 현황 -->
+        <div class="card">
+            <h2>📊 섹터별 현황</h2>
+            <div class="sector-grid" id="sectorGrid">
+                <div class="sector-card">
+                    <div class="name">🏭 Dry Bulk</div>
+                    <div class="value positive" id="dryBulk">+0.35%</div>
+                </div>
+                <div class="sector-card">
+                    <div class="name">🛢️ Tanker</div>
+                    <div class="value positive" id="tanker">+0.62%</div>
+                </div>
+                <div class="sector-card">
+                    <div class="name">📦 Container</div>
+                    <div class="value negative" id="container">-2.32%</div>
+                </div>
+                <div class="sector-card">
+                    <div class="name">💎 Commodity</div>
+                    <div class="value negative" id="commodity">-2.63%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 트레이딩 신호 -->
+        <div class="card">
+            <h2>🎯 트레이딩 신호</h2>
+            <ul class="signal-list" id="signalList">
+                <li class="signal-item">
+                    <div>
+                        <span class="symbol">DSX</span>
+                        <span class="price">$2.32</span>
+                    </div>
+                    <span class="signal-badge buy">📈 BUY 65%</span>
+                </li>
+                <li class="signal-item">
+                    <div>
+                        <span class="symbol">ZIM</span>
+                        <span class="price">$22.03</span>
+                    </div>
+                    <span class="signal-badge sell">💥 SELL 85%</span>
+                </li>
+                <li class="signal-item">
+                    <div>
+                        <span class="symbol">FRO</span>
+                        <span class="price">$28.58</span>
+                    </div>
+                    <span class="signal-badge buy">📈 BUY 50%</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 주요 종목 -->
+        <div class="card">
+            <h2>📈 종목 현황</h2>
+            <ul class="signal-list" id="stockList">
+                <li class="signal-item">
+                    <div>
+                        <span class="symbol">SBLK</span>
+                        <span class="price">Star Bulk</span>
+                    </div>
+                    <span class="change positive">+0.22%</span>
+                </li>
+                <li class="signal-item">
+                    <div>
+                        <span class="symbol">DSX</span>
+                        <span class="price">Diana Shipping</span>
+                    </div>
+                    <span class="change positive">+1.31%</span>
+                </li>
+                <li class="signal-item">
+                    <div>
+                        <span class="symbol">ZIM</span>
+                        <span class="price">ZIM Shipping</span>
+                    </div>
+                    <span class="change negative">-4.96%</span>
+                </li>
+                <li class="signal-item">
+                    <div>
+                        <span class="symbol">DBB</span>
+                        <span class="price">Base Metals ETF</span>
+                    </div>
+                    <span class="change negative">-4.38%</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 물류 지도 -->
+        <div class="card">
+            <h2>🗺️ 주요 항로</h2>
+            <div id="map"></div>
+        </div>
+
+        <!-- 운임 지수 차트 -->
+        <div class="card" style="grid-column: span 2;">
+            <h2>📉 운임 지수 현황</h2>
+            <div class="chart-container">
+                <canvas id="freightChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 지도 초기화
+        const map = L.map('map').setView([20, 120], 2);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // 주요 항구 마커
+        const ports = [
+            { name: "Shanghai", lat: 31.2, lng: 121.5, color: "#ff5252" },
+            { name: "Los Angeles", lat: 33.7, lng: -118.2, color: "#4a90d9" },
+            { name: "Rotterdam", lat: 51.9, lng: 4.5, color: "#00c853" },
+            { name: "Singapore", lat: 1.3, lng: 103.8, color: "#ffc107" },
+            { name: "Busan", lat: 35.1, lng: 129.0, color: "#9c27b0" },
+        ];
+
+        ports.forEach(port => {
+            L.circleMarker([port.lat, port.lng], {
+                radius: 8,
+                fillColor: port.color,
+                color: "#fff",
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.8
+            }).addTo(map).bindPopup(`<b>${port.name}</b>`);
+        });
+
+        // 주요 항로 그리기
+        const routes = [
+            [[31.2, 121.5], [33.7, -118.2]],  // Shanghai - LA
+            [[31.2, 121.5], [51.9, 4.5]],      // Shanghai - Rotterdam
+            [[1.3, 103.8], [51.9, 4.5]],       // Singapore - Rotterdam
+        ];
+
+        routes.forEach(route => {
+            L.polyline(route, {
+                color: '#4a90d9',
+                weight: 2,
+                opacity: 0.6,
+                dashArray: '10, 10'
+            }).addTo(map);
+        });
+
+        // 운임 차트
+        const ctx = document.getElementById('freightChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['BDI', 'FBX China-USWC', 'FBX China-EU', 'FBX Asia-Med'],
+                datasets: [{
+                    label: '현재 지수',
+                    data: [1523, 2450, 3200, 2500],
+                    backgroundColor: [
+                        'rgba(0, 200, 83, 0.6)',
+                        'rgba(74, 144, 217, 0.6)',
+                        'rgba(255, 193, 7, 0.6)',
+                        'rgba(156, 39, 176, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgb(0, 200, 83)',
+                        'rgb(74, 144, 217)',
+                        'rgb(255, 193, 7)',
+                        'rgb(156, 39, 176)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#888' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#888' }
+                    }
+                }
+            }
+        });
+
+        // 데이터 로드 함수
+        function loadData() {
+            document.getElementById('lastUpdate').textContent =
+                '업데이트: ' + new Date().toLocaleTimeString('ko-KR');
+        }
+
+        // 초기 로드
+        loadData();
+        // 30초마다 자동 새로고침
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>

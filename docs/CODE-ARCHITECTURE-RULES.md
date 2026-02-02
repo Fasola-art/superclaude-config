@@ -1,22 +1,22 @@
-# Code Architecture Rules (필수)
+# Code Architecture Rules (Required)
 
-> 코드 아키텍처 설계 시 필수 준수 규칙
+> Mandatory rules for code architecture design
 
 ---
 
-## UI/Hook 분리
+## UI/Hook Separation
 
-| 원칙 | 설명 |
-|------|------|
-| 컴포넌트 역할 | UI 렌더링만 담당 |
-| 상태 관리 | Custom Hook으로 분리 |
-| API 호출 | Custom Hook으로 분리 |
-| Hook 파일명 | `use-[기능명].ts` |
+| Principle        | Description              |
+|------------------|--------------------------|
+| Component role   | Handle UI rendering only |
+| State management | Extract to Custom Hook   |
+| API calls        | Extract to Custom Hook   |
+| Hook filename    | `use-[feature-name].ts`  |
 
-### 예시
+### Example
 
 ```typescript
-// ❌ 나쁜 예: 컴포넌트에 로직 혼재
+// BAD: Logic mixed in component
 function UserProfile() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -28,7 +28,7 @@ function UserProfile() {
   return <div>{user?.name}</div>;
 }
 
-// ✅ 좋은 예: Hook으로 분리
+// GOOD: Extracted to Hook
 function UserProfile() {
   const { user, loading } = useUser();
   return <div>{user?.name}</div>;
@@ -49,22 +49,22 @@ function useUser() {
 
 ---
 
-## 공통 기능 추출
+## Common Function Extraction
 
-| 원칙 | 설명 |
-|------|------|
-| 반복 패턴 | 2회 이상 반복 → 공통 컴포넌트로 추출 |
-| Props 통합 | 유사한 Props → BaseProps 타입으로 통합 |
-| 관련 컴포넌트 | Compound Component 패턴 적용 |
+| Principle           | Description                                   |
+|---------------------|-----------------------------------------------|
+| Repeated patterns   | 2+ repetitions → Extract to shared component  |
+| Props consolidation | Similar Props → Unify with BaseProps type     |
+| Related components  | Apply Compound Component pattern              |
 
-### Compound Component 예시
+### Compound Component Example
 
 ```typescript
-// ✅ Compound Component 패턴
+// GOOD: Compound Component pattern
 <Card>
-  <Card.Header>제목</Card.Header>
-  <Card.Body>내용</Card.Body>
-  <Card.Footer>푸터</Card.Footer>
+  <Card.Header>Title</Card.Header>
+  <Card.Body>Content</Card.Body>
+  <Card.Footer>Footer</Card.Footer>
 </Card>
 ```
 
@@ -72,47 +72,47 @@ function useUser() {
 
 ## SSOT (Single Source of Truth)
 
-| 원칙 | 설명 |
-|------|------|
-| 데이터 출처 | 모든 데이터/상태는 단일 출처만 가져야 함 |
-| 파생 값 | 파생 가능한 값은 상태로 저장하지 말고 계산 |
-| 검증 로직 | 중복 검증 로직 → 단일 함수로 통합 |
-| 상수/설정 | 중복 상수/설정 → 단일 파일에서 관리 |
+| Principle        | Description                                              |
+|------------------|----------------------------------------------------------|
+| Data source      | All data/state must have single source                   |
+| Derived values   | Compute instead of storing in state                      |
+| Validation logic | Consolidate duplicate validation into single function    |
+| Constants/config | Manage duplicates in single file                         |
 
-### 예시
+### Example
 
 ```typescript
-// ❌ 나쁜 예: 파생 값을 상태로 저장
+// BAD: Derived value stored in state
 const [items, setItems] = useState([]);
-const [total, setTotal] = useState(0); // 파생 값
+const [total, setTotal] = useState(0); // Derived value
 
-// ✅ 좋은 예: 계산으로 파생
+// GOOD: Compute derived value
 const [items, setItems] = useState([]);
 const total = useMemo(() => items.reduce((sum, i) => sum + i.price, 0), [items]);
 ```
 
 ---
 
-## Database Normalization Rules (필수)
+## Database Normalization Rules (Required)
 
-### 정규화 3단계 적용 원칙
+### Apply 3 Normal Forms
 
-| 정규형 | 규칙 | 체크 항목 |
-|--------|------|----------|
-| 1NF | 원자값 | 컬럼에 배열/중첩 객체 대신 별도 테이블 |
-| 2NF | 완전 함수 종속 | 복합키 사용 시 모든 컬럼이 전체 키에 종속 |
-| 3NF | 이행 종속 제거 | 비키 컬럼 간 종속성 없음 |
+| Normal Form | Rule                       | Checklist                                                     |
+|-------------|----------------------------|---------------------------------------------------------------|
+| 1NF         | Atomic values              | Use separate table instead of arrays/nested objects in columns |
+| 2NF         | Full functional dependency | All columns depend on entire composite key                    |
+| 3NF         | Remove transitive dependency | No dependencies between non-key columns                       |
 
-### 예시
+### Example
 
 ```sql
--- ❌ 나쁜 예: 1NF 위반 (배열 저장)
+-- BAD: 1NF violation (storing arrays)
 CREATE TABLE orders (
   id INT,
-  items TEXT  -- 'item1,item2,item3' 형태로 저장
+  items TEXT  -- Stored as 'item1,item2,item3'
 );
 
--- ✅ 좋은 예: 별도 테이블
+-- GOOD: Separate table
 CREATE TABLE orders (
   id INT PRIMARY KEY
 );
@@ -126,14 +126,14 @@ CREATE TABLE order_items (
 
 ---
 
-## 체크리스트
+## Checklist
 
-### 컴포넌트 작성 시
-- [ ] 상태 관리 로직이 Hook으로 분리되었는가?
-- [ ] API 호출이 Hook으로 분리되었는가?
-- [ ] 2회 이상 반복되는 패턴이 공통 컴포넌트로 추출되었는가?
+### When Writing Components
+- [ ] Is state management logic extracted to Hook?
+- [ ] Are API calls extracted to Hook?
+- [ ] Are patterns repeated 2+ times extracted to shared components?
 
-### 데이터 설계 시
-- [ ] 모든 상태가 단일 출처를 가지는가?
-- [ ] 파생 가능한 값이 상태로 저장되지 않았는가?
-- [ ] 데이터베이스가 3NF를 준수하는가?
+### When Designing Data
+- [ ] Does all state have single source?
+- [ ] Are derivable values not stored in state?
+- [ ] Does database comply with 3NF?

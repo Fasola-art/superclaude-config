@@ -1,0 +1,9 @@
+{
+  "id": "14",
+  "subject": "JARVIS 기능: 정보 검색 (Search)",
+  "description": "\"/j 근처 맛집 찾아봐\" \"/j 리맥스 혹이 뭐야\" - 웹 검색 + 메모리 검색 통합, 결과 요약 및 추천",
+  "activeForm": "정보 검색 기능 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

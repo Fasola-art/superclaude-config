@@ -1,0 +1,9 @@
+{
+  "id": "15",
+  "subject": "JARVIS 기능: 리마인더 (Remind)",
+  "description": "\"/j 3시에 회의 알림\" \"/j 메모해줘: 우유 사기\" - 메모리에 저장, 시간 기반 알림",
+  "activeForm": "리마인더 기능 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

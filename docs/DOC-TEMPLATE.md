@@ -1,80 +1,80 @@
-# 문서 템플릿 (Document Template)
+# Document Template
 
-> 표준 문서 작성을 위한 템플릿
+> Standard template for documentation
 
 ---
 
-## 문서 헤더
+## Document Header
 
 ```markdown
-# [문서 제목]
+# [Document Title]
 
-> [한 줄 설명]
-> 버전: [X.Y.Z]
-> 최종 수정: [YYYY-MM-DD]
+> [One-line description]
+> Version: [X.Y.Z]
+> Last Modified: [YYYY-MM-DD]
 
 ---
 ```
 
-## 표준 구조
+## Standard Structure
 
-### 1. 개요 (Overview)
-- 문서 목적
-- 대상 독자
-- 관련 문서 링크
+### 1. Overview
+- Document purpose
+- Target audience
+- Related document links
 
-### 2. 핵심 내용 (Core Content)
-- 주요 개념 설명
-- 구조/다이어그램
-- 코드 예시
+### 2. Core Content
+- Key concept explanations
+- Structure/diagrams
+- Code examples
 
-### 3. 사용법 (Usage)
-- 단계별 가이드
-- 예시 코드
-- 주의사항
+### 3. Usage
+- Step-by-step guide
+- Example code
+- Caveats
 
-### 4. 참조 (Reference)
-- 관련 문서
-- 외부 링크
-- API 문서
+### 4. Reference
+- Related documents
+- External links
+- API documentation
 
 ---
 
-## 마크다운 규칙
+## Markdown Rules
 
-### 제목
+### Headings
 ```markdown
-# H1: 문서 제목
-## H2: 주요 섹션
-### H3: 하위 섹션
-#### H4: 세부 항목
+# H1: Document Title
+## H2: Major Section
+### H3: Subsection
+#### H4: Detail Item
 ```
 
-### 코드 블록
+### Code Blocks
 ````markdown
 ```typescript
-// 언어 명시
+// Specify language
 const example = 'code';
 ```
 ````
 
-### 테이블
+### Tables
 ```markdown
-| 열1 | 열2 | 열3 |
-|-----|-----|-----|
-| A   | B   | C   |
+| Col1 | Col2 | Col3 |
+|------|------|------|
+| A    | B    | C    |
 ```
 
-### 체크리스트
+### Checklists
 ```markdown
-- [ ] 미완료 항목
-- [x] 완료 항목
+- [ ] Incomplete item
+- [x] Completed item
 ```
 
 ---
 
-## 파일 명명 규칙
+## File Naming Conventions
 
-- 대문자 + 하이픈: `DOCUMENT-NAME.md`
-- 소문자 + 언더스코어: `document_name.md`
-- 버전 포함: `DOCUMENT-v2.0.md`
+- Uppercase + hyphen: `DOCUMENT-NAME.md`
+- Lowercase + underscore: `document_name.md`
+- With version: `DOCUMENT-v2.0.md`

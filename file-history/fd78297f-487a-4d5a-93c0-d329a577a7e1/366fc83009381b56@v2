@@ -1,0 +1,596 @@
+# TDD Rules (Test-Driven Development)
+
+> **Version**: 2026.01
+> **Target**: TypeScript, Python, Go
+> **Goal**: Write tests first, code second
+
+---
+
+## ⚡ Quick Start (3-Step TDD)
+
+| Step | Action | Output |
+|------|--------|--------|
+| 1 | 🔴 Red | Write failing test that defines expected behavior |
+| 2 | 🟢 Green | Write minimal code to make test pass |
+| 3 | 🔵 Refactor | Clean up code while keeping tests green |
+
+**Golden Rule**: Never write production code without a failing test first.
+
+---
+
+## Priority Summary
+
+| Priority | Category | Rules | Key Effect |
+|----------|----------|-------|------------|
+| CRITICAL | CYCLE | 4 | TDD cycle compliance |
+| CRITICAL | TEST-FIRST | 3 | Test-first discipline |
+| HIGH | STRUCTURE | 4 | Test organization |
+| HIGH | COVERAGE | 3 | Coverage strategy |
+| MEDIUM | LANG | 9 | Language-specific patterns |
+| LOW | PERF | 3 | Test performance |
+
+---
+
+## CRITICAL: CYCLE (TDD Cycle)
+
+### CYCLE-001: Red First
+
+**Always start with a failing test.**
+
+```typescript
+// Step 1: Write test that fails
+describe('Calculator', () => {
+  it('should add two numbers', () => {
+    const calc = new Calculator();
+    expect(calc.add(2, 3)).toBe(5);
+  });
+});
+
+// At this point: Calculator class doesn't exist → Test fails ✓
+```
+
+### CYCLE-002: Minimal Green
+
+**Write the simplest code to pass the test.**
+
+```typescript
+// Step 2: Minimal implementation
+class Calculator {
+  add(a: number, b: number): number {
+    return a + b;
+  }
+}
+
+// Test passes → Move to refactor
+```
+
+**Anti-pattern**: Don't over-engineer. Write just enough code.
+
+### CYCLE-003: Refactor Safely
+
+**Improve code quality while tests stay green.**
+
+```typescript
+// Step 3: Refactor (if needed)
+class Calculator {
+  add(a: number, b: number): number {
+    return a + b;
+  }
+
+  // Add more operations following same TDD cycle
+  subtract(a: number, b: number): number {
+    return a - b;
+  }
+}
+
+// Run tests after each refactor → All green ✓
+```
+
+### CYCLE-004: Small Steps
+
+**Take tiny incremental steps.**
+
+```typescript
+// BAD: Writing large test suites before any code
+describe('UserService', () => {
+  it('should create user');
+  it('should update user');
+  it('should delete user');
+  it('should validate email');
+  // ... 20 more tests
+});
+
+// GOOD: One test at a time
+describe('UserService', () => {
+  it('should create user with valid email', () => {
+    // Red → Green → Refactor
+  });
+  // Then add next test
+});
+```
+
+---
+
+## CRITICAL: TEST-FIRST (Test-First Discipline)
+
+### FIRST-001: Define Behavior Before Implementation
+
+```typescript
+// Start with expected behavior
+describe('EmailValidator', () => {
+  it('should accept valid email format', () => {
+    const validator = new EmailValidator();
+    expect(validator.isValid('user@example.com')).toBe(true);
+  });
+
+  it('should reject email without @', () => {
+    const validator = new EmailValidator();
+    expect(validator.isValid('userexample.com')).toBe(false);
+  });
+});
+```
+
+### FIRST-002: Test Edge Cases Early
+
+```typescript
+describe('divide', () => {
+  it('should divide two numbers', () => {
+    expect(divide(10, 2)).toBe(5);
+  });
+
+  it('should throw on division by zero', () => {
+    expect(() => divide(10, 0)).toThrow('Division by zero');
+  });
+
+  it('should handle negative numbers', () => {
+    expect(divide(-10, 2)).toBe(-5);
+  });
+});
+```
+
+### FIRST-003: Use Tests as Documentation
+
+```typescript
+describe('ShoppingCart', () => {
+  describe('when adding items', () => {
+    it('should increase item count', () => { /* ... */ });
+    it('should update total price', () => { /* ... */ });
+    it('should allow duplicate items', () => { /* ... */ });
+  });
+
+  describe('when removing items', () => {
+    it('should decrease item count', () => { /* ... */ });
+    it('should not allow negative quantities', () => { /* ... */ });
+  });
+});
+```
+
+---
+
+## HIGH: STRUCTURE (Test Structure)
+
+### STRUCT-001: Arrange-Act-Assert (AAA)
+
+```typescript
+it('should apply discount to order', () => {
+  // Arrange: Set up test data
+  const order = new Order();
+  order.addItem({ name: 'Widget', price: 100 });
+  const discount = new PercentDiscount(10);
+
+  // Act: Execute the behavior
+  order.applyDiscount(discount);
+
+  // Assert: Verify the result
+  expect(order.total).toBe(90);
+});
+```
+
+### STRUCT-002: One Assertion Per Test (Logical)
+
+```typescript
+// BAD: Multiple unrelated assertions
+it('should process order', () => {
+  expect(order.isValid).toBe(true);
+  expect(order.total).toBe(100);
+  expect(order.items.length).toBe(3);
+  expect(user.orders.length).toBe(1);
+});
+
+// GOOD: One logical concept per test
+it('should validate order', () => {
+  expect(order.isValid).toBe(true);
+});
+
+it('should calculate total from items', () => {
+  expect(order.total).toBe(100);
+});
+
+it('should contain expected items', () => {
+  expect(order.items).toHaveLength(3);
+});
+```
+
+### STRUCT-003: Descriptive Test Names
+
+```typescript
+// BAD: Vague names
+it('should work');
+it('test user');
+it('handles error');
+
+// GOOD: Describe behavior
+it('should return empty array when no users found');
+it('should throw ValidationError when email is invalid');
+it('should retry 3 times on network failure');
+```
+
+### STRUCT-004: Test Isolation
+
+```typescript
+// BAD: Tests depend on each other
+let user: User;
+
+it('should create user', () => {
+  user = createUser({ name: 'Alice' });
+  expect(user.id).toBeDefined();
+});
+
+it('should update user', () => {
+  user.name = 'Bob';  // Depends on previous test!
+  expect(user.name).toBe('Bob');
+});
+
+// GOOD: Independent tests
+describe('User', () => {
+  let user: User;
+
+  beforeEach(() => {
+    user = createUser({ name: 'Alice' });
+  });
+
+  it('should update name', () => {
+    user.name = 'Bob';
+    expect(user.name).toBe('Bob');
+  });
+});
+```
+
+---
+
+## HIGH: COVERAGE (Coverage Strategy)
+
+### COV-001: Test Happy Path First
+
+```typescript
+describe('PaymentProcessor', () => {
+  it('should process valid payment', () => {
+    const result = processor.charge({
+      amount: 100,
+      cardNumber: '4242424242424242',
+      expiry: '12/25',
+    });
+    expect(result.success).toBe(true);
+  });
+});
+```
+
+### COV-002: Test Error Paths
+
+```typescript
+describe('PaymentProcessor', () => {
+  it('should reject expired card', () => {
+    expect(() => processor.charge({
+      amount: 100,
+      cardNumber: '4242424242424242',
+      expiry: '01/20',  // Expired
+    })).toThrow('Card expired');
+  });
+
+  it('should handle network timeout', async () => {
+    mockNetwork.simulateTimeout();
+    await expect(processor.charge(validPayment))
+      .rejects.toThrow('Network timeout');
+  });
+});
+```
+
+### COV-003: Test Boundary Conditions
+
+```typescript
+describe('Pagination', () => {
+  it('should return first page', () => {
+    expect(paginate(items, { page: 1 })).toHaveLength(10);
+  });
+
+  it('should return empty on page beyond data', () => {
+    expect(paginate(items, { page: 999 })).toHaveLength(0);
+  });
+
+  it('should handle page 0 as page 1', () => {
+    expect(paginate(items, { page: 0 })).toEqual(
+      paginate(items, { page: 1 })
+    );
+  });
+
+  it('should handle negative page numbers', () => {
+    expect(() => paginate(items, { page: -1 }))
+      .toThrow('Invalid page number');
+  });
+});
+```
+
+---
+
+## MEDIUM: LANG (Language-Specific Patterns)
+
+### TypeScript (Jest/Vitest)
+
+#### TS-001: Type-Safe Mocks
+
+```typescript
+import { vi, type Mock } from 'vitest';
+
+interface UserRepository {
+  findById(id: string): Promise<User | null>;
+}
+
+const mockRepo: UserRepository = {
+  findById: vi.fn(),
+};
+
+it('should find user by id', async () => {
+  vi.mocked(mockRepo.findById).mockResolvedValue({ id: '1', name: 'Alice' });
+
+  const user = await service.getUser('1');
+  expect(user?.name).toBe('Alice');
+});
+```
+
+#### TS-002: Async Testing
+
+```typescript
+// Using async/await
+it('should fetch user data', async () => {
+  const user = await fetchUser('123');
+  expect(user.name).toBe('Alice');
+});
+
+// Testing promises
+it('should reject invalid id', () => {
+  return expect(fetchUser('')).rejects.toThrow('Invalid ID');
+});
+```
+
+#### TS-003: Test Setup
+
+```typescript
+// vitest.config.ts
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: 'node',
+    coverage: {
+      reporter: ['text', 'json', 'html'],
+      threshold: { lines: 80, branches: 80 },
+    },
+  },
+});
+```
+
+### Python (pytest)
+
+#### PY-001: Fixtures
+
+```python
+import pytest
+
+@pytest.fixture
+def user():
+    return User(name="Alice", email="alice@example.com")
+
+@pytest.fixture
+def db_session():
+    session = create_session()
+    yield session
+    session.rollback()
+
+def test_user_creation(user):
+    assert user.name == "Alice"
+```
+
+#### PY-002: Parametrized Tests
+
+```python
+import pytest
+
+@pytest.mark.parametrize("input,expected", [
+    ("hello", "HELLO"),
+    ("World", "WORLD"),
+    ("", ""),
+])
+def test_uppercase(input: str, expected: str):
+    assert input.upper() == expected
+```
+
+#### PY-003: Exception Testing
+
+```python
+import pytest
+
+def test_division_by_zero():
+    with pytest.raises(ValueError, match="cannot divide by zero"):
+        divide(10, 0)
+```
+
+### Go (testing)
+
+#### GO-001: Table-Driven Tests
+
+```go
+func TestAdd(t *testing.T) {
+    tests := []struct {
+        name     string
+        a, b     int
+        expected int
+    }{
+        {"positive numbers", 2, 3, 5},
+        {"negative numbers", -2, -3, -5},
+        {"zero", 0, 0, 0},
+    }
+
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            result := Add(tt.a, tt.b)
+            if result != tt.expected {
+                t.Errorf("got %d, want %d", result, tt.expected)
+            }
+        })
+    }
+}
+```
+
+#### GO-002: Subtests
+
+```go
+func TestUser(t *testing.T) {
+    t.Run("Create", func(t *testing.T) {
+        user := NewUser("Alice")
+        if user.Name != "Alice" {
+            t.Error("expected name to be Alice")
+        }
+    })
+
+    t.Run("Validate", func(t *testing.T) {
+        user := NewUser("")
+        if err := user.Validate(); err == nil {
+            t.Error("expected validation error")
+        }
+    })
+}
+```
+
+#### GO-003: Test Helpers
+
+```go
+func TestWithDB(t *testing.T) {
+    db := setupTestDB(t)  // Helper sets up and registers cleanup
+
+    user := &User{Name: "Alice"}
+    if err := db.Create(user); err != nil {
+        t.Fatalf("failed to create user: %v", err)
+    }
+}
+
+func setupTestDB(t *testing.T) *DB {
+    t.Helper()
+    db, err := NewTestDB()
+    if err != nil {
+        t.Fatalf("failed to create test db: %v", err)
+    }
+    t.Cleanup(func() { db.Close() })
+    return db
+}
+```
+
+---
+
+## LOW: PERF (Test Performance)
+
+### PERF-001: Parallel Tests
+
+```typescript
+// TypeScript (Vitest)
+describe.concurrent('API tests', () => {
+  it('should fetch users', async () => { /* ... */ });
+  it('should fetch posts', async () => { /* ... */ });
+});
+```
+
+```python
+# Python (pytest)
+# pytest.ini or pyproject.toml
+# [tool.pytest.ini_options]
+# addopts = "-n auto"  # pytest-xdist for parallel
+```
+
+```go
+// Go
+func TestParallel(t *testing.T) {
+    t.Parallel()
+    // Test runs in parallel with other parallel tests
+}
+```
+
+### PERF-002: Fast Feedback
+
+```bash
+# Watch mode for instant feedback
+npm test -- --watch
+pytest --watch
+go test -v ./...
+```
+
+### PERF-003: Test Organization
+
+```
+src/
+├── user/
+│   ├── user.ts
+│   ├── user.test.ts      # Unit tests co-located
+│   └── user.spec.ts      # Integration tests
+└── __tests__/
+    └── integration/      # Or separate integration folder
+```
+
+---
+
+## Checklist
+
+### Before Each TDD Cycle
+- [ ] Understand the requirement clearly
+- [ ] Write test name describing expected behavior
+- [ ] Test fails for the right reason (not syntax error)
+
+### After Implementation
+- [ ] All tests pass
+- [ ] Code is refactored
+- [ ] No duplicate logic
+- [ ] Test coverage meets threshold
+
+### Code Review
+- [ ] Tests written before code
+- [ ] Tests are readable as documentation
+- [ ] Edge cases covered
+- [ ] No test interdependencies
+
+---
+
+## Commands
+
+```bash
+# TypeScript/JavaScript
+npm test              # Run all tests
+npm test -- --watch   # Watch mode
+npm test -- --coverage
+
+# Python
+pytest                # Run all tests
+pytest -v --tb=short  # Verbose, short traceback
+pytest --cov=src      # With coverage
+
+# Go
+go test ./...         # Run all tests
+go test -v ./...      # Verbose
+go test -cover ./...  # With coverage
+go test -race ./...   # Race detection
+```
+
+---
+
+**META**
+- Version: 2026.01
+- Last Updated: 2026-02-01
+- Category: Testing Methodology

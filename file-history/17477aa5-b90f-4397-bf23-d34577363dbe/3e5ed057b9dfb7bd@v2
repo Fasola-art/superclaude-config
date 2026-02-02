@@ -1,0 +1,58 @@
+---
+name: sync-guide
+description: 지침 파일 → 한글 사용자 가이드 동기화
+version: "1.0.0"
+triggers:
+  - /sync-guide
+  - 가이드 동기화
+  - 한글 가이드 업데이트
+---
+
+# 지침 동기화 스킬
+
+영어 지침 파일을 한글 사용자 가이드로 동기화합니다.
+
+## 사용법
+
+```
+/sync-guide              # 전체 동기화
+/sync-guide CLAUDE.md    # 개별 파일 동기화
+/sync-guide --list       # 대상 파일 목록
+```
+
+## 실행 지침
+
+### 전체 동기화
+
+```bash
+python3 ~/.claude/scripts/sync_user_guide.py
+```
+
+### 개별 파일 동기화
+
+```bash
+python3 ~/.claude/scripts/sync_user_guide.py --file ~/.claude/docs/HOOKS-SYSTEM.md
+```
+
+### 파일 목록 확인
+
+```bash
+python3 ~/.claude/scripts/sync_user_guide.py --list
+```
+
+## 출력 경로
+
+```
+Source: ~/.claude/docs/HOOKS-SYSTEM.md
+Output: ~/.claude/user-guide/docs/HOOKS-SYSTEM.md
+```
+
+## 자동 동기화
+
+- 스케줄: 매월 1일 오전 3시
+- LaunchAgent: `com.superclaude.user-guide-sync`
+
+## 비용
+
+- 전체 동기화: ~273원/회
+- 개별 파일: ~6원/회

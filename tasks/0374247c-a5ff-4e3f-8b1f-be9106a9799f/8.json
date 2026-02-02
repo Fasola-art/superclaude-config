@@ -1,0 +1,9 @@
+{
+  "id": "8",
+  "subject": "JARVIS 모듈 구현: WeatherMonitor",
+  "description": "날씨 캐시, 체감온도, 옷차림 추천",
+  "activeForm": "WeatherMonitor 모듈 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

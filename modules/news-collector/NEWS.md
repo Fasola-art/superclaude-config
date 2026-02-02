@@ -1,33 +1,33 @@
 # News Collector Module
 
-> SuperClaude 뉴스 수집 및 분석 모듈
+> SuperClaude news collection and analysis module
 
 ---
 
-## 개요
+## Overview
 
-뉴스 수집 모듈은 다양한 소스에서 뉴스를 자동 수집하고,
-필터링, 요약, 센티멘트 분석을 수행합니다.
+News collector module automatically gathers news from various sources,
+performs filtering, summarization, and sentiment analysis.
 
 ---
 
-## 폴더 구조
+## Folder Structure
 
 ```
 ~/.claude/modules/news-collector/
-├── NEWS.md             # 이 파일 (모듈 가이드)
-├── config.json         # 모듈 설정
-├── sources/            # 뉴스 소스 정의
+├── NEWS.md             # This file (module guide)
+├── config.json         # Module configuration
+├── sources/            # News source definitions
 │   ├── rss.json
 │   ├── api.json
 │   └── custom/
-├── filters/            # 필터링 규칙
+├── filters/            # Filtering rules
 │   ├── keywords.json
 │   ├── categories.json
 │   └── exclude.json
-├── alerts/             # 알림 설정
+├── alerts/             # Alert settings
 │   └── rules.json
-└── archive/            # 아카이브
+└── archive/            # Archive
     ├── 2026/
     │   ├── 01/
     │   └── ...
@@ -36,9 +36,9 @@
 
 ---
 
-## 기능
+## Features
 
-### 1. 뉴스 소스
+### 1. News Sources
 
 ```yaml
 sources:
@@ -66,24 +66,24 @@ sources:
       url: "https://news.google.com"
 
   custom_sources:
-    - name: "회사 블로그"
+    - name: "Company Blog"
       type: "rss"
       url: "custom_url"
 ```
 
-### 2. 필터링
+### 2. Filtering
 
 ```yaml
 filters:
   keywords:
     include:
       - "AI"
-      - "머신러닝"
-      - "트레이딩"
-      - "암호화폐"
+      - "Machine Learning"
+      - "Trading"
+      - "Cryptocurrency"
     exclude:
-      - "광고"
-      - "스팸"
+      - "Advertisement"
+      - "Spam"
 
   categories:
     - tech
@@ -102,12 +102,12 @@ filters:
     similarity_threshold: 0.8
 ```
 
-### 3. 센티멘트 분석
+### 3. Sentiment Analysis
 
 ```yaml
 sentiment:
   enabled: true
-  model: "local"  # 또는 "api"
+  model: "local"  # or "api"
 
   output:
     - score: -1.0 ~ 1.0
@@ -121,22 +121,22 @@ sentiment:
     - by_time
 ```
 
-### 4. 요약
+### 4. Summarization
 
 ```yaml
 summarization:
   enabled: true
-  max_length: 200  # 글자 수
+  max_length: 200  # characters
   language: "ko"
 
   output:
-    - title: "원본 제목"
-    - summary: "AI 생성 요약"
-    - key_points: ["핵심 포인트 1", "핵심 포인트 2"]
-    - entities: ["회사명", "인물명"]
+    - title: "Original title"
+    - summary: "AI-generated summary"
+    - key_points: ["Key point 1", "Key point 2"]
+    - entities: ["Company name", "Person name"]
 ```
 
-### 5. 알림
+### 5. Alerts
 
 ```yaml
 alerts:
@@ -148,33 +148,33 @@ alerts:
 
   triggers:
     keyword_mention:
-      keywords: ["긴급", "속보"]
+      keywords: ["Urgent", "Breaking"]
       priority: high
 
     sentiment_spike:
-      threshold: 0.5  # 급격한 변화
+      threshold: 0.5  # Sudden change
       direction: "negative"
 
     volume_spike:
-      threshold: 200  # % 증가
+      threshold: 200  # % increase
       timeframe: "1h"
 ```
 
 ---
 
-## 스킬 명령어
+## Skill Commands
 
-| 명령어 | 설명 |
-|--------|------|
-| /news-fetch | 최신 뉴스 수집 |
-| /news-filter [키워드] | 키워드로 필터링 |
-| /news-summary [URL] | 뉴스 요약 |
-| /news-sentiment [주제] | 센티멘트 분석 |
-| /news-alert [조건] | 알림 설정 |
+| Command | Description |
+|---------|-------------|
+| /news-fetch | Fetch latest news |
+| /news-filter [keyword] | Filter by keyword |
+| /news-summary [URL] | Summarize news article |
+| /news-sentiment [topic] | Analyze sentiment |
+| /news-alert [condition] | Set up alerts |
 
 ---
 
-## 설정 (config.json)
+## Configuration (config.json)
 
 ```json
 {
@@ -198,37 +198,37 @@ alerts:
 
 ---
 
-## 사용 예시
+## Usage Examples
 
 ```bash
-# 최신 뉴스 수집
+# Fetch latest news
 /news-fetch
 
-# AI 관련 뉴스만 필터링
+# Filter AI-related news only
 /news-filter "AI"
 
-# 특정 기사 요약
+# Summarize specific article
 /news-summary https://example.com/article
 
-# 암호화폐 센티멘트 분석
+# Analyze cryptocurrency sentiment
 /news-sentiment "Bitcoin"
 
-# 부정적 뉴스 알림 설정
-/news-alert "sentiment < -0.5" --keyword "내 포트폴리오"
+# Set negative news alert
+/news-alert "sentiment < -0.5" --keyword "my portfolio"
 ```
 
 ---
 
-## 스케줄링
+## Scheduling
 
 ```yaml
 schedule:
   fetch:
-    interval: "1h"  # 매시간
+    interval: "1h"  # Hourly
     sources: "all"
 
   archive:
-    interval: "1d"  # 매일
+    interval: "1d"  # Daily
     cleanup: true
 
   report:
@@ -239,9 +239,9 @@ schedule:
 
 ---
 
-## 향후 계획
+## Roadmap
 
-- [ ] 실시간 스트리밍 수집
-- [ ] 다국어 번역
-- [ ] 이미지/차트 분석
-- [ ] Trading 모듈 연동
+- [ ] Real-time streaming collection
+- [ ] Multi-language translation
+- [ ] Image/chart analysis
+- [ ] Trading module integration

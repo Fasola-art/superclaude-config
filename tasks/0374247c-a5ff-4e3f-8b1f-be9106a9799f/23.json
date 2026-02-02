@@ -1,0 +1,9 @@
+{
+  "id": "23",
+  "subject": "OMC/OMO 개념 포함 개발 용어 가이드 작성",
+  "description": "OMC, OMO 개념 포함된 개발자 개발용어 상세 설명 및 사용법 유저 가이드 필요.\n\n- 개발 용어 정리\n- 상세 설명\n- 실제 사용법 예시\n- 유저 가이드 문서화",
+  "activeForm": "개발 용어 가이드 작성 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

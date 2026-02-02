@@ -1,5 +1,5 @@
 ---
-description: 플러그인 생성 가이드 워크플로우 (Plugin creation with design and validation)
+description: Plugin creation workflow with design and validation
 argument-hint: Optional plugin description
 allowed-tools: ["Read", "Write", "Grep", "Glob", "Bash", "TodoWrite", "AskUserQuestion", "Skill", "Task"]
 ---
@@ -377,13 +377,13 @@ Guide the user through creating a complete, high-quality Claude Code plugin from
 ### Quality Standards
 
 Every component must meet these standards:
-- ✅ Follows plugin-dev's proven patterns
-- ✅ Uses correct naming conventions
-- ✅ Has strong trigger conditions (skills/agents)
-- ✅ Includes working examples
-- ✅ Properly documented
-- ✅ Validated with utilities
-- ✅ Tested in Claude Code
+- Follows plugin-dev's proven patterns
+- Uses correct naming conventions
+- Has strong trigger conditions (skills/agents)
+- Includes working examples
+- Properly documented
+- Validated with utilities
+- Tested in Claude Code
 
 ---
 

@@ -1,0 +1,9 @@
+{
+  "id": "18",
+  "subject": "JARVIS 기술: 브라우저 자동화",
+  "description": "Chrome Extension 연동 - 예약, 검색 등 브라우저 기반 작업 자동화",
+  "activeForm": "브라우저 자동화 구현 중",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

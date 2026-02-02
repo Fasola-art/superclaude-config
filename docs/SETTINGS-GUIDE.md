@@ -1,10 +1,10 @@
-# 시스템 설정 가이드
+# System Settings Guide
 
-> settings.json 상세 매뉴얼
+> Detailed manual for settings.json
 
 ---
 
-## 파일 위치
+## File Location
 
 ```
 ~/.claude/settings.json
@@ -12,7 +12,7 @@
 
 ---
 
-## 전체 구조
+## Full Structure
 
 ```json
 {
@@ -33,9 +33,9 @@
 
 ---
 
-## 섹션별 상세
+## Section Details
 
-### hardware (하드웨어 정보)
+### hardware
 
 ```json
 {
@@ -49,11 +49,11 @@
 }
 ```
 
-**용도**: 적응형 병렬 실행 최적화에 사용
+**Purpose**: Used for adaptive parallel execution optimization
 
 ---
 
-### permissions (권한 설정)
+### permissions
 
 ```json
 {
@@ -74,14 +74,14 @@
 }
 ```
 
-**패턴 문법**:
-- `*`: 와일드카드
-- `**`: 재귀 와일드카드
-- 정확한 명령어 매칭
+**Pattern syntax**:
+- `*`: Wildcard
+- `**`: Recursive wildcard
+- Exact command matching
 
 ---
 
-### parallelExecution (병렬 실행)
+### parallelExecution
 
 ```json
 {
@@ -95,17 +95,17 @@
 }
 ```
 
-| 설정 | 설명 | 기본값 |
-|------|------|--------|
-| initial | 시작 동시 실행 수 | 10 |
-| scaleUp | 성공 시 증가량 | 5 |
-| scaleDown | 실패 시 감소량 | 3 |
-| maximum | 최대 동시 실행 (CPU 코어) | 24 |
-| consecutiveSuccessForScaleUp | 스케일업 조건 | 3 |
+| Setting                      | Description                | Default |
+|------------------------------|----------------------------|---------|
+| initial                      | Starting concurrent count  | 10      |
+| scaleUp                      | Increment on success       | 5       |
+| scaleDown                    | Decrement on failure       | 3       |
+| maximum                      | Max concurrent (CPU cores) | 24      |
+| consecutiveSuccessForScaleUp | Scale-up trigger condition | 3       |
 
 ---
 
-### context (컨텍스트 관리)
+### context
 
 ```json
 {
@@ -118,16 +118,16 @@
 }
 ```
 
-| 설정 | 설명 | 기본값 |
-|------|------|--------|
-| warningThreshold | 경고 임계값 | 75% |
-| criticalThreshold | 자동 DCP 임계값 | 90% |
-| emergencyThreshold | 강제 압축 임계값 | 95% |
-| autoArchive | 자동 아카이브 | true |
+| Setting            | Description          | Default |
+|--------------------|----------------------|---------|
+| warningThreshold   | Warning threshold    | 75%     |
+| criticalThreshold  | Auto DCP threshold   | 90%     |
+| emergencyThreshold | Forced compression   | 95%     |
+| autoArchive        | Auto archive enabled | true    |
 
 ---
 
-### writerReviewer (코드 검토)
+### writerReviewer
 
 ```json
 {
@@ -146,16 +146,16 @@
 }
 ```
 
-| 설정 | 설명 | 기본값 |
-|------|------|--------|
-| enabled | 활성화 여부 | true |
-| targetScore | 목표 점수 | 0.85 |
-| maxIterations | 최대 반복 | 10 |
-| convergenceThreshold | 수렴 임계값 | 0.015 |
+| Setting              | Description           | Default |
+|----------------------|-----------------------|---------|
+| enabled              | Enable/disable        | true    |
+| targetScore          | Target score          | 0.85    |
+| maxIterations        | Max iterations        | 10      |
+| convergenceThreshold | Convergence threshold | 0.015   |
 
 ---
 
-### errorKB (에러 지식베이스)
+### errorKB
 
 ```json
 {
@@ -168,16 +168,16 @@
 }
 ```
 
-| 설정 | 설명 | 기본값 |
-|------|------|--------|
-| enabled | 활성화 여부 | true |
-| similarityThreshold | Jaccard 유사도 임계값 | 0.70 |
-| maxRalphLoopRetries | Ralph Loop 최대 재시도 | 10 |
-| autoLearnOnSuccess | 성공 시 자동 학습 | true |
+| Setting             | Description                  | Default |
+|---------------------|------------------------------|---------|
+| enabled             | Enable/disable               | true    |
+| similarityThreshold | Jaccard similarity threshold | 0.70    |
+| maxRalphLoopRetries | Ralph Loop max retries       | 10      |
+| autoLearnOnSuccess  | Auto-learn on success        | true    |
 
 ---
 
-### session (세션 관리)
+### session
 
 ```json
 {
@@ -189,15 +189,15 @@
 }
 ```
 
-| 설정 | 설명 | 기본값 |
-|------|------|--------|
-| autoSnapshot | 자동 스냅샷 | true |
-| maxSnapshots | 최대 스냅샷 수 | 10 |
-| autoResume | 자동 복구 | true |
+| Setting      | Description        | Default |
+|--------------|--------------------|---------|
+| autoSnapshot | Auto snapshot      | true    |
+| maxSnapshots | Max snapshot count | 10      |
+| autoResume   | Auto resume        | true    |
 
 ---
 
-### language (언어 설정)
+### language
 
 ```json
 {
@@ -208,14 +208,14 @@
 }
 ```
 
-| 설정 | 설명 | 기본값 |
-|------|------|--------|
-| response | 응답 언어 | ko |
-| codeComments | 코드 주석 언어 | ko |
+| Setting      | Description           | Default |
+|--------------|-----------------------|---------|
+| response     | Response language     | ko      |
+| codeComments | Code comment language | ko      |
 
 ---
 
-### hooks (훅 설정)
+### hooks
 
 ```json
 {
@@ -226,18 +226,18 @@
 }
 ```
 
-| 설정 | 설명 | 기본값 |
-|------|------|--------|
-| enabled | 훅 활성화 | true |
-| path | 훅 디렉토리 | ~/.claude/hooks |
+| Setting | Description     | Default         |
+|---------|-----------------|-----------------|
+| enabled | Enable hooks    | true            |
+| path    | Hooks directory | ~/.claude/hooks |
 
 ---
 
-## 환경별 오버라이드
+## Environment Override
 
 ### settings.local.json
 
-로컬 환경 전용 설정 (git에서 제외)
+Local environment specific settings (excluded from git)
 
 ```json
 {
@@ -249,16 +249,16 @@
 }
 ```
 
-**우선순위**: settings.local.json > settings.json
+**Priority**: settings.local.json > settings.json
 
 ---
 
-## 설정 검증
+## Settings Validation
 
 ```bash
-# 설정 유효성 검사
+# Validate settings
 claude config validate
 
-# 현재 설정 확인
+# Show current settings
 claude config show
 ```

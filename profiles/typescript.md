@@ -1,118 +1,118 @@
-# TypeScript/React/Next.js 언어 프로필
+# TypeScript/React/Next.js Language Profile
 
-> **버전**: 1.0.0
-> **적용 대상**: TypeScript 5.x, React 18+, Next.js 14+
-> **자동 감지**: `package.json` 또는 `tsconfig.json` 존재 시
+> **Version**: 1.0.0
+> **Target**: TypeScript 5.x, React 18+, Next.js 14+
+> **Auto-detect**: Presence of `package.json` or `tsconfig.json`
 
 ---
 
-## 🎯 목표
+## Goal
 
-**Primary Outcome**: TypeScript 생태계에서 타입 안전하고 성능 최적화된 코드 생성
+**Primary Outcome**: Generate type-safe and performance-optimized code in the TypeScript ecosystem
 
 **Success Criteria**:
-- [ ] `strict: true` 모드 준수
-- [ ] any 타입 0개
-- [ ] 번들 크기 최적화 (barrel import 없음)
-- [ ] Server/Client 컴포넌트 올바른 분리
+- [ ] Comply with `strict: true` mode
+- [ ] Zero `any` types
+- [ ] Bundle size optimized (no barrel imports)
+- [ ] Proper Server/Client component separation
 
 **Failure Cases**:
-- 🔴 `@ts-ignore` 사용 → 타입 수정 필요
-- 🔴 런타임 타입 에러 → 타입 가드 추가
+- `@ts-ignore` usage → Requires type fix
+- Runtime type error → Add type guard
 
 ---
 
-## 🚀 빠른 참조
+## Quick Reference
 
-### 필수 규칙 (위반 시 빌드 실패)
+### Required Rules (Build fails on violation)
 
-| 규칙 | 설명 | 예시 |
-|------|------|------|
-| **strict mode** | tsconfig.json strict: true | 암묵적 any 금지 |
-| **명시적 반환 타입** | 함수 반환 타입 명시 | `function fn(): string` |
-| **null 체크** | optional chaining 사용 | `user?.name` |
-| **barrel 금지** | 직접 import | `from '@/Button'` ✗ |
+| Rule | Description | Example |
+|------|-------------|---------|
+| **strict mode** | tsconfig.json strict: true | No implicit any |
+| **explicit return type** | Explicit function return types | `function fn(): string` |
+| **null check** | Use optional chaining | `user?.name` |
+| **no barrel** | Direct import | `from '@/Button'` |
 
-### 권장 규칙
+### Recommended Rules
 
-| 규칙 | 이유 | 대안 |
-|------|------|------|
-| `unknown` > `any` | 타입 안전성 | 타입 가드로 좁히기 |
-| `const assertion` | 리터럴 타입 보존 | `as const` |
-| `satisfies` | 타입 검증 + 추론 | TS 4.9+ |
+| Rule | Reason | Alternative |
+|------|--------|-------------|
+| `unknown` > `any` | Type safety | Narrow with type guard |
+| `const assertion` | Preserve literal types | `as const` |
+| `satisfies` | Type validation + inference | TS 4.9+ |
 
 ---
 
-## 📋 섹션 1: 타입 시스템 규칙
+## Section 1: Type System Rules
 
-### 📊 타입 정의 패턴
+### Type Definition Patterns
 
-| 패턴 | 사용 시점 | 예시 |
-|------|----------|------|
-| `interface` | 객체 구조, 확장 필요 | `interface User { name: string }` |
-| `type` | 유니온, 유틸리티, 복잡한 타입 | `type Status = 'ok' \| 'error'` |
-| `enum` | 사용 자제 (tree-shaking 문제) | `const STATUS = { ... } as const` |
-| `const assertion` | 리터럴 값 보존 | `['a', 'b'] as const` |
+| Pattern | When to Use | Example |
+|---------|-------------|---------|
+| `interface` | Object structure, extension needed | `interface User { name: string }` |
+| `type` | Union, utility, complex types | `type Status = 'ok' \| 'error'` |
+| `enum` | Avoid (tree-shaking issues) | `const STATUS = { ... } as const` |
+| `const assertion` | Preserve literal values | `['a', 'b'] as const` |
 
-### ✅ 타입 작성 규칙
+### Type Writing Rules
 
 ```typescript
-// ✅ GOOD: 명시적 타입
+// GOOD: Explicit types
 interface User {
   id: string;
   name: string;
-  email: string | null;  // null 명시
+  email: string | null;  // explicit null
   createdAt: Date;
 }
 
-// ✅ GOOD: 유니온 타입
+// GOOD: Union types
 type APIResponse<T> =
   | { status: 'success'; data: T }
   | { status: 'error'; error: string };
 
-// ✅ GOOD: 제네릭 제약
+// GOOD: Generic constraints
 function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
   return obj[key];
 }
 ```
 
-### ❌ 안티패턴
+### Anti-patterns
 
 ```typescript
-// ❌ BAD: any 사용
+// BAD: any usage
 function process(data: any) { ... }
 
-// ❌ BAD: 타입 단언 남용
-const user = response as User;  // 검증 없이
+// BAD: Type assertion abuse
+const user = response as User;  // without validation
 
-// ❌ BAD: enum 사용
-enum Status { Active, Inactive }  // bundle 크기 증가
+// BAD: enum usage
+enum Status { Active, Inactive }  // increases bundle size
 ```
 
-### ⚠️ 예외 처리
+### Exception Handling
 
-| 상황 | 대응 방법 |
-|------|----------|
-| 외부 라이브러리 타입 없음 | `declare module 'lib'` 또는 `@types` 설치 |
-| 복잡한 타입 추론 불가 | 명시적 타입 주석 추가 |
-| 레거시 JS 코드 통합 | `// @ts-check` + JSDoc 또는 점진적 마이그레이션 |
+| Situation | Solution |
+|-----------|----------|
+| External library has no types | `declare module 'lib'` or install `@types` |
+| Complex type inference impossible | Add explicit type annotation |
+| Legacy JS code integration | `// @ts-check` + JSDoc or gradual migration |
 
 ---
 
-## 📋 섹션 2: React 컴포넌트 규칙
+## Section 2: React Component Rules
 
-### 📊 컴포넌트 패턴
+### Component Patterns
 
-| 패턴 | 사용 시점 | 예시 |
-|------|----------|------|
-| **Server Component** | 데이터 페칭, 정적 UI | 기본값 (use client 없음) |
-| **Client Component** | 인터랙션, 훅 사용 | `'use client'` 선언 |
-| **Suspense 경계** | 비동기 로딩 | `<Suspense fallback={...}>` |
+| Pattern | When to Use | Example |
+|---------|-------------|---------|
+| **Server Component** | Data fetching, static UI | Default (no use client) |
+| **Client Component** | Interaction, hooks | `'use client'` declaration |
+| **Suspense boundary** | Async loading | `<Suspense fallback={...}>` |
 
-### ✅ 컴포넌트 타입 패턴
+### Component Type Patterns
 
 ```typescript
-// ✅ GOOD: Props 인터페이스
+// GOOD: Props interface
 interface ButtonProps {
   variant: 'primary' | 'secondary';
   size?: 'sm' | 'md' | 'lg';  // optional
@@ -120,7 +120,7 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-// ✅ GOOD: 함수 컴포넌트
+// GOOD: Function component
 function Button({ variant, size = 'md', children, onClick }: ButtonProps) {
   return (
     <button
@@ -132,7 +132,7 @@ function Button({ variant, size = 'md', children, onClick }: ButtonProps) {
   );
 }
 
-// ✅ GOOD: forwardRef 패턴
+// GOOD: forwardRef pattern
 const Input = forwardRef<HTMLInputElement, InputProps>(
   function Input({ label, ...props }, ref) {
     return <input ref={ref} {...props} />;
@@ -140,45 +140,45 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 ```
 
-### ❌ React 안티패턴
+### React Anti-patterns
 
 ```typescript
-// ❌ BAD: React.FC 사용 (children 암묵적 포함 문제)
+// BAD: React.FC usage (implicit children issue)
 const Button: React.FC<Props> = ({ ... }) => { ... };
 
-// ❌ BAD: 인라인 객체/함수 (불필요한 리렌더)
+// BAD: Inline objects/functions (unnecessary re-renders)
 <Child style={{ color: 'red' }} onClick={() => handle()} />
 
-// ❌ BAD: barrel import
+// BAD: Barrel import
 import { Button, Input, Card } from '@/components';
 ```
 
-### ⚠️ 예외 처리
+### Exception Handling
 
-| 상황 | 대응 방법 |
-|------|----------|
-| children 타입 복잡 | `React.ReactNode` 사용 |
-| 이벤트 타입 | `React.MouseEvent<HTMLButtonElement>` |
-| ref 전달 필요 | `forwardRef` 패턴 |
+| Situation | Solution |
+|-----------|----------|
+| Complex children type | Use `React.ReactNode` |
+| Event type | `React.MouseEvent<HTMLButtonElement>` |
+| Need ref forwarding | `forwardRef` pattern |
 
 ---
 
-## 📋 섹션 3: Next.js App Router 규칙
+## Section 3: Next.js App Router Rules
 
-### 📊 라우팅 패턴
+### Routing Patterns
 
-| 파일 | 용도 | 주의사항 |
-|------|------|----------|
-| `page.tsx` | 라우트 페이지 | Server Component 기본 |
-| `layout.tsx` | 레이아웃 | 중첩 가능, 상태 유지 |
-| `loading.tsx` | 로딩 UI | Suspense 자동 적용 |
-| `error.tsx` | 에러 UI | `'use client'` 필수 |
-| `route.ts` | API Route | GET, POST 등 export |
+| File | Purpose | Notes |
+|------|---------|-------|
+| `page.tsx` | Route page | Server Component default |
+| `layout.tsx` | Layout | Nestable, state preserved |
+| `loading.tsx` | Loading UI | Auto Suspense applied |
+| `error.tsx` | Error UI | `'use client'` required |
+| `route.ts` | API Route | Export GET, POST, etc. |
 
-### ✅ 데이터 페칭 패턴
+### Data Fetching Patterns
 
 ```typescript
-// ✅ GOOD: Server Component에서 직접 fetch
+// GOOD: Direct fetch in Server Component
 async function ProductList() {
   const products = await fetch('https://api.example.com/products', {
     next: { revalidate: 3600 }  // ISR
@@ -186,7 +186,7 @@ async function ProductList() {
   return <div>{/* ... */}</div>;
 }
 
-// ✅ GOOD: 병렬 데이터 페칭
+// GOOD: Parallel data fetching
 async function Dashboard() {
   const [user, posts, stats] = await Promise.all([
     getUser(),
@@ -196,7 +196,7 @@ async function Dashboard() {
   return <div>{/* ... */}</div>;
 }
 
-// ✅ GOOD: Server Action
+// GOOD: Server Action
 'use server';
 export async function createPost(formData: FormData) {
   const title = formData.get('title') as string;
@@ -205,99 +205,99 @@ export async function createPost(formData: FormData) {
 }
 ```
 
-### ❌ Next.js 안티패턴
+### Next.js Anti-patterns
 
 ```typescript
-// ❌ BAD: Client Component에서 불필요한 데이터 페칭
+// BAD: Unnecessary data fetching in Client Component
 'use client';
 function Page() {
   const [data, setData] = useState(null);
-  useEffect(() => { fetch(...) }, []);  // 서버에서 해야 함
+  useEffect(() => { fetch(...) }, []);  // Should be on server
 }
 
-// ❌ BAD: 순차 데이터 페칭 (waterfall)
+// BAD: Sequential data fetching (waterfall)
 const user = await getUser();
-const posts = await getPosts(user.id);  // 의존성 없으면 병렬로
+const posts = await getPosts(user.id);  // Parallelize if no dependency
 
-// ❌ BAD: 과도한 'use client'
-'use client';  // 정적 UI인데 불필요하게 선언
+// BAD: Excessive 'use client'
+'use client';  // Unnecessary for static UI
 function StaticCard() { return <div>...</div>; }
 ```
 
 ---
 
-## 📋 섹션 4: Import/Export 규칙
+## Section 4: Import/Export Rules
 
-### 📊 Import 순서
+### Import Order
 
 ```typescript
 // 1. React/Next.js
 import { useState } from 'react';
 import Link from 'next/link';
 
-// 2. 외부 라이브러리
+// 2. External libraries
 import { clsx } from 'clsx';
 import { format } from 'date-fns';
 
-// 3. 내부 모듈 (절대 경로)
+// 3. Internal modules (absolute path)
 import { Button } from '@/components/Button';
 import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/lib/utils';
 
-// 4. 상대 경로 (같은 폴더)
+// 4. Relative path (same folder)
 import { helpers } from './helpers';
 
-// 5. 타입 (type-only import)
+// 5. Types (type-only import)
 import type { User } from '@/types';
 
-// 6. 스타일
+// 6. Styles
 import styles from './styles.module.css';
 ```
 
-### ✅ Export 패턴
+### Export Patterns
 
 ```typescript
-// ✅ GOOD: Named export (tree-shaking 가능)
+// GOOD: Named export (tree-shakable)
 export function Button() { ... }
 export function Input() { ... }
 
-// ✅ GOOD: 타입 분리 export
+// GOOD: Separate type export
 export type { ButtonProps, InputProps };
 
-// ✅ GOOD: 상수 export
+// GOOD: Constant export
 export const BUTTON_VARIANTS = ['primary', 'secondary'] as const;
 ```
 
-### ❌ Import 안티패턴
+### Import Anti-patterns
 
 ```typescript
-// ❌ BAD: Barrel import (번들 크기 증가)
+// BAD: Barrel import (increases bundle size)
 import { Button, Input, Card, Modal } from '@/components';
 
-// ❌ BAD: 전체 라이브러리 import
+// BAD: Import entire library
 import _ from 'lodash';
 import * as R from 'ramda';
 
-// ❌ BAD: default export (리팩토링 어려움)
+// BAD: default export (refactoring difficult)
 export default function Button() { ... }
 ```
 
 ---
 
-## 📋 섹션 5: 에러 처리 규칙
+## Section 5: Error Handling Rules
 
-### 📊 에러 처리 패턴
+### Error Handling Patterns
 
-| 패턴 | 사용 시점 | 예시 |
-|------|----------|------|
-| `Result<T, E>` | 예상 가능한 실패 | API 호출, 파싱 |
-| `try/catch` | 예외적 상황 | 외부 라이브러리 호출 |
-| `Error Boundary` | React 렌더링 에러 | 컴포넌트 crash 방지 |
+| Pattern | When to Use | Example |
+|---------|-------------|---------|
+| `Result<T, E>` | Expected failures | API calls, parsing |
+| `try/catch` | Exceptional situations | External library calls |
+| `Error Boundary` | React render errors | Prevent component crash |
 
-### ✅ 에러 처리 패턴
+### Error Handling Patterns
 
 ```typescript
-// ✅ GOOD: Result 타입 패턴
+// GOOD: Result type pattern
 type Result<T, E = Error> =
   | { ok: true; value: T }
   | { ok: false; error: E };
@@ -315,141 +315,141 @@ async function fetchUser(id: string): Promise<Result<User>> {
   }
 }
 
-// ✅ GOOD: 사용부
+// GOOD: Usage
 const result = await fetchUser('123');
 if (!result.ok) {
   console.error(result.error);
   return;
 }
-console.log(result.value.name);  // 타입 안전
+console.log(result.value.name);  // type safe
 ```
 
-### ❌ 에러 처리 안티패턴
+### Error Handling Anti-patterns
 
 ```typescript
-// ❌ BAD: 에러 무시
+// BAD: Ignore error
 try {
   await riskyOperation();
 } catch (e) {
-  // 아무것도 안함
+  // do nothing
 }
 
-// ❌ BAD: any로 catch
+// BAD: any catch
 catch (e: any) {
   console.log(e.message);
 }
 
-// ❌ BAD: throw 문자열
+// BAD: throw string
 throw 'Something went wrong';
 ```
 
 ---
 
-## 📋 섹션 6: 성능 최적화 규칙
+## Section 6: Performance Optimization Rules
 
-### 📊 최적화 체크리스트
+### Optimization Checklist
 
-| 항목 | 확인 방법 | 목표 |
-|------|----------|------|
-| **번들 크기** | `npx @next/bundle-analyzer` | < 100KB (초기) |
+| Item | How to Check | Target |
+|------|--------------|--------|
+| **Bundle size** | `npx @next/bundle-analyzer` | < 100KB (initial) |
 | **LCP** | Lighthouse | < 2.5s |
 | **CLS** | Lighthouse | < 0.1 |
-| **리렌더링** | React DevTools Profiler | 불필요한 리렌더 0 |
+| **Re-renders** | React DevTools Profiler | Zero unnecessary re-renders |
 
-### ✅ 최적화 패턴
+### Optimization Patterns
 
 ```typescript
-// ✅ GOOD: 동적 import
+// GOOD: Dynamic import
 const HeavyChart = dynamic(() => import('./HeavyChart'), {
   loading: () => <Skeleton />,
   ssr: false
 });
 
-// ✅ GOOD: 메모이제이션
+// GOOD: Memoization
 const sortedItems = useMemo(
   () => items.sort((a, b) => a.price - b.price),
   [items]
 );
 
-// ✅ GOOD: 이미지 최적화
+// GOOD: Image optimization
 <Image
   src="/hero.jpg"
   alt="Hero"
   width={1200}
   height={600}
-  priority  // LCP 이미지
+  priority  // LCP image
   sizes="(max-width: 768px) 100vw, 50vw"
 />
 ```
 
 ---
 
-## 📋 섹션 7: 테스트 규칙
+## Section 7: Testing Rules
 
-### 📊 테스트 전략
+### Test Strategy
 
-| 테스트 유형 | 도구 | 커버리지 목표 |
-|------------|------|--------------|
-| 단위 테스트 | Vitest/Jest | 80% |
-| 컴포넌트 테스트 | Testing Library | 핵심 컴포넌트 100% |
-| E2E 테스트 | Playwright | Happy Path 100% |
-| 타입 테스트 | tsd, expect-type | 유틸리티 타입 |
+| Test Type | Tool | Coverage Target |
+|-----------|------|-----------------|
+| Unit Test | Vitest/Jest | 80% |
+| Component Test | Testing Library | 100% core components |
+| E2E Test | Playwright | 100% Happy Path |
+| Type Test | tsd, expect-type | Utility types |
 
-### ✅ 테스트 패턴
+### Test Patterns
 
 ```typescript
-// ✅ GOOD: 컴포넌트 테스트
+// GOOD: Component test
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-test('버튼 클릭 시 카운터 증가', async () => {
+test('clicking button increments counter', async () => {
   render(<Counter />);
 
-  await userEvent.click(screen.getByRole('button', { name: /증가/i }));
+  await userEvent.click(screen.getByRole('button', { name: /increment/i }));
 
   expect(screen.getByText('1')).toBeInTheDocument();
 });
 
-// ✅ GOOD: 타입 테스트
+// GOOD: Type test
 import { expectTypeOf } from 'expect-type';
 
-test('fetchUser 반환 타입', () => {
+test('fetchUser return type', () => {
   expectTypeOf(fetchUser).returns.toMatchTypeOf<Promise<Result<User>>>();
 });
 ```
 
 ---
 
-## ✅ 자가 진단 체크리스트
+## Self-Diagnosis Checklist
 
-### 🔴 Critical (반드시 완료)
-- [ ] `tsconfig.json`에 `strict: true` 설정
-- [ ] `any` 타입 사용 0개
-- [ ] barrel import 사용 0개
-- [ ] Server/Client 컴포넌트 올바르게 분리
+### Critical (Must Complete)
+- [ ] `tsconfig.json` has `strict: true`
+- [ ] Zero `any` type usage
+- [ ] Zero barrel import usage
+- [ ] Proper Server/Client component separation
 
-### 🟡 Important (80% 이상)
-- [ ] 모든 함수에 반환 타입 명시
-- [ ] 에러 처리 패턴 통일
-- [ ] 불필요한 리렌더링 제거
-- [ ] 이미지 최적화 적용
+### Important (80%+)
+- [ ] All functions have explicit return types
+- [ ] Unified error handling patterns
+- [ ] Removed unnecessary re-renders
+- [ ] Applied image optimization
 
-### 🟢 Nice-to-have
-- [ ] 타입 테스트 작성
-- [ ] 번들 분석 수행
-- [ ] Lighthouse 90+ 달성
+### Nice-to-have
+- [ ] Written type tests
+- [ ] Performed bundle analysis
+- [ ] Achieved Lighthouse 90+
 
-**합격 기준**: Critical 100% + Important 80% 이상
+**Pass Criteria**: Critical 100% + Important 80%+
 
 ---
 
-## 📚 참조
+## References
 
-| 문서 | 링크 |
-|------|------|
-| TypeScript 공식 | https://www.typescriptlang.org/docs/ |
-| React 공식 | https://react.dev/ |
-| Next.js 공식 | https://nextjs.org/docs |
+| Document | Link |
+|----------|------|
+| TypeScript Official | https://www.typescriptlang.org/docs/ |
+| React Official | https://react.dev/ |
+| Next.js Official | https://nextjs.org/docs |
 | Vercel Best Practices | `~/.claude/rules/react/REACT-RULES.md` |
 
 ---
