@@ -6,6 +6,7 @@
 - BaseStrategy: 모든 전략의 기반 클래스
 - MomentumStrategy: 모멘텀 기반 전략
 - MeanReversionStrategy: 평균회귀 전략
+- BollingerBreakoutStrategy: 볼린저 밴드 돌파 전략
 """
 
 from .base_strategy import (
@@ -17,6 +18,7 @@ from .base_strategy import (
 )
 from .momentum_strategy import MomentumStrategy, MomentumConfig
 from .mean_reversion_strategy import MeanReversionStrategy, MeanReversionConfig
+from .bollinger_breakout_strategy import BollingerBreakoutStrategy, BollingerConfig
 
 __all__ = [
     'BaseStrategy',
@@ -27,5 +29,7 @@ __all__ = [
     'MomentumStrategy',
     'MomentumConfig',
     'MeanReversionStrategy',
-    'MeanReversionConfig'
+    'MeanReversionConfig',
+    'BollingerBreakoutStrategy',
+    'BollingerConfig'
 ]

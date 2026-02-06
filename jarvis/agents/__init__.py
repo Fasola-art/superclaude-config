@@ -18,11 +18,8 @@ from .ralph_loop import (
     ReviewerAgent,
     RalphLoop,
 )
-from .coordinator import (
-    WorkflowStep,
-    Workflow,
-    AgentCoordinator,
-)
+from .coordinator import AgentCoordinator
+from .coordinator_models import Workflow, WorkflowStep
 from .analyzers import (
     AnalysisResult,
     BaseAnalyzer,

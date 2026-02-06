@@ -64,5 +64,12 @@
     "response": "ko",
     "codeComments": "ko",
     "variableNames": "en"
+  },
+
+  "agentRules": {
+    "enabled": true,
+    "injectOnTaskCall": true,
+    "rulesFile": "~/.claude/rules/_shared/agent-rules.md",
+    "applyTo": ["Task", "Skill", "PlanMode"]
   }
 }

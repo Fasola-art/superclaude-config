@@ -5,12 +5,19 @@
 
 from __future__ import annotations
 
+import os
 import sqlite3
+import threading
 from pathlib import Path
 from typing import Generator
 from contextlib import contextmanager
 
-DB_PATH = Path(__file__).parent / "jarvis.db"
+# DB 경로: 환경 변수 또는 기본 경로
+DB_PATH = Path(os.environ.get("JARVIS_DB_PATH", Path(__file__).parent / "jarvis.db"))
+
+# 초기화 상태 추적 (thread-safe)
+_db_initialized = False
+_db_init_lock = threading.Lock()
 
 
 def get_connection() -> sqlite3.Connection:
@@ -34,8 +41,24 @@ def get_db() -> Generator[sqlite3.Connection, None, None]:
         conn.close()
 
 
-def init_database() -> None:
-    """데이터베이스 초기화 및 테이블 생성"""
+def init_database(force: bool = False) -> None:
+    """데이터베이스 초기화 및 테이블 생성 (thread-safe, 한 번만 실행)"""
+    global _db_initialized
+
+    if _db_initialized and not force:
+        return
+
+    with _db_init_lock:
+        # Double-checked locking
+        if _db_initialized and not force:
+            return
+
+        _init_tables()
+        _db_initialized = True
+
+
+def _init_tables() -> None:
+    """실제 테이블 생성 로직"""
     with get_db() as conn:
         cursor = conn.cursor()
 
@@ -102,5 +125,18 @@ def init_database() -> None:
                 last_action TEXT,
                 conversation_summary TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+        # 리마인더 테이블
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS reminders (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                message TEXT NOT NULL,
+                remind_at TIMESTAMP NOT NULL,
+                repeat_interval TEXT,
+                is_dismissed BOOLEAN DEFAULT 0,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                snoozed_until TIMESTAMP
             )
         """)

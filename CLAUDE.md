@@ -38,6 +38,81 @@ Example:
 
 ---
 
+## Pre-Task Checklist (MANDATORY)
+
+**Before ANY code modification:**
+1. Run `wc -l <file>` - verify within limits
+2. If exceeds limit → split first, then modify
+
+**Line Limits (STRICT):**
+| Type | Range | Split Trigger |
+|------|-------|---------------|
+| Logic/Utils | 50~80 | 3+ functions or complex regex |
+| UI Components | 100~120 | 4+ states or deep DOM |
+| API/Server | 80~100 | Error handling obscures logic |
+| types/constants | ≤20 | Type-only or const-only |
+| utils/hooks | ≤50 | Single-purpose functions |
+
+**Critical Rules:**
+- **MIN 20 lines**: No file under 20 lines (merge instead)
+- **2+ usage → extract**: Shared logic → common module
+- **Split requires**: barrel export (index.ts/\_\_init\_\_.py)
+
+**Test Strategy:**
+| Target | Method |
+|--------|--------|
+| 공통함수/utils | TDD 필수 |
+| 비즈니스 로직 | TDD 권장 |
+| 결제/인증 플로우 | E2E 필수 |
+| UI/프로토타입 | 수동 테스트 |
+
+**Standard Folder Structure:**
+```
+feature/
+├── index.ts       # barrel export
+├── types.ts       # ≤20 lines
+├── constants.ts   # ≤20 lines
+├── utils.ts       # ≤50 lines
+├── hooks.ts       # ≤50 lines
+├── Component.tsx  # main component
+└── *.test.ts      # tests
+```
+
+**Violation = Immediate rollback + refactor**
+
+---
+
+## Markdown File Rules (MANDATORY)
+
+**Apply Pre-Task Checklist to ALL .md files:**
+
+| Type | Range | Split Trigger |
+|------|-------|---------------|
+| Rules/Guides | 50~100 | 3+ sections or mixed topics |
+| Reference docs | 80~120 | Single topic only |
+| Index files | 20~50 | Links + brief descriptions |
+| Templates | ≤30 | Minimal, no examples |
+
+**Modularization Principles:**
+- **2+ references → extract**: Shared content → `_shared/` module
+- **Single responsibility**: One topic per file
+- **Barrel pattern**: Each folder has `index.md` with links
+- **No redundancy**: Zero duplicate content across files
+
+**Efficiency Rules:**
+- **Minimal code**: Shortest syntax achieving same result
+- **No boilerplate**: Skip obvious headers/footers
+- **Active voice**: Direct imperatives only
+- **Tables over prose**: Structured data in tables
+
+**File Creation Checklist:**
+1. Check if content exists elsewhere → reference instead
+2. Verify line count within limits
+3. Extract shared patterns to `_shared/`
+4. Create index.md if new folder
+
+---
+
 ## Development Rules
 
 ### Full Implementation Required (No Stub/Placeholder/Skeleton Code)
@@ -63,7 +138,7 @@ Example:
 
 ---
 
-## Core Rules (7)
+## Core Rules (8)
 
 | Rule                 | Instruction                                        |
 |----------------------|----------------------------------------------------|
@@ -74,6 +149,28 @@ Example:
 | PRD Creation         | Use /prd-create for idea → PRD conversion          |
 | Skill Capture        | Save completed dev work as reusable skill          |
 | TDD/E2E Suggestion   | On feature request, ask "TDD/E2E로 진행할까요?"     |
+| **Agent/Skill Rules** | **Include `rules/_shared/agent-rules.md` in prompt** |
+
+### Agent/Skill/PlanMode Mandatory
+
+**On Task tool invocation, ALWAYS prepend to prompt:**
+```
+[MANDATORY RULES]
+1. 파일: 50~120줄 범위 유지 (초과 시 분할, 미달 시 병합)
+2. Python: 타입 힌트 + docstring 필수
+3. 기존 코드 먼저 확인: ~/.claude/modules/
+4. No stub/placeholder - 완전한 구현만
+5. 응답: 한국어
+```
+
+**모듈별 추가 규칙 (해당 시 포함):**
+- trading: `~/.claude/modules/trading/CLAUDE.md` 참조 지시
+- sql: `~/.claude/modules/sql-trading/CLAUDE.md` 참조 지시
+
+**Post-verification (MANDATORY):**
+1. Agent 완료 후 `wc -l` 체크
+2. 120줄 초과 시 → 분할
+3. 50줄 미만 시 → 병합
 
 ### Skill Capture Rules
 
@@ -120,6 +217,12 @@ triggers:
 | /recover          | Session recovery                   |
 | /tdd              | Start TDD workflow                 |
 | /e2e              | Create E2E tests                   |
+
+---
+
+## Code Structure Rules
+
+> **See Pre-Task Checklist above for complete rules**
 
 ---
 

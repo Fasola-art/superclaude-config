@@ -4,13 +4,11 @@ JARVIS Memory 모듈
 """
 
 from .db import get_connection, get_db, init_database, DB_PATH
-from .models import (
-    WorkSessionManager,
-    TaskManager,
-    CalendarManager,
-    ContextManager,
-    UsagePatternTracker,
-)
+from .session import WorkSessionManager
+from .task import TaskManager
+from .calendar import CalendarManager
+from .context import ContextManager
+from .patterns import UsagePatternTracker
 
 __all__ = [
     "get_connection",

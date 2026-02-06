@@ -9,10 +9,22 @@
 
 import json
 import os
+import re
 import textwrap
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Any, Optional
+
+
+def strip_unsupported_chars(text: str) -> str:
+    """이모지 + 중국어 제거 (matplotlib 폰트 호환)"""
+    if not text:
+        return text
+    # 이모지 제거
+    text = re.sub(r'[\U0001F300-\U0001F9FF\u2600-\u27BF]', '', text)
+    # 중국어 간체 제거 (한글/영문/숫자/기호만 유지)
+    text = re.sub(r'[\u4e00-\u9fff]', '', text)
+    return text
 
 # 경로 설정
 REPORTS_DIR = Path.home() / ".claude" / "modules" / "trading" / "reports" / "daily"
@@ -399,7 +411,7 @@ def export_to_image(report: Dict, outlook: Dict = None) -> str:
 
     # ===== 2~3페이지: 시황 (2장으로 분할) =====
     if outlook:
-        outlook_text = outlook.get('text', '')
+        outlook_text = strip_unsupported_chars(outlook.get('text', ''))
         outlook_text = outlook_text.replace('$', '\\$')
 
         # 텍스트를 섹션별로 분할 (## 기준)
@@ -407,27 +419,56 @@ def export_to_image(report: Dict, outlook: Dict = None) -> str:
         if sections[0].startswith('## '):
             sections[0] = sections[0][3:]
 
-        # "섹터별 동향"까지 2페이지, "종목별 상세 분석"부터 3페이지
-        split_point = 0
+        # 3페이지 분할: (1) 현황~섹터별, (2) 종목별 상세 분석, (3) 내일 전망
+        split1, split2 = 0, 0
         for i, sec in enumerate(sections):
             if sec.startswith('종목별 상세 분석') or sec.startswith('종목별'):
-                split_point = i
+                split1 = i
+            if sec.startswith('내일 전망') or sec.startswith('내일'):
+                split2 = i
                 break
-        if split_point == 0:
-            split_point = max(1, int(len(sections) * 0.55))  # 폴백: 55%
+        if split1 == 0:
+            split1 = max(1, int(len(sections) * 0.4))
+        if split2 == 0:
+            split2 = max(split1 + 1, int(len(sections) * 0.7))
 
-        page1_sections = sections[:split_point]
-        page2_sections = sections[split_point:]
+        page1_sections = sections[:split1]       # 현황 ~ 섹터별
+        page2_sections = sections[split1:split2]  # 종목별 상세 분석
+        page3_sections = sections[split2:]        # 내일 전망
 
-        # 페이지 1 시황
+        def render_styled_text(ax, text, start_y=0.95):
+            """## / ### 제목은 굵게, 일반 텍스트는 보통으로 렌더링 (+8pt 크게)"""
+            lines = text.split('\n')
+            y = start_y
+            line_height = 0.036  # 줄 간격 (fontsize 21 기준)
+
+            for line in lines:
+                if line.startswith('## '):
+                    # 대제목: 굵게, 크게 (16→24)
+                    ax.text(0.03, y, line[3:], fontsize=24, ha='left', va='top',
+                            transform=ax.transAxes, family='AppleGothic', fontweight='bold', color='#1a1a2e')
+                    y -= line_height * 1.4
+                elif line.startswith('### '):
+                    # 소제목: 굵게 (14→22)
+                    ax.text(0.05, y, line[4:], fontsize=22, ha='left', va='top',
+                            transform=ax.transAxes, family='AppleGothic', fontweight='bold', color='#16213e')
+                    y -= line_height * 1.3
+                elif line.strip():
+                    # 일반 텍스트 (13→21)
+                    ax.text(0.03, y, line, fontsize=21, ha='left', va='top',
+                            transform=ax.transAxes, family='AppleGothic', fontweight='normal', color='#333')
+                    y -= line_height
+                else:
+                    # 빈 줄
+                    y -= line_height * 0.5
+
+        # 페이지 1 시황: 현황 ~ 섹터별
         page1_text = '## ' + '\n## '.join(page1_sections)
-        fig, ax = plt.subplots(figsize=(10, 14), dpi=120)
+        fig, ax = plt.subplots(figsize=(12, 18), dpi=120)
         ax.axis('off')
-        ax.text(0.03, 0.97, page1_text, fontsize=11, ha='left', va='top',
-                transform=ax.transAxes, family='AppleGothic',
-                linespacing=1.25, fontweight='normal')
-        ax.set_title(f'경제 시황 (1/2) - {date}', fontsize=18, fontweight='bold', pad=10)
-        plt.figtext(0.5, 0.01, '출처: Yahoo Finance, CoinGecko, NY Fed, FRED | 투자 조언 아님', ha='center', fontsize=9, color='gray')
+        render_styled_text(ax, page1_text)
+        ax.set_title(f'경제 시황 (1/3) - {date}', fontsize=22, fontweight='bold', pad=15)
+        plt.figtext(0.5, 0.01, '출처: Yahoo Finance, CoinGecko, NY Fed, FRED | 투자 조언 아님', ha='center', fontsize=11, color='gray')
 
         page2_file = date_dir / "02_시황_1.png"
         plt.savefig(page2_file, bbox_inches='tight', facecolor='white', edgecolor='none')
@@ -435,22 +476,35 @@ def export_to_image(report: Dict, outlook: Dict = None) -> str:
         saved_files.append(str(page2_file))
         print(f"[저장] {page2_file.name}")
 
-        # 페이지 2 시황 (나머지)
+        # 페이지 2 시황: 종목별 상세 분석
         if page2_sections:
             page2_text = '## ' + '\n## '.join(page2_sections)
-            fig, ax = plt.subplots(figsize=(10, 14), dpi=120)
+            fig, ax = plt.subplots(figsize=(12, 18), dpi=120)
             ax.axis('off')
-            ax.text(0.03, 0.97, page2_text, fontsize=11, ha='left', va='top',
-                    transform=ax.transAxes, family='AppleGothic',
-                    linespacing=1.25, fontweight='normal')
-            ax.set_title(f'경제 시황 (2/2) - {date}', fontsize=18, fontweight='bold', pad=10)
-            plt.figtext(0.5, 0.01, '출처: Yahoo Finance, CoinGecko, NY Fed, FRED | 투자 조언 아님', ha='center', fontsize=9, color='gray')
+            render_styled_text(ax, page2_text)
+            ax.set_title(f'경제 시황 (2/3) - {date}', fontsize=22, fontweight='bold', pad=15)
+            plt.figtext(0.5, 0.01, '출처: Yahoo Finance, CoinGecko, NY Fed, FRED | 투자 조언 아님', ha='center', fontsize=11, color='gray')
 
             page3_file = date_dir / "03_시황_2.png"
             plt.savefig(page3_file, bbox_inches='tight', facecolor='white', edgecolor='none')
             plt.close()
             saved_files.append(str(page3_file))
             print(f"[저장] {page3_file.name}")
+
+        # 페이지 3 시황: 내일 전망
+        if page3_sections:
+            page3_text = '## ' + '\n## '.join(page3_sections)
+            fig, ax = plt.subplots(figsize=(12, 18), dpi=120)
+            ax.axis('off')
+            render_styled_text(ax, page3_text)
+            ax.set_title(f'경제 시황 (3/3) - {date}', fontsize=22, fontweight='bold', pad=15)
+            plt.figtext(0.5, 0.01, '출처: Yahoo Finance, CoinGecko, NY Fed, FRED | 투자 조언 아님', ha='center', fontsize=11, color='gray')
+
+            page4_file = date_dir / "04_시황_3.png"
+            plt.savefig(page4_file, bbox_inches='tight', facecolor='white', edgecolor='none')
+            plt.close()
+            saved_files.append(str(page4_file))
+            print(f"[저장] {page4_file.name}")
 
     print(f"[완료] {len(saved_files)}개 이미지 → {date_dir}")
     return str(date_dir)

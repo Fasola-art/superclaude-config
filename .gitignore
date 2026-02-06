@@ -3,6 +3,8 @@ credentials/
 api-keys.json
 *.secret
 *.key
+.env
+.env.*
 
 # 캐시 및 임시 파일
 cache/
@@ -14,6 +16,7 @@ logs/
 # 히스토리 (대화 기록)
 history.jsonl
 history.json
+history/
 
 # 백업
 backups/
@@ -33,3 +36,37 @@ chrome/
 projects/
 *.jsonl
 plugins/marketplaces/
+
+# Node.js
+node_modules/
+.next/
+.turbo/
+*.node
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.egg-info/
+
+# 세션/런타임 데이터 (기기별 고유)
+file-history/
+session-env/
+shell-snapshots/
+paste-cache/
+stats-cache.json
+statsig/
+telemetry/
+sessions/
+todos/
+
+# DB 파일 (런타임 생성)
+*.db
+
+# 빌드 아티팩트
+*.sst
+.alert_state.json
+tasks/

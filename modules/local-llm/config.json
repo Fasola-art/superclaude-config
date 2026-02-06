@@ -1,0 +1,61 @@
+{
+  "module": "local-llm",
+  "version": "1.0.0",
+  "description": "로컬 LLM 서브에이전트 시스템",
+  "backends": {
+    "mlx": {
+      "enabled": true,
+      "models_dir": "~/.claude/modules/local-llm/models/"
+    },
+    "ollama": {
+      "enabled": true,
+      "host": "http://localhost:11434"
+    },
+    "lm_studio": {
+      "enabled": false,
+      "host": "http://localhost:1234"
+    }
+  },
+  "models": {
+    "qwen2.5-3b": {
+      "repo": "mlx-community/Qwen2.5-3B-Instruct-4bit",
+      "vram_gb": 2,
+      "role": "news_classifier",
+      "always_loaded": true
+    },
+    "qwen2.5-7b": {
+      "repo": "mlx-community/Qwen2.5-7B-Instruct-4bit",
+      "vram_gb": 6,
+      "role": "general",
+      "always_loaded": false
+    }
+  },
+  "performance": {
+    "max_concurrent_models": 2,
+    "idle_unload_minutes": 5,
+    "cache_ttl_hours": 24,
+    "batch_size": 10
+  },
+  "agents": {
+    "news_classifier": {
+      "model": "qwen2.5-3b",
+      "max_tokens": 100,
+      "temperature": 0.3
+    },
+    "indicator_interpreter": {
+      "model": "qwen2.5-7b",
+      "max_tokens": 200,
+      "temperature": 0.5
+    },
+    "signal_validator": {
+      "model": "qwen2.5-7b",
+      "max_tokens": 150,
+      "temperature": 0.3
+    },
+    "report_drafter": {
+      "model": "qwen2.5-7b",
+      "max_tokens": 500,
+      "temperature": 0.7
+    }
+  }
+}

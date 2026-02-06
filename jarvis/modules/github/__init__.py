@@ -13,7 +13,8 @@ from .types import (
     Issue,
     Notification,
 )
-from .client import GitHubClient, GitHubError
+from .api_runner import GitHubError
+from .client import GitHubClient
 from .monitor import GitHubMonitor
 from .notifier import (
     GitHubNotifier,

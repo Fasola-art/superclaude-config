@@ -1,25 +1,30 @@
 #!/usr/bin/env python3
 """
 텔레그램 메시지 AI 요약
-- Claude Haiku를 사용한 메시지 요약
+- Ollama (Qwen2.5-7B)를 사용한 메시지 요약
 - 주요 이슈 추출
 - 키워드 분석
 """
 
-import os
 import json
+import requests
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import List, Dict, Optional
 
 MODULE_DIR = Path.home() / ".claude" / "modules" / "telegram"
 DATA_DIR = MODULE_DIR / "data"
-CREDENTIALS_FILE = Path.home() / ".claude" / "credentials" / "api-keys.json"
 
-def load_api_key() -> str:
-    with open(CREDENTIALS_FILE, 'r') as f:
-        creds = json.load(f)
-    return creds['anthropic']['api_key']
+OLLAMA_URL = "http://localhost:11434/api/generate"
+OLLAMA_MODEL = "qwen2.5:7b"
+
+def check_ollama() -> bool:
+    """Ollama 서버 상태 체크"""
+    try:
+        resp = requests.get("http://localhost:11434/api/tags", timeout=5)
+        return resp.status_code == 200
+    except requests.exceptions.RequestException:
+        return False
 
 def load_messages(hours: int = 24, chat_id: Optional[int] = None) -> List[Dict]:
     """메시지 로드"""
@@ -56,9 +61,7 @@ def format_messages_for_summary(messages: List[Dict]) -> str:
     return "\n".join(lines)
 
 def summarize_messages(messages: List[Dict], topic: str = "일반") -> Dict:
-    """Claude를 사용해 메시지 요약"""
-    api_key = load_api_key()
-
+    """Ollama를 사용해 메시지 요약"""
     if not messages:
         return {
             'success': False,
@@ -66,60 +69,70 @@ def summarize_messages(messages: List[Dict], topic: str = "일반") -> Dict:
             'summary': None
         }
 
+    if not check_ollama():
+        return {
+            'success': False,
+            'error': 'Ollama 서버 연결 실패',
+            'summary': None
+        }
+
     try:
-        from anthropic import Anthropic
-
-        client = Anthropic(api_key=api_key)
-
         messages_text = format_messages_for_summary(messages)
         chat_title = messages[0].get('chat_title', 'Unknown')
 
-        prompt = f"""다음은 텔레그램 그룹 "{chat_title}"의 최근 대화 내용입니다.
+        prompt = f"""[필수 규칙]
+- 100% 한국어로만 작성. 중국어(简体/繁體) 절대 금지.
+- 아래 ## 형식 그대로 유지. 섹션 제목 변경 금지.
+- 간결한 체언 종결 ("~함", "~됨", "~예정")
+
+다음은 텔레그램 그룹 "{chat_title}"의 최근 대화 내용입니다.
 
 주제/목적: {topic}
 
 대화 내용:
 {messages_text}
 
-위 대화를 분석하여 다음 형식으로 요약해주세요:
+위 대화를 분석하여 아래 형식으로 요약:
 
 ## 주요 내용 요약
-(3-5개 핵심 포인트)
+- (핵심 포인트 1)
+- (핵심 포인트 2)
+- (핵심 포인트 3)
 
 ## 중요 이슈/토픽
-(논의된 주요 주제들)
+- (주요 주제 1)
+- (주요 주제 2)
 
 ## 액션 아이템
-(결정사항, 해야 할 일 등)
+- (결정사항/할 일)
 
 ## 주목할 정보
-(수치, 날짜, 링크 등 중요 정보)
+- (수치, 날짜, 링크 등)"""
 
-간결하게 작성. 체언 종결 사용."""
-
-        response = client.messages.create(
-            model="claude-haiku-4-5-20251001",
-            max_tokens=1500,
-            messages=[{"role": "user", "content": prompt}]
+        response = requests.post(
+            OLLAMA_URL,
+            json={
+                "model": OLLAMA_MODEL,
+                "prompt": prompt,
+                "stream": False,
+                "options": {"num_predict": 1500, "temperature": 0.7}
+            },
+            timeout=120
         )
 
-        summary_text = response.content[0].text
+        if response.status_code != 200:
+            raise RuntimeError(f"Ollama API 오류: {response.status_code}")
 
-        # 비용 계산
-        input_tokens = response.usage.input_tokens
-        output_tokens = response.usage.output_tokens
-        cost = (input_tokens * 0.80 + output_tokens * 4.00) / 1_000_000
+        summary_text = response.json().get("response", "")
 
         result = {
             'success': True,
             'chat_title': chat_title,
             'message_count': len(messages),
             'summary': summary_text,
-            'tokens': {
-                'input': input_tokens,
-                'output': output_tokens
-            },
-            'cost': cost,
+            'tokens': {'input': 0, 'output': 0},
+            'cost': 0.0,  # 로컬 모델은 무료
+            'model': OLLAMA_MODEL,
             'timestamp': datetime.now().isoformat()
         }
 

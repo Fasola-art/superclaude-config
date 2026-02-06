@@ -1,6 +1,6 @@
 # 📋 SuperClaude TODO
 
-> **마지막 업데이트**: 2026-02-06
+> **마지막 업데이트**: 2026-02-06 (TDD 검증 완료)
 > **위치**: `~/.claude/todo.md` (단일 소스)
 
 ---
@@ -18,11 +18,11 @@
 | ID | 태스크 | 우선순위 |
 |----|--------|----------|
 | J-01 | MemoryManager 구현 | ✅ 완료 (197줄) |
-| J-02 | HabitTracker 구현 | 🟡 Medium |
-| J-03 | PTCoach 구현 | 🟡 Medium |
-| J-04 | DietCoach 구현 | 🟡 Medium |
+| J-02 | HabitTracker 구현 | ✅ 완료 (TDD 2/2) |
+| J-03 | PTCoach 구현 | ✅ 완료 (TDD 1/1) |
+| J-04 | DietCoach 구현 | ✅ 완료 (TDD 1/1) |
 | J-05 | ProjectMonitor 구현 | ✅ 완료 (modules/project/) |
-| J-06 | ClientWorkTracker 구현 | 🟡 Medium |
+| J-06 | ClientWorkTracker 구현 | ✅ 완료 (TDD 4/4) |
 | J-07 | GitHubMonitor 구현 | ✅ 완료 (modules/github/) |
 | J-08 | WeatherMonitor 구현 | ✅ 완료 (modules/weather/) |
 
@@ -44,9 +44,9 @@
 |----|--------|----------|
 | JT-01 | 자연어 파싱 (NLU) | ✅ 완료 (nlu/ 7개 파일) |
 | JT-02 | 로컬 메모리 (SQLite) | ✅ 완료 (memory/db.py) |
-| JT-03 | 브라우저 자동화 | 🟡 Medium |
+| JT-03 | 브라우저 자동화 | ✅ 완료 (TDD 3/3) |
 | JT-04 | 병렬 처리 | ✅ 완료 (core/parallel.py) |
-| JT-05 | 학습 시스템 | 🟢 Low |
+| JT-05 | 학습 시스템 | ✅ 완료 (TDD 5/5) |
 
 ### 개발 지침 (5개)
 
@@ -63,8 +63,8 @@
 | ID | 태스크 | 우선순위 |
 |----|--------|----------|
 | I-01 | 클라우드플레어 알아보기 | 🟢 Low |
-| I-02 | PostgreSQL 스키마 확장 (모듈별 테이블) | 🟡 Medium |
-| I-03 | 로그 집계 시스템 구축 | 🟡 Medium |
+| I-02 | PostgreSQL 스키마 확장 (모듈별 테이블) | ✅ 완료 (TDD 6/6) |
+| I-03 | 로그 집계 시스템 구축 | ✅ 완료 (TDD 6/6) |
 | I-04 | Puppeteer MCP 서버 설정 (Chromium) | 🟢 Low |
 
 ### Trading 모듈 (4개)
@@ -73,12 +73,24 @@
 |----|--------|----------|
 | T-01 | 실시간 가격 데이터 연동 | ✅ 완료 |
 | T-02 | WebSocket 연결 테스트 | ✅ 완료 |
-| T-03 | 모듈 간 통합 테스트 | 🟡 Medium |
+| T-03 | 모듈 간 통합 테스트 | ✅ 완료 (7/7 E2E) |
 | T-04 | 대시보드 UI 개발 (React + Next.js) | 🟡 Medium |
 
 ---
 
 ## 🟢 완료됨 (최근)
+
+### 2026-02-06
+- [x] J-02: HabitTracker (TDD 검증 완료 - 2테스트 통과)
+- [x] J-03: PTCoach (TDD 검증 완료 - 1테스트 통과)
+- [x] J-04: DietCoach (TDD 검증 완료 - 1테스트 통과)
+- [x] J-06: ClientWorkTracker (TDD 검증 완료 - 4테스트 통과)
+- [x] JT-03: 브라우저 자동화 (TDD 검증 완료 - 3테스트 통과)
+- [x] JT-05: 학습 시스템 신규 구현 (TDD - 5테스트 통과, 4파일)
+- [x] T-03: 모듈 간 통합 테스트 (E2E - 7/7 테스트 통과)
+- [x] I-02: PostgreSQL 스키마 확장 (TDD 6/6, jarvis_tables.sql)
+- [x] I-03: 로그 집계 시스템 (TDD 6/6, modules/logging/)
+- [x] SQL Trading 대시보드 모듈화 (979줄 → 9개 파일)
 
 ### 2026-02-03
 - [x] D-02: 코드 구조화 & 효율성 지침 (CLAUDE.md에 반영)
@@ -106,12 +118,12 @@
 
 ```
 ┌─────────────────────────────────────┐
-│  대기 중: 10개                       │
+│  대기 중: 4개                        │
 │  진행 중: 0개                        │
-│  완료됨: 30+ 개                      │
+│  완료됨: 39+ 개                      │
 ├─────────────────────────────────────┤
 │  🔴 High: 0개                        │
-│  🟡 Medium: 7개                      │
+│  🟡 Medium: 1개 (D-03 문서)          │
 │  🟢 Low: 3개                         │
 └─────────────────────────────────────┘
 ```

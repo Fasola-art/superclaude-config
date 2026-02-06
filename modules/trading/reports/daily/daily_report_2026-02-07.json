@@ -1,0 +1,210 @@
+{
+  "date": "2026-02-07",
+  "generated_at": "2026-02-07 00:34:53",
+  "quotes": [
+    {
+      "symbol": "VIX",
+      "name": "VIX (공포지수)",
+      "price": 19.26,
+      "change_pct": -11.53,
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "MOVE",
+      "name": "MOVE Index (채권 변동성)",
+      "price": 62.16,
+      "change_pct": 0.0,
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "GOLD",
+      "name": "Gold (금)",
+      "price": 4969.3,
+      "change_pct": 1.63,
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "EUR_USD",
+      "name": "EUR/USD (유로/달러)",
+      "price": 1.18,
+      "change_pct": 0.21,
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "USD_JPY",
+      "name": "USD/JPY (달러/엔)",
+      "price": 157.08,
+      "change_pct": 0.04,
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "NASDAQ",
+      "name": "NASDAQ (NQ)",
+      "price": 24827.75,
+      "change_pct": 0.72,
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "SP500",
+      "name": "S&P 500 (ES)",
+      "price": 6883.75,
+      "change_pct": 0.92,
+      "source": "Yahoo Finance"
+    },
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin (BTC/USD)",
+      "price": 68123,
+      "change_pct": 1.93,
+      "source": "CoinGecko"
+    }
+  ],
+  "sofr_current": 3.65,
+  "sofr_trend": [
+    {
+      "date": "2026-01-28",
+      "rate": 3.64,
+      "source": "NY Fed"
+    },
+    {
+      "date": "2026-01-29",
+      "rate": 3.65,
+      "source": "NY Fed"
+    },
+    {
+      "date": "2026-01-30",
+      "rate": 3.68,
+      "source": "NY Fed"
+    },
+    {
+      "date": "2026-02-02",
+      "rate": 3.69,
+      "source": "NY Fed"
+    },
+    {
+      "date": "2026-02-03",
+      "rate": 3.69,
+      "source": "NY Fed"
+    },
+    {
+      "date": "2026-02-04",
+      "rate": 3.65,
+      "source": "NY Fed"
+    },
+    {
+      "date": "2026-02-05",
+      "rate": 3.65,
+      "source": "NY Fed"
+    }
+  ],
+  "sofr_analysis": "일주일간 횡보 (3.64% → 3.65%, +0.01%p)",
+  "move_current": 62.16,
+  "move_trend": [
+    {
+      "date": "2026-01-29",
+      "value": 60.73,
+      "source": "Yahoo Finance (ICE BofAML)"
+    },
+    {
+      "date": "2026-01-30",
+      "value": 59.2,
+      "source": "Yahoo Finance (ICE BofAML)"
+    },
+    {
+      "date": "2026-02-02",
+      "value": 59.3,
+      "source": "Yahoo Finance (ICE BofAML)"
+    },
+    {
+      "date": "2026-02-03",
+      "value": 57.54,
+      "source": "Yahoo Finance (ICE BofAML)"
+    },
+    {
+      "date": "2026-02-04",
+      "value": 57.51,
+      "source": "Yahoo Finance (ICE BofAML)"
+    },
+    {
+      "date": "2026-02-06",
+      "value": 62.16,
+      "source": "Yahoo Finance (ICE BofAML)"
+    }
+  ],
+  "move_analysis": "일주일간 횡보 (60.7 → 62.2, +2.4%) - 낮은 채권 변동성 (안정적)",
+  "economic_indicators": [
+    {
+      "name": "연방기금금리",
+      "series_id": "FEDFUNDS",
+      "value": 3.64,
+      "date": "2026-01-01",
+      "change": -0.08000000000000007,
+      "change_pct": -2.1505376344086042,
+      "source": "FRED (Federal Reserve)"
+    },
+    {
+      "name": "10년 국채 수익률",
+      "series_id": "DGS10",
+      "value": 4.29,
+      "date": "2026-02-04",
+      "change": 0.009999999999999787,
+      "change_pct": 0.23364485981307911,
+      "source": "FRED (Federal Reserve)"
+    },
+    {
+      "name": "2년 국채 수익률",
+      "series_id": "DGS2",
+      "value": 3.57,
+      "date": "2026-02-04",
+      "change": 0.0,
+      "change_pct": 0.0,
+      "source": "FRED (Federal Reserve)"
+    },
+    {
+      "name": "10Y-2Y 스프레드",
+      "series_id": "T10Y2Y",
+      "value": 0.74,
+      "date": "2026-02-05",
+      "change": 0.020000000000000018,
+      "change_pct": 2.7777777777777803,
+      "source": "FRED (Federal Reserve)"
+    },
+    {
+      "name": "CPI",
+      "series_id": "CPIAUCSL",
+      "value": 326.03,
+      "date": "2025-12-01",
+      "change": 0.9989999999999668,
+      "change_pct": 0.30735529841767917,
+      "source": "FRED (Federal Reserve)"
+    },
+    {
+      "name": "실업률",
+      "series_id": "UNRATE",
+      "value": 4.4,
+      "date": "2025-12-01",
+      "change": -0.09999999999999964,
+      "change_pct": -2.2222222222222143,
+      "source": "FRED (Federal Reserve)"
+    }
+  ],
+  "market_analysis": {
+    "vix_level": 19.26,
+    "vix_interpretation": "보통 수준의 변동성",
+    "yield_curve": 0.74,
+    "yield_interpretation": "정상적인 수익률 곡선",
+    "fed_funds": 3.64,
+    "summary": []
+  },
+  "tomorrow_events": [],
+  "sources": [
+    "Yahoo Finance (시세)",
+    "CoinGecko (비트코인)",
+    "NY Fed (SOFR)",
+    "FRED - Federal Reserve Economic Data (경제 지표)"
+  ],
+  "warnings": [
+    "⚠️ 선물 가격(ES, NQ, GC)은 Yahoo Finance 기준으로 실시간 CME 데이터와 차이가 있을 수 있습니다.",
+    "⚠️ 본 보고서는 정보 제공 목적이며 투자 조언이 아닙니다."
+  ]
+}

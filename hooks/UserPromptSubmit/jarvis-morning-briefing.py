@@ -1,145 +1,98 @@
 #!/usr/bin/env python3
 """
-jarvis-morning-briefing.py
-Morning briefing generation hook
-
-Trigger: UserPromptSubmit
-Timeout: 5000ms
+jarvis-morning-briefing.py - 모닝 브리핑 훅 (80줄)
+Hook Type: UserPromptSubmit
 """
-
-import json
-import sys
 import os
-from datetime import datetime, timedelta
+import sys
+import json
+from datetime import date
 from pathlib import Path
 
 CLAUDE_DIR = Path.home() / '.claude'
-BRIEFING_FILE = CLAUDE_DIR / 'cache' / 'last-briefing.json'
-TODOS_DIR = CLAUDE_DIR / 'todos'
-SESSIONS_DIR = CLAUDE_DIR / 'sessions'
+JARVIS_DIR = CLAUDE_DIR / 'jarvis'
+MARKER_FILE = JARVIS_DIR / '.last_execution'
 
-BRIEFING_INTERVAL_HOURS = 8  # Briefing every 8 hours
+sys.path.insert(0, str(CLAUDE_DIR))
+from jarvis.core import get_logger
+logger = get_logger(__name__)
 
 
-def should_show_briefing() -> bool:
-    """Check if briefing should be shown"""
+def is_first_execution_today() -> bool:
+    if not MARKER_FILE.exists():
+        return True
     try:
-        if BRIEFING_FILE.exists():
-            data = json.loads(BRIEFING_FILE.read_text())
-            last_briefing = datetime.fromisoformat(data.get('lastBriefing', ''))
-            hours_since = (datetime.now() - last_briefing).total_seconds() / 3600
-            return hours_since >= BRIEFING_INTERVAL_HOURS
-    except Exception:
+        return MARKER_FILE.read_text().strip() != date.today().isoformat()
+    except (PermissionError, OSError):
+        return True
+
+
+def update_marker() -> None:
+    try:
+        MARKER_FILE.parent.mkdir(parents=True, exist_ok=True)
+        MARKER_FILE.write_text(date.today().isoformat())
+    except OSError:
         pass
-    return True
 
 
-def save_briefing_time():
-    """Save briefing time"""
-    BRIEFING_FILE.parent.mkdir(parents=True, exist_ok=True)
-    BRIEFING_FILE.write_text(json.dumps({
-        'lastBriefing': datetime.now().isoformat()
-    }))
-
-
-def get_incomplete_todos() -> list:
-    """Get incomplete tasks"""
-    todos = []
+def get_token_stats() -> str:
+    stats_file = CLAUDE_DIR / 'stats-cache.json'
+    if not stats_file.exists():
+        return "Today 0 tokens"
     try:
-        if TODOS_DIR.exists():
-            for file in TODOS_DIR.glob('*.json'):
-                try:
-                    data = json.loads(file.read_text())
-                    if isinstance(data, list):
-                        for todo in data:
-                            if todo.get('status') not in ['completed', 'cancelled']:
-                                todos.append(todo)
-                    elif isinstance(data, dict) and data.get('status') not in ['completed', 'cancelled']:
-                        todos.append(data)
-                except Exception:
-                    continue
-    except Exception:
+        data = json.loads(stats_file.read_text())
+        for day in data.get('dailyModelTokens', []):
+            if day.get('date') == date.today().isoformat():
+                tokens = sum(day.get('tokensByModel', {}).values())
+                return f"Today {tokens:,} tokens"
+    except (json.JSONDecodeError, OSError):
         pass
-    return todos[:5]  # Max 5
+    return "Today 0 tokens"
 
 
-def get_recent_sessions() -> list:
-    """Get recent sessions"""
-    sessions = []
+def get_morning_briefing() -> str:
+    lines = ["=" * 50, "JARVIS Briefing", "=" * 50, f"\n{get_token_stats()}"]
+
     try:
-        if SESSIONS_DIR.exists():
-            files = sorted(SESSIONS_DIR.glob('*.json'), key=os.path.getmtime, reverse=True)
-            for file in files[:3]:  # Recent 3
-                try:
-                    data = json.loads(file.read_text())
-                    sessions.append({
-                        'name': file.stem,
-                        'lastModified': datetime.fromtimestamp(file.stat().st_mtime).isoformat()
-                    })
-                except Exception:
-                    continue
-    except Exception:
-        pass
-    return sessions
+        from jarvis.memory import init_database, WorkSessionManager, TaskManager, CalendarManager
+        init_database()
 
+        yesterday = WorkSessionManager.get_yesterday_summary()
+        lines.append(f"\nYesterday: {yesterday.get('total_sessions', 0) if yesterday else 0} sessions")
 
-def generate_briefing() -> dict:
-    """Generate briefing"""
-    now = datetime.now()
-    greeting = "Good morning" if now.hour < 12 else ("Good afternoon" if now.hour < 18 else "Good evening")
+        events = CalendarManager.get_today_events()
+        lines.append(f"Today: {len(events) if events else 0} events")
 
-    incomplete_todos = get_incomplete_todos()
-    recent_sessions = get_recent_sessions()
+        tasks = TaskManager.get_pending_tasks()
+        lines.append(f"Pending: {len(tasks) if tasks else 0} tasks")
 
-    briefing_parts = [f"{greeting}!"]
-
-    if incomplete_todos:
-        briefing_parts.append(f"\nIncomplete tasks: {len(incomplete_todos)}")
-        for todo in incomplete_todos:
-            status_icon = "[in progress]" if todo.get('status') == 'in_progress' else "[pending]"
-            briefing_parts.append(f"  {status_icon} {todo.get('subject', 'Unknown')}")
-
-    if recent_sessions:
-        briefing_parts.append(f"\nRecent sessions:")
-        for session in recent_sessions:
-            briefing_parts.append(f"  - {session['name']}")
-
-    briefing_parts.append("\nUse 'continue' keyword to resume previous work.")
-
-    return {
-        'greeting': greeting,
-        'incompleteTodos': len(incomplete_todos),
-        'recentSessions': len(recent_sessions),
-        'message': '\n'.join(briefing_parts)
-    }
-
-
-def main():
-    try:
-        # Ignore stdin (briefing is unrelated to input)
-        sys.stdin.read()
-
-        if not should_show_briefing():
-            print(json.dumps({
-                'status': 'skipped',
-                'message': 'Briefing skipped (recently shown)'
-            }, ensure_ascii=False))
-            sys.exit(0)
-
-        briefing = generate_briefing()
-        save_briefing_time()
-
-        output = {
-            'status': 'briefing',
-            **briefing
-        }
-
-        print(json.dumps(output, ensure_ascii=False))
-        sys.exit(0)
-
+    except ImportError:
+        lines.append("\nJARVIS modules not installed")
     except Exception as e:
-        print(json.dumps({'status': 'error', 'message': str(e)}, ensure_ascii=False))
-        sys.exit(1)
+        lines.append(f"\nError: {type(e).__name__}")
+
+    try:
+        from jarvis.memory.ml_predictor import get_predictor
+        suggestion = get_predictor().suggest_next_action()
+        if suggestion:
+            lines.append(f"\nSuggestion: {suggestion}")
+    except ImportError:
+        pass
+    except Exception:
+        pass
+
+    lines.append("\n" + "=" * 50)
+    return "\n".join(lines)
+
+
+def main() -> None:
+    prompt = os.environ.get('CLAUDE_USER_PROMPT', '')
+    force = '/j briefing' in prompt.lower() or '/j 브리핑' in prompt.lower()
+
+    if force or is_first_execution_today():
+        print(get_morning_briefing())
+        if not force:
+            update_marker()
 
 
 if __name__ == '__main__':

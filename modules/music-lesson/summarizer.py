@@ -1,5 +1,5 @@
 """
-Claude Haiku 요약 모듈
+Ollama 요약 모듈 (Qwen2.5-7B)
 STT 결과를 음악 레슨 요약으로 변환
 
 사용법:
@@ -12,11 +12,13 @@ STT 결과를 음악 레슨 요약으로 변환
 from __future__ import annotations
 
 import json
+import requests
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional
 
-import anthropic
+OLLAMA_URL = "http://localhost:11434/api/generate"
+OLLAMA_MODEL = "qwen2.5:7b"
 
 
 @dataclass
@@ -37,62 +39,51 @@ class LessonSummary:
     raw_summary: str                    # 전체 요약 텍스트
 
 
-def load_api_key() -> str:
-    """Anthropic API 키 로드"""
-    key_path = Path.home() / ".claude" / "credentials" / "api-keys.json"
-    if not key_path.exists():
-        raise FileNotFoundError(f"API 키 파일 없음: {key_path}")
-
-    with open(key_path) as f:
-        keys = json.load(f)
-
-    if "anthropic" not in keys:
-        raise KeyError("anthropic 키가 api-keys.json에 없음")
-
-    return keys["anthropic"]["api_key"]
+def check_ollama() -> bool:
+    """Ollama 서버 상태 체크"""
+    try:
+        resp = requests.get("http://localhost:11434/api/tags", timeout=5)
+        return resp.status_code == 200
+    except requests.exceptions.RequestException:
+        return False
 
 
-LESSON_SUMMARY_PROMPT = """당신은 수업 내용을 학생이 복습하기 좋게 정리하는 전문가입니다.
-
-다음 수업 녹음 텍스트를 분석하여 구조화된 요약을 작성해주세요.
-
-## 지침
-
-### 1. 중요 개념 (key_concepts)
-- 단어가 아닌 **문장형**으로 작성
-- 선생님이 강조한 핵심 멘트를 그대로 살려서 작성
-- 예시: "선율은 도약보다 스케일로 연결해야 자연스럽다", "리스크 관리가 수익보다 중요하다"
-
-### 2. 개념별 상세 설명 (concept_details)
-- 수업에서 **실제 언급된 구체적인 예시, 비유, 설명**을 최대한 포함
-- 딱딱한 교과서 문체가 아닌, 선생님이 설명하듯 **친절하고 구어체**로 작성
-- 학생이 "아, 그때 그 얘기!" 하고 떠올릴 수 있게 **구체적으로** 작성
-- 수업에서 언급한 **숫자, 퍼센트, 구체적 사례, 비유, 작품명, 용어**가 있다면 반드시 포함
-- 각 설명은 **3-5문장 이상**으로 충분히 길게 작성
-- "예를 들어...", "선생님 말씀으로는...", "실제로..." 같은 표현 활용
-
-### 3. 암기용 요약 (memorization_summary)
-- 핵심만 불릿 포인트로 정리
-- 시험 직전에 훑어볼 수 있는 형태
-
-## 출력 형식 (JSON)
-{{
-    "title": "수업 제목",
-    "key_concepts": [
-        "선생님이 강조한 핵심 멘트 1 (문장형)",
-        "선생님이 강조한 핵심 멘트 2 (문장형)",
-        "선생님이 강조한 핵심 멘트 3 (문장형)"
-    ],
-    "concept_details": [
-        {{"name": "개념명", "explanation": "수업에서 언급한 구체적 예시와 함께 친절하게 설명. 선생님이 한 비유나 사례가 있다면 포함."}},
-        {{"name": "개념명", "explanation": "디테일하고 구어체로 작성. '~하면 안 돼요', '~해야 해요' 같은 톤 사용 가능."}}
-    ],
-    "memorization_summary": "• 핵심1\\n• 핵심2\\n• 핵심3",
-    "full_summary": "전체 수업 내용 2-3문장 요약"
-}}
-
-## 수업 녹음 텍스트
+LESSON_SUMMARY_PROMPT = """[수업 녹음 내용]
 {transcript}
+
+---
+위 수업 녹음을 분석하여 아래 형식으로 요약하라.
+예시의 형식만 참고하고, 내용은 반드시 위 수업 녹음에서 추출하라.
+
+[출력 형식]
+# (수업 주제)
+
+## 📌 중요 개념
+- (수업에서 선생님이 강조한 핵심)
+- (수업에서 나온 중요 포인트)
+- (필요시 추가)
+
+## 📖 개념별 상세 설명
+
+### (수업에서 다룬 개념명)
+(수업 내용 기반 3-4문장 설명. 선생님이 말한 예시 포함.)
+
+### (수업에서 다룬 개념명)
+(수업 내용 기반 설명)
+
+## 🧠 암기용 요약
+
+• (핵심 1)
+• (핵심 2)
+• (핵심 3)
+
+---
+*(전체 수업 2문장 요약)*
+
+[필수 규칙]
+- 반드시 한국어로만 작성
+- 수업 녹음 내용을 기반으로 작성 (예시 복사 금지)
+- "-다" 체 사용
 """
 
 
@@ -101,7 +92,7 @@ def summarize_lesson(
     lesson_date: Optional[str] = None
 ) -> LessonSummary:
     """
-    레슨 녹음 텍스트를 요약
+    레슨 녹음 텍스트를 요약 (마크다운 직접 출력)
 
     Args:
         transcript: STT 변환된 레슨 텍스트
@@ -116,77 +107,71 @@ def summarize_lesson(
     if lesson_date is None:
         lesson_date = date.today().isoformat()
 
-    # API 키 로드
-    api_key = load_api_key()
-    client = anthropic.Anthropic(api_key=api_key)
+    # Ollama 서버 체크
+    if not check_ollama():
+        raise ConnectionError("Ollama 서버 연결 실패 (localhost:11434)")
 
-    # Claude 호출
-    message = client.messages.create(
-        model="claude-3-5-haiku-20241022",  # Haiku 사용 (빠르고 저렴)
-        max_tokens=4096,
-        messages=[
-            {
-                "role": "user",
-                "content": LESSON_SUMMARY_PROMPT.format(transcript=transcript)
-            }
-        ]
-    )
+    # 텍스트가 너무 길면 앞부분만 사용 (토큰 제한)
+    max_chars = 8000
+    if len(transcript) > max_chars:
+        transcript = transcript[:max_chars] + "\n\n[...이하 생략...]"
 
-    # 응답 파싱
-    response_text = message.content[0].text
-
-    # JSON 추출 (코드 블록 처리)
-    json_str = response_text
-    if "```json" in response_text:
-        json_start = response_text.find("```json") + 7
-        json_end = response_text.find("```", json_start)
-        json_str = response_text[json_start:json_end].strip()
-    elif "```" in response_text:
-        json_start = response_text.find("```") + 3
-        json_end = response_text.find("```", json_start)
-        json_str = response_text[json_start:json_end].strip()
-
-    # JSON 객체 직접 추출 시도 (중괄호 기준)
-    if not json_str.startswith("{"):
-        start_idx = json_str.find("{")
-        end_idx = json_str.rfind("}") + 1
-        if start_idx != -1 and end_idx > start_idx:
-            json_str = json_str[start_idx:end_idx]
-
-    try:
-        data = json.loads(json_str)
-    except json.JSONDecodeError as e:
-        # 파싱 실패 시 기본값 반환
-        return LessonSummary(
-            title="수업",
-            date=lesson_date,
-            key_concepts=["요약 생성 실패"],
-            concept_details=[],
-            memorization_summary="",
-            raw_summary=response_text
+    # Ollama 호출 (최대 2회 시도)
+    response_text = ""
+    for attempt in range(2):
+        prompt = LESSON_SUMMARY_PROMPT.format(transcript=transcript)
+        response = requests.post(
+            OLLAMA_URL,
+            json={
+                "model": OLLAMA_MODEL,
+                "prompt": prompt,
+                "stream": False,
+                "options": {"num_predict": 2048, "temperature": 0.5}
+            },
+            timeout=180
         )
 
-    # concept_details 파싱
-    concept_details = []
-    for item in data.get("concept_details", []):
-        if isinstance(item, dict):
-            concept_details.append(ConceptDetail(
-                name=item.get("name", ""),
-                explanation=item.get("explanation", "")
-            ))
+        if response.status_code != 200:
+            raise RuntimeError(f"Ollama API 오류: {response.status_code}")
+
+        response_text = response.json().get("response", "").strip()
+
+        # 형식 검증: 필수 섹션 확인
+        if "## 📌" in response_text and "## 📖" in response_text and "## 🧠" in response_text:
+            break  # 형식 OK
+        elif attempt == 0:
+            print("  ⚠️ 형식 오류, 재시도...")
+
+    # 제목 추출 시도
+    title = "수업"
+    lines = response_text.split('\n')
+    for line in lines:
+        if line.startswith('# '):
+            title = line[2:].strip()
+            break
 
     return LessonSummary(
-        title=data.get("title", "수업"),
+        title=title,
         date=lesson_date,
-        key_concepts=data.get("key_concepts", []),
-        concept_details=concept_details,
-        memorization_summary=data.get("memorization_summary", ""),
-        raw_summary=data.get("full_summary", "")
+        key_concepts=[],  # 마크다운에 포함됨
+        concept_details=[],  # 마크다운에 포함됨
+        memorization_summary="",  # 마크다운에 포함됨
+        raw_summary=response_text  # 전체 마크다운 저장
     )
 
 
 def format_summary_markdown(summary: LessonSummary) -> str:
     """요약을 마크다운 형식으로 변환"""
+    # 마크다운이 이미 raw_summary에 있으면 날짜만 추가
+    if summary.raw_summary and summary.raw_summary.startswith('#'):
+        md = summary.raw_summary
+        # 제목 다음에 날짜 삽입
+        lines = md.split('\n')
+        result = [lines[0], "", f"**날짜**: {summary.date}", ""]
+        result.extend(lines[1:])
+        return '\n'.join(result)
+
+    # 기존 방식 (fallback)
     lines = [
         f"# {summary.title}",
         f"",
@@ -194,14 +179,12 @@ def format_summary_markdown(summary: LessonSummary) -> str:
         f"",
     ]
 
-    # 1. 중요 개념
     if summary.key_concepts:
         lines.append("## 📌 중요 개념")
         for concept in summary.key_concepts:
             lines.append(f"- {concept}")
         lines.append("")
 
-    # 2. 개념별 상세 설명
     if summary.concept_details:
         lines.append("## 📖 개념별 상세 설명")
         lines.append("")
@@ -210,14 +193,12 @@ def format_summary_markdown(summary: LessonSummary) -> str:
             lines.append(f"{detail.explanation}")
             lines.append("")
 
-    # 3. 암기용 요약
     if summary.memorization_summary:
         lines.append("## 🧠 암기용 요약")
         lines.append("")
         lines.append(summary.memorization_summary)
         lines.append("")
 
-    # 전체 요약
     if summary.raw_summary:
         lines.append("---")
         lines.append(f"*{summary.raw_summary}*")

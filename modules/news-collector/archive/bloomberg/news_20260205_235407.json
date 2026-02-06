@@ -1,0 +1,1352 @@
+{
+  "markets": [
+    {
+      "title": "Stocks Slide After Weak Jobs Data as Bonds Climb: Markets Wrap",
+      "description": "Wall Street traders rushed out of riskier corners of the market, with stocks sliding amid a renewed wave of tech selling while bonds climbed after weak jobs data. Bitcoin briefly tumbled below $70,000. Silver plunged.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-04/asian-stocks-to-fall-as-tech-led-drop-gains-pace-markets-wrap",
+      "category": "markets",
+      "published": "2026-02-04 22:17:57+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "negative",
+      "importance": "normal"
+    },
+    {
+      "title": "Lagarde Plays Down Impact of Euro Rally as ECB Holds Rates",
+      "description": "The European Central Bank kept interest rates unchanged, with President Christine Lagarde downplaying the recent euro rally and again describing inflation as being in a “good place.”",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/ecb-holds-rates-as-euro-rally-and-tariffs-threaten-economy",
+      "category": "markets",
+      "published": "2026-02-05 13:16:12+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "positive",
+      "importance": "high"
+    },
+    {
+      "title": "Gemini to Shutter UK, EU, Australia Customer Accounts",
+      "description": "Gemini Space Station Inc. said it plans to close all customer accounts in the UK, European Union and Australia.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/gemini-to-shutter-uk-eu-australia-customer-accounts",
+      "category": "markets",
+      "published": "2026-02-05 14:24:36+00:00",
+      "author": "",
+      "tags": [
+        "NMS:GEMI"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "South Korea Launches $3 Billion Sale of Dollar Bonds",
+      "description": "South Korea is offering $3 billion of dollar bonds, in an effort to bolster its foreign exchange reserves amid global uncertainties and massive investments pledged under a US trade deal.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/south-korea-launches-3-billion-sale-of-dollar-bonds",
+      "category": "markets",
+      "published": "2026-02-05 14:18:45+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Vanguard CEO Ramji Poaches From Goldman, BlackRock for Key Roles",
+      "description": "Vanguard Group Chief Executive Officer Salim Ramji is putting his imprint on the world’s second-largest asset manager by siphoning talent from Wall Street firms to fill key roles.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/vanguard-ceo-ramji-poaches-from-goldman-blackrock-for-key-roles",
+      "category": "markets",
+      "published": "2026-02-05 14:04:26+00:00",
+      "author": "",
+      "tags": [
+        "NYS:GS",
+        "NYS:BLK"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Lagarde Says Stronger Euro Could Push Inflation Further Below Goal",
+      "description": "",
+      "url": "https://www.bloomberg.com/news/live-blog/2026-02-05/ecb-interest-rate-decision-euro-lagarde-press-conference-live-updates",
+      "category": "markets",
+      "published": "2026-02-05 11:54:19+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "US Jobless Claims Jump in Week Impacted by Severe Weather",
+      "description": "Applications for US unemployment benefits increased by 22,000 to 231,000 in the final week of January, rising by more than forecast. Michael McKee reports on Bloomberg Television. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/us-jobless-claims-jump-in-week-impacted-by-weather-video",
+      "category": "markets",
+      "published": "2026-02-05 13:57:25+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Oil Declines After Iran Confirms US Negotiations Set for Friday",
+      "description": "Oil fell for the first time in three days after Iran confirmed it would hold negotiations with the US, easing the immediate risk of military strikes against the OPEC producer.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-04/latest-oil-market-news-and-analysis-for-feb-5",
+      "category": "markets",
+      "published": "2026-02-04 23:11:37+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "New York’s Pension Funds Scrutinize Palantir Over ICE Contract",
+      "description": "New York’s pension funds are questioning Palantir Technologies Inc., a software company, over its business dealings with US Immigration and Customs Enforcement and the Department of Homeland Security.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/new-york-s-pension-funds-scrutinize-palantir-over-ice-contract",
+      "category": "markets",
+      "published": "2026-02-05 13:45:39+00:00",
+      "author": "",
+      "tags": [
+        "NMS:PLTR"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "ECB Holds Rates at 2% as Tariffs Threaten Economy",
+      "description": "The European Central Bank kept interest rates unchanged at 2% as officials assess the economic toll of a rally in the euro and renewed trade unpredictability. Bloomberg's Lizzy Burden reports from Frankfurt. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/ecb-holds-rates-at-2-as-tariffs-threaten-economy-video",
+      "category": "markets",
+      "published": "2026-02-05 13:36:33+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Bitcoin Drops Below $70,000 as ‘Forced Deleveraging’ Accelerates",
+      "description": "Bitcoin tumbled below $70,000 Thursday as negative momentum deepened across cryptocurrencies, driven by vanishing marginal demand and this week’s volatility in tech equities along with precious metals.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/bitcoin-drops-below-70-000-as-forced-deleveraging-accelerates",
+      "category": "markets",
+      "published": "2026-02-05 12:24:19+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "negative",
+      "importance": "high"
+    },
+    {
+      "title": "Tech Rout Deepens, Double Central Bank Decision Day | The Pulse 2/5/2026",
+      "description": "\"The Pulse With Francine Lacqua\" is all about conversations with high profile guests in the beating heart of global business, economics, finance and politics. Based in London, we go wherever the story is, bringing you exclusive interviews and market-moving scoops. Today's guests: Iain Stealey, JPMorgan Asset Management, Fixed Income International CIO; Bruna Skarica, Morgan Stanley, Chief UK Economist; Ellie Geranmayeh, European Council on Foreign Relations, Middle East and North Africa Program Deputy Director; Jackie Ineke, Spring Investments, CIO; Richard Harpin, HomeServe, Founder (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/the-pulse-2-5-2026-video",
+      "category": "markets",
+      "published": "2026-02-05 13:17:38+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Options Traders Pile Into Tech Hedges After Software Rout",
+      "description": "The unrelenting selloff in software shares has left tech investors antsy enough that they’re starting to pony up for protection against yet another steep slide.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/traders-pile-into-tech-hedges-as-rout-in-software-stocks-deepens",
+      "category": "markets",
+      "published": "2026-02-05 10:30:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "BOE's Bailey Sees Scope for Further Easing",
+      "description": "Bank of England Governor Andrew Bailey, speaking at a news conference in London, said there \"should be scope for some further easing in monetary policy\" given that inflation is on track to return to the 2% target \"soon.\" Earlier the BOE voted 5-4 to leave rates unchanged at 3.75%. The closer-than-expected decision revived hopes of a move next month. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/boe-s-bailey-sees-scope-for-further-easing-video",
+      "category": "markets",
+      "published": "2026-02-05 13:06:54+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "The David Rubenstein Show: Former US Vice President Mike Pence",
+      "description": "Former US Vice President Mike Pence looks back on the events of January 6 2021, his final days in office with President Trump and his vision for the future of the Republican Party. In a wide-ranging conversation with David Rubenstein, Pence also discusses Venezuela, the potential acquisition of Greenland and Fed independence. He appears on this week's episode of The David Rubenstein Show: Peer to Peer Conversations. This interview was recorded January 16 in Washington DC. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/the-david-rubenstein-show-mike-pence-video",
+      "category": "markets",
+      "published": "2026-02-05 13:06:24+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "KKR’s Profit Hit by Clawback at Asia Private Equity Fund",
+      "description": "KKR &amp; Co. reported a drop in fourth-quarter profit, missing Wall Street estimates, as asset sales declined and the firm took a charge for one of its private equity funds in Asia.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/kkr-profit-takes-a-hit-from-clawback-at-asia-private-equity-fund",
+      "category": "markets",
+      "published": "2026-02-05 12:01:47+00:00",
+      "author": "",
+      "tags": [
+        "NYS:KKR"
+      ],
+      "sentiment": "negative",
+      "importance": "normal"
+    },
+    {
+      "title": "Europe’s Reliance on US, Russian LNG Climbs to Record Above 80%",
+      "description": "Europe’s reliance on its two biggest providers of LNG surged to a record last month, stoking concern that the region is still failing to diversify.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/europe-s-reliance-on-us-russian-lng-climbs-to-record-above-80",
+      "category": "markets",
+      "published": "2026-02-05 12:59:27+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Silver Hit With Fresh Selloff in China After Tentative Recovery",
+      "description": "Silver fell sharply, at one point wiping out its two-day recovery, as the white metal struggled to find a floor following a historic market rout.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-04/gold-rises-for-a-third-day-in-recovery-from-historic-market-rout",
+      "category": "markets",
+      "published": "2026-02-04 23:23:11+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Gilts Jump, Pound Drops as BOE Vote Fuels Bets on March Cut",
+      "description": "UK benchmark bonds reversed losses and the pound fell after Bank of England policymakers came unexpectedly close to cutting interest rates, prompting traders to bet on further monetary easing.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/gilts-jump-pound-retreats-as-traders-bet-on-march-boe-rate-cut",
+      "category": "markets",
+      "published": "2026-02-05 12:30:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "US Companies Announce Most January Job Cuts Since 2009",
+      "description": "US companies announced 108,435 job cuts in January, a 118% increase from a year earlier, marking the largest number of job cuts for any January since the depths of the Great Recession in 2009, according to data from outplacement firm Challenger, Gray & Christmas Inc. Michael McKee reports on Bloomberg Television. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/us-companies-announce-most-january-job-cuts-since-2009-video",
+      "category": "markets",
+      "published": "2026-02-05 12:51:18+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ],
+  "technology": [
+    {
+      "title": "Peloton Slashes Sales Outlook, Misses Estimates Despite Hardware Debut",
+      "description": "Shares of Peloton Interactive Inc. tumbled by the most in more than two years after the company provided a weaker-than-expected revenue forecast for the fiscal third quarter, disappointing investors who hoped a recent hardware revamp would spur a long-promised turnaround.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/peloton-slashes-sales-outlook-misses-estimates-despite-hardware-debut",
+      "category": "technology",
+      "published": "2026-02-05 12:05:26+00:00",
+      "author": "",
+      "tags": [
+        "NMS:PTON"
+      ],
+      "sentiment": "negative",
+      "importance": "normal"
+    },
+    {
+      "title": "Liz Ann Sonders Explains Why the Broadening Trade Has Legs",
+      "description": "“Rotation is the new momentum trade,” says Liz Ann Sonders, chief investment strategist at Charles Schwab, as she sees the broadening out of markets as a “meaningful shift that probably will continue.” (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/liz-ann-sonders-says-the-broadening-trade-has-legs-video",
+      "category": "technology",
+      "published": "2026-02-05 14:42:51+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Alphabet Plans Record Spending in Race to Win AI Customers",
+      "description": "Alphabet Inc. topped projections for quarterly revenue and outlined an ambitious capital spending plan, far surpassing predictions, leveraging its growth to build out the data centers and infrastructure needed to lead in the AI age.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-04/alphabet-to-blow-past-investor-expectations-on-spending",
+      "category": "technology",
+      "published": "2026-02-04 21:08:22+00:00",
+      "author": "",
+      "tags": [
+        "NMS:GOOGL"
+      ],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Inside the Numbers: David Vélez ",
+      "description": "In Inside the Numbers, Nubank founder and CEO David Vélez unpacks the key figures behind the digital bank’s growth. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/inside-the-numbers-david-velez",
+      "category": "technology",
+      "published": "2026-02-05 11:00:03+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "OpenAI Unveils Platform to Help Companies Deploy ‘AI Coworkers’",
+      "description": "OpenAI is introducing a new platform that’s designed to help companies deploy AI agents more easily, part of a broader push to cement itself as a leader in automating valuable work tasks.The new product, called Frontier, allows organizations to build and manage these AI tools so that each agent has appropriate guardrails and data access. The goal is to simplify the process of rolling out AI agents &mdash; or “AI coworkers,” as OpenAI calls them &mdash; and pave the way for broader adoption of the technology",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/openai-unveils-platform-to-help-companies-deploy-ai-coworkers",
+      "category": "technology",
+      "published": "2026-02-05 14:00:25+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Nigeria Central Bank Moves to Rein In Fintech, Boost Access to Capital",
+      "description": "Nigeria is tightening scrutiny of its fast-growing fintech industry while easing licensing and improving access to capital as it tries to balance innovation with financial stability.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/nigeria-central-bank-moves-to-rein-in-fintech-as-sector-booms",
+      "category": "technology",
+      "published": "2026-02-05 13:33:02+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Startup Goodfire Notches $1.25 Billion Valuation to Decode AI Models",
+      "description": "A growing cadre of multibillion-dollar startups are racing to create the best artificial intelligence models, able to absorb tasks from software engineers, musicians and paralegals. Eric Ho, the chief executive officer of a startup called Goodfire, thinks we’re moving too fast.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/startup-goodfire-notches-1-25-billion-valuation-to-decode-ai-models",
+      "category": "technology",
+      "published": "2026-02-05 13:24:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Microsoft Gets Rare Downgrade as Stifel Warns on Azure Growth",
+      "description": "Microsoft Corp. was hit with a rare analyst downgrade, in the latest sign of how caution toward software companies is even spreading to some of the biggest and most influential names.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/microsoft-gets-rare-downgrade-as-stifel-warns-on-azure-growth",
+      "category": "technology",
+      "published": "2026-02-05 13:21:53+00:00",
+      "author": "",
+      "tags": [
+        "NMS:MSFT"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Data Centers Power HVAC Growth as Residential Air Conditioning Sales Lag",
+      "description": "A data center boom, driven by increased AI usage, is emerging as a key growth driver for cooling, helping offset Carrier Global Corp.’s soft sales to residential customers and lifting Johnson Controls International Plc’s profit outlook to a decade high.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/data-centers-power-hvac-growth-as-residential-aircon-sales-lag",
+      "category": "technology",
+      "published": "2026-02-05 13:15:50+00:00",
+      "author": "",
+      "tags": [
+        "NYS:CARR"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Acharya: World is Still Short Software",
+      "description": "'No one is vibe-coding their payroll' says Anish Acharya, General Partner at Andreessen Horowitz on this week's software sell off. 'I think the market has overreacted'. He joins Bloomberg's Guy Johnson, Anna Edwards and Tom Mackenzie on 'The Opening Trade'. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/acharya-world-is-still-short-software-video",
+      "category": "technology",
+      "published": "2026-02-05 12:51:44+00:00",
+      "author": "",
+      "tags": [
+        "NMS:GOOGL"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Hackers Hit Sensitive Targets in 37 Nations in Spying Plot",
+      "description": "An Asian cyber-espionage group has spent the past year breaking into computer systems belonging to governments and critical infrastructure organizations in more than 37 countries, according to the cybersecurity firm Palo Alto Networks, Inc.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/hackers-hit-sensitive-targets-in-37-nations-in-vast-spying-plot",
+      "category": "technology",
+      "published": "2026-02-05 11:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Anthropic’s New AI Legal Tool Triggered a Selloff Without Evidence",
+      "description": "Market reacted by selling first and asking questions after",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-05/anthropic-s-legal-ai-tool-sparked-a-huge-selloff-without-any-proven-benefit",
+      "category": "technology",
+      "published": "2026-02-05 12:02:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "General Catalyst-Backed Startup Raises $75 Million to Bring AI to Accounting",
+      "description": "General Catalyst &mdash; the storied venture capital firm that’s undergoing a transformation into a broader and more ambitious financial company &mdash; is making its latest play to use AI to transform a legacy business: This time targeting accounting.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/general-catalyst-backed-startup-raises-75-million-to-bring-ai-to-accounting",
+      "category": "technology",
+      "published": "2026-02-05 12:00:27+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Nubank CEO Bets $82 Billion Empire on Worldwide Expansion Plan",
+      "description": "David Velez’s favorite anecdote &mdash; the origin story of Latin America’s second-most valuable financial company &mdash; begins with a bulletproof door.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/nubank-ceo-bets-82-billion-empire-on-worldwide-expansion-plan",
+      "category": "technology",
+      "published": "2026-02-05 12:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Amazon Cloud Sales in Focus After Microsoft’s $500 Billion Rout",
+      "description": "All eyes will be Amazon.com Inc.’s cloud business when the technology giant reports earnings on Thursday, after shares of Microsoft Corp. plunged last week due in part to slowing growth at its key cloud-computing platform.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/amazon-cloud-sales-in-focus-after-microsoft-s-500-billion-rout",
+      "category": "technology",
+      "published": "2026-02-05 11:20:01+00:00",
+      "author": "",
+      "tags": [
+        "NMS:MSFT",
+        "NMS:AMZN"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "How AI Answers Your Question May Depend on Your Politics",
+      "description": "Modern statecraft may already involve manipulating artificial intelligence&nbsp;systems to produce different results based on someone’s identity or political activity.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/chinese-ai-produces-different-responses-based-on-users-politics",
+      "category": "technology",
+      "published": "2026-02-05 11:00:29+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Hackers Hit Sensitive Targets in 37 Nations in Vast Spying Plot",
+      "description": "State-aligned attackers targeted government agencies and critical infrastructure.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-05/hackers-hit-sensitive-targets-in-37-nations-in-vast-spying-plot-ml9chfqj",
+      "category": "technology",
+      "published": "2026-02-05 11:00:01+00:00",
+      "author": "",
+      "tags": [
+        "NMS:PANW"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Amazon Told to Drop Price Policy, Pay $70 Million in Germany",
+      "description": "Amazon.com Inc. must stop enforcing price controls for retailers on its German marketplace, according to the nation’s antitrust watchdog, which also seized €59 million ($70 million) from the Big Tech company. That amount is how much Amazon is estimated to have made via the illicit practice.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/amazon-told-to-stop-policing-prices-pay-70-million-in-germany",
+      "category": "technology",
+      "published": "2026-02-05 09:30:20+00:00",
+      "author": "",
+      "tags": [
+        "NMS:AMZN"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Kyiv Says Russian Military Has Lost Access to Musk’s Starlink",
+      "description": "Starlink terminals used by Russian military units to provide satellite internet on the battlefield have been shut down, according to an adviser to Ukraine’s Defense Minister Mykhailo Fedorov.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/kyiv-says-russian-military-has-lost-access-to-musk-s-starlink",
+      "category": "technology",
+      "published": "2026-02-05 10:45:24+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "JPM Sees 'Opportunities' Coming Out of Tech Stocks Selloff",
+      "description": "JPMorgan Asset Management's Iain Stealey talks about the global slump in tech stocks, calling what happened in markets \"AI jitters.\" He adds that the current environment is \"great\" for \"good stock pickers\" and there will be \"a lot of opportunities coming out of this.\" Stealey speaks on Bloomberg Television. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/jpm-sees-opportunities-coming-out-of-tech-stocks-selloff-video",
+      "category": "technology",
+      "published": "2026-02-05 10:14:04+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ],
+  "politics": [
+    {
+      "title": "Lagarde Says Inflation, ECB Policy in 'Good Place'",
+      "description": "\"We are in a good place and inflation is in a good place,\" European Central Bank President Christine Lagarde told reporters in Frankfurt. She made the comments after the central bank decided to hold interest rates. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/lagarde-says-inflation-ecb-policy-in-good-place-video",
+      "category": "politics",
+      "published": "2026-02-05 14:45:57+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "US Ambassador to Cut Contact With Polish Parliament Speaker",
+      "description": "US Ambassador to Poland Tom Rose said he’ll cease all contact with the speaker of the Polish Parliament Wlodzimierz Czarzasty due to his comments on President Donald Trump.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/us-ambassador-to-cease-dealings-with-polish-parliament-speaker",
+      "category": "politics",
+      "published": "2026-02-05 13:59:55+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Bailey Says He's 'Shocked' by Mandelson-Epstein Ties",
+      "description": "Bank of England Governor Andrew Bailey said he was “shocked” by Peter Mandelson’s ties with pedophile financier Jeffrey Epstein, adding that society must do some soul searching over the revelations. “How is it that we live in a society in which this happened while the cover-up happened as well,” Bailey said during a monetary policy press conference. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/bailey-says-he-s-shocked-by-mandelson-epstein-ties-video",
+      "category": "politics",
+      "published": "2026-02-05 14:24:58+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Lagarde: Stronger Euro Could Push Inflation Lower",
+      "description": "European Central Bank President Christine Lagarde tells reporters in Frankfurt that a stronger euro could \"bring inflation down beyond current expectations.\" She speaks to reporters in Frankfurt following the ECB's decision to keep interest rates unchanged. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/lagarde-stronger-euro-could-push-inflation-lower-video",
+      "category": "politics",
+      "published": "2026-02-05 14:23:03+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "ECB 'Determined' to Ensure Inflation Stabilizes at 2%",
+      "description": "European Central Bank President Christine Lagarde said the central bank is \"determined to ensure that inflation stabilizes\" at the 2% target in the medium term. She was speaking to reporters in Frankfurt following the ECB's decision to keep interest rates unchanged. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/ecb-determined-to-ensure-inflation-stabilizes-at-2-video",
+      "category": "politics",
+      "published": "2026-02-05 14:18:39+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "UK Says Trade Deal With Saudis, Other Gulf States ‘Imminent’",
+      "description": "The UK’s trade minister said a free-trade agreement with the Gulf Cooperation Council was “imminent,” as the Starmer government looks to build on pacts last year with the European Union, India and the US.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/uk-minister-says-trade-deal-with-gulf-nations-is-imminent",
+      "category": "politics",
+      "published": "2026-02-05 11:39:56+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "US and Russia Agree to Restart Military-to-Military Talks",
+      "description": "The United States and Russia have agreed to restart high-level military contacts that had been suspended shortly after the invasion of Ukraine, the US announced.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/us-and-russia-agree-to-restart-military-to-military-talks",
+      "category": "politics",
+      "published": "2026-02-05 13:51:38+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Europe to Soften Emissions Curbs on Companies in Flagship Market",
+      "description": "The European Union is set to relax emissions-reduction rules for thousands of companies, recalibrating the world’s most rigorous carbon market under pressure from industry and governments concerned about the region’s sinking competitiveness.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/europe-to-soften-emissions-curbs-on-companies-in-flagship-market",
+      "category": "politics",
+      "published": "2026-02-05 13:42:45+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Azerbaijan Sentences Former Karabakh Leaders to Life in Prison",
+      "description": "Azerbaijan sentenced Armenian leaders of the unrecognized Nagorno-Karabakh Republic to life in prison at the end of trials that followed its military seizure of the breakaway enclave.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/azerbaijan-sentences-former-karabakh-leaders-to-life-in-prison",
+      "category": "politics",
+      "published": "2026-02-05 13:29:39+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Bank of England Governor Calls for Soul Searching Over Mandelson Revelations",
+      "description": "Bank of England Governor Andrew Bailey said he was “shocked” by Peter Mandelson’s ties with pedophile financier Jeffrey Epstein, adding that society must do some soul searching over the revelations.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/bank-of-england-governor-calls-for-soul-searching-over-mandelson-revelations",
+      "category": "politics",
+      "published": "2026-02-05 13:27:21+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Starmer Says Sorry to Epstein Victims Over Mandelson Scandal",
+      "description": "Keir Starmer apologized for appointing Peter Mandelson to a senior role despite the former envoy’s known links to the pedophile financier Jeffrey Epstein, as he sought to turn the page on the crisis engulfing his government.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/-darkness-of-mandelson-epstein-ties-weren-t-known-starmer-says",
+      "category": "politics",
+      "published": "2026-02-05 11:27:28+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Ukraine and Russia Agree to Swap Prisoners as Talks Advance",
+      "description": "Ukraine and Russia agreed to exchange prisoners as the warring parties pressed ahead with “detailed and productive” negotiations to end the four-year conflict, according to President Donald Trump’s special envoy.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/ukraine-and-russia-agree-to-swap-prisoners-as-talks-advance",
+      "category": "politics",
+      "published": "2026-02-05 11:08:22+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Dozens Killed in Central Nigeria Even as US Expands Role",
+      "description": "Unidentified gunmen killed dozens of people in an attack in central Nigeria, underscoring the worsening security crisis facing Africa’s most-populous nation, despite a recent deepening of military cooperation with the US.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-04/dozens-of-villagers-killed-in-attack-in-central-nigeria",
+      "category": "politics",
+      "published": "2026-02-04 18:25:28+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Macron Plans to Discuss Strong Euro at EU Summit Next Week",
+      "description": "France intends to discuss the euro’s appreciation against the dollar when European Union leaders meet next week to discuss improving the bloc’s ailing competitiveness.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/macron-plans-to-discuss-strong-euro-at-eu-summit-next-week",
+      "category": "politics",
+      "published": "2026-02-05 12:38:15+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "positive",
+      "importance": "normal"
+    },
+    {
+      "title": "Starmer 'Sorry' for Having Believed Mandelson's 'Lies'",
+      "description": "UK Prime Minister Keir Starmer apologized for appointing Peter Mandelson to a senior role despite the former envoy’s known links to the pedophile financier Jeffrey Epstein. Starmer said he was sorry \"for having believed Mandelson’s lies and appointed him.\" (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-05/starmer-sorry-for-having-believed-mandelson-s-lies-video",
+      "category": "politics",
+      "published": "2026-02-05 12:36:03+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Italy to Back Meloni Proposal Giving Police Sweeping New Powers",
+      "description": "Italy’s cabinet is set to approve a decree expanding police powers, a step that is triggering criticism from opposition parties and civil rights groups.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/italy-to-back-meloni-proposal-giving-police-sweeping-new-powers",
+      "category": "politics",
+      "published": "2026-02-05 12:11:53+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Merz Promises Gulf Countries Easier Access to Military Goods",
+      "description": "German Chancellor Friedrich Merz vowed to relax military export restrictions to entice more business from Gulf countries like Saudi Arabia and Qatar.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/merz-promises-gulf-countries-easier-access-to-military-goods",
+      "category": "politics",
+      "published": "2026-02-05 12:04:03+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "India Made Long Push With Trump Behind Scenes to Clinch US Deal",
+      "description": "In early September, shortly after Indian Prime Minister Narendra Modi held a chummy meeting with Vladimir Putin and Xi Jinping in China, he dispatched his national security adviser to Washington to help smooth over fraying ties.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-04/india-made-long-push-with-trump-behind-scenes-to-clinch-us-deal",
+      "category": "politics",
+      "published": "2026-02-04 05:05:31+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "European Investment Bank Returns to Turkey With Energy Loans",
+      "description": "The European Investment Bank is set to formally return to Turkey after a yearslong diplomatic fallout stemming from energy exploration in the eastern Mediterranean, reviving a key foreign source of financing for Ankara.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-04/european-investment-bank-returns-to-turkey-with-energy-loans",
+      "category": "politics",
+      "published": "2026-02-04 15:16:46+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Xi’s Pointed Message for Trump on Taiwan Arms",
+      "description": "The Chinese readout of the Xi-Trump call makes no mention of a planned April meeting.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-05/china-s-xi-has-a-warning-for-trump-on-taiwan-arms-sales",
+      "category": "politics",
+      "published": "2026-02-05 11:01:34+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ],
+  "wealth": [
+    {
+      "title": "UK Political Risk Won’t Deter Further Rate Cuts",
+      "description": "The Bank of England is clearly now more worried about weak growth than strong inflation.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-05/money-distilled-political-risks-won-t-deter-further-bank-of-england-rate-cuts",
+      "category": "wealth",
+      "published": "2026-02-05 14:45:17+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Cape Town Will Slap Tax Hike on Airbnb Owners",
+      "description": "Cape Town plans to more than double municipal rates on homes that are rented out for short durations, including those listed on Airbnb Inc. and Booking.com, as a boom in private tourist accommodation drives up prices and stokes resentment among locals.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/south-africa-news-cape-town-will-slap-tax-hike-on-airbnb-owners",
+      "category": "wealth",
+      "published": "2026-02-05 14:30:08+00:00",
+      "author": "",
+      "tags": [
+        "NMS:ABNB"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Cardholders Are Mad at Bilt’s CEO. They’re Still Renewing",
+      "description": "After its&nbsp;public breakup with former issuer Wells Fargo, Bilt offered&nbsp;new credit cards that were supposed to be a reset. It didn’t go exactly as planned.",
+      "url": "https://www.bloomberg.com/news/features/2026-02-05/bilt-2-0-credit-cards-tweaked-after-new-rewards-calculations-irk-customers",
+      "category": "wealth",
+      "published": "2026-02-05 13:00:25+00:00",
+      "author": "",
+      "tags": [
+        "NYS:WFC"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "For Colombia’s Richest Man, Maduro’s Ouster Means More Candy for Venezuela",
+      "description": "Jaime Gilinski’s bet on Latin America’s top packaged-foods maker supercharged his wealth. Now, he and son Gabriel are hunting for their next win in the country next door.",
+      "url": "https://www.bloomberg.com/news/features/2026-02-05/maduro-s-ouster-creates-opening-in-venezuela-for-colombian-billionaire-gilinski",
+      "category": "wealth",
+      "published": "2026-02-05 10:30:30+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "El hombre más rico de Colombia quiere conquistar Venezuela a punta de golosinas",
+      "description": "La fortuna de Jaime Gilinski se disparó al comprar Nutresa, la empresa de alimentos procesados más grande de Colombia. Ahora, junto a su hijo Gabriel, quieren crecer aún más en la Venezuela post-Maduro.",
+      "url": "https://www.bloomberg.com/news/features/2026-02-05/caida-de-maduro-abre-oportunidad-en-venezuela-para-magnate-colombiano-gilinski",
+      "category": "wealth",
+      "published": "2026-02-05 10:30:25+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Blue Owl Fund Sells Warehouse to DHS for ICE ‘Mega’ Jail for Nearly $120 Million",
+      "description": "A fund managed by Blue Owl Capital Inc. sold a warehouse in Pennsylvania to the Department of Homeland Security for nearly $120 million.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-04/blue-owl-fund-sells-warehouse-to-dhs-for-ice-mega-jail",
+      "category": "wealth",
+      "published": "2026-02-04 18:51:57+00:00",
+      "author": "",
+      "tags": [
+        "NYS:OWL"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Goldman Defense of Lawyer’s Epstein Ties Provokes Unease at Bank",
+      "description": "The top partners at Goldman Sachs Group Inc. were expecting to celebrate its soaring stock price and trading bonanza at their annual gathering in Miami this week. Instead, many are girding for a different topic: Kathy Ruemmler’s association with Jeffrey Epstein.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/goldman-defense-of-lawyer-s-epstein-ties-provokes-unease-at-bank",
+      "category": "wealth",
+      "published": "2026-02-03 21:04:51+00:00",
+      "author": "",
+      "tags": [
+        "NYS:GS"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "‘Trump Homes’ Plan to Test Feasibility of Lease-to-Own Model",
+      "description": "Builders are proposing a program converting renters to buyers, but past iterations have had mixed results.&nbsp;",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-04/-trump-homes-plan-to-test-feasibility-of-lease-to-own-model",
+      "category": "wealth",
+      "published": "2026-02-04 16:41:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Software Billionaires Drop $62 Billion in AI-Driven Stock Slump",
+      "description": "Software billionaires have seen their fortunes plunge by at least $62 billion this year following a selloff on Tuesday that deepened the industry’s months-long decline.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-04/software-billionaires-drop-62-billion-in-ai-driven-stock-slump",
+      "category": "wealth",
+      "published": "2026-02-04 16:02:05+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "negative",
+      "importance": "normal"
+    },
+    {
+      "title": "Will AI Fears Keep Hammering Software Stocks?",
+      "description": "Disruption panic has erupted across markets. Is the selling overdone - or not over?",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-04/will-ai-fears-keep-hammering-software-stocks",
+      "category": "wealth",
+      "published": "2026-02-04 14:19:03+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Fidelity Fund That Sold Gold Before Crash Is Ready to Buy Again",
+      "description": "Fidelity International money manager George Efstathopoulos sold a chunk of his gold holdings days before the precious metal’s biggest slide in four decades. Now he’s getting ready to buy again.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-04/fidelity-fund-that-sold-gold-before-crash-is-ready-to-buy-again",
+      "category": "wealth",
+      "published": "2026-02-04 06:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "First Brands Founder Uses Hamptons Home for $50 Million Bond",
+      "description": "First Brands founder Patrick James will remain free on a $50 million bond partly secured by a Hamptons home as he awaits trial on fraud charges stemming from the multibillion-dollar collapse of his auto parts supply business.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/first-brands-founder-uses-hamptons-home-for-50-million-bond",
+      "category": "wealth",
+      "published": "2026-02-03 21:55:15+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "CAZ Debuts Fund for Individuals to Back Private-Asset Firms",
+      "description": "Alternative money manager CAZ Investments launched a fund for individuals that will take stakes in private-asset firms, a niche strategy that’s gathering momentum amid a secondaries boom.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/caz-debuts-fund-for-wealthy-to-buy-stakes-of-private-asset-firms",
+      "category": "wealth",
+      "published": "2026-02-03 12:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Batista Family Revamps Holding Company in Bid to Tap Debt Markets",
+      "description": "Brazil’s billionaire Batista family is revamping its holding company to incorporate its pulp, mining and consumer goods businesses, in a bid to better access debt markets and more nimbly manage its priorities.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/batista-family-revamps-holding-company-in-bid-to-tap-debt-markets",
+      "category": "wealth",
+      "published": "2026-02-03 21:21:30+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Gold and Silver Fans ‘Hate This New Volatility’ But Keep the Faith",
+      "description": "Gold investors tend to be a robust breed, inured to market moves. But the past week’s swings have had even committed gold bugs, along with the newer crop of silver investors, feeling queasy.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/gold-silver-retail-investors-hate-market-s-new-wild-swings-but-hang-on",
+      "category": "wealth",
+      "published": "2026-02-03 18:42:26+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Millennium Bolsters CIO Office Leadership With Mazzella, Santoro",
+      "description": "Millennium Management is expanding its top leadership team, which is currently dominated by former Goldman Sachs Group Inc. executives, by bringing aboard two of its trading heads.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/millennium-bolsters-cio-office-leadership-with-mazzella-santoro",
+      "category": "wealth",
+      "published": "2026-02-03 16:59:37+00:00",
+      "author": "",
+      "tags": [
+        "NYS:GS"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ],
+  "economics": [
+    {
+      "title": "A Long-Awaited Productivity Revival Is Stirring in Britain",
+      "description": "The hedgehog chart has been the bane of British finance ministers and Bank of England chiefs since the financial crisis.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/a-long-awaited-productivity-resurgence-is-stirring-in-britain",
+      "category": "economics",
+      "published": "2026-02-05 05:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Lagarde Plays Down Impact of Euro Rally as ECB Holds Rates",
+      "description": "The European Central Bank kept interest rates unchanged, with President Christine Lagarde downplaying the recent euro rally and again describing inflation as being in a “good place.”",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/ecb-holds-rates-as-euro-rally-and-tariffs-threaten-economy",
+      "category": "economics",
+      "published": "2026-02-05 13:16:12+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "positive",
+      "importance": "high"
+    },
+    {
+      "title": "UK Says Trade Deal With Saudis, Other Gulf States ‘Imminent’",
+      "description": "The UK’s trade minister said a free-trade agreement with the Gulf Cooperation Council was “imminent,” as the Starmer government looks to build on pacts last year with the European Union, India and the US.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/uk-minister-says-trade-deal-with-gulf-nations-is-imminent",
+      "category": "economics",
+      "published": "2026-02-05 11:39:56+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Lagarde Says Stronger Euro Could Push Inflation Further Below Goal",
+      "description": "",
+      "url": "https://www.bloomberg.com/news/live-blog/2026-02-05/ecb-interest-rate-decision-euro-lagarde-press-conference-live-updates",
+      "category": "economics",
+      "published": "2026-02-05 11:54:19+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "US Bonds Rally as Job-Market Angst Backs Wagers on Fed Rate Cuts",
+      "description": "Treasuries rose after data showed a surge in job-cut announcements by US companies and a jump in claims for unemployment benefits, bolstering wagers that the Federal Reserve will resume cutting interest rates this year.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/us-bonds-rally-as-job-market-angst-backs-wagers-on-fed-rate-cuts",
+      "category": "economics",
+      "published": "2026-02-05 13:57:45+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "positive",
+      "importance": "high"
+    },
+    {
+      "title": "US Jobless Claims Top All Estimates in Week Hit by Extreme Cold",
+      "description": "Applications for US unemployment benefits rose by more than forecast last week, when severe winter weather gripped much of the country.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/us-jobless-claims-increased-by-more-than-forecast-last-week",
+      "category": "economics",
+      "published": "2026-02-05 13:32:54+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Nigeria Central Bank Moves to Rein In Fintech, Boost Access to Capital",
+      "description": "Nigeria is tightening scrutiny of its fast-growing fintech industry while easing licensing and improving access to capital as it tries to balance innovation with financial stability.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/nigeria-central-bank-moves-to-rein-in-fintech-as-sector-booms",
+      "category": "economics",
+      "published": "2026-02-05 13:33:02+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Bank of England Governor Calls for Soul Searching Over Mandelson Revelations",
+      "description": "Bank of England Governor Andrew Bailey said he was “shocked” by Peter Mandelson’s ties with pedophile financier Jeffrey Epstein, adding that society must do some soul searching over the revelations.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/bank-of-england-governor-calls-for-soul-searching-over-mandelson-revelations",
+      "category": "economics",
+      "published": "2026-02-05 13:27:21+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "US Companies Announced Most Job Cuts for Any January Since 2009",
+      "description": "US companies announced the largest number of job cuts for any January since the depths of the Great Recession in 2009, according to data from outplacement firm Challenger, Gray &amp; Christmas Inc.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/us-companies-announce-most-job-cuts-for-any-january-since-2009",
+      "category": "economics",
+      "published": "2026-02-05 12:30:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Dovish Bank of England Hold Spurs Bets on Faster Rate Cuts",
+      "description": "The Bank of England came within a vote of cutting interest rates and predicted inflation will fall below its target, a closer-than-expected decision that revived hopes of a move next month.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/bank-of-england-comes-close-to-cutting-rates-with-dovish-hold",
+      "category": "economics",
+      "published": "2026-02-05 12:00:02+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Warren Asks Bessent to Terminate $20 Billion Argentina Swap Line",
+      "description": "Senator Elizabeth Warren is requesting that Treasury Secretary Scott Bessent terminate a $20 billion currency swap line with Argentina, asserting that if the arrangement has run its course, it should be shut down.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/warren-asks-bessent-to-terminate-20-billion-argentina-swap-line",
+      "category": "economics",
+      "published": "2026-02-05 12:45:12+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Macron Plans to Discuss Strong Euro at EU Summit Next Week",
+      "description": "France intends to discuss the euro’s appreciation against the dollar when European Union leaders meet next week to discuss improving the bloc’s ailing competitiveness.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/macron-plans-to-discuss-strong-euro-at-eu-summit-next-week",
+      "category": "economics",
+      "published": "2026-02-05 12:38:15+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "positive",
+      "importance": "normal"
+    },
+    {
+      "title": "China Signals a Trimmed GDP Growth Target, Requiring Less Stimulus",
+      "description": "Beijing is seen lowering its economic growth target in a move that may reduce the need for stimulus.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-05/china-signals-a-trimmed-gdp-growth-target-requiring-less-stimulus",
+      "category": "economics",
+      "published": "2026-02-05 12:11:50+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Maersk Sees Solid Shipping Demand, Challenges Looming to Manage Supply",
+      "description": "Maersk sees container growth of 2%-4% but worries about managing a capacity increase as Red Sea reopens",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-05/maersk-s-outlook-for-container-shipping",
+      "category": "economics",
+      "published": "2026-02-05 12:00:02+00:00",
+      "author": "",
+      "tags": [
+        "CPH:MAERSKB"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "European Investment Bank Returns to Turkey With Energy Loans",
+      "description": "The European Investment Bank is set to formally return to Turkey after a yearslong diplomatic fallout stemming from energy exploration in the eastern Mediterranean, reviving a key foreign source of financing for Ankara.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-04/european-investment-bank-returns-to-turkey-with-energy-loans",
+      "category": "economics",
+      "published": "2026-02-04 15:16:46+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "US Trade Deal Dashes Hope of India Rate Cut",
+      "description": "The Reserve Bank of India may keep policy rates unchanged on Friday after a bumper week in which the government boosted spending in its budget and President Donald Trump announced a surprise trade deal, raising the outlook for economic growth.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/us-trade-deal-dashes-hope-of-india-rate-cut-decision-guide",
+      "category": "economics",
+      "published": "2026-02-05 00:30:00+00:00",
+      "author": "",
+      "tags": [
+        "NSE:BOI"
+      ],
+      "sentiment": "positive",
+      "importance": "high"
+    },
+    {
+      "title": "Australia’s Shrinking China Trade Surplus Rings Economic Alarm",
+      "description": "Australia’s trade surplus shrank to the lowest since 2018, underscoring how China’s soaring exports and weak imports are reshaping merchandise flows and potentially dragging down major trade partners.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/australia-s-shrinking-china-trade-surplus-rings-economic-alarm",
+      "category": "economics",
+      "published": "2026-02-05 10:50:55+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Prabowo Names Former Central Banker as Deputy Finance Chief",
+      "description": "President Prabowo Subianto appointed Juda Agung as deputy finance minister, tapping a former Bank Indonesia board member after a recent central bank reshuffle rattled markets.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/prabowo-names-former-central-banker-as-deputy-finance-minister",
+      "category": "economics",
+      "published": "2026-02-05 09:03:59+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Banxico Set to Pause Cuts After Two-Year Easing",
+      "description": "Mexico’s central bank is expected to hold its benchmark interest rate unchanged, pausing an easing cycle that has lowered borrowing costs from double-digit levels in Latin America’s second-largest economy.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/banxico-set-to-pause-cuts-after-two-year-easing-decision-guide",
+      "category": "economics",
+      "published": "2026-02-05 10:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Stocks to Beat Bonds as Geopolitics Rock Assets: Markets Pulse",
+      "description": "Stocks will offer better volatility-adjusted returns than bonds in a world where international policy developments drive markets, according to a majority of respondents to the latest Markets Pulse survey.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/stocks-to-beat-bonds-as-geopolitics-rock-assets-markets-pulse",
+      "category": "economics",
+      "published": "2026-02-05 09:47:41+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ],
+  "industries": [
+    {
+      "title": "Ralph Lauren Sales Growth Slows Amid Pullback in Europe",
+      "description": "Ralph Lauren Corp. dropped after sales growth decelerated in the most recent quarter, a sign that the company’s accessible luxury apparel is losing momentum with cautious shoppers.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/ralph-lauren-sales-growth-slows-as-wary-consumers-pull-back",
+      "category": "industries",
+      "published": "2026-02-05 13:51:50+00:00",
+      "author": "",
+      "tags": [
+        "NYS:RL"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Bristol’s Outlook Tops Views as New Drugs Gain Momentum",
+      "description": "Bristol Myers Squibb Co. forecast 2026 sales and profit above Wall Street’s expectations, a sign that the company’s newer medicines are helping stem the losses from its older drugs that are losing patent protection.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/bristol-s-outlook-tops-expectations-as-new-drugs-gain-momentum",
+      "category": "industries",
+      "published": "2026-02-05 11:59:00+00:00",
+      "author": "",
+      "tags": [
+        "NYS:BMY"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Estée Lauder Outlook Disappoints Investors Wanting More",
+      "description": "Estée Lauder Cos. shares tumbled after its outlook boost failed to reassure investors about the pace of the cosmetics conglomerate’s turnaround.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/estee-lauder-raises-outlook-in-sign-ceo-s-turnaround-paying-off",
+      "category": "industries",
+      "published": "2026-02-05 11:00:13+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Novo Shares Fall as Hims Offers $49 Wegovy Pill Copycat",
+      "description": "The challenges are mounting for Novo Nordisk A/S.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/novo-shares-fall-as-hims-hers-offers-49-wegovy-copycat",
+      "category": "industries",
+      "published": "2026-02-05 14:01:44+00:00",
+      "author": "",
+      "tags": [
+        "NYS:HIMS"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Scottie Pippen Auctioning $6 Million of Personal Memorabilia",
+      "description": "Chicago Bulls legend and six-time NBA champion Scottie Pippen has hired Sotheby’s auction house to sell a selection of his personal memorabilia, including the jersey he wore during the championship-clinching game of the 1998 NBA Finals.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/scottie-pippen-auctioning-6-million-of-personal-memorabilia",
+      "category": "industries",
+      "published": "2026-02-05 14:00:53+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Novo Slump Is No Buy-the-Dip Moment for Top Danish Investor",
+      "description": "Denmark’s largest pension fund sees no buy-the-dip opportunity in Novo Nordisk A/S’s shares after the drugmaker warned that sales will fall in 2026, underscoring how investors on its home turf have little confidence in the stock.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/novo-slump-is-no-buy-the-dip-moment-for-top-danish-investor",
+      "category": "industries",
+      "published": "2026-02-05 13:28:28+00:00",
+      "author": "",
+      "tags": [
+        "CPH:NOVOB"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Cardholders Are Mad at Bilt’s CEO. They’re Still Renewing",
+      "description": "After its&nbsp;public breakup with former issuer Wells Fargo, Bilt offered&nbsp;new credit cards that were supposed to be a reset. It didn’t go exactly as planned.",
+      "url": "https://www.bloomberg.com/news/features/2026-02-05/bilt-2-0-credit-cards-tweaked-after-new-rewards-calculations-irk-customers",
+      "category": "industries",
+      "published": "2026-02-05 13:00:25+00:00",
+      "author": "",
+      "tags": [
+        "NYS:WFC"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Breitling Makes Formula One Debut With Aston Martin Partnership",
+      "description": "Breitling AG will become the official watch partner of the Aston Martin Formula One team, marking a high-profile debut into one of the world’s most popular sports.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/breitling-makes-formula-one-debut-with-aston-martin-partnership",
+      "category": "industries",
+      "published": "2026-02-05 13:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Hershey’s Outlook Tops Estimates on Price Hikes, New Items",
+      "description": "Hershey Co. offered a better-than-expected 2026 outlook, saying higher prices and new products would bolster the candymaker’s performance.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/hershey-s-outlook-tops-estimates-on-price-increases-new-items",
+      "category": "industries",
+      "published": "2026-02-05 11:59:02+00:00",
+      "author": "",
+      "tags": [
+        "NYS:HSY"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Jaguar Land Rover Parent Posts $386 Million Loss on Shutdown",
+      "description": "Tata Motors Passenger Vehicles Ltd. slumped to a loss in its latest quarter, showing lingering pain at its Jaguar Land Rover unit after a crippling cyberattack shut down production.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/jaguar-land-rover-parent-post-a-loss-as-cyberattack-pain-lingers",
+      "category": "industries",
+      "published": "2026-02-05 10:40:46+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Revolut Boosting Team That Runs Share Sales Without Wall Street",
+      "description": "Revolut Ltd. is shunning Wall Street banks and is instead hiring more staff to run secondary share sales after successfully handling an in-house deal that helped it clinch a valuation of $75 billion last year.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/revolut-boosting-team-that-runs-share-sales-without-wall-street",
+      "category": "industries",
+      "published": "2026-02-05 12:23:14+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "KKR to Acquire Sports Investor Arctos in $1.4 Billion Deal",
+      "description": "KKR &amp; Co. has agreed to acquire sports and secondaries investor Arctos Partners in a $1.4 billion deal, in a major push into a booming industry.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/kkr-to-acquire-sports-investor-arctos-in-1-4-billion-deal",
+      "category": "industries",
+      "published": "2026-02-05 12:05:58+00:00",
+      "author": "",
+      "tags": [
+        "NYS:KKR"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Nubank CEO Bets $82 Billion Empire on Worldwide Expansion Plan",
+      "description": "David Velez’s favorite anecdote &mdash; the origin story of Latin America’s second-most valuable financial company &mdash; begins with a bulletproof door.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/nubank-ceo-bets-82-billion-empire-on-worldwide-expansion-plan",
+      "category": "industries",
+      "published": "2026-02-05 12:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Hedge Funds Say No to New Cash Just as Clients Rush to Allocate",
+      "description": "A new set of hedge funds is spurning fresh cash after the industry’s best year since 2009, just as more capital is poised to come into the sector.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/hedge-funds-say-no-to-new-cash-just-as-clients-rush-to-allocate",
+      "category": "industries",
+      "published": "2026-02-05 11:41:03+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "BofA Reworks Credit Cards to Fuel Ambitious Consumer Profit Plan",
+      "description": "Bank of America Corp. &mdash; aiming to double the profit it makes from consumers &mdash; is revamping its approach to credit cards as the lender embarks on a plan to meet one of its most audacious financial targets set last year.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/bank-of-america-uses-credit-card-rewards-ai-to-grow-consumer-business",
+      "category": "industries",
+      "published": "2026-02-05 11:40:00+00:00",
+      "author": "",
+      "tags": [
+        "NYS:BAC"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Shell’s Profit Falls on Lower Crude Prices, Chemicals Drag",
+      "description": "Shell Plc profits slumped in the fourth quarter, undershooting expectations as lower crude prices and a struggling chemicals business dented earnings.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/shell-profit-misses-on-lower-crude-prices-rocky-oil-trading",
+      "category": "industries",
+      "published": "2026-02-05 07:05:38+00:00",
+      "author": "",
+      "tags": [
+        "LSE:SHEL"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Turkey and Chevron Sign Agreement on Global Oil and Gas Exploration",
+      "description": "Turkey signed a deal with Chevron Corp. on Thursday to jointly explore for oil and gas around the world, the country’s energy ministry said.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/turkey-chevron-sign-agreement-on-global-oil-and-gas-exploration",
+      "category": "industries",
+      "published": "2026-02-05 11:16:59+00:00",
+      "author": "",
+      "tags": [
+        "NYS:CVX"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Private Credit Joins Race to Rebuild Europe’s Defense Industry",
+      "description": "A string of private credit deals in recent weeks suggests some of the world’s most deep-pocketed investors are getting behind Europe’s defense build-up.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/private-credit-joins-race-to-rebuild-europe-s-defense-industry",
+      "category": "industries",
+      "published": "2026-02-05 11:00:08+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Menopause Makes ADHD Worse",
+      "description": "Almost all women say symptoms get worse after the life change.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-05/menopause-worsens-womens-adhd-symptoms-increasing-brain-fog",
+      "category": "industries",
+      "published": "2026-02-05 11:00:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Cigna’s 2026 Earnings Floor Falls Short of Analysts’ Estimates",
+      "description": "Cigna Group set the floor for its 2026 earnings outlook shy of Wall Street expectations as the health-care conglomerate revamps its drug benefit plans, a move the company has warned will drag on profits.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-05/cigna-s-2026-earnings-floor-falls-short-of-analysts-estimates",
+      "category": "industries",
+      "published": "2026-02-05 11:00:00+00:00",
+      "author": "",
+      "tags": [
+        "NYS:CI"
+      ],
+      "sentiment": "neutral",
+      "importance": "high"
+    }
+  ]
+}

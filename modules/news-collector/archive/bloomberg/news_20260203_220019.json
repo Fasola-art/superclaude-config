@@ -1,0 +1,1291 @@
+{
+  "markets": [
+    {
+      "title": "Stock Futures Rise as Palantir Fuels Rally in Tech: Markets Wrap",
+      "description": "Stocks rose as precious metals bounced back and robust earnings from Palantir Technologies Inc. drove a rally in technology stocks.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-02/asian-stocks-set-to-climb-after-us-data-lifts-mood-markets-wrap",
+      "category": "markets",
+      "published": "2026-02-02 22:23:09+00:00",
+      "author": "",
+      "tags": [
+        "NMS:PLTR"
+      ],
+      "sentiment": "positive",
+      "importance": "normal"
+    },
+    {
+      "title": "Private Equity’s Giant Software Bet Has Been Upended by AI",
+      "description": "Apollo Global Management’s John Zito left the audience of investors stunned.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/private-equity-s-giant-software-bet-has-been-upended-by-ai",
+      "category": "markets",
+      "published": "2026-02-03 11:53:36+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Oil Swings as Traders Focus on Iran Risks, India’s Oil Purchases",
+      "description": "Oil flipped between gains and losses as traders weighed the risks of conflict between the US and Iran, as well as a US-India trade deal that may require the South Asian nation to scale back imports of discounted Russian crude.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-02/latest-oil-market-news-and-analysis-for-february-3",
+      "category": "markets",
+      "published": "2026-02-02 23:18:58+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Otro Raises $1.2 Billion for First Buyout Fund Amid Sports Boom",
+      "description": "Otro Capital raised $1.2 billion for its first flagship private equity fund, as the sports-focused firm capitalizes on soaring demand from large institutional investors for the burgeoning asset class.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/otro-raises-1-2-billion-for-first-buyout-fund-amid-sports-boom",
+      "category": "markets",
+      "published": "2026-02-03 12:30:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "China’s Speculative Gold Rush Tests Risk Appetite in Beijing",
+      "description": "While broad market participation is welcomed by officials, any threat to social cohesion is sure to attract negative attention.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-03/china-s-speculative-gold-rush-tests-risk-appetite-in-beijing",
+      "category": "markets",
+      "published": "2026-02-03 12:24:10+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "negative",
+      "importance": "normal"
+    },
+    {
+      "title": "Data Services Stocks Sink After Anthropic Launches Legal Tool",
+      "description": "Stocks deemed to be at risk of disruption from advances in artificial intelligence took another steep leg lower on Tuesday after the release of a new tool by AI startup Anthropic.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/legal-software-stocks-plunge-as-anthropic-releases-new-ai-tool",
+      "category": "markets",
+      "published": "2026-02-03 11:09:48+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Billionaire Quek Offers to Buy Out Guocoland Malaysia Unit",
+      "description": "Billionaire Quek Leng Chan’s Guocoland Ltd. offered to buy out minority shareholders in its property developer unit in Malaysia, citing a need for greater flexibility to streamline operations.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/billionaire-said-to-consider-taking-guocoland-malaysia-private",
+      "category": "markets",
+      "published": "2026-02-03 04:52:45+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Iran Risk Hands Oil Algos an Early Test After Three-Year Slump",
+      "description": "Algorithmic traders have racked up a third straight year of losses in oil, the longest slump on record, with hopes for a turnaround in 2026 facing an early test amid geopolitical volatility.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/iran-risk-hands-oil-algos-an-early-test-after-three-year-slump",
+      "category": "markets",
+      "published": "2026-02-03 12:06:20+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "negative",
+      "importance": "normal"
+    },
+    {
+      "title": "Copper Rebounds as China Industry Group Calls for Stockpiling",
+      "description": "Copper rebounded as a metals selloff led by silver and gold eased and a state-backed industry group called for China to boost its strategic reserves of the crucial industrial metal.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/copper-rebounds-from-two-day-slump-as-metals-selloff-eases",
+      "category": "markets",
+      "published": "2026-02-03 02:28:15+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "CAZ Debuts Fund for Wealthy to Buy Stakes of Private-Asset Firms",
+      "description": "Alternative money manager CAZ Investments launched a fund for wealthy individuals that will take stakes in private-asset firms, a niche strategy that’s gathering momentum amid a secondaries boom.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/caz-debuts-fund-for-wealthy-to-buy-stakes-of-private-asset-firms",
+      "category": "markets",
+      "published": "2026-02-03 12:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "‘Get Me Out’: Traders Dump Software Stocks as AI Fears Take Hold",
+      "description": "Wall Street has been skeptical about software stocks for a while, but sentiment has gone from bearish to doomsday lately with traders gripped by fears about the destruction to be wrought by artificial intelligence.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/-get-me-out-traders-dump-software-stocks-as-ai-fears-take-hold",
+      "category": "markets",
+      "published": "2026-02-03 11:55:02+00:00",
+      "author": "",
+      "tags": [
+        "NMS:MSFT",
+        "NMS:TTWO"
+      ],
+      "sentiment": "negative",
+      "importance": "normal"
+    },
+    {
+      "title": "EQT Weighs Sale of Stake in Software Firm Thinkproject",
+      "description": "EQT AB is weighing a sale of its stake in software as a service provider Thinkproject, people familiar with the matter said.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/eqt-weighs-sale-of-stake-in-software-firm-thinkproject",
+      "category": "markets",
+      "published": "2026-02-03 11:54:58+00:00",
+      "author": "",
+      "tags": [
+        "STO:EQT"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Bitcoin Stalls After Weak Rebound as Options Signal Caution",
+      "description": "Bitcoin remained under pressure Tuesday, stalling after a brief rebound from a 10-month low as trader caution persisted in options activity.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/bitcoin-stalls-after-weak-rebound-as-options-signal-caution",
+      "category": "markets",
+      "published": "2026-02-03 04:38:34+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Gold Is Behaving More Like a Meme Stock These Days",
+      "description": "Market data as of 06:49 am EST. Market data may be delayed depending on provider agreements.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-03/gold-is-behaving-more-like-a-meme-stock-these-days",
+      "category": "markets",
+      "published": "2026-02-03 11:49:30+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "China’s Association Calls For More Copper Stockpiling",
+      "description": "China’s state-backed metals industry group is calling for more copper in the country’s strategic stockpiles, a move that would add to upward pressure on prices and highlight a growing push by governments to bolster supply security.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/china-to-expand-strategic-copper-inventories-after-prices-rally",
+      "category": "markets",
+      "published": "2026-02-03 07:11:13+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Musk's SpaceX Merges with xAI, Gold Bounces Back | The Opening Trade 2/3/2026",
+      "description": "Elon Musk is combining SpaceX and xAI in a deal that values the enlarged entity at $1.25 trillion, as the world’s richest man looks to fuel his increasingly costly ambitions in artificial intelligence and space exploration. Elsewhere in technology, Palantir Technologies shares rose in afterhours trading on Tuesday after the data-analysis software company gave a revenue forecast that is much stronger than analysts expected. Precious metals gold and silver rebounded, after a historic collapse from all-time highs lured dip-buyers back to precious metals. The Opening Trade has everything you need to know as markets open across Europe. With analysis you won't find anywhere else, we break down the biggest stories of the day and speak to top guests who have skin in the game. Hosted by Anna Edwards, Guy Johnson and Tom Mackenzie. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-03/the-opening-trade-2-3-2026-video",
+      "category": "markets",
+      "published": "2026-02-03 11:48:20+00:00",
+      "author": "",
+      "tags": [
+        "NMS:TSLA",
+        "KSC:005930"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Stocks Extend Rebound Rally as Palantir Sparks Tech Momentum | Bloomberg Brief 2/3/2026",
+      "description": "US equity futures rise as Palantir's robust earnings fuel a rally in technology stocks. Gold and silver climb as dip buyers crowd in. Laura Cooper of Nuveen discusses the Federal Reserve's rate path as investors face data delays due to the partial government shutdown. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-03/bloomberg-brief-2-3-2026-video",
+      "category": "markets",
+      "published": "2026-02-03 11:48:11+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "positive",
+      "importance": "normal"
+    },
+    {
+      "title": "Strong Earnings Set the Table for ‘Very Good’ 2026, Evercore’s Emanuel Says",
+      "description": "“It is an environment where we are in a state of unprecedented flux and change,” says Julian Emanuel, chief equity and quantitative strategist at Evercore ISI, as he discusses how macro disturbances are helping to accelerate the bull market. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-03/strong-earnings-set-the-table-for-2026-julian-emanuel-video",
+      "category": "markets",
+      "published": "2026-02-03 11:47:50+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "positive",
+      "importance": "high"
+    },
+    {
+      "title": "BlackRock’s GIP Teams Up With EQT in Bid to Acquire Power Firm AES",
+      "description": "BlackRock Inc.’s Global Infrastructure Partners has teamed up with EQT AB in its bid to acquire power company AES Corp., according to people familiar with the matter.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-02/gip-is-said-to-team-up-with-eqt-in-bid-to-acquire-power-firm-aes",
+      "category": "markets",
+      "published": "2026-02-02 22:57:15+00:00",
+      "author": "",
+      "tags": [
+        "STO:EQT",
+        "NYS:BLK"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Banks Ready $3.75 Billion Debt Sale to Back BP Castrol Buyout",
+      "description": "Banks are preparing to sell $3.75 billion in debt to back Stonepeak Partners’ acquisition of a majority stake in BP Plc’s Castrol division, taking advantage of a hot credit market to offload risk long before the deal is expected to close.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/banks-ready-3-75-billion-debt-sale-to-back-bp-castrol-buyout",
+      "category": "markets",
+      "published": "2026-02-03 11:34:53+00:00",
+      "author": "",
+      "tags": [
+        "LSE:BP/"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ],
+  "technology": [
+    {
+      "title": "Private Equity’s Giant Software Bet Has Been Upended by AI",
+      "description": "Apollo Global Management’s John Zito left the audience of investors stunned.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/private-equity-s-giant-software-bet-has-been-upended-by-ai",
+      "category": "technology",
+      "published": "2026-02-03 11:53:36+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Data Services Stocks Sink After Anthropic Launches Legal Tool",
+      "description": "Stocks deemed to be at risk of disruption from advances in artificial intelligence took another steep leg lower on Tuesday after the release of a new tool by AI startup Anthropic.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/legal-software-stocks-plunge-as-anthropic-releases-new-ai-tool",
+      "category": "technology",
+      "published": "2026-02-03 11:09:48+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "PayPal Replaces CEO Chriss After Profit Falls Short of Estimates",
+      "description": "PayPal Holdings Inc. said Chief Executive Officer Alex Chriss will be replaced by HP Inc. CEO Enrique Lores after profit and revenue fell short of expectations. Shares of the firm tumbled more than 12%.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/paypal-names-hp-s-enrique-lores-to-replace-ceo-alex-chriss",
+      "category": "technology",
+      "published": "2026-02-03 12:00:11+00:00",
+      "author": "",
+      "tags": [
+        "NMS:PYPL"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Apple’s iPhone 17 Upgrades Hit the Spot for Chinese Consumers",
+      "description": "The seeds for Apple’s best iPhone sales in China were planted years earlier",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-03/apple-s-iphone-17-upgrades-hit-the-spot-for-chinese-consumers",
+      "category": "technology",
+      "published": "2026-02-03 12:02:01+00:00",
+      "author": "",
+      "tags": [
+        "NMS:AAPL"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "‘Get Me Out’: Traders Dump Software Stocks as AI Fears Take Hold",
+      "description": "Wall Street has been skeptical about software stocks for a while, but sentiment has gone from bearish to doomsday lately with traders gripped by fears about the destruction to be wrought by artificial intelligence.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/-get-me-out-traders-dump-software-stocks-as-ai-fears-take-hold",
+      "category": "technology",
+      "published": "2026-02-03 11:55:02+00:00",
+      "author": "",
+      "tags": [
+        "NMS:MSFT",
+        "NMS:TTWO"
+      ],
+      "sentiment": "negative",
+      "importance": "normal"
+    },
+    {
+      "title": "Spain to Ban Children From Social Platforms Like Grok and TikTok",
+      "description": "Prime Minister Pedro Sánchez said Spain would block children from using social media platforms including Instagram and TikTok in a new European push to regulate digital platforms.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/spain-to-seek-to-ban-under-16-year-olds-from-social-media",
+      "category": "technology",
+      "published": "2026-02-03 10:08:26+00:00",
+      "author": "",
+      "tags": [
+        "NMS:META"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Nintendo’s Profit Disappoints Even as Memory Prices Climb",
+      "description": "Nintendo Co.’s profit rose a smaller-than-expected 23% after the US levied tariffs on the Switch 2 console, revealing a big hit to margins while concerns grow about the impact of soaring memory chip prices in 2026.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/nintendo-s-profit-disappoints-while-rising-memory-prices-weigh",
+      "category": "technology",
+      "published": "2026-02-03 06:43:55+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Musk’s French X Office Searched in Prosecutor’s Grok, Bias Probe",
+      "description": "Elon Musk’s X offices in Paris were searched by French law enforcement’s cybercrime unit as part of an ongoing probe into alleged misuses of the social media platform.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/musk-s-french-x-office-searched-in-prosecutor-s-grok-bias-probe",
+      "category": "technology",
+      "published": "2026-02-03 10:37:54+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Fusion Startup Raises Funds to Build Desktop-Sized Power Plants",
+      "description": "Avalanche Energy wants to use the technology to power satellites and drones, though it remains far from building a commercial prototype.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/washington-fusion-startup-avalanche-energy-raises-29-million",
+      "category": "technology",
+      "published": "2026-02-03 10:00:25+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Chinese Tech Stocks Near Bear Market as Tax Concerns Mount",
+      "description": "An abrupt selloff in Chinese technology shares pushed a key index to the brink of a bear market, amid growing concerns that authorities may impose a tax on Internet firms.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/chinese-tech-stocks-extend-drop-to-20-from-october-high",
+      "category": "technology",
+      "published": "2026-02-03 03:04:03+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Chipmakers, Gold Power Emerging-Market Rebound After Fed Jitters",
+      "description": "Emerging-market stocks and currencies rebounded Tuesday, snapping a three-day run of losses, as the dollar weakened and the volatility in precious metals ebbed.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/chipmakers-gold-power-emerging-market-rebound-after-fed-jitters",
+      "category": "technology",
+      "published": "2026-02-03 09:29:37+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "negative",
+      "importance": "high"
+    },
+    {
+      "title": "NASA Delays Moon Mission Launch After Hydrogen Leaks During Test",
+      "description": "NASA is pushing the proposed launch date for its Artemis II lunar mission back to at least March after finding a hydrogen leak during a major fueling test.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/nasa-delays-moon-mission-launch-after-hydrogen-leaks-during-test",
+      "category": "technology",
+      "published": "2026-02-03 09:23:21+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Nintendo’s Quarterly Profit Disappoints",
+      "description": "Nintendo Co.’s profit rose a smaller-than-expected 23%, hurt by US tariffs on its Switch 2 console and soaring memory chip prices. After a record-setting summer debut for the flagship console, the Kyoto-based company is grappling with global trade disruptions from US tariffs. Bloomberg Intelligence’s Nathan Naidu breaks down the situation.",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-03/nintendo-s-quarterly-profit-disappoints-video",
+      "category": "technology",
+      "published": "2026-02-03 08:50:13+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Samsung, SK Hynix Exceed Value of Chinese Duo as AI Boom Shifts",
+      "description": "South Korea’s two most valuable companies eclipsed a duo of Chinese internet giants by market cap for the first time, underscoring how an evolving global artificial intelligence boom has reshaped the sector’s investment dynamics in Asia.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/samsung-sk-hynix-to-top-value-of-chinese-duo-as-ai-boom-shifts",
+      "category": "technology",
+      "published": "2026-02-03 01:55:40+00:00",
+      "author": "",
+      "tags": [
+        "KSC:000660",
+        "KSC:005930"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "What’s Musk Trying to Achieve With the SpaceX-xAI Deal?",
+      "description": "Elon Musk is combining SpaceX and xAI as he looks to fuel his increasingly costly ambitions in artificial intelligence and space exploration. The deal gives SpaceX a valuation of $1 trillion, and xAI a value of $250 billion, people familiar with the matter said. Bloomberg’s Neil Campling breaks down the possible reasoning behind the deal.",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-03/what-s-musk-trying-to-achieve-with-the-spacex-xai-deal-video",
+      "category": "technology",
+      "published": "2026-02-03 06:55:10+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Guard Against ‘AI Exuberance’ in Credit, HSBC Strategists Say",
+      "description": "Credit investors should guard against potential downside risks tied to “AI exuberance” after optimism around the technology helped yield premiums drop to their lowest in decades, according to HSBC Bank strategists.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/guard-against-ai-exuberance-in-credit-hsbc-strategists-say",
+      "category": "technology",
+      "published": "2026-02-03 04:57:56+00:00",
+      "author": "",
+      "tags": [
+        "LSE:HSBA"
+      ],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "SiTime Is Said Near $3 Billion Deal for Renesas Timing Unit",
+      "description": "Analog chipmaker SiTime Corp. is nearing an agreement to acquire Renesas Electronics Corp.’s timing unit in a deal that could be worth about $3 billion, according to people familiar with the matter.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/sitime-is-said-to-near-3-billion-deal-for-renesas-timing-unit",
+      "category": "technology",
+      "published": "2026-02-03 03:04:01+00:00",
+      "author": "",
+      "tags": [
+        "NAS:SITM"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Chip Designer Montage Is Said Set to Price $902 Million Hong Kong Listing at Top",
+      "description": "Chinese chip designer Montage Technology Co. is planning to price its Hong Kong listing at the highest possible figure, according to people familiar with the matter, putting it on course to raise HK$7 billion ($902 million).",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/chip-designer-montage-is-said-set-to-price-902-million-hong-kong-listing-at-top",
+      "category": "technology",
+      "published": "2026-02-03 02:56:34+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Musk’s SpaceX Combines With xAI at $1.25 Trillion Valuation",
+      "description": "Elon Musk is combining SpaceX and xAI in a deal that values the enlarged entity at $1.25 trillion, as the world’s richest man looks to fuel his increasingly costly ambitions in artificial intelligence and space exploration.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-02/elon-musk-s-spacex-said-to-combine-with-xai-ahead-of-mega-ipo",
+      "category": "technology",
+      "published": "2026-02-02 21:04:22+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "HPE Judge Allows Depositions of Company Lawyers, Advisers",
+      "description": "The judge reviewing the US Justice Department’s settlement allowing Hewlett Packard Enterprise Co.’s acquisition of Juniper Networks Inc. said he will let states challenging the deal interview under oath the lawyers and advisers the companies hired.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/hpe-judge-allows-depositions-of-company-lawyers-advisers",
+      "category": "technology",
+      "published": "2026-02-03 00:50:23+00:00",
+      "author": "",
+      "tags": [
+        "NYS:HPE"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ],
+  "politics": [
+    {
+      "title": "Trump’s Surprise Trade Deal With India Resets Fractured Ties",
+      "description": "President Donald Trump and Prime Minister Narendra Modi took a major step to reset fractured ties with a surprise deal on Monday to slash tariffs, bringing much-needed relief to India’s economy.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/trump-s-surprise-trade-deal-with-india-resets-fractured-ties",
+      "category": "politics",
+      "published": "2026-02-03 05:57:52+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Zelenskiy Warns Russia’s New Onslaught Will Impact Peace Talks",
+      "description": "Ukrainian President Volodymyr Zelenskiy said Russia’s resumption of attacks on the country’s energy infrastructure with the biggest assault this year will have consequences for Kyiv’s negotiating team in this week’s peace talks.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/ukraine-faces-russian-attacks-after-pause-on-energy-strikes-ends",
+      "category": "politics",
+      "published": "2026-02-03 06:29:14+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "UK Navy Says Ship Hailed by Armed Small Vessels in Hormuz",
+      "description": "A vessel was hailed by smaller armed ships in the Strait of Hormuz, a UK naval group said, with heightened focus on the vital waterway amid tensions between the US and Iran.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/uk-navy-says-ship-hailed-by-armed-small-vessels-in-hormuz-strait",
+      "category": "politics",
+      "published": "2026-02-03 11:44:19+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Soy Oil Market Shows Initial Optimism on US Crop Trade to India",
+      "description": "US soybean oil futures climbed more than 2% on Tuesday after President Donald Trump unexpectedly announced a trade deal with India, in a sign of optimism that a truce could open the way for billions of dollars of American products to hit the world’s most populous nation.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/soy-oil-market-shows-first-sign-of-optimism-on-us-trade-to-india",
+      "category": "politics",
+      "published": "2026-02-03 07:24:37+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "India Rupee Rallies, Stocks Jump as Tariff Deal Boosts Sentiment",
+      "description": "Indian assets rallied after the US sharply cut tariffs on the country’s goods, lifting the rupee and stocks as investors reassessed a long-soured outlook.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/india-s-rupee-stocks-to-get-tariff-truce-boost-investors-say",
+      "category": "politics",
+      "published": "2026-02-03 00:20:59+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "positive",
+      "importance": "normal"
+    },
+    {
+      "title": "Spain to Ban Children From Social Platforms Like Grok and TikTok",
+      "description": "Prime Minister Pedro Sánchez said Spain would block children from using social media platforms including Instagram and TikTok in a new European push to regulate digital platforms.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/spain-to-seek-to-ban-under-16-year-olds-from-social-media",
+      "category": "politics",
+      "published": "2026-02-03 10:08:26+00:00",
+      "author": "",
+      "tags": [
+        "NMS:META"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "France Eyes Shared Tools at G-7 to Address Economic Imbalances",
+      "description": "French Finance Minister Roland Lescure said the Group of 7 should work toward shared tools for tackling global economic imbalances including China’s vast trade surpluses with the rest of the world.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/france-eyes-shared-tools-at-g-7-to-address-economic-imbalances",
+      "category": "politics",
+      "published": "2026-02-03 11:07:10+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Abu Dhabi Builds a New Deal Machine Around Its Crown Prince",
+      "description": "Donald Trump’s whirlwind tour of the Middle East last year included breakfast with Sheikh Khaled bin Mohammed, Abu Dhabi’s crown prince. The US president was seeking billions of dollars in investment, and the Emirati royal is now in pole position to deliver.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/abu-dhabi-builds-a-new-deal-machine-around-its-crown-prince",
+      "category": "politics",
+      "published": "2026-02-03 11:01:25+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Credit Suisse Nazi Probe Reveals Fresh SS Links, Says Senator",
+      "description": "An investigation into ties between Credit Suisse and Nazi Germany has so far revealed hundreds of accounts with potential links to Nazi-era officials and industrialists, including the SS paramilitary wing, according to US Senator Charles Grassley, adding to pressure on the bank ahead of a key hearing.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/credit-suisse-nazi-probe-reveals-fresh-ss-links-says-senator",
+      "category": "politics",
+      "published": "2026-02-03 11:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "A Saudi-Israeli Rapprochement Is Looking Increasingly Remote",
+      "description": "MBS is shifting strategy in a way that suggests normalization of ties is unlikely anytime soon.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-03/a-saudi-israeli-rapprochement-is-looking-increasingly-remote",
+      "category": "politics",
+      "published": "2026-02-03 10:59:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Berlin Buys 25% Stake in Tennet’s German Grid for €3.3 Billion",
+      "description": "The German government will buy a 25.1% stake in the German unit of power grid operator Tennet Holding BV after years of wrangling between Berlin and The Hague.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/berlin-buys-25-1-stake-in-tennet-s-german-grid-unit-for-3-3b",
+      "category": "politics",
+      "published": "2026-02-03 10:48:31+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Ethiopia Returns to Double-Digit Economic Growth After Reforms",
+      "description": "Ethiopia will return to double-digit economic growth this fiscal year after reforms backed by the International Monetary Fund eased foreign exchange constraints and strengthened exports.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/ethiopia-returns-to-double-digit-economic-growth-after-reforms",
+      "category": "politics",
+      "published": "2026-02-03 10:42:28+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "South Africa’s Steenhuisen Won’t Seek Reelection as DA Head",
+      "description": "The leader of South Africa’s Democratic Alliance, a key member of the ruling coalition, plans to step down at internal elections in two months, after facing criticism over his leadership. The rand weakened.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/south-africa-s-steenhuisen-to-quit-as-democratic-alliance-leader",
+      "category": "politics",
+      "published": "2026-02-03 09:16:08+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Turkey Is Preparing to Host US-Iran Talks in Istanbul",
+      "description": "Turkey plans to host high-level talks between the US and Iran on Friday aimed at de-escalating tensions between the two countries.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/turkey-is-preparing-to-host-us-iran-talks-in-istanbul",
+      "category": "politics",
+      "published": "2026-02-03 10:28:56+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Putin’s Top Security Aide Deepens Ties With Myanmar After Vote",
+      "description": "Russia and Myanmar strengthened military ties this week, as President Vladimir Putin’s top security aide visited the Southeast Asian nation after the ruling junta concluded an election that Western democracies and the United Nations have described as flawed.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/putin-s-top-security-aide-deepens-ties-with-myanmar-after-vote",
+      "category": "politics",
+      "published": "2026-02-03 09:41:31+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Hungary Trade Takes Off as Polls Point to Orban’s Election Loss",
+      "description": "Investors are stepping up bold wagers on Hungary’s stocks, bonds and currency ahead of elections that could redefine the country’s future.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/bold-hungary-bet-lures-investors-as-pivotal-election-nears",
+      "category": "politics",
+      "published": "2026-02-03 06:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "India Sees Strong Revenue, Scope to Trim Borrowing Next Year",
+      "description": "India expects revenue collections to be buoyant in the year beginning April, potentially allowing it to scale back its borrowing program, according to a senior finance ministry official.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/india-sees-strong-revenue-scope-to-trim-borrowing-next-year",
+      "category": "politics",
+      "published": "2026-02-03 08:59:33+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Trump Cuts India Tariffs in Russian Oil Deal & Musk's SpaceX-xAI Combine | Daybreak Europe 2/3/2026",
+      "description": "Bloomberg Daybreak Europe is your essential morning viewing to stay ahead. Live from London, we set the agenda for your day, catching you up with overnight markets news from the US and Asia. On today's show, Indian shares and the rupee rallied after the US reduced tariffs on Indian goods to 18%. President Trump says the US will reduce the tariffs after Indian Prime Minister Narendra Modi agreed to stop buying Russian oil. Bloomberg understands that Elon Musk is merging SpaceX with xAI in an all-stock deal valuing the new company at $1.25 trillion, bringing together two of the largest closely held companies in the world. SpaceX is still planning to do an IPO later this year. Bill and Hillary Clinton agreed to testify in the congressional investigation into Jeffrey Epstein, averting a potential criminal contempt vote. Today's guests: Bank of America UK economist Sonali Punhani & BYD Executive Vice President Stella Li (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-03/daybreak-europe-2-3-2026-video",
+      "category": "politics",
+      "published": "2026-02-03 08:33:43+00:00",
+      "author": "",
+      "tags": [
+        "HKG:1211"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "France Adopts Budget After Premier Wins No-Confidence Votes",
+      "description": "France’s parliament adopted a budget for 2026 after Prime Minister Sebastien Lecornu survived two no-confidence votes Monday, bringing the curtain down on months of political upheaval that’s rattled investor confidence in the country.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-02/france-adopts-budget-after-premier-survives-no-confidence-votes",
+      "category": "politics",
+      "published": "2026-02-02 18:48:03+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "France Adopts Budget as PM Survives No-Confidence Votes",
+      "description": "France’s parliament adopted a budget for 2026 after Prime Minister Sebastien Lecornu survived two no-confidence votes Monday. The new budget has smaller spending cuts and tax increases than earlier proposals, meaning the deficit for the year, expected at 5%, will be larger than initially planned. Bloomberg’s Caroline Connan reports.",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-03/france-adopts-budget-as-pm-survives-no-confidence-votes-video",
+      "category": "politics",
+      "published": "2026-02-03 06:42:48+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ],
+  "wealth": [
+    {
+      "title": "CAZ Debuts Fund for Wealthy to Buy Stakes of Private-Asset Firms",
+      "description": "Alternative money manager CAZ Investments launched a fund for wealthy individuals that will take stakes in private-asset firms, a niche strategy that’s gathering momentum amid a secondaries boom.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/caz-debuts-fund-for-wealthy-to-buy-stakes-of-private-asset-firms",
+      "category": "wealth",
+      "published": "2026-02-03 12:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Abu Dhabi Builds a New Deal Machine Around Its Crown Prince",
+      "description": "Donald Trump’s whirlwind tour of the Middle East last year included breakfast with Sheikh Khaled bin Mohammed, Abu Dhabi’s crown prince. The US president was seeking billions of dollars in investment, and the Emirati royal is now in pole position to deliver.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/abu-dhabi-builds-a-new-deal-machine-around-its-crown-prince",
+      "category": "wealth",
+      "published": "2026-02-03 11:01:25+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Mubadala’s €700 Million Signa Award to Test Austrian Insolvency",
+      "description": "Mubadala Investment Co won more than €700 million ($827 million) from an arbitration linked to the insolvent Signa conglomerate, a decision that’ll likely test Austrian insolvency law as creditors scrap to recoup losses from the defunct firm.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/mubadala-s-700-million-signa-award-to-test-austrian-insolvency",
+      "category": "wealth",
+      "published": "2026-02-03 09:05:18+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Singaporeans Are Queueing Up to Buy Gold Despite Rout",
+      "description": "People were still queuing up to buy gold in Singapore on Monday even as prices plummeted, showing the extraordinary resilience in retail demand for precious metals.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-02/singaporeans-are-queueing-up-to-buy-the-dip-in-gold-despite-rout",
+      "category": "wealth",
+      "published": "2026-02-02 08:53:52+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Indian Jewelry Maker Emerald Jewel Said Planning IPO for Up to $300 Million",
+      "description": "Emerald Jewel Industry India Ltd., one of the country’s largest jewelry manufacturers, is weighing an initial public offering that could raise as much as $300 million, according to people familiar with the matter, potentially paving the way for India’s biggest listings in the sector.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/emerald-jewel-is-said-to-plan-ipo-to-raise-up-to-300-million",
+      "category": "wealth",
+      "published": "2026-02-03 06:39:43+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Trump Amasses $483 Million War Chest to Aid Midterm Chances",
+      "description": "President Donald Trump has said the “only thing” he worries about is losing Republican control of Congress in the November elections. The latest campaign finance filings show he’s built an unprecedented war chest to help keep that from happening.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-02/trump-amasses-483-million-war-chest-to-bolster-midterm-chances",
+      "category": "wealth",
+      "published": "2026-02-02 15:36:57+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Ken Griffin, Steve Ross Team Up to Lure More CEOs to Florida",
+      "description": "Ken Griffin and Stephen Ross, who are among the highest-profile billionaires to move to South Florida during the pandemic, are bankrolling a new campaign to get others to follow in their footsteps.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-02/ken-griffin-steve-ross-team-up-to-lure-more-ceos-to-florida",
+      "category": "wealth",
+      "published": "2026-02-02 16:35:46+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Is the Gold Bull Over, or Just Taking a Breath?",
+      "description": "Precious metals have been hammered. Here’s what to watch for next.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-02/what-s-next-for-the-price-of-silver-and-gold-after-market-slump",
+      "category": "wealth",
+      "published": "2026-02-02 13:18:46+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Castel CEO’s Fate in Limbo Amid Clash Over Shareholders’ Vote",
+      "description": "The clash between the top executive of the billionaire Castel family’s eponymous firm and two heirs took an unexpected turn after the two sides disputed the outcome of a shareholders’ meeting.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-02/castel-group-ceo-ousted-as-director-from-key-singapore-holding",
+      "category": "wealth",
+      "published": "2026-02-02 10:41:59+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Intesa to Boost Wealth Business With New Hires in European Push",
+      "description": "Intesa Sanpaolo SpA outlined steps to expand its wealth management business across Europe as part of a plan by Chief Executive Officer Carlo Messina to boost fee income.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-02/intesa-to-boost-wealth-business-with-new-hires-in-european-push",
+      "category": "wealth",
+      "published": "2026-02-02 10:41:00+00:00",
+      "author": "",
+      "tags": [
+        "MIL:ISP"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Ro Khanna Pushes California Billionaires, Union to Compromise on Wealth Tax Plan",
+      "description": "Tech industry and labor leaders plan to meet in March as Representative Ro Khanna pushes for a compromise deal over a proposed billionaire tax that has rattled Silicon Valley, a person familiar with the meeting said.",
+      "url": "https://www.bloomberg.com/news/articles/2026-01-31/ro-khanna-pushes-compromise-talks-as-california-wealth-tax-rattles-tech-sector",
+      "category": "wealth",
+      "published": "2026-01-31 18:09:22+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ],
+  "economics": [
+    {
+      "title": "Miran Says Fed Needs to Cut Rates by More Than a Point This Year",
+      "description": "Federal Reserve Governor Stephen Miran said the absence of strong price pressures in the economy means interest rates, which he described as restrictive, need to be lowered again this year.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/miran-says-fed-needs-to-cut-rates-by-more-than-a-point-this-year",
+      "category": "economics",
+      "published": "2026-02-03 12:50:26+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "positive",
+      "importance": "high"
+    },
+    {
+      "title": "Haddad Says He Pitched Lula on Picks for Central Bank Seats",
+      "description": "Brazil Finance Minister Fernando Haddad pitched two economists for open seats on the central bank board, but said President Luiz Inacio Lula da Silva hasn’t yet made a decision on the nominees.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/haddad-says-he-pitched-lula-on-picks-for-central-bank-seats",
+      "category": "economics",
+      "published": "2026-02-03 12:31:03+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Brazil Central Bank Leaves Door Open on Size of Coming Rate Cuts",
+      "description": "Brazil’s central bank said it will determine the size and length of its coming monetary easing cycle over time as board members mull economic data that is still showing mixed signals.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/brazil-central-bank-leaves-door-open-on-size-of-coming-rate-cuts",
+      "category": "economics",
+      "published": "2026-02-03 12:19:45+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Australia Becomes First Major Economy to Hike Interest Rates This Year",
+      "description": "In another sign of the splintering global policy outlook, Australia has just delivered the first interest-rate hike among major central banks for the year.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-03/australia-becomes-first-major-economy-to-hike-interest-rates-this-year",
+      "category": "economics",
+      "published": "2026-02-03 12:00:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "US, India Trade Deal Eases Months of Tense Talks Over Oil, Tariffs",
+      "description": "After a call between Trump and Modi, both sides announced a pact but left many experts guessing on key details",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-03/us-and-india-trade-deal",
+      "category": "economics",
+      "published": "2026-02-03 12:00:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "India Rupee Rallies, Stocks Jump as Tariff Deal Boosts Sentiment",
+      "description": "Indian assets rallied after the US sharply cut tariffs on the country’s goods, lifting the rupee and stocks as investors reassessed a long-soured outlook.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/india-s-rupee-stocks-to-get-tariff-truce-boost-investors-say",
+      "category": "economics",
+      "published": "2026-02-03 00:20:59+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "positive",
+      "importance": "normal"
+    },
+    {
+      "title": "Tradition’s Major Says Get Ready for Warsh’s Fed to Slash Rates",
+      "description": "A Kevin Warsh-led Federal Reserve may cut interest rates much further than markets are expecting, according to Steven Major, global macro advisor at broker Tradition Dubai.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/tradition-s-major-says-get-ready-for-warsh-s-fed-to-slash-rates",
+      "category": "economics",
+      "published": "2026-02-03 11:12:09+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "France Eyes Shared Tools at G-7 to Address Economic Imbalances",
+      "description": "French Finance Minister Roland Lescure said the Group of 7 should work toward shared tools for tackling global economic imbalances including China’s vast trade surpluses with the rest of the world.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/france-eyes-shared-tools-at-g-7-to-address-economic-imbalances",
+      "category": "economics",
+      "published": "2026-02-03 11:07:10+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Ethiopia Returns to Double-Digit Economic Growth After Reforms",
+      "description": "Ethiopia will return to double-digit economic growth this fiscal year after reforms backed by the International Monetary Fund eased foreign exchange constraints and strengthened exports.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/ethiopia-returns-to-double-digit-economic-growth-after-reforms",
+      "category": "economics",
+      "published": "2026-02-03 10:42:28+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "What We Know About the US–India Trade Deal",
+      "description": "There’s been a surprise trade shift between the US and India. Trump says tariffs on Indian goods will fall from 50% to 18% under a deal linked to Russian oil. Here's what we know. (Source: Bloomberg)",
+      "url": "https://www.bloomberg.com/news/videos/2026-02-03/what-we-know-about-the-us-india-trade-deal-video",
+      "category": "economics",
+      "published": "2026-02-03 10:36:33+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Saudi National Bank Explores Foray into Booming SRT Market",
+      "description": "Saudi National Bank is considering a foray into the rapidly-growing market for significant risk transfers as it seeks fresh ways to maximize its capacity to bankroll the kingdom’s $2 trillion Vision 2030 agenda.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/saudi-national-bank-explores-foray-into-booming-srt-market",
+      "category": "economics",
+      "published": "2026-02-03 10:01:18+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Euro-Zone Banks Unexpectedly Tighten Firms’ Credit Standards",
+      "description": "Euro-zone banks unexpectedly tightened corporate credit standards at the end of 2025, raising doubts about investment and economic activity before the European Central Bank sets interest rates this week.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/euro-zone-banks-unexpectedly-tighten-credit-standards-for-firms",
+      "category": "economics",
+      "published": "2026-02-03 09:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Indonesia’s Finance Minister Blasts Citi for Budget Deficit View",
+      "description": "Indonesia’s finance minister has taken aim at Citigroup Inc. for a report that said the Southeast Asian nation’s budget deficit could breach the legal limit this year.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/indonesia-s-finance-minister-blasts-citi-for-budget-deficit-view",
+      "category": "economics",
+      "published": "2026-02-03 09:24:56+00:00",
+      "author": "",
+      "tags": [
+        "NYS:C"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Hungary Trade Takes Off as Polls Point to Orban’s Election Loss",
+      "description": "Investors are stepping up bold wagers on Hungary’s stocks, bonds and currency ahead of elections that could redefine the country’s future.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/bold-hungary-bet-lures-investors-as-pivotal-election-nears",
+      "category": "economics",
+      "published": "2026-02-03 06:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "India Sees Strong Revenue, Scope to Trim Borrowing Next Year",
+      "description": "India expects revenue collections to be buoyant in the year beginning April, potentially allowing it to scale back its borrowing program, according to a senior finance ministry official.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/india-sees-strong-revenue-scope-to-trim-borrowing-next-year",
+      "category": "economics",
+      "published": "2026-02-03 08:59:33+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "French Inflation Rate Unexpectedly Sinks to Five-Year Low",
+      "description": "French inflation unexpectedly eased to a five-year low, staying well short of the European Central Bank’s 2% target as energy prices fell.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/french-inflation-rate-unexpectedly-sinks-to-five-year-low",
+      "category": "economics",
+      "published": "2026-02-03 07:45:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Turkish Inflation Slowdown Stagnates at Start of Year",
+      "description": "Turkish inflation slowed for the fourth month in a row in January, albeit significantly less than analysts expected due to seasonal price rises in food and other goods.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/turkish-inflation-slows-less-than-forecast-to-30-7-in-january",
+      "category": "economics",
+      "published": "2026-02-03 07:03:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "India Exports Poised to Rise as US Slashes Tariffs to 18%",
+      "description": "Indian exporters are set for a boost after the US lowered tariffs on shipments from the country, easing months of uncertainty and triggering a sharp rally in local markets.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/india-exports-poised-to-rise-as-us-slashes-tariffs-to-18",
+      "category": "economics",
+      "published": "2026-02-03 05:30:06+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "positive",
+      "importance": "normal"
+    },
+    {
+      "title": "UK Grocery Inflation Eases as Stretched Shoppers Seek Promotions",
+      "description": "UK grocery price inflation eased to its lowest level since April, as Britons opted for supermarkets’ own-brand products and promotional items.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/uk-grocery-inflation-eases-as-stretched-shoppers-seek-promotions",
+      "category": "economics",
+      "published": "2026-02-03 08:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Australia Becomes First Major Economy to Hike Rates in 2026",
+      "description": "Australia’s central bank raised its key interest rate Tuesday, the first major monetary authority to hike this year, after judging inflation pressures were persistent enough to warrant renewed restraint.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/australia-raises-key-interest-rate-to-combat-inflation-pressure",
+      "category": "economics",
+      "published": "2026-02-03 03:31:20+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    }
+  ],
+  "industries": [
+    {
+      "title": "Pfizer Releases New Obesity Data, Leaving Investors Wanting More",
+      "description": "Pfizer Inc. revealed data from one of its new obesity treatments early Tuesday that had little detail, leaving investors wondering if the pricey acquisition of Metsera Inc. will fill the gaps from its declining Covid shot and pill franchises.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/pfizer-beats-sales-estimates-on-demand-for-older-drugs",
+      "category": "industries",
+      "published": "2026-02-03 11:57:28+00:00",
+      "author": "",
+      "tags": [
+        "NYS:PFE"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Pfizer Says Metsera Drug Produced 12.3% Weight Loss in Study",
+      "description": "Pfizer Inc. said that a monthly regimen of an obesity drug obtained in its deal for Metsera Inc. produced up to 12.3% weight loss after 28 weeks compared to a placebo.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/pfizer-says-metsera-drug-produced-12-3-weight-loss-in-study",
+      "category": "industries",
+      "published": "2026-02-03 12:42:32+00:00",
+      "author": "",
+      "tags": [
+        "NYS:PFE"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Siemens Energy to Invest $1 Billion in US to Tap Power Boom",
+      "description": "Siemens Energy AG will invest $1 billion (€847 million) in manufacturing capacity in the US over the next two years as power demand surges.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/siemens-energy-to-invest-1-billion-in-us-to-tap-into-power-boom",
+      "category": "industries",
+      "published": "2026-02-03 11:00:00+00:00",
+      "author": "",
+      "tags": [
+        "GER:ENR"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "PepsiCo Cuts Lay’s, Doritos Prices as Much as 15% to Boost Sales",
+      "description": "PepsiCo Inc. is cutting prices by as much as 15% for key brands, including Lay’s and Doritos, in a bid to lift sales by offering more affordable products.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/pepsico-tops-expectations-after-pledging-to-cut-some-prices",
+      "category": "industries",
+      "published": "2026-02-03 11:18:54+00:00",
+      "author": "",
+      "tags": [
+        "NMS:PEP"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "UK Navy Says Ship Hailed by Armed Small Vessels in Hormuz",
+      "description": "A vessel was hailed by smaller armed ships in the Strait of Hormuz, a UK naval group said, with heightened focus on the vital waterway amid tensions between the US and Iran.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/uk-navy-says-ship-hailed-by-armed-small-vessels-in-hormuz-strait",
+      "category": "industries",
+      "published": "2026-02-03 11:44:19+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "PayPal Replaces CEO Chriss After Profit Falls Short of Estimates",
+      "description": "PayPal Holdings Inc. said Chief Executive Officer Alex Chriss will be replaced by HP Inc. CEO Enrique Lores after profit and revenue fell short of expectations. Shares of the firm tumbled more than 12%.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/paypal-names-hp-s-enrique-lores-to-replace-ceo-alex-chriss",
+      "category": "industries",
+      "published": "2026-02-03 12:00:11+00:00",
+      "author": "",
+      "tags": [
+        "NMS:PYPL"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Copper Rebounds as China Industry Group Calls for Stockpiling",
+      "description": "Copper rebounded as a metals selloff led by silver and gold eased and a state-backed industry group called for China to boost its strategic reserves of the crucial industrial metal.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/copper-rebounds-from-two-day-slump-as-metals-selloff-eases",
+      "category": "industries",
+      "published": "2026-02-03 02:28:15+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Why China’s Grip on Critical Minerals Is So Hard to Break",
+      "description": "China is the dominant supplier of materials that are vital for the production of electric vehicle batteries, solar panels, wind-turbine magnets and other low-carbon technologies.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/china-s-critical-minerals-project-vault-and-other-efforts-to-challenge-lead",
+      "category": "industries",
+      "published": "2026-02-03 12:00:26+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Merck’s Forecast Misses Expectations on Gardasil Woes",
+      "description": "Merck &amp; Co. forecast 2026 sales and profit that missed Wall Street’s expectations as continued challenges with its HPV vaccine Gardasil, which may remain off the market in China this year, overshadowed growth from newer drugs.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/merck-s-full-year-forecast-misses-expectations-on-gardasil-woes",
+      "category": "industries",
+      "published": "2026-02-03 11:30:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Santander and NatWest Mull Multibillion Pound UK Pension Transfers",
+      "description": "Banco Santander SA and NatWest Group Plc are exploring offloading billions of pounds in UK pension assets to an insurer, according to people familiar with the plans.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/santander-natwest-mull-multibillion-pound-uk-pension-transfers",
+      "category": "industries",
+      "published": "2026-02-03 10:05:39+00:00",
+      "author": "",
+      "tags": [
+        "LSE:NWG"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Morocco Looks to Resume $1 Billion LNG Project ‘in Due Course’",
+      "description": "Morocco will issue new tenders to develop a liquefied natural gas terminal on its Mediterranean coast “in due course,” a top official said, signaling the kingdom’s $1 billion energy project is still on the table.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/morocco-looks-to-resume-1-billion-lng-project-in-due-course",
+      "category": "industries",
+      "published": "2026-02-03 11:33:23+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Gerard Piqué’s Kings League Raises $63 Million to Reach Gen Z",
+      "description": "Former footballer Gerard Piqué has secured $63 million for his Kings League startup, striking a partnership with media and entertainment investor Alignment Growth as investors pour money into digital-first sports formats targeting Gen Z and Gen Alpha audiences.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/gerard-pique-s-kings-league-raises-63-million-to-reach-gen-z",
+      "category": "industries",
+      "published": "2026-02-03 11:00:21+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Narcolepsy Sufferers See Hope for a Treatment",
+      "description": "Takeda seeks approval for drug that treats root cause.",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-02-03/takeda-seeks-approval-for-new-narcolepsy-drug-targeting-root-cause",
+      "category": "industries",
+      "published": "2026-02-03 11:00:01+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Credit Suisse Nazi Probe Reveals Fresh SS Links, Says Senator",
+      "description": "An investigation into ties between Credit Suisse and Nazi Germany has so far revealed hundreds of accounts with potential links to Nazi-era officials and industrialists, including the SS paramilitary wing, according to US Senator Charles Grassley, adding to pressure on the bank ahead of a key hearing.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/credit-suisse-nazi-probe-reveals-fresh-ss-links-says-senator",
+      "category": "industries",
+      "published": "2026-02-03 11:00:00+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Qatar in Deal to Supply LNG for 27 Years to Japan’s Jera",
+      "description": "Qatar signed a 27-year deal to sell liquefied natural gas to Japan’s biggest utility, marking a turnaround for a dwindling fuel trade between the two countries.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/qatar-set-to-sign-new-lng-sales-deal-with-japan-utility-jera",
+      "category": "industries",
+      "published": "2026-02-03 09:18:14+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Berlin Buys 25% Stake in Tennet’s German Grid for €3.3 Billion",
+      "description": "The German government will buy a 25.1% stake in the German unit of power grid operator Tennet Holding BV after years of wrangling between Berlin and The Hague.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/berlin-buys-25-1-stake-in-tennet-s-german-grid-unit-for-3-3b",
+      "category": "industries",
+      "published": "2026-02-03 10:48:31+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Zimbabwe Court Rules Impala Platinum Not Liable for Royalty",
+      "description": "Zimbabwe’s High court said Impala Platinum Holdings Ltd.’s local unit is not liable to pay mining royalties of $7.1 million on exports matte and concentrates.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/zimbabwe-court-rules-impala-platinum-not-liable-for-royalty",
+      "category": "industries",
+      "published": "2026-02-03 10:19:38+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "Tanker Rates Spike as Iran Tensions Run Up Against Tight Supply",
+      "description": "Tankers moving crude from the Middle East to China have charged the highest fees in two months this week, after nervousness over Iran tensions combined with tight vessel supply to drive up prices.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/tanker-rates-spike-as-iran-tensions-run-up-against-tight-supply",
+      "category": "industries",
+      "published": "2026-02-03 09:21:36+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "high"
+    },
+    {
+      "title": "Malaysia Frees Ships It Says Conducted Unlicensed Oil Transfer",
+      "description": "Malaysia released two aging tankers it detained for conducting a ship-to-ship transfer of oil without permission on a bond, following a request from a representative for the vessels, according to maritime authorities.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/malaysia-frees-ships-it-says-conducted-unlicensed-oil-transfer",
+      "category": "industries",
+      "published": "2026-02-03 09:16:35+00:00",
+      "author": "",
+      "tags": [],
+      "sentiment": "neutral",
+      "importance": "normal"
+    },
+    {
+      "title": "UniCredit Pulled €16 Billion From Amundi Amid Partnership Doubts",
+      "description": "UniCredit SpA withdrew client assets worth €16 billion ($18.8 billion) from Amundi SA last year amid speculation that the Italian bank plans to end its sales partnership with the French asset manager.",
+      "url": "https://www.bloomberg.com/news/articles/2026-02-03/amundi-s-outflows-from-unicredit-totaled-16-billion-last-year",
+      "category": "industries",
+      "published": "2026-02-03 06:00:00+00:00",
+      "author": "",
+      "tags": [
+        "PAR:AMUN",
+        "MIL:UCG"
+      ],
+      "sentiment": "neutral",
+      "importance": "normal"
+    }
+  ]
+}

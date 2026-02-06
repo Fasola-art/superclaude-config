@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
-"""
-GitHub 모니터링 모듈
-"""
+"""GitHub 모니터링 모듈"""
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Optional
 
-from .types import PullRequest, Issue, Notification, ReviewState
+from .types import PullRequest, Issue, Notification
 from .client import GitHubClient
+from .monitor_utils import (
+    create_pr_review_notification,
+    create_issue_assigned_notification,
+    filter_stale_prs,
+    categorize_prs_by_review_state,
+    collect_action_items,
+)
 
 
 class GitHubMonitor:
@@ -35,39 +40,25 @@ class GitHubMonitor:
         """업데이트 확인"""
         notifications: list[Notification] = []
 
-        # 각 레포 확인
         for repo in self.repos:
             client = GitHubClient(repo)
 
             # 리뷰 요청된 PR
-            review_requests = client.get_review_requests()
-            for pr in review_requests:
+            for pr in client.get_review_requests():
                 key = f"{repo}:{pr.number}"
                 if key not in self._known_prs:
-                    notifications.append(Notification(
-                        type="pr_review_requested",
-                        title=f"[{repo}] 리뷰 요청: #{pr.number} {pr.title}",
-                        url=pr.url,
-                        repo=repo,
-                        timestamp=pr.updated_at,
-                        actor=pr.author,
-                        priority="high",
-                    ))
+                    notifications.append(
+                        create_pr_review_notification(repo, pr)
+                    )
                     self._known_prs.add(key)
 
             # 내게 할당된 Issue
-            my_issues = client.get_my_assigned_issues()
-            for issue in my_issues:
+            for issue in client.get_my_assigned_issues():
                 key = f"{repo}:{issue.number}"
                 if key not in self._known_issues:
-                    notifications.append(Notification(
-                        type="issue_assigned",
-                        title=f"[{repo}] 이슈 할당: #{issue.number} {issue.title}",
-                        url=issue.url,
-                        repo=repo,
-                        timestamp=issue.updated_at,
-                        priority="normal",
-                    ))
+                    notifications.append(
+                        create_issue_assigned_notification(repo, issue)
+                    )
                     self._known_issues.add(key)
 
         self._last_check = datetime.now()
@@ -77,62 +68,16 @@ class GitHubMonitor:
         """PR 요약"""
         client = GitHubClient(repo) if repo else self.client
         prs = client.get_pull_requests(state="open")
-
-        # 리뷰 대기 중인 PR
-        awaiting_review = [pr for pr in prs if not pr.draft and not pr.reviews]
-
-        # 변경 요청된 PR
-        changes_requested = [
-            pr for pr in prs
-            if any(r.state == ReviewState.CHANGES_REQUESTED for r in pr.reviews)
-        ]
-
-        # 승인된 PR
-        approved = [
-            pr for pr in prs
-            if any(r.state == ReviewState.APPROVED for r in pr.reviews)
-            and all(r.state != ReviewState.CHANGES_REQUESTED for r in pr.reviews)
-        ]
-
-        return {
-            "total_open": len(prs),
-            "awaiting_review": len(awaiting_review),
-            "changes_requested": len(changes_requested),
-            "approved": len(approved),
-            "draft": len([pr for pr in prs if pr.draft]),
-            "prs": prs,
-        }
+        return categorize_prs_by_review_state(prs)
 
     def get_stale_prs(
-        self,
-        days: int = 7,
-        repo: Optional[str] = None,
+        self, days: int = 7, repo: Optional[str] = None
     ) -> list[PullRequest]:
         """오래된 PR 조회"""
         client = GitHubClient(repo) if repo else self.client
         prs = client.get_pull_requests(state="open")
-
-        threshold = datetime.now() - timedelta(days=days)
-        return [
-            pr for pr in prs
-            if pr.updated_at.replace(tzinfo=None) < threshold
-        ]
+        return filter_stale_prs(prs, days)
 
     def get_my_action_items(self) -> dict[str, list[PullRequest | Issue]]:
         """내 액션 아이템"""
-        items: dict[str, list[PullRequest | Issue]] = {
-            "review_requests": [],
-            "assigned_issues": [],
-            "my_open_prs": [],
-        }
-
-        for repo in self.repos:
-            client = GitHubClient(repo)
-
-            # 리뷰 요청
-            items["review_requests"].extend(client.get_review_requests())
-
-            # 할당된 이슈
-            items["assigned_issues"].extend(client.get_my_assigned_issues())
-
-        return items
+        return collect_action_items(self.repos)

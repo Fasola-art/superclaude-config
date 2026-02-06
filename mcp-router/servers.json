@@ -31,6 +31,32 @@
       },
       "description": "GitHub API 연동",
       "enabled": true
+    },
+    "local-llm": {
+      "command": "python3",
+      "args": ["-m", "local_llm.mcp_wrapper"],
+      "env": {
+        "PYTHONPATH": "~/.claude/modules/local-llm",
+        "MLX_MODEL_PATH": "~/.claude/modules/local-llm/models/",
+        "DEFAULT_MODEL": "qwen2.5-7b"
+      },
+      "description": "로컬 LLM 서브에이전트 (MLX/Ollama)",
+      "enabled": true
+    },
+    "ollama": {
+      "command": "npx",
+      "args": ["-y", "@anthropics/mcp-server-ollama"],
+      "env": {
+        "OLLAMA_HOST": "http://localhost:11434"
+      },
+      "description": "Ollama 로컬 LLM 서버",
+      "enabled": true
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+      "description": "Playwright 브라우저 자동화 (웹 탐색/테스트)",
+      "enabled": true
     }
   }
 }
