@@ -71,5 +71,25 @@
     "injectOnTaskCall": true,
     "rulesFile": "~/.claude/rules/_shared/agent-rules.md",
     "applyTo": ["Task", "Skill", "PlanMode"]
+  },
+
+  "autoRetry": {
+    "enabled": true,
+    "maxRetries": 5,
+    "passThreshold": 0.90,
+    "skipPatterns": [".json", ".md", ".env", ".yaml", ".yml", ".toml"]
+  },
+
+  "agentMemory": {
+    "enabled": true,
+    "maxPerAgent": 50,
+    "retentionDays": 30,
+    "topK": 5
+  },
+
+  "intentDetection": {
+    "enabled": true,
+    "ambiguityThreshold": 0.60,
+    "minKeywords": 2
   }
 }

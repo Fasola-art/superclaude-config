@@ -140,3 +140,19 @@ def _init_tables() -> None:
                 snoozed_until TIMESTAMP
             )
         """)
+
+        # 에이전트 메모리 테이블
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS agent_memories (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                agent_type TEXT NOT NULL,
+                project_path TEXT,
+                context_key TEXT NOT NULL,
+                context_value TEXT NOT NULL,
+                session_id TEXT,
+                access_count INTEGER DEFAULT 1,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                last_accessed TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(agent_type, project_path, context_key)
+            )
+        """)

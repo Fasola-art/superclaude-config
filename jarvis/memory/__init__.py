@@ -9,6 +9,7 @@ from .task import TaskManager
 from .calendar import CalendarManager
 from .context import ContextManager
 from .patterns import UsagePatternTracker
+from .agent_memory import AgentMemory, MemoryEntry
 
 __all__ = [
     "get_connection",
@@ -20,4 +21,6 @@ __all__ = [
     "CalendarManager",
     "ContextManager",
     "UsagePatternTracker",
+    "AgentMemory",
+    "MemoryEntry",
 ]

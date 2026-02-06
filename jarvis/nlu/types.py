@@ -54,3 +54,22 @@ class ParseResult:
     def get_entities(self, entity_type: str) -> list[Any]:
         """특정 타입의 모든 엔티티 값 반환"""
         return [e.value for e in self.entities if e.type == entity_type]
+
+
+@dataclass
+class IntentScore:
+    """Intent 매칭 결과 (점수 포함)"""
+
+    intent: Intent
+    score: float
+    matched_patterns: list[str] = field(default_factory=list)
+
+
+@dataclass
+class AmbiguityResult:
+    """모호성 분석 결과"""
+
+    score: float  # 0.0 (명확) ~ 1.0 (매우 모호)
+    reason: str
+    suggestions: list[str] = field(default_factory=list)
+    top_intents: list[IntentScore] = field(default_factory=list)

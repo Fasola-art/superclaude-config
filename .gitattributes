@@ -1,0 +1,23 @@
+# Windows 호환: 자동 줄바꿈 변환
+* text=auto
+
+# Python: LF 유지
+*.py text eol=lf
+
+# Shell: LF 유지
+*.sh text eol=lf
+
+# Markdown/JSON/YAML: 자동 변환
+*.md text
+*.json text
+*.yaml text
+*.yml text
+*.toml text
+
+# Binary: 변환 안 함
+*.db binary
+*.sqlite binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary

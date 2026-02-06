@@ -116,6 +116,10 @@
           {
             "type": "command",
             "command": "python3 ~/.claude/hooks/UserPromptSubmit/persona-activator.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/UserPromptSubmit/intent-clarifier.py"
           }
         ]
       }
@@ -136,6 +140,10 @@
           {
             "type": "command",
             "command": "python3 ~/.claude/hooks/PreToolUse/agent-rules-injector.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/PreToolUse/agent-memory-loader.py"
           }
         ]
       },
@@ -205,6 +213,10 @@
           {
             "type": "command",
             "command": "python3 ~/.claude/hooks/PostToolUse/pattern-tracker.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/PostToolUse/auto-retry-loop.py"
           }
         ]
       },
@@ -227,6 +239,10 @@
           {
             "type": "command",
             "command": "python3 ~/.claude/hooks/PostToolUse/ralph-loop-checker.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/PostToolUse/agent-memory-saver.py"
           }
         ]
       }

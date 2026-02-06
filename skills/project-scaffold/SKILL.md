@@ -1,7 +1,7 @@
 ---
 name: project-scaffold
-description: Quick TypeScript CLI project generation with AI integration support.
-version: "1.0.0"
+description: Project generation with Starter/Dynamic/Enterprise levels.
+version: "2.0.0"
 triggers:
   - /scaffold
   - /new-project
@@ -9,32 +9,37 @@ triggers:
 author: reim
 tags:
   - typescript
-  - cli
   - project
   - scaffold
+  - level
 ---
 
 # Project Scaffold Skill
 
-> Quickly generate TypeScript + CLI projects
+> Multi-level project generation
 
 ---
 
 ## Usage
 
 ```bash
-/scaffold <project-name> [options]
+/scaffold <project-name> [--level starter|dynamic|enterprise] [--ai]
 ```
 
-### Options
-- `--cli`: CLI tool template (default)
-- `--api`: API server template
-- `--ai`: Include AI integration (Claude API)
+### Levels
+
+| Level | Stack | DB | Auth | Deploy | Time |
+|-------|-------|----|------|--------|------|
+| starter | HTML/CSS/JS | None | None | GitHub Pages | ~3min |
+| dynamic | Next.js + TS + Supabase | Supabase | Supabase Auth | Vercel | ~10min |
+| enterprise | Docker + K8s + Terraform | PostgreSQL + Redis | OAuth2 + JWT | AWS/GCP | ~20min |
 
 ### Examples
+
 ```bash
-/scaffold my-tool --cli --ai
-/scaffold api-server --api
+/scaffold my-blog --level starter
+/scaffold saas-app --level dynamic --ai
+/scaffold platform --level enterprise
 ```
 
 ---
@@ -43,157 +48,48 @@ tags:
 
 <command-name>project-scaffold</command-name>
 
-### 1. Collect User Input
+### 1. Collect Input
 
-If project name is not provided, ask using AskUserQuestion:
-- Project name
-- Project type (CLI / API / Library)
-- AI integration needed (Claude / OpenAI / None)
-- Output location (current directory / specified path)
+If level not specified, use AskUserQuestion:
+- Project name (required)
+- Level: Starter / Dynamic / Enterprise
+- AI integration: Claude / OpenAI / None
+- Output path
 
-### 2. Generate Project Structure
+### 2. Level-specific Generation
 
-```
-<project-name>/
-├── src/
-│   ├── cli/
-│   │   └── index.ts          # CLI entry point
-│   ├── core/
-│   │   └── main.ts           # Core logic
-│   ├── integrations/
-│   │   └── claude.ts         # AI integration (optional)
-│   ├── types/
-│   │   └── index.ts          # Type definitions
-│   └── utils/
-│       └── helpers.ts        # Utilities
-├── examples/
-│   └── sample.txt            # Sample input
-├── output/                   # Output directory
-├── package.json
-├── tsconfig.json
-├── .env.example
-├── .gitignore
-└── README.md
-```
+| Level | Reference |
+|-------|-----------|
+| starter | [references/starter.md](references/starter.md) |
+| dynamic | [references/dynamic.md](references/dynamic.md) |
+| enterprise | [references/enterprise.md](references/enterprise.md) |
 
-### 3. Required File Contents
+### 3. Post-creation
 
-#### package.json Template
-```json
-{
-  "name": "<project-name>",
-  "version": "0.1.0",
-  "type": "module",
-  "bin": {
-    "<cli-name>": "./dist/cli/index.ts"
-  },
-  "scripts": {
-    "dev": "tsx src/cli/index.ts",
-    "build": "tsc",
-    "start": "node dist/cli/index.js"
-  },
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.39.0",
-    "commander": "^12.1.0",
-    "chalk": "^5.3.0",
-    "ora": "^8.0.1",
-    "dotenv": "^16.4.5"
-  },
-  "devDependencies": {
-    "@types/node": "^22.10.0",
-    "typescript": "^5.7.0",
-    "tsx": "^4.19.0"
-  }
-}
-```
-
-#### tsconfig.json Template
-```json
-{
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
-  },
-  "include": ["src/**/*"]
-}
-```
-
-#### CLI Entry Point Template (src/cli/index.ts)
-```typescript
-#!/usr/bin/env node
-import { Command } from 'commander';
-import chalk from 'chalk';
-import ora from 'ora';
-import { config } from 'dotenv';
-config();
-
-const program = new Command();
-
-program
-  .name('<cli-name>')
-  .description('<description>')
-  .version('0.1.0');
-
-program
-  .command('run <input>')
-  .description('Main command')
-  .option('-v, --verbose', 'Verbose output')
-  .action(async (input, options) => {
-    const spinner = ora('Processing...').start();
-    try {
-      // Call core logic
-      spinner.succeed(chalk.green('Complete!'));
-    } catch (error) {
-      spinner.fail(chalk.red('Error occurred'));
-    }
-  });
-
-program.parse();
-```
-
-### 4. Install Packages
-
-```bash
-cd <project-name> && npm install
-```
-
-### 5. Completion Message
-
-```markdown
-Project created successfully!
-
-Location: <path>
-Packages: Installed
-
-Getting started:
-  cd <project-name>
-  cp .env.example .env
-  # Set ANTHROPIC_API_KEY
-  npm run dev run examples/sample.txt
-```
+1. Install dependencies (if applicable)
+2. Initialize git repository
+3. Create .env.example
+4. Display getting-started instructions
 
 ---
 
 ## Reference
 
-### Environment Variables for AI Integration
-```
-ANTHROPIC_API_KEY=sk-ant-xxx
-```
+### Common Options
 
-### Extensible Templates
+- `--ai`: Include AI integration (Claude API)
 - `--notion`: Notion API integration
-- `--clova`: CLOVA Speech STT integration
-- `--supabase`: Supabase integration
+- `--supabase`: Supabase integration (dynamic level default)
+
+### Level Detection Heuristic
+
+If level not specified, infer from project name keywords:
+- "blog", "landing", "portfolio" → starter
+- "app", "saas", "dashboard" → dynamic
+- "platform", "service", "api" → enterprise
 
 ---
 
 **META**
-- Created: 2026-01-31
-- Last Updated: 2026-01-31
+- Version: 2.0.0
+- Updated: 2026-02-07
