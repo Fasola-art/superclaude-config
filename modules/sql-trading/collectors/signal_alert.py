@@ -17,6 +17,8 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from telegram_sender import send_message as tg_send
+
 # psql 경로
 PSQL_PATHS = [
     "/opt/homebrew/opt/postgresql@16/bin/psql",
@@ -224,6 +226,7 @@ def main():
         if buy_signals:
             msg = ", ".join([format_signal_message(s) for s in buy_signals[:3]])
             send_notification("📈 매수 신호", msg)
+            tg_send(f"📈 *매수 신호*\n{msg}")
             alerts_sent += 1
 
         # 매도 신호
@@ -231,6 +234,7 @@ def main():
         if sell_signals:
             msg = ", ".join([format_signal_message(s) for s in sell_signals[:3]])
             send_notification("📉 매도 신호", msg)
+            tg_send(f"📉 *매도 신호*\n{msg}")
             alerts_sent += 1
 
     # 2. 급등/급락 알림
@@ -241,6 +245,7 @@ def main():
             direction = "급등 🚀" if alert["change_pct"] > 0 else "급락 💥"
             msg = f"{alert['symbol']} {alert['change_pct']:+.1f}% (${alert['price']})"
             send_notification(f"⚠️ {direction}", msg)
+            tg_send(f"⚠️ *{direction}*\n{msg}")
             notified.add(alert_key)
             alerts_sent += 1
 
