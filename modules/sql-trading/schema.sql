@@ -265,3 +265,200 @@ COMMENT ON TABLE economic_indicators IS '경제 지표 데이터 (FRED 등)';
 COMMENT ON TABLE trading_signals IS '트레이딩 신호 및 알림';
 COMMENT ON TABLE trade_statistics IS 'UN Comtrade 국제 무역 통계';
 COMMENT ON TABLE freight_indices IS '운임 지수 (BDI, FBX 등)';
+
+-- ============================================
+-- 확장 테이블 (2026-02-12 추가)
+-- ============================================
+
+-- 암호화폐 시세
+CREATE TABLE IF NOT EXISTS crypto_prices (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMPTZ NOT NULL,
+    symbol VARCHAR(20) NOT NULL,
+    price_usd DECIMAL(20, 8),
+    price_krw DECIMAL(20, 2),
+    change_pct_24h DECIMAL(10, 4),
+    volume_24h DECIMAL(20, 2),
+    market_cap DECIMAL(20, 2),
+    source VARCHAR(50) DEFAULT 'coingecko',
+    metadata JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 김치프리미엄
+CREATE TABLE IF NOT EXISTS kimchi_premium (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMPTZ NOT NULL,
+    symbol VARCHAR(20) NOT NULL,
+    global_price_usd DECIMAL(20, 8),
+    korea_price_krw DECIMAL(20, 2),
+    exchange_rate DECIMAL(15, 4),
+    premium_pct DECIMAL(10, 4),
+    source VARCHAR(50),
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 부동산 지수
+CREATE TABLE IF NOT EXISTS realestate_indices (
+    id SERIAL PRIMARY KEY,
+    date DATE NOT NULL,
+    region VARCHAR(100),
+    index_type VARCHAR(50),
+    index_value DECIMAL(15, 4),
+    change_pct DECIMAL(10, 4),
+    source VARCHAR(50) DEFAULT 'kbland',
+    metadata JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE(date, region, index_type)
+);
+
+-- 금리
+CREATE TABLE IF NOT EXISTS interest_rates (
+    id SERIAL PRIMARY KEY,
+    date DATE NOT NULL,
+    rate_type VARCHAR(50),
+    rate_value DECIMAL(10, 4),
+    country VARCHAR(10) DEFAULT 'KR',
+    source VARCHAR(50),
+    metadata JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE(date, rate_type, country)
+);
+
+-- 뉴스
+CREATE TABLE IF NOT EXISTS market_news (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMPTZ NOT NULL,
+    title TEXT NOT NULL,
+    summary TEXT,
+    url TEXT,
+    source VARCHAR(100),
+    category VARCHAR(50),
+    sentiment DECIMAL(5, 4),
+    symbols TEXT[],
+    metadata JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 포트폴리오
+CREATE TABLE IF NOT EXISTS portfolio_items (
+    id SERIAL PRIMARY KEY,
+    symbol VARCHAR(20) NOT NULL UNIQUE,
+    asset_type VARCHAR(20),
+    quantity DECIMAL(20, 8),
+    avg_price DECIMAL(20, 8),
+    current_price DECIMAL(20, 8),
+    currency VARCHAR(10) DEFAULT 'KRW',
+    metadata JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 사용자 설정
+CREATE TABLE IF NOT EXISTS user_settings (
+    id SERIAL PRIMARY KEY,
+    key VARCHAR(100) UNIQUE NOT NULL,
+    value JSONB NOT NULL,
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 자동매매 주문 실행
+CREATE TABLE IF NOT EXISTS trading_execution_orders (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMPTZ NOT NULL,
+    signal_id INTEGER REFERENCES trading_signals(id),
+    symbol VARCHAR(20),
+    side VARCHAR(10),
+    order_type VARCHAR(20),
+    quantity DECIMAL(20, 8),
+    price DECIMAL(20, 8),
+    status VARCHAR(20),
+    broker VARCHAR(50),
+    metadata JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 리스크 이벤트
+CREATE TABLE IF NOT EXISTS trading_risk_events (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMPTZ NOT NULL,
+    level VARCHAR(20),
+    event_type VARCHAR(50),
+    description TEXT,
+    daily_pnl_pct DECIMAL(10, 4),
+    total_drawdown_pct DECIMAL(10, 4),
+    action_taken TEXT,
+    metadata JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 백테스팅 결과
+CREATE TABLE IF NOT EXISTS trading_backtest_results (
+    id SERIAL PRIMARY KEY,
+    strategy VARCHAR(100),
+    start_date DATE,
+    end_date DATE,
+    total_trades INTEGER,
+    win_rate DECIMAL(10, 4),
+    sharpe_ratio DECIMAL(10, 4),
+    max_drawdown DECIMAL(10, 4),
+    total_return DECIMAL(10, 4),
+    metadata JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 페이퍼 트레이딩
+CREATE TABLE IF NOT EXISTS trading_paper_trades (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMPTZ NOT NULL,
+    symbol VARCHAR(20),
+    side VARCHAR(10),
+    quantity DECIMAL(20, 8),
+    entry_price DECIMAL(20, 8),
+    exit_price DECIMAL(20, 8),
+    pnl DECIMAL(20, 8),
+    pnl_pct DECIMAL(10, 4),
+    strategy VARCHAR(100),
+    metadata JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 확장 인덱스
+CREATE INDEX IF NOT EXISTS idx_crypto_symbol ON crypto_prices(symbol, timestamp);
+CREATE INDEX IF NOT EXISTS idx_crypto_timestamp ON crypto_prices(timestamp);
+CREATE INDEX IF NOT EXISTS idx_kimchi_symbol ON kimchi_premium(symbol, timestamp);
+CREATE INDEX IF NOT EXISTS idx_realestate_date ON realestate_indices(date);
+CREATE INDEX IF NOT EXISTS idx_realestate_region ON realestate_indices(region);
+CREATE INDEX IF NOT EXISTS idx_rates_date ON interest_rates(date);
+CREATE INDEX IF NOT EXISTS idx_news_timestamp ON market_news(timestamp);
+CREATE INDEX IF NOT EXISTS idx_news_category ON market_news(category);
+CREATE INDEX IF NOT EXISTS idx_portfolio_symbol ON portfolio_items(symbol);
+CREATE INDEX IF NOT EXISTS idx_exec_timestamp ON trading_execution_orders(timestamp);
+CREATE INDEX IF NOT EXISTS idx_risk_timestamp ON trading_risk_events(timestamp);
+CREATE INDEX IF NOT EXISTS idx_paper_timestamp ON trading_paper_trades(timestamp);
+
+-- 확장 뷰
+CREATE OR REPLACE VIEW v_latest_crypto AS
+SELECT DISTINCT ON (symbol)
+    symbol, timestamp, price_usd, price_krw, change_pct_24h, volume_24h, market_cap
+FROM crypto_prices
+ORDER BY symbol, timestamp DESC;
+
+CREATE OR REPLACE VIEW v_latest_kimchi AS
+SELECT DISTINCT ON (symbol)
+    symbol, timestamp, global_price_usd, korea_price_krw, exchange_rate, premium_pct
+FROM kimchi_premium
+ORDER BY symbol, timestamp DESC;
+
+-- 확장 테이블 코멘트
+COMMENT ON TABLE crypto_prices IS '암호화폐 시세';
+COMMENT ON TABLE kimchi_premium IS '김치프리미엄';
+COMMENT ON TABLE realestate_indices IS '부동산 지수';
+COMMENT ON TABLE interest_rates IS '금리';
+COMMENT ON TABLE market_news IS '시장 뉴스';
+COMMENT ON TABLE portfolio_items IS '포트폴리오';
+COMMENT ON TABLE user_settings IS '사용자 설정';
+COMMENT ON TABLE trading_execution_orders IS '자동매매 주문';
+COMMENT ON TABLE trading_risk_events IS '리스크 이벤트';
+COMMENT ON TABLE trading_backtest_results IS '백테스팅 결과';
+COMMENT ON TABLE trading_paper_trades IS '페이퍼 트레이딩';

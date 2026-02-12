@@ -1,35 +1,34 @@
-#!/usr/bin/env python3
 """
-SQL Trading Dashboard API Server
+마켓브리핑 API 서버
 
-실시간 DB 데이터를 대시보드에 제공하는 FastAPI 서버
-
-Usage:
-    python3 api_server.py
-    # http://localhost:8080
-
-Version: 1.0.0
+FastAPI + psycopg2 커넥션 풀
 """
-
-import json
-import subprocess
+from contextlib import asynccontextmanager
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
-app = FastAPI(title="SQL Trading API", version="1.0.0")
+from db import close_pool
+from routers import stocks, crypto, realestate, commodities, signals, news, portfolio
 
-# Static 파일 서빙
-static_path = Path(__file__).parent / "static"
-if static_path.exists():
-    app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
 
-# CORS 설정
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """서버 시작/종료 이벤트"""
+    yield
+    close_pool()
+
+
+app = FastAPI(
+    title="마켓브리핑 API",
+    version="2.0.0",
+    lifespan=lifespan,
+)
+
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -38,257 +37,51 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# psql 경로
-PSQL_PATH = "/opt/homebrew/opt/postgresql@16/bin/psql"
+# Static 파일
+static_path = Path(__file__).parent / "static"
+if static_path.exists():
+    app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
 
-
-def run_query(sql: str) -> List[Dict[str, Any]]:
-    """SQL 쿼리 실행"""
-    try:
-        result = subprocess.run(
-            [PSQL_PATH, "-U", "reim", "-d", "claude_mcp", "-t", "-A", "-F", "\t", "-c", sql],
-            capture_output=True,
-            text=True,
-            timeout=30
-        )
-        if result.returncode != 0:
-            return []
-
-        rows = []
-        for line in result.stdout.strip().split("\n"):
-            if line:
-                rows.append(line.split("\t"))
-        return rows
-    except Exception as e:
-        print(f"Query error: {e}")
-        return []
-
-
-@app.get("/")
-async def index():
-    """대시보드 HTML 반환 (모듈화 버전)"""
-    html_path = Path(__file__).parent / "realtime-modular.html"
-    if html_path.exists():
-        return FileResponse(html_path)
-    # fallback to legacy
-    legacy_path = Path(__file__).parent / "realtime.html"
-    if legacy_path.exists():
-        return FileResponse(legacy_path)
-    return HTMLResponse("<h1>Dashboard not found</h1>")
-
-
-@app.get("/api/sectors")
-async def get_sectors():
-    """섹터별 현황"""
-    sql = """
-    SELECT
-        metadata->>'sector' as sector,
-        ROUND(AVG(change_pct)::numeric, 2) as avg_change,
-        COUNT(DISTINCT symbol) as count
-    FROM market_snapshots
-    WHERE timestamp > NOW() - INTERVAL '3 hours'
-      AND metadata->>'sector' IS NOT NULL
-    GROUP BY metadata->>'sector'
-    ORDER BY AVG(change_pct) DESC;
-    """
-    rows = run_query(sql)
-    return [
-        {"sector": r[0], "change": float(r[1]), "count": int(r[2])}
-        for r in rows if len(r) >= 3
-    ]
-
-
-@app.get("/api/signals")
-async def get_signals():
-    """트레이딩 신호"""
-    sql = """
-    SELECT
-        symbol,
-        signal_type,
-        ROUND(confidence::numeric * 100),
-        ROUND(price::numeric, 2),
-        reason
-    FROM trading_signals
-    WHERE timestamp > NOW() - INTERVAL '2 hours'
-      AND signal_type IN ('BUY', 'STRONG_BUY', 'SELL', 'STRONG_SELL', 'OVERSOLD')
-    ORDER BY timestamp DESC
-    LIMIT 10;
-    """
-    rows = run_query(sql)
-    return [
-        {
-            "symbol": r[0],
-            "signal": r[1],
-            "confidence": int(r[2]),
-            "price": float(r[3]),
-            "reason": r[4]
-        }
-        for r in rows if len(r) >= 5
-    ]
-
-
-@app.get("/api/stocks")
-async def get_stocks():
-    """종목 현황"""
-    sql = """
-    SELECT DISTINCT ON (symbol)
-        symbol,
-        ROUND(price::numeric, 2),
-        ROUND(change_pct::numeric, 2),
-        volume,
-        metadata->>'sector',
-        metadata->>'name'
-    FROM market_snapshots
-    WHERE timestamp > NOW() - INTERVAL '3 hours'
-    ORDER BY symbol, timestamp DESC;
-    """
-    rows = run_query(sql)
-    return [
-        {
-            "symbol": r[0],
-            "price": float(r[1]),
-            "change": float(r[2]),
-            "volume": int(r[3]) if r[3] else 0,
-            "sector": r[4],
-            "name": r[5] or r[0]
-        }
-        for r in rows if len(r) >= 6
-    ]
-
-
-@app.get("/api/freight")
-async def get_freight():
-    """운임 지수"""
-    sql = """
-    SELECT DISTINCT ON (index_name, route)
-        index_name,
-        route,
-        ROUND(value::numeric, 0),
-        ROUND(change_pct::numeric, 2)
-    FROM freight_indices
-    ORDER BY index_name, route, date DESC;
-    """
-    rows = run_query(sql)
-    return [
-        {
-            "index": r[0],
-            "route": r[1],
-            "value": int(r[2]),
-            "change": float(r[3])
-        }
-        for r in rows if len(r) >= 4
-    ]
+# 라우터 등록
+app.include_router(stocks.router, prefix="/api/stocks", tags=["stocks"])
+app.include_router(crypto.router, prefix="/api/crypto", tags=["crypto"])
+app.include_router(realestate.router, prefix="/api/realestate", tags=["realestate"])
+app.include_router(commodities.router, prefix="/api/commodities", tags=["commodities"])
+app.include_router(signals.router, prefix="/api/signals", tags=["signals"])
+app.include_router(news.router, prefix="/api/news", tags=["news"])
+app.include_router(portfolio.router, prefix="/api/portfolio", tags=["portfolio"])
 
 
 @app.get("/api/summary")
 async def get_summary():
-    """전체 요약"""
-    # 총 레코드
-    count_sql = "SELECT COUNT(*) FROM market_snapshots WHERE timestamp > NOW() - INTERVAL '24 hours';"
-    count_rows = run_query(count_sql)
-    total_records = int(count_rows[0][0]) if count_rows else 0
+    """전체 시장 요약"""
+    from db import fetch_one, fetch_all
 
-    # 신호 수
-    signal_sql = """
-    SELECT signal_type, COUNT(*)
-    FROM trading_signals
-    WHERE timestamp > NOW() - INTERVAL '2 hours'
-    GROUP BY signal_type;
-    """
-    signal_rows = run_query(signal_sql)
-    signals = {r[0]: int(r[1]) for r in signal_rows if len(r) >= 2}
+    count = fetch_one("SELECT COUNT(*) as cnt FROM market_snapshots WHERE timestamp > NOW() - INTERVAL '24 hours'")
+    total_records = count["cnt"] if count else 0
 
-    # 최신 업데이트
-    latest_sql = "SELECT MAX(timestamp) FROM market_snapshots;"
-    latest_rows = run_query(latest_sql)
-    latest = latest_rows[0][0] if latest_rows and latest_rows[0] else None
+    signal_rows = fetch_all("""
+        SELECT signal_type, COUNT(*) as cnt
+        FROM trading_signals
+        WHERE timestamp > NOW() - INTERVAL '2 hours'
+        GROUP BY signal_type
+    """)
+    sigs = {r["signal_type"]: r["cnt"] for r in signal_rows}
+
+    latest = fetch_one("SELECT MAX(timestamp) as ts FROM market_snapshots")
 
     return {
         "total_records": total_records,
-        "buy_signals": signals.get("BUY", 0) + signals.get("STRONG_BUY", 0),
-        "sell_signals": signals.get("SELL", 0) + signals.get("STRONG_SELL", 0),
-        "last_update": latest,
-        "server_time": datetime.now().isoformat()
+        "buy_signals": sigs.get("BUY", 0) + sigs.get("STRONG_BUY", 0),
+        "sell_signals": sigs.get("SELL", 0) + sigs.get("STRONG_SELL", 0),
+        "last_update": latest["ts"] if latest else None,
+        "server_time": datetime.now().isoformat(),
     }
-
-
-@app.get("/api/indicators")
-async def get_indicators():
-    """경제지표"""
-    sql = """
-    SELECT DISTINCT ON (series_id)
-        series_id,
-        value,
-        change_pct,
-        category,
-        TO_CHAR(date, 'MM-DD') as date
-    FROM economic_indicators
-    ORDER BY series_id, date DESC;
-    """
-    rows = run_query(sql)
-
-    # 지표 이름 매핑
-    names = {
-        "T10Y2Y": "장단기 금리차",
-        "BAMLH0A0HYM2": "하이일드 스프레드",
-        "DCOILWTICO": "WTI 유가",
-        "DCOILBRENTEU": "브렌트유",
-    }
-
-    return [
-        {
-            "id": r[0],
-            "name": names.get(r[0], r[0]),
-            "value": float(r[1]),
-            "change": float(r[2]),
-            "category": r[3],
-            "date": r[4]
-        }
-        for r in rows if len(r) >= 5
-    ]
-
-
-@app.get("/api/logistics")
-async def get_logistics():
-    """물류 추적 데이터"""
-    sql = """
-    SELECT DISTINCT ON (shipment_id)
-        shipment_id,
-        lat,
-        lng,
-        status,
-        origin_port,
-        dest_port,
-        vessel_name,
-        cargo_type,
-        TO_CHAR(timestamp AT TIME ZONE 'Asia/Seoul', 'MM/DD HH24:MI'),
-        TO_CHAR(estimated_arrival AT TIME ZONE 'Asia/Seoul', 'MM/DD HH24:MI')
-    FROM logistics_tracking
-    WHERE timestamp > NOW() - INTERVAL '30 days'
-    ORDER BY shipment_id, timestamp DESC
-    LIMIT 30;
-    """
-    rows = run_query(sql)
-    return [
-        {
-            "id": r[0],
-            "lat": float(r[1]) if r[1] else None,
-            "lng": float(r[2]) if r[2] else None,
-            "status": r[3],
-            "origin": r[4],
-            "dest": r[5],
-            "vessel": r[6],
-            "cargo": r[7],
-            "departure": r[8] if len(r) > 8 else None,
-            "arrival": r[9] if len(r) > 9 else None
-        }
-        for r in rows if len(r) >= 8
-    ]
 
 
 if __name__ == "__main__":
     import uvicorn
-    print("🚀 SQL Trading API Server")
+    print("🚀 마켓브리핑 API Server")
     print("📊 Dashboard: http://localhost:8080")
     print("📡 API Docs: http://localhost:8080/docs")
     uvicorn.run(app, host="0.0.0.0", port=8080)
