@@ -1,89 +1,52 @@
 #!/usr/bin/env python3
 """
-Persona Auto-Activation Hook
-- Select appropriate persona through context analysis
-- Activate up to 3 simultaneously
+Persona Auto-Activation Hook (v2.0)
+- loader.py + index.json 기반 57개 전체 페르소나 지원
+- 카테고리: dev(14), finance(12), education(4), ideation(27)
+- 최대 동시 활성화: 8개 (index.json 설정)
 """
 
 import os
 import sys
-import re
+from pathlib import Path
 
-# Persona keyword mapping
-PERSONA_KEYWORDS = {
-    "security": {
-        "keywords": ["auth", "login", "password", "token", "jwt", "oauth", "security", "authentication", "permission"],
-        "priority": 1
-    },
-    "architect": {
-        "keywords": ["design", "architecture", "structure", "pattern", "system"],
-        "priority": 2
-    },
-    "frontend": {
-        "keywords": ["react", "vue", "css", "html", "component", "ui", "ux", "style"],
-        "priority": 3
-    },
-    "backend": {
-        "keywords": ["api", "server", "database", "db", "query", "rest", "graphql"],
-        "priority": 3
-    },
-    "devops": {
-        "keywords": ["docker", "k8s", "kubernetes", "ci", "cd", "deploy", "aws", "gcp"],
-        "priority": 4
-    },
-    "performance": {
-        "keywords": ["performance", "optimize", "speed", "memory"],
-        "priority": 3
-    },
-    "tester": {
-        "keywords": ["test", "jest", "vitest", "cypress", "e2e", "unit"],
-        "priority": 4
-    },
-    "analyzer": {
-        "keywords": ["analyze", "review", "examine"],
-        "priority": 5
-    },
-    "explorer": {
-        "keywords": ["find", "search", "where", "locate"],
-        "priority": 5
-    }
-}
+# Windows UTF-8 출력 강제
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
 
-MAX_CONCURRENT = 3
+PERSONAS_DIR = Path.home() / ".claude" / "personas"
+sys.path.insert(0, str(PERSONAS_DIR))
 
-def detect_personas(prompt: str) -> list:
-    """Detect appropriate personas from prompt"""
-    prompt_lower = prompt.lower()
-    detected = []
+from loader import activate_personas, load_persona
 
-    for persona, config in PERSONA_KEYWORDS.items():
-        for keyword in config["keywords"]:
-            if keyword in prompt_lower:
-                detected.append({
-                    "name": persona,
-                    "priority": config["priority"],
-                    "matched": keyword
-                })
-                break
 
-    # Sort by priority and select top 3
-    detected.sort(key=lambda x: x["priority"])
-    return detected[:MAX_CONCURRENT]
-
-def main():
+def main() -> None:
     prompt = os.environ.get("PROMPT", "")
 
     if not prompt and not sys.stdin.isatty():
         prompt = sys.stdin.read()
 
-    if not prompt:
+    if not prompt or len(prompt.strip()) < 3:
         return
 
-    personas = detect_personas(prompt)
+    activated = activate_personas(prompt)
 
-    if personas:
-        names = [p['name'] for p in personas]
-        print(f"Personas: {','.join(names)}")
+    if not activated:
+        return
+
+    # 카테고리별 그룹핑하여 출력
+    by_cat: dict[str, list[str]] = {}
+    for p in activated:
+        cat = p.get("category", "etc")
+        name = p.get("name", p.get("id", "unknown"))
+        by_cat.setdefault(cat, []).append(name)
+
+    parts = []
+    for cat, names in by_cat.items():
+        parts.append(f"{cat}:[{','.join(names)}]")
+
+    print(f"Personas: {' | '.join(parts)}")
+
 
 if __name__ == "__main__":
     main()
