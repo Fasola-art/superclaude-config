@@ -27,7 +27,7 @@
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "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"
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PAT}"
       },
       "description": "GitHub API 연동",
       "enabled": true

@@ -1,6 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "model": "claude-opus-4-6",
   "env": {
     "ENABLE_TOOL_SEARCH": "auto:5"
   },
@@ -64,6 +63,18 @@
       "Bash(source*)",
       "Bash(launchctl*)",
       "Bash(sudo *)",
+      "Bash(bun *)",
+      "Bash(bun)",
+      "Bash(kill *)",
+      "Bash(lsof *)",
+      "Bash(wc *)",
+      "Bash(diff *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(go *)",
+      "Bash(cargo *)",
+      "Bash(pnpm *)",
+      "Bash(git push*)",
       "mcp__context7__*",
       "mcp__taskmaster-ai__*",
       "mcp__ide__*",
@@ -79,12 +90,17 @@
       "Bash(sudo rm -rf*)"
     ]
   },
+  "model": "claude-opus-4-6",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "UserPromptSubmit": [
       {
         "matcher": "",
         "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/UserPromptSubmit/handoff-loader.py"
+          },
           {
             "type": "command",
             "command": "python3 ~/.claude/hooks/UserPromptSubmit/jarvis-morning-briefing.py"
@@ -131,6 +147,15 @@
           {
             "type": "command",
             "command": "python3 ~/.claude/hooks/PreToolUse/writer-reviewer-hook.py"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/PreToolUse/rollback-guard.py"
           }
         ]
       },

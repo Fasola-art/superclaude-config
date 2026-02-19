@@ -6,8 +6,9 @@
 
 | Type | Max Lines | Violation Action |
 |------|-----------|------------------|
-| Rules/Guides | **100** | Split or reject |
-| Reference | **120** | Split or reject |
+| Rules/Guides | **120** | Split or reject |
+| Reference | **150** | Split or reject |
+| Hook scripts | **150** | Split to _shared/ |
 | Index | **50** | Merge or reject |
 | Templates | **30** | Simplify |
 

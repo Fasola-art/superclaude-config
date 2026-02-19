@@ -1,64 +1,125 @@
-# SuperClaude v2.0.9 - Mac Studio Ultra M2
+# SuperClaude v2.1.0 - Mac Studio Ultra M2
 
-> **Platform**: macOS (Mac Studio Ultra M2) | **Version**: 2.0.9
+> macOS | Opus 4.6 | Korean Response
 
 ---
 
 ## Primary Rule: Korean Response
 
-**All responses MUST be in Korean.**
-- Questions, explanations, guides, code comments, error messages: Korean
-- Exceptions: code syntax, commands, filenames, technical terms: original language
-
----
+All responses in Korean. Exceptions: code syntax, commands, filenames, technical terms.
 
 ## Instruction Translation Rule
 
-**When user provides instructions in natural language:**
-1. DO NOT copy user's words verbatim into config/rules
-2. ALWAYS translate to Claude-optimized technical terminology
-3. Use imperative commands and precise technical terms
-4. Prefer English keywords for better model comprehension
-
-Example:
-- User says: "껍데기만 만들지 마" → Write: "No stub/placeholder code"
-- User says: "표 정렬 맞춰" → Write: "Use fixed-width text formatting for tables"
+User's natural language → Claude-optimized technical terminology.
+- "껍데기만 만들지 마" → "No stub/placeholder code"
+- "표 정렬 맞춰" → "Use fixed-width text formatting for tables"
 
 ---
 
 ## Efficiency Rules
 
-| Rule            | Instruction                                                                               |
-|-----------------|-------------------------------------------------------------------------------------------|
-| Execution       | Skip pre-execution explanations. Clear intent → execute immediately. Ambiguous → ask once. |
-| Output          | Max 3-line summary. On success: "✅ Complete" + essential info only.                       |
-| Context         | Hook injection: 1 line max. Disable always-load.                                          |
-| File Export     | After file creation, run `open -R <path>` to reveal in Finder.                            |
-| Markdown Tables | Use fixed-width plain text format (monospace-compatible).                                 |
+| Rule | Instruction |
+|------|-------------|
+| Execution | Clear intent → execute immediately. Ambiguous → ask once. |
+| Output | Max 3-line summary. Success: "✅ Complete" + essential info. |
+| Context | Hook injection: 1 line max. |
+| File Export | After creation, run `open -R <path>`. |
+| Tables | Fixed-width plain text format. |
 
 ---
 
-## Pre-Task Checklist (MANDATORY)
+## Line Limits (STRICT)
 
-**Before ANY code modification:**
-1. Run `wc -l <file>` - verify within limits
-2. If exceeds limit → split first, then modify
+**Before ANY modification: `wc -l <file>` → verify within limits.**
 
-**Line Limits (STRICT):**
 | Type | Range | Split Trigger |
 |------|-------|---------------|
-| Logic/Utils | 50~80 | 3+ functions or complex regex |
-| UI Components | 100~120 | 4+ states or deep DOM |
-| API/Server | 80~100 | Error handling obscures logic |
+| Logic/Utils | 50~100 | 3+ functions |
+| UI Components | 100~150 | 4+ states |
+| API/Server | 80~120 | Error handling obscures logic |
 | types/constants | ≤20 | Type-only or const-only |
 | utils/hooks | ≤50 | Single-purpose functions |
+| Hook scripts (.py) | 50~150 | Complex logic split to _shared/ |
+| Rules/Guides (.md) | 50~120 | 3+ sections |
+| Reference (.md) | 80~150 | Single topic only |
 
-**Critical Rules:**
-- **MIN 20 lines**: No file under 20 lines (merge instead)
-- **2+ usage → extract**: Shared logic → common module
-- **Split requires**: barrel export (index.ts/\_\_init\_\_.py)
+**MIN 20 lines** (merge instead) | **2+ usage → extract** | **Split requires barrel export**
+**Violation = Immediate rollback + refactor**
 
-**Test Strategy:**
+---
+
+## Development Rules
+
+**PROHIBITED**: `pass`, `...`, `TODO`, `FIXME`, `NotImplementedError`, empty bodies, placeholders.
+
+**REQUIRED**: Complete implementation, actual API calls + error handling, config activation, verify execution.
+
+---
+
+## Core Rules (8)
+
+| Rule | Instruction |
+|------|-------------|
+| Writer-Reviewer Loop | 4-agent parallel review on code generation |
+| TodoWrite | REQUIRED for 3+ step tasks |
+| Response Language | Korean (including code comments) |
+| Project Planning | Auto-enter plan mode on PRD receipt |
+| PRD Creation | Use /prd-create for idea → PRD |
+| Skill Capture | Save completed dev work as reusable skill |
+| TDD/E2E Suggestion | On feature request, ask "TDD/E2E로 진행할까요?" |
+| Agent Rules | Include `rules/_shared/agent-rules.md` in prompt |
+
+### Agent/Task Prompt Injection
+
+On Task tool invocation, prepend:
+```
+[MANDATORY RULES]
+1. 파일: 50~150줄 범위 유지
+2. Python: 타입 힌트 + docstring 필수
+3. 기존 코드 먼저 확인: ~/.claude/modules/
+4. No stub/placeholder - 완전한 구현만
+5. 응답: 한국어
+```
+
+Module-specific: trading → `modules/trading/CLAUDE.md`, sql → `modules/sql-trading/CLAUDE.md`
+
+Post-verification: `wc -l` → 150줄 초과 시 분할, 50줄 미만 시 병합.
+
+---
+
+## Safety Rules
+
+**Auto-Allowed**: Git read/write (except push), npm, File ops, supabase
+**Requires Approval**: `git push`, `.env`, `rm -rf`, `sudo`
+
+## API Key Rules
+
+1. Check `~/.claude/credentials/api-keys.json` first
+2. If exists: use automatically | If not: request from user
+
+## MCP Router
+
+**NEVER** register directly in mcp.json. ALWAYS use MCP Router: `~/.claude/mcp-router/servers.json`
+
+## Session Continuity
+
+- Stop hook generates `~/.claude/HANDOFF.md` automatically
+- Next session loads and archives it via handoff-loader hook
+- Use `cc` (--continue) or `cr` (--resume) for session recovery
+
+---
+
+## References
+
+- Slash Commands / Skill Capture / Docs: `rules/_shared/workflow-rules.md`
+- Agent Rules: `rules/_shared/agent-rules.md`
+- Language Rules: `rules/{go,python,react,sql}/`
+- Testing: `rules/testing/`
+
+---
+
+## Test Strategy
+
 | Target | Method |
 |--------|--------|
 | 공통함수/utils | TDD 필수 |
@@ -66,227 +127,6 @@ Example:
 | 결제/인증 플로우 | E2E 필수 |
 | UI/프로토타입 | 수동 테스트 |
 
-**Standard Folder Structure:**
-```
-feature/
-├── index.ts       # barrel export
-├── types.ts       # ≤20 lines
-├── constants.ts   # ≤20 lines
-├── utils.ts       # ≤50 lines
-├── hooks.ts       # ≤50 lines
-├── Component.tsx  # main component
-└── *.test.ts      # tests
-```
-
-**Violation = Immediate rollback + refactor**
-
 ---
 
-## Markdown File Rules (MANDATORY)
-
-**Apply Pre-Task Checklist to ALL .md files:**
-
-| Type | Range | Split Trigger |
-|------|-------|---------------|
-| Rules/Guides | 50~100 | 3+ sections or mixed topics |
-| Reference docs | 80~120 | Single topic only |
-| Index files | 20~50 | Links + brief descriptions |
-| Templates | ≤30 | Minimal, no examples |
-
-**Modularization Principles:**
-- **2+ references → extract**: Shared content → `_shared/` module
-- **Single responsibility**: One topic per file
-- **Barrel pattern**: Each folder has `index.md` with links
-- **No redundancy**: Zero duplicate content across files
-
-**Efficiency Rules:**
-- **Minimal code**: Shortest syntax achieving same result
-- **No boilerplate**: Skip obvious headers/footers
-- **Active voice**: Direct imperatives only
-- **Tables over prose**: Structured data in tables
-
-**File Creation Checklist:**
-1. Check if content exists elsewhere → reference instead
-2. Verify line count within limits
-3. Extract shared patterns to `_shared/`
-4. Create index.md if new folder
-
----
-
-## Development Rules
-
-### Full Implementation Required (No Stub/Placeholder/Skeleton Code)
-
-**PROHIBITED patterns:**
-- `pass`, `...`, `TODO`, `FIXME`, `NotImplementedError`
-- Empty function bodies
-- Placeholder comments like "implement later"
-- Partial implementations
-
-**REQUIRED for every feature:**
-1. **Functions/Classes**: Complete working implementation
-2. **API Integration**: Actual endpoint calls + error handling
-3. **Hooks/Triggers**: Config modification + activation
-4. **Automation Services**: Create LaunchAgent + run `launchctl load`
-5. **Verification**: Execute at least once to confirm functionality
-
-**Pre-completion Checklist:**
-- [ ] Code executes without errors
-- [ ] Dependencies installed
-- [ ] Config files correctly written
-- [ ] Services activated and running
-
----
-
-## Core Rules (8)
-
-| Rule                 | Instruction                                        |
-|----------------------|----------------------------------------------------|
-| Writer-Reviewer Loop | Trigger 4-agent parallel review on code generation |
-| TodoWrite            | REQUIRED for tasks with 3+ steps                   |
-| Response Language    | Korean (including code comments)                   |
-| Project Planning     | Auto-enter plan mode on PRD receipt                |
-| PRD Creation         | Use /prd-create for idea → PRD conversion          |
-| Skill Capture        | Save completed dev work as reusable skill          |
-| TDD/E2E Suggestion   | On feature request, ask "TDD/E2E로 진행할까요?"     |
-| **Agent/Skill Rules** | **Include `rules/_shared/agent-rules.md` in prompt** |
-
-### Agent/Skill/PlanMode Mandatory
-
-**On Task tool invocation, ALWAYS prepend to prompt:**
-```
-[MANDATORY RULES]
-1. 파일: 50~120줄 범위 유지 (초과 시 분할, 미달 시 병합)
-2. Python: 타입 힌트 + docstring 필수
-3. 기존 코드 먼저 확인: ~/.claude/modules/
-4. No stub/placeholder - 완전한 구현만
-5. 응답: 한국어
-```
-
-**모듈별 추가 규칙 (해당 시 포함):**
-- trading: `~/.claude/modules/trading/CLAUDE.md` 참조 지시
-- sql: `~/.claude/modules/sql-trading/CLAUDE.md` 참조 지시
-
-**Post-verification (MANDATORY):**
-1. Agent 완료 후 `wc -l` 체크
-2. 120줄 초과 시 → 분할
-3. 50줄 미만 시 → 병합
-
-### Skill Capture Rules
-
-**Trigger conditions (if any met, create skill):**
-- New project/tool creation completed
-- Reusable workflow implemented
-- Complex integration completed (API, etc.)
-- User mentions "reuse later" / "나중에 재사용"
-
-**Save location**: `~/.claude/skills/<skill-name>.md`
-
-**Skill file structure**:
-```markdown
----
-name: <skill-name>
-description: <one-line description>
-version: "1.0.0"
-triggers:
-  - /<command>
-  - <natural language trigger>
----
-# <Skill Name>
-## Usage
-## Execution Instructions
-## Reference
-```
-
-**Post-completion**: Notify user: "This work can be reused with `/skill-name`."
-
----
-
-## Slash Commands
-
-| Command           | Action                             |
-|-------------------|------------------------------------|
-| /prd-create       | Generate PRD from idea             |
-| /project-plan     | Initialize project from PRD        |
-| /project-status   | Check current progress             |
-| /project-continue | Resume previous work               |
-| /scaffold         | Quick TypeScript CLI project setup |
-| /ideation         | Multi-persona ideation discussion  |
-| /research         | Deep research                      |
-| /error-search     | Search Error KB                    |
-| /recover          | Session recovery                   |
-| /tdd              | Start TDD workflow                 |
-| /e2e              | Create E2E tests                   |
-
----
-
-## Code Structure Rules
-
-> **See Pre-Task Checklist above for complete rules**
-
----
-
-## Safety Rules
-
-**Auto-Allowed**: Git read/write (except push), npm, File read/write/edit, supabase
-**Requires Approval**: `git push`, `.env`, `rm -rf`, `sudo`
-
----
-
-## API Key Rules
-
-**On API key requirement:**
-1. First check: `~/.claude/credentials/api-keys.json`
-2. If exists: use automatically
-3. If not: request from user
-4. On new key acquisition: suggest adding to `api-keys.json`
-
----
-
-## MCP Router (Required)
-
-**NEVER** suggest direct MCP server registration in mcp.json.
-ALWAYS use MCP Router: `~/.claude/mcp-router/servers.json`
-
----
-
-## File Structure
-
-```
-~/.claude/
-├── CLAUDE.md                 # This file
-├── superclaude-config.json   # Config (parallel execution, W-R, etc.)
-├── settings.json             # Claude Code official settings
-├── docs/                     # Detailed documentation (reference as needed)
-├── hooks/                    # Automation hooks
-├── personas/                 # Personas (45+)
-├── skills/                   # Skill definitions
-├── error-kb/                 # Error knowledge base
-├── modules/                  # trading, news-collector, realtime-analysis
-├── profiles/                 # Language profiles (TypeScript, Rust, Python, Go)
-└── rules/                    # Language-specific coding rules
-```
-
----
-
-## Documentation Reference
-
-| Topic                   | Path                              |
-|-------------------------|-----------------------------------|
-| Full System             | `docs/SUPERCLAUDE-REFERENCE.md`   |
-| Vibe/Mode Keywords      | `KEYWORD-TRIGGERS.md`             |
-| Thinking Modes          | `docs/THINKING-MODES.md`          |
-| Project Planning        | `docs/PROJECT-PLANNING.md`        |
-| Hook System             | `docs/HOOKS-SYSTEM.md`            |
-| Settings Guide          | `docs/SETTINGS-GUIDE.md`          |
-| Personas                | `docs/PERSONAS.md`                |
-| Architecture Principles | `docs/ARCH-PRINCIPLES.md`         |
-| Quality Gates           | `docs/QUALITY-GATES.md`           |
-
----
-
-## META
-
-- **Version**: 2.0.9
-- **Response Language**: Korean
-- **Environment**: macOS (Mac Studio Ultra M2)
+**META**: v2.1.0 | Korean | macOS (Mac Studio Ultra M2)
