@@ -23,7 +23,7 @@ export function RealEstateClient() {
               <MetricCard
                 key={i}
                 label={`${idx.region} ${idx.index_type}`}
-                value={idx.index_value.toFixed(2)}
+                value={Number(idx.index_value).toFixed(2)}
                 change={idx.change_pct}
               />
             ))}
@@ -55,7 +55,7 @@ export function RealEstateClient() {
                   <tr key={idx} className="border-b border-[var(--border)] last:border-0">
                     <td className="px-3 py-2 text-[var(--text)]">{rate.rate_type}</td>
                     <td className="px-3 py-2 text-right font-mono text-[var(--text)]">
-                      {rate.rate_value.toFixed(2)}%
+                      {Number(rate.rate_value).toFixed(2)}%
                     </td>
                     <td className="px-3 py-2 text-right text-[var(--text-muted)]">
                       {rate.country}
@@ -92,11 +92,11 @@ export function RealEstateClient() {
                   <tr key={idx} className="border-b border-[var(--border)] last:border-0">
                     <td className="px-3 py-2 text-[var(--text)]">{region.region}</td>
                     <td className="px-3 py-2 text-right">
-                      <div className="font-mono text-[var(--text)]">{region.sale_index.toFixed(2)}</div>
+                      <div className="font-mono text-[var(--text)]">{Number(region.sale_index).toFixed(2)}</div>
                       <ChangeIndicator value={region.sale_change} size="sm" />
                     </td>
                     <td className="px-3 py-2 text-right">
-                      <div className="font-mono text-[var(--text)]">{region.jeonse_index.toFixed(2)}</div>
+                      <div className="font-mono text-[var(--text)]">{Number(region.jeonse_index).toFixed(2)}</div>
                       <ChangeIndicator value={region.jeonse_change} size="sm" />
                     </td>
                   </tr>

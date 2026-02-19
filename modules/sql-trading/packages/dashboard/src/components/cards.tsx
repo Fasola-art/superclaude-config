@@ -37,7 +37,7 @@ export function SectorsChart() {
 
   if (isLoading) return <p className="text-gray-400">로딩 중...</p>;
 
-  const maxChange = Math.max(...sectors.map((s) => Math.abs(s.change)), 1);
+  const maxChange = Math.max(...sectors.map((s) => Math.abs(Number(s.change))), 1);
 
   return (
     <div className="space-y-3">
@@ -46,11 +46,11 @@ export function SectorsChart() {
           <span className="w-24 text-sm truncate">{s.sector}</span>
           <div className="flex-1 h-6 bg-gray-800 rounded overflow-hidden relative">
             <div
-              className={`h-full ${s.change >= 0 ? 'bg-green-500' : 'bg-red-500'}`}
-              style={{ width: `${Math.abs(s.change) / maxChange * 100}%` }}
+              className={`h-full ${Number(s.change) >= 0 ? 'bg-green-500' : 'bg-red-500'}`}
+              style={{ width: `${Math.abs(Number(s.change)) / maxChange * 100}%` }}
             />
             <span className="absolute inset-0 flex items-center justify-end pr-2 text-xs">
-              {s.change > 0 ? '+' : ''}{s.change.toFixed(2)}%
+              {Number(s.change) > 0 ? '+' : ''}{Number(s.change).toFixed(2)}%
             </span>
           </div>
           <span className="w-8 text-xs text-gray-500">{s.count}</span>

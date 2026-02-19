@@ -79,11 +79,11 @@ export function StocksTable() {
               <td className="py-2 px-2 font-mono font-bold">{s.symbol}</td>
               <td className="py-2 px-2 text-gray-400 truncate max-w-[150px]">{s.name}</td>
               <td className="py-2 px-2 text-xs text-gray-500">{s.sector || '-'}</td>
-              <td className="py-2 px-2 text-right font-mono">${s.price.toFixed(2)}</td>
-              <td className={`py-2 px-2 text-right ${s.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                {s.change > 0 ? '+' : ''}{s.change.toFixed(2)}%
+              <td className="py-2 px-2 text-right font-mono">${Number(s.price).toFixed(2)}</td>
+              <td className={`py-2 px-2 text-right ${Number(s.change) >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                {Number(s.change) > 0 ? '+' : ''}{Number(s.change).toFixed(2)}%
               </td>
-              <td className="py-2 px-2 text-right text-gray-400">{s.volume.toLocaleString()}</td>
+              <td className="py-2 px-2 text-right text-gray-400">{Number(s.volume).toLocaleString()}</td>
             </tr>
           ))}
         </tbody>

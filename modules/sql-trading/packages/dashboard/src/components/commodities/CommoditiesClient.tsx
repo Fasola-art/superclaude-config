@@ -30,22 +30,22 @@ export function CommoditiesClient() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <MetricCard
           label="WTI 원유"
-          value={wtiValue != null ? `$${wtiValue.toFixed(2)} /배럴` : '-'}
+          value={wtiValue != null ? `$${Number(wtiValue).toFixed(2)} /배럴` : '-'}
           change={wti?.change_pct}
         />
         <MetricCard
           label="Brent 원유"
-          value={brentValue != null ? `$${brentValue.toFixed(2)} /배럴` : '-'}
+          value={brentValue != null ? `$${Number(brentValue).toFixed(2)} /배럴` : '-'}
           change={brent?.change_pct}
         />
         <MetricCard
           label="BDI 지수"
-          value={bdiValue != null ? bdiValue.toFixed(0) : '-'}
+          value={bdiValue != null ? Number(bdiValue).toFixed(0) : '-'}
           change={bdi?.change_pct}
         />
         <MetricCard
           label="FBX China"
-          value={fbxChinaValue != null ? `$${fbxChinaValue.toFixed(0)}` : '-'}
+          value={fbxChinaValue != null ? `$${Number(fbxChinaValue).toFixed(0)}` : '-'}
           change={fbxChina?.change_pct}
         />
       </div>
@@ -67,7 +67,7 @@ export function CommoditiesClient() {
                 <tr key={idx} className="border-b border-[var(--border)]">
                   <td className="p-2 text-[var(--text)]">{item.index_name}</td>
                   <td className="p-2 text-[var(--text-muted)]">{item.route}</td>
-                  <td className="p-2 text-right text-[var(--text)]">${item.value.toFixed(0)}</td>
+                  <td className="p-2 text-right text-[var(--text)]">${Number(item.value).toFixed(0)}</td>
                   <td className="p-2 text-right">
                     <ChangeIndicator value={item.change_pct}  />
                   </td>

@@ -11,8 +11,8 @@ export function RiskClient() {
 
   const currentRisk = riskStatus?.current;
   const recentEvents = riskStatus?.recent_events || [];
-  const dailyPnl = currentRisk?.daily_pnl_pct;
-  const maxDrawdown = currentRisk?.total_drawdown_pct;
+  const dailyPnl = currentRisk?.daily_pnl_pct != null ? Number(currentRisk.daily_pnl_pct) : undefined;
+  const maxDrawdown = currentRisk?.total_drawdown_pct != null ? Number(currentRisk.total_drawdown_pct) : undefined;
 
   // 서킷브레이커 레벨 매핑
   const getCircuitBreakerLevel = () => {
@@ -93,9 +93,9 @@ export function RiskClient() {
                 <div className="flex justify-between text-xs text-muted">
                   <span>{new Date(event.timestamp).toLocaleString()}</span>
                   {event.daily_pnl_pct != null && (
-                    <span className={event.daily_pnl_pct >= 0 ? 'text-up' : 'text-down'}>
-                      P&L: {event.daily_pnl_pct > 0 ? '+' : ''}
-                      {event.daily_pnl_pct.toFixed(2)}%
+                    <span className={Number(event.daily_pnl_pct) >= 0 ? 'text-up' : 'text-down'}>
+                      P&L: {Number(event.daily_pnl_pct) > 0 ? '+' : ''}
+                      {Number(event.daily_pnl_pct).toFixed(2)}%
                     </span>
                   )}
                 </div>

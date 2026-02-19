@@ -36,7 +36,7 @@ export function HomeDailyPerformance() {
       <div className="grid grid-cols-4 gap-3 text-sm mb-4">
         <div>
           <div className="text-[var(--text-muted)]">승률</div>
-          <div className="text-[var(--text)] font-mono">{summary.win_rate.toFixed(2)}%</div>
+          <div className="text-[var(--text)] font-mono">{Number(summary.win_rate).toFixed(2)}%</div>
         </div>
         <div>
           <div className="text-[var(--text-muted)]">성공</div>
@@ -63,8 +63,8 @@ export function HomeDailyPerformance() {
                 <span className="text-xs text-[var(--text-muted)]">{it.signal_type}</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className={it.pct_change >= 0 ? 'text-[var(--up)]' : 'text-[var(--down)]'}>
-                  {it.pct_change > 0 ? '+' : ''}{it.pct_change.toFixed(2)}%
+                <span className={Number(it.pct_change) >= 0 ? 'text-[var(--up)]' : 'text-[var(--down)]'}>
+                  {Number(it.pct_change) > 0 ? '+' : ''}{Number(it.pct_change).toFixed(2)}%
                 </span>
                 {outcomeBadge(it.outcome)}
               </div>

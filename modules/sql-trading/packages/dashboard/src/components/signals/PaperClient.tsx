@@ -10,10 +10,10 @@ export function PaperClient() {
   if (isLoading) return <CardSkeleton />;
 
   // 총 수익/손실 계산
-  const totalPnl = trades?.reduce((sum, t) => sum + (t.pnl || 0), 0) || 0;
+  const totalPnl = trades?.reduce((sum, t) => sum + (Number(t.pnl) || 0), 0) || 0;
   const totalPnlPct =
     trades && trades.length > 0
-      ? trades.reduce((sum, t) => sum + (t.pnl_pct || 0), 0) / trades.length
+      ? trades.reduce((sum, t) => sum + (Number(t.pnl_pct) || 0), 0) / trades.length
       : 0;
 
   // 전략별 성과
@@ -22,8 +22,8 @@ export function PaperClient() {
       acc[t.strategy] = { count: 0, totalPnl: 0, wins: 0 };
     }
     acc[t.strategy].count += 1;
-    acc[t.strategy].totalPnl += t.pnl || 0;
-    if ((t.pnl || 0) > 0) acc[t.strategy].wins += 1;
+    acc[t.strategy].totalPnl += Number(t.pnl) || 0;
+    if ((Number(t.pnl) || 0) > 0) acc[t.strategy].wins += 1;
     return acc;
   }, {} as Record<string, { count: number; totalPnl: number; wins: number }>);
 

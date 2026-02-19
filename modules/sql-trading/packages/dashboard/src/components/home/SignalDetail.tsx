@@ -38,7 +38,7 @@ export function SignalDetail({
         </div>
         <div className="flex items-center gap-3 text-xs text-[var(--text-muted)]">
           <span>전략: <strong className="text-[var(--text)]">{s.strategy}</strong></span>
-          <span>신뢰도: <strong className="text-[var(--text)]">{(s.confidence * 100).toFixed(0)}%</strong></span>
+          <span>신뢰도: <strong className="text-[var(--text)]">{(Number(s.confidence) * 100).toFixed(0)}%</strong></span>
         </div>
       </div>
 
@@ -65,7 +65,7 @@ function PriceCell({ label, value, color }: { label: string; value: number | nul
   return (
     <div>
       <span className="text-[var(--text-muted)]">{label}</span>
-      <div className="font-mono" style={color ? { color } : undefined}>${value?.toLocaleString() || '-'}</div>
+      <div className="font-mono" style={color ? { color } : undefined}>${value != null ? Number(value).toLocaleString() : '-'}</div>
     </div>
   );
 }
@@ -81,7 +81,7 @@ function NewsRow({ news: n }: { news: NewsItem }) {
       <a href={n.url} target="_blank" rel="noopener noreferrer"
         className="block rounded px-2 py-1.5 hover:bg-[var(--bg-hover)] transition-colors">
         <div className="flex items-center gap-1.5 mb-0.5">
-          <Badge variant={sent.c}>{sent.t} {n.sentiment?.toFixed(2)}</Badge>
+          <Badge variant={sent.c}>{sent.t} {n.sentiment != null ? Number(n.sentiment).toFixed(2) : ''}</Badge>
           <span className="text-[10px] text-[var(--text-muted)]">{n.source}</span>
         </div>
         <div className="text-xs text-[var(--text)] line-clamp-2">{n.title}</div>

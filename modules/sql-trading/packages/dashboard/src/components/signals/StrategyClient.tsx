@@ -96,7 +96,7 @@ export function StrategyClient() {
                   <td className="p-2 text-right">
                     <Badge variant="down">{s.sells}</Badge>
                   </td>
-                  <td className="p-2 text-right font-mono">{(s.avg_confidence * 100).toFixed(1)}%</td>
+                  <td className="p-2 text-right font-mono">{(Number(s.avg_confidence) * 100).toFixed(1)}%</td>
                 </tr>
               ))}
             </tbody>

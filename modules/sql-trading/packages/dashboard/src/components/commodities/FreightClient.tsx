@@ -38,7 +38,7 @@ export function FreightClient() {
                   <tr key={idx} className="border-b border-[var(--border)]">
                     <td className="p-2 text-[var(--text)]">{item.route}</td>
                     <td className="p-2 text-right font-mono text-[var(--text)]">
-                      ${item.value.toLocaleString()}
+                      ${Number(item.value).toLocaleString()}
                     </td>
                     <td className="p-2 text-right">
                       <ChangeIndicator value={item.change_pct}  />

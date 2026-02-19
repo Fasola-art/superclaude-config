@@ -41,8 +41,8 @@ export function HomeSignalPreview() {
             <span className="text-lg font-bold">{riskLevel}</span>
           </div>
           {risk?.current?.daily_pnl_pct != null && (
-            <div className={`text-sm mt-2 ${risk.current.daily_pnl_pct >= 0 ? 'text-[var(--up)]' : 'text-[var(--down)]'}`}>
-              일일 PnL: {risk.current.daily_pnl_pct > 0 ? '+' : ''}{risk.current.daily_pnl_pct.toFixed(2)}%
+            <div className={`text-sm mt-2 ${Number(risk.current.daily_pnl_pct) >= 0 ? 'text-[var(--up)]' : 'text-[var(--down)]'}`}>
+              일일 PnL: {Number(risk.current.daily_pnl_pct) > 0 ? '+' : ''}{Number(risk.current.daily_pnl_pct).toFixed(2)}%
             </div>
           )}
         </Card>

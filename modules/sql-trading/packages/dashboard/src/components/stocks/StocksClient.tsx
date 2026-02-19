@@ -23,7 +23,7 @@ export function StocksClient() {
               <MetricCard
                 key={idx.symbol}
                 label={idx.name}
-                value={idx.price.toLocaleString()}
+                value={Number(idx.price).toLocaleString()}
                 change={idx.change_pct}
                 prefix={['BTC', 'ETH'].includes(idx.symbol) ? '$' : undefined}
               />
@@ -59,7 +59,7 @@ export function StocksClient() {
                       <div className="text-xs text-[var(--text-muted)]">{mover.sector}</div>
                     </td>
                     <td className="px-3 py-2 text-right font-mono text-[var(--text)]">
-                      {mover.price.toLocaleString()}
+                      {Number(mover.price).toLocaleString()}
                     </td>
                     <td className="px-3 py-2 text-right">
                       <ChangeIndicator value={mover.change_pct} />

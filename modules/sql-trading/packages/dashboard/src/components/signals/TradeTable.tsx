@@ -33,24 +33,24 @@ export function TradeTable({ trades }: TradeTableProps) {
                 <Badge variant={trade.side === 'BUY' ? 'up' : 'down'}>{trade.side}</Badge>
               </td>
               <td className="p-2 text-right font-mono">{trade.quantity}</td>
-              <td className="p-2 text-right font-mono">${trade.entry_price.toFixed(2)}</td>
+              <td className="p-2 text-right font-mono">${Number(trade.entry_price).toFixed(2)}</td>
               <td className="p-2 text-right font-mono">
-                {trade.exit_price ? `$${trade.exit_price.toFixed(2)}` : '-'}
+                {trade.exit_price != null ? `$${Number(trade.exit_price).toFixed(2)}` : '-'}
               </td>
               <td className="p-2 text-right font-mono">
-                {trade.pnl !== null ? (
-                  <span className={trade.pnl >= 0 ? 'text-up' : 'text-down'}>
-                    {trade.pnl > 0 ? '+' : ''}${trade.pnl.toFixed(2)}
+                {trade.pnl != null ? (
+                  <span className={Number(trade.pnl) >= 0 ? 'text-up' : 'text-down'}>
+                    {Number(trade.pnl) > 0 ? '+' : ''}${Number(trade.pnl).toFixed(2)}
                   </span>
                 ) : (
                   '-'
                 )}
               </td>
               <td className="p-2 text-right font-mono">
-                {trade.pnl_pct !== null ? (
-                  <span className={trade.pnl_pct >= 0 ? 'text-up' : 'text-down'}>
-                    {trade.pnl_pct > 0 ? '+' : ''}
-                    {trade.pnl_pct.toFixed(2)}%
+                {trade.pnl_pct != null ? (
+                  <span className={Number(trade.pnl_pct) >= 0 ? 'text-up' : 'text-down'}>
+                    {Number(trade.pnl_pct) > 0 ? '+' : ''}
+                    {Number(trade.pnl_pct).toFixed(2)}%
                   </span>
                 ) : (
                   '-'

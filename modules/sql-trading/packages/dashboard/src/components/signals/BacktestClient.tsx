@@ -18,9 +18,9 @@ export function BacktestClient() {
 
   const checkApproval = (result: BacktestResult) => {
     return (
-      result.sharpe_ratio >= APPROVAL_CRITERIA.sharpe &&
-      result.max_drawdown <= APPROVAL_CRITERIA.mdd &&
-      result.win_rate >= APPROVAL_CRITERIA.winRate
+      Number(result.sharpe_ratio) >= APPROVAL_CRITERIA.sharpe &&
+      Number(result.max_drawdown) <= APPROVAL_CRITERIA.mdd &&
+      Number(result.win_rate) >= APPROVAL_CRITERIA.winRate
     );
   };
 
@@ -73,13 +73,13 @@ export function BacktestClient() {
                       {r.start_date} ~ {r.end_date}
                     </td>
                     <td className="p-2 text-right font-mono">{r.total_trades}</td>
-                    <td className="p-2 text-right font-mono">{r.win_rate.toFixed(1)}%</td>
-                    <td className="p-2 text-right font-mono">{r.sharpe_ratio.toFixed(2)}</td>
-                    <td className="p-2 text-right font-mono text-down">{r.max_drawdown.toFixed(1)}%</td>
+                    <td className="p-2 text-right font-mono">{Number(r.win_rate).toFixed(1)}%</td>
+                    <td className="p-2 text-right font-mono">{Number(r.sharpe_ratio).toFixed(2)}</td>
+                    <td className="p-2 text-right font-mono text-down">{Number(r.max_drawdown).toFixed(1)}%</td>
                     <td className="p-2 text-right font-mono">
-                      <span className={r.total_return >= 0 ? 'text-up' : 'text-down'}>
-                        {r.total_return > 0 ? '+' : ''}
-                        {r.total_return.toFixed(1)}%
+                      <span className={Number(r.total_return) >= 0 ? 'text-up' : 'text-down'}>
+                        {Number(r.total_return) > 0 ? '+' : ''}
+                        {Number(r.total_return).toFixed(1)}%
                       </span>
                     </td>
                     <td className="p-2 text-center">

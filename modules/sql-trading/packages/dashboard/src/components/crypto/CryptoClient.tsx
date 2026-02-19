@@ -34,7 +34,7 @@ export function CryptoClient() {
               <MetricCard
                 key={coin.symbol}
                 label={coin.symbol}
-                value={`$${coin.price_usd.toLocaleString()}`}
+                value={`$${Number(coin.price_usd).toLocaleString()}`}
                 change={coin.change_pct_24h}
               />
             ))}
@@ -59,7 +59,7 @@ export function CryptoClient() {
               <MetricCard
                 key={stock.symbol}
                 label={stock.symbol}
-                value={`$${stock.price.toFixed(2)}`}
+                value={`$${Number(stock.price).toFixed(2)}`}
                 change={stock.change_pct}
               />
             ))}
@@ -77,12 +77,12 @@ export function CryptoClient() {
             <div className="mb-3">
               <div className="text-xs text-[var(--text-muted)] mb-1">BTC 도미넌스</div>
               <div className="text-2xl font-bold text-[var(--text)]">
-                {dominance.btc_dominance.toFixed(2)}%
+                {Number(dominance.btc_dominance).toFixed(2)}%
               </div>
             </div>
-            <ConfidenceGauge value={dominance.btc_dominance / 100} />
+            <ConfidenceGauge value={Number(dominance.btc_dominance) / 100} />
             <div className="mt-3 text-xs text-[var(--text-muted)]">
-              총 시가총액: ${(dominance.total_market_cap / 1e12).toFixed(2)}T
+              총 시가총액: ${(Number(dominance.total_market_cap) / 1e12).toFixed(2)}T
             </div>
           </div>
         ) : (
@@ -113,10 +113,10 @@ export function CryptoClient() {
                   <tr key={idx} className="border-b border-[var(--border)] last:border-0">
                     <td className="px-3 py-2 text-[var(--text)]">{item.symbol}</td>
                     <td className="px-3 py-2 text-right font-mono text-[var(--text)]">
-                      ${item.global_price_usd.toLocaleString()}
+                      ${Number(item.global_price_usd).toLocaleString()}
                     </td>
                     <td className="px-3 py-2 text-right font-mono text-[var(--text)]">
-                      ₩{item.korea_price_krw.toLocaleString()}
+                      ₩{Number(item.korea_price_krw).toLocaleString()}
                     </td>
                     <td className="px-3 py-2 text-right">
                       <ChangeIndicator value={item.premium_pct} />

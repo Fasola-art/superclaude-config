@@ -40,7 +40,7 @@ export function HomeMarketPreview() {
               <MetricCard
                 key={coin.symbol}
                 label={coin.symbol}
-                value={coin.price_usd?.toLocaleString() ?? '-'}
+                value={coin.price_usd != null ? Number(coin.price_usd).toLocaleString() : '-'}
                 change={coin.change_pct_24h}
                 prefix="$"
               />
@@ -56,9 +56,9 @@ export function HomeMarketPreview() {
                   <span className="text-xs text-[var(--text-muted)]">{stock.name || ''}</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs">
-                  <span className="font-mono text-[var(--text)]">${stock.price.toFixed(2)}</span>
-                  <span className={stock.change_pct >= 0 ? 'text-[var(--up)]' : 'text-[var(--down)]'}>
-                    {stock.change_pct > 0 ? '+' : ''}{stock.change_pct.toFixed(2)}%
+                  <span className="font-mono text-[var(--text)]">${Number(stock.price).toFixed(2)}</span>
+                  <span className={Number(stock.change_pct) >= 0 ? 'text-[var(--up)]' : 'text-[var(--down)]'}>
+                    {Number(stock.change_pct) > 0 ? '+' : ''}{Number(stock.change_pct).toFixed(2)}%
                   </span>
                 </div>
               </div>
@@ -77,7 +77,7 @@ export function HomeMarketPreview() {
         ) : (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {keyStocks.map((idx) => (
-              <MetricCard key={idx.symbol} label={idx.name} value={idx.price.toLocaleString()} change={idx.change_pct} />
+              <MetricCard key={idx.symbol} label={idx.name} value={Number(idx.price).toLocaleString()} change={idx.change_pct} />
             ))}
           </div>
         )}

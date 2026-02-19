@@ -77,7 +77,7 @@ export function SignalsClient() {
                       {signal.signal_type}
                     </Badge>
                   </td>
-                  <td className="p-2 text-right font-mono">{(signal.confidence * 100).toFixed(0)}%</td>
+                  <td className="p-2 text-right font-mono">{(Number(signal.confidence) * 100).toFixed(0)}%</td>
                   <td className="p-2 text-muted">{signal.strategy}</td>
                   <td className="p-2 text-xs text-muted truncate max-w-xs">{signal.reason}</td>
                 </tr>
@@ -100,7 +100,7 @@ export function SignalsClient() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted">평균 신뢰도</span>
-                  <span>{(s.avg_confidence * 100).toFixed(1)}%</span>
+                  <span>{(Number(s.avg_confidence) * 100).toFixed(1)}%</span>
                 </div>
               </div>
             </div>

@@ -38,10 +38,10 @@ export function TradeClient() {
                     {item.commodity_desc}
                   </td>
                   <td className="p-2 text-right font-mono text-[var(--text)]">
-                    {item.trade_value.toLocaleString()}
+                    {item.trade_value != null ? Number(item.trade_value).toLocaleString() : '-'}
                   </td>
                   <td className="p-2 text-right font-mono text-[var(--text-muted)]">
-                    {item.net_weight.toLocaleString()}
+                    {item.net_weight != null ? Number(item.net_weight).toLocaleString() : '-'}
                   </td>
                   <td className="p-2 text-center text-xs text-[var(--text-muted)]">
                     {item.flow_code}

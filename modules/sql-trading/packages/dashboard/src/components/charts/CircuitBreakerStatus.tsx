@@ -35,15 +35,15 @@ export function CircuitBreakerStatus({
             <div className="flex justify-between">
               <span className="text-muted">일일 손익</span>
               <span className={dailyPnl >= 0 ? 'text-up' : 'text-down'}>
-                {dailyPnl > 0 ? '+' : ''}
-                {dailyPnl.toFixed(2)}%
+                {Number(dailyPnl) > 0 ? '+' : ''}
+                {Number(dailyPnl).toFixed(2)}%
               </span>
             </div>
           )}
           {maxDrawdown !== undefined && (
             <div className="flex justify-between">
               <span className="text-muted">최대 낙폭 (MDD)</span>
-              <span className="text-down">{maxDrawdown.toFixed(2)}%</span>
+              <span className="text-down">{Number(maxDrawdown).toFixed(2)}%</span>
             </div>
           )}
         </div>
