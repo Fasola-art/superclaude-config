@@ -1,32 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find:*)",
-      "Bash(grep:*)",
-      "Bash(wc:*)",
-      "Bash(tree:*)",
-      "Bash(du:*)",
-      "Bash(docker:*)",
-      "Bash(psql:*)",
-      "Bash(ruff:*)",
-      "Bash(pytest:*)",
-      "Bash(security:*)",
-      "mcp__postgresql__query",
-      "Bash(brew list:*)",
-      "Bash(c:*)",
-      "Bash(claude --version:*)",
-      "Bash(alias:*)",
-      "Bash(shopt:*)",
-      "Bash(bash -ic 'source ~/.zshrc && c --version')",
-      "Bash(/Users/reim/.local/bin/claude:*)",
-      "Bash(zsh -ic 'c --version')",
-      "Bash(brew uninstall:*)",
-      "Bash(hdiutil attach:*)",
-      "Bash(python3:*)",
-      "Bash(test:*)",
-      "Bash(test -f:*)",
-      "Bash(git commit:*)",
-      "Bash(git config:*)"
+      "Bash(git -C:*)"
     ]
   }
 }
