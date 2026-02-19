@@ -4,13 +4,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   Home, TrendingUp, Bitcoin, Building2,
-  Package, Signal, Settings,
+  Package, Signal, Settings, DollarSign,
 } from 'lucide-react';
 
 const tabs = [
   { href: '/', icon: Home, label: '홈' },
   { href: '/stocks', icon: TrendingUp, label: '주식' },
   { href: '/crypto', icon: Bitcoin, label: '코인' },
+  { href: '/fx', icon: DollarSign, label: '외환' },
   { href: '/realestate', icon: Building2, label: '부동산' },
   { href: '/commodities', icon: Package, label: '원자재' },
   { href: '/signals', icon: Signal, label: '시그널' },

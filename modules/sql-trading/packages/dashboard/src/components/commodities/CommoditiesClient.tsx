@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useOilPrices, useFreight } from '@/hooks';
-import { Card, MetricCard, Badge, ChangeIndicator } from '@/components/ui';
+import { Card, MetricCard, ChangeIndicator } from '@/components/ui';
 
 export function CommoditiesClient() {
   const { data: oilData, isLoading: oilLoading } = useOilPrices();
@@ -17,7 +17,11 @@ export function CommoditiesClient() {
 
   const bdi = freightData?.find(d => d.index_name === 'BDI');
   const fbxChina = freightData?.find(d => d.route?.includes('China'));
-  const fbxEurope = freightData?.find(d => d.route?.includes('Europe'));
+
+  const wtiValue = wti?.value;
+  const brentValue = brent?.value;
+  const bdiValue = bdi?.value;
+  const fbxChinaValue = fbxChina?.value;
 
   return (
     <div className="space-y-6">
@@ -26,22 +30,22 @@ export function CommoditiesClient() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <MetricCard
           label="WTI 원유"
-          value={`$${wti?.value.toFixed(2) || '-'} /배럴`}
+          value={wtiValue != null ? `$${wtiValue.toFixed(2)} /배럴` : '-'}
           change={wti?.change_pct}
         />
         <MetricCard
           label="Brent 원유"
-          value={`$${brent?.value.toFixed(2) || '-'} /배럴`}
+          value={brentValue != null ? `$${brentValue.toFixed(2)} /배럴` : '-'}
           change={brent?.change_pct}
         />
         <MetricCard
           label="BDI 지수"
-          value={bdi?.value.toFixed(0) || '-'}
+          value={bdiValue != null ? bdiValue.toFixed(0) : '-'}
           change={bdi?.change_pct}
         />
         <MetricCard
           label="FBX China"
-          value={`$${fbxChina?.value.toFixed(0) || '-'}`}
+          value={fbxChinaValue != null ? `$${fbxChinaValue.toFixed(0)}` : '-'}
           change={fbxChina?.change_pct}
         />
       </div>

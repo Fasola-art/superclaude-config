@@ -46,6 +46,11 @@ def load_api_keys() -> Dict[str, str]:
 
 API_KEYS = load_api_keys()
 
+
+def _escape_sql(value: str) -> str:
+    """단순 SQL 문자열 이스케이프"""
+    return value.replace("'", "''")
+
 # 추적 종목 정의
 WATCHLIST = {
     # Dry Bulk 해운주 (BDI 연동) - 원자재 경기 민감
@@ -55,7 +60,6 @@ WATCHLIST = {
         "EGLE": "Eagle Bulk Shipping",
         "NMM": "Navios Maritime Partners",
         "GNK": "Genco Shipping",
-        "GOGL": "Golden Ocean Group",
     },
     # 컨테이너 해운 - 소비재 경기
     "container": {
@@ -82,11 +86,17 @@ WATCHLIST = {
         "^DJI": "Dow Jones",
         "^IXIC": "NASDAQ",
     },
+    # 크립토 연계 주식
+    "crypto_equity": {
+        "BMNR": "BitMine",
+        "DFDV": "DFDV",
+    },
 }
 
-# Alpha Vantage: 신뢰성 중요한 ETF/지수만 (1시간 간격, 25회/일 제한)
-# 해운주는 yfinance로 빠른 대응
+# Alpha Vantage: 신뢰성 중요한 ETF/지수만 (25회/일 제한)
+# 6시간 간격으로만 호출해 일일 한도 초과를 방지
 ALPHA_VANTAGE_SYMBOLS = ["DBC", "GSG", "DBA", "DBB"]  # 원자재 ETF만
+ALPHA_VANTAGE_HOURS = {0, 6, 12, 18}
 
 
 def fetch_alpha_vantage(symbol: str) -> Optional[Dict[str, Any]]:
@@ -227,7 +237,9 @@ def fetch_yfinance(symbols: List[str]) -> List[Dict[str, Any]]:
     for symbol in symbols:
         try:
             ticker = yf.Ticker(symbol)
-            hist = ticker.history(period="5d")
+            hist = ticker.history(period="1d", interval="1m")
+            if hist.empty:
+                hist = ticker.history(period="5d")
 
             if hist.empty:
                 continue
@@ -278,8 +290,9 @@ def generate_market_sql(data: List[Dict[str, Any]]) -> str:
         })
 
         values.append(
-            f"(NOW(), '{d['symbol']}', {d['price']}, {d['change_pct']}, "
-            f"{d['volume']}, '{asset_type}', '{d.get('source', 'unknown')}', '{metadata}')"
+            f"(NOW(), '{_escape_sql(d['symbol'])}', {d['price']}, {d['change_pct']}, "
+            f"{d['volume']}, '{_escape_sql(asset_type)}', "
+            f"'{_escape_sql(d.get('source', 'unknown'))}', '{_escape_sql(metadata)}')"
         )
 
     return """INSERT INTO market_snapshots
@@ -296,7 +309,7 @@ def generate_freight_sql(bdi: Optional[Dict[str, Any]]) -> str:
     return f"""INSERT INTO freight_indices
 (date, index_name, route, value, change_pct, source)
 VALUES
-('{bdi['date']}', '{bdi['index_name']}', '{bdi['route']}', {bdi['value']}, {bdi['change_pct']}, 'fred')
+('{_escape_sql(bdi['date'])}', '{_escape_sql(bdi['index_name'])}', '{_escape_sql(bdi['route'])}', {bdi['value']}, {bdi['change_pct']}, 'fred')
 ON CONFLICT (date, index_name, route) DO UPDATE SET
 value = EXCLUDED.value, change_pct = EXCLUDED.change_pct;"""
 
@@ -309,8 +322,8 @@ def generate_indicators_sql(indicators: List[Dict[str, Any]]) -> str:
     values = []
     for ind in indicators:
         values.append(
-            f"('{ind['series_id']}', '{ind['date']}', {ind['value']}, "
-            f"{ind['change_pct']}, '{ind['category']}', 'medium')"
+            f"('{_escape_sql(ind['series_id'])}', '{_escape_sql(ind['date'])}', {ind['value']}, "
+            f"{ind['change_pct']}, '{_escape_sql(ind['category'])}', 'medium')"
         )
 
     return """INSERT INTO economic_indicators
@@ -361,8 +374,9 @@ def collect_all(save_db: bool = True, verbose: bool = True) -> Dict[str, Any]:
     all_data = []
     sources_used = []
 
-    # 1. Alpha Vantage로 핵심 종목 수집 (5개)
-    if API_KEYS.get("alpha_vantage"):
+    # 1. Alpha Vantage로 핵심 종목 수집 (일일 한도 보호)
+    now_hour = datetime.now().hour
+    if API_KEYS.get("alpha_vantage") and now_hour in ALPHA_VANTAGE_HOURS:
         if verbose:
             print("📡 Alpha Vantage 데이터 수집 중...")
         for symbol in ALPHA_VANTAGE_SYMBOLS:

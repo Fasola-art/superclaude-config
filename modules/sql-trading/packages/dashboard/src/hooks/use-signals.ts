@@ -5,6 +5,7 @@ import type {
   BacktestResult,
   RiskStatus,
   PaperTrade,
+  DailyPerformance,
 } from '@/types/api';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
@@ -52,5 +53,13 @@ export function usePaperTrades() {
     queryKey: ['signals', 'paper'],
     queryFn: () => fetchApi<PaperTrade[]>('/api/signals/paper'),
     staleTime: 30_000,
+  });
+}
+
+export function useDailyPerformance() {
+  return useQuery({
+    queryKey: ['signals', 'daily-performance'],
+    queryFn: () => fetchApi<DailyPerformance>('/api/signals/daily-performance'),
+    staleTime: 60_000,
   });
 }

@@ -3,3 +3,4 @@ export * from './use-crypto';
 export * from './use-realestate';
 export * from './use-signals';
 export * from './use-commodities';
+export * from './use-fx';

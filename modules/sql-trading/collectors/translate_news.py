@@ -71,15 +71,15 @@ def collect_and_save(verbose: bool = True) -> int:
             meta = json.loads(row["meta"]) if row["meta"] != "{}" else {}
         except json.JSONDecodeError:
             meta = {}
-        meta.update({"original_title": row["title"][:500],
+        meta.update({"original_title": row["title"],
                       "translated": True})
         if row["summary"]:
-            meta["original_summary"] = row["summary"][:800]
+            meta["original_summary"] = row["summary"]
 
         mj = escape_sql(json.dumps(meta, ensure_ascii=False))
         run_sql(
-            f"UPDATE market_news SET title='{escape_sql(title_kr[:500])}', "
-            f"summary='{escape_sql(summary_kr[:1000])}', "
+            f"UPDATE market_news SET title='{escape_sql(title_kr)}', "
+            f"summary='{escape_sql(summary_kr)}', "
             f"metadata='{mj}'::jsonb WHERE id={row['id']};"
         )
         total += 1

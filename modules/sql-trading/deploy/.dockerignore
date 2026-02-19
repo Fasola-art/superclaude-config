@@ -1,0 +1,8 @@
+node_modules
+.next
+.git
+*.log
+deploy/.env
+__pycache__
+*.pyc
+data/

@@ -156,8 +156,12 @@ open_dashboard() {
     # 서버 확인
     if ! curl -s http://localhost:8080/api/summary > /dev/null 2>&1; then
         echo "🚀 대시보드 서버 시작 중..."
-        cd "$MODULE_DIR/dashboard"
-        nohup python3 api_server.py > /dev/null 2>&1 &
+        LOG_DIR="$HOME/.claude/logs"
+        mkdir -p "$LOG_DIR"
+        (cd "$MODULE_DIR/packages/api" && \
+          PYTHONPATH="$MODULE_DIR/packages/api/src" \
+          nohup /opt/homebrew/bin/python3 -m uvicorn main:app --host 0.0.0.0 --port 8080 \
+          > "$LOG_DIR/sql-trading-api.log" 2>&1 &)
         sleep 2
     fi
     echo "🌐 대시보드 열기: http://localhost:8080"
@@ -181,9 +185,23 @@ show_status() {
     echo ""
 
     if launchctl list | grep -q "sql-trading-collector"; then
-        echo -e "📦 데이터 수집: ${GREEN}✅ 활성${NC} (30분 주기)"
+        echo -e "📦 데이터 수집: ${GREEN}✅ 활성${NC} (1시간 주기)"
+        last_market=$(tail -1 ~/.claude/logs/sql-trading-collector.log 2>/dev/null | sed -E 's/ - .*//')
+        if [[ -n "$last_market" ]]; then
+            echo -e "   └ 마지막 실행: ${last_market}"
+        fi
     else
         echo -e "📦 데이터 수집: ${RED}❌ 비활성${NC}"
+    fi
+
+    if launchctl list | grep -q "sql-trading-crypto"; then
+        echo -e "🪙 코인 수집:   ${GREEN}✅ 활성${NC} (5분 주기)"
+        last_crypto=$(tail -1 ~/.claude/logs/sql-trading-crypto.log 2>/dev/null | head -1 | sed -E 's/ - .*//')
+        if [[ -n "$last_crypto" ]]; then
+            echo -e "   └ 마지막 실행: ${last_crypto}"
+        fi
+    else
+        echo -e "🪙 코인 수집:   ${RED}❌ 비활성${NC}"
     fi
 
     if launchctl list | grep -q "sql-trading-alert"; then

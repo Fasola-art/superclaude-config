@@ -16,7 +16,7 @@ class PortfolioItem(BaseModel):
 
 
 @router.get("/")
-async def get_portfolio():
+def get_portfolio():
     """포트폴리오 현황"""
     rows = fetch_all("""
         SELECT symbol, asset_type, quantity, avg_price,
@@ -28,7 +28,7 @@ async def get_portfolio():
 
 
 @router.post("/")
-async def add_item(item: PortfolioItem):
+def add_item(item: PortfolioItem):
     """포트폴리오 아이템 추가"""
     execute("""
         INSERT INTO portfolio_items (symbol, asset_type, quantity, avg_price, currency)

@@ -6,7 +6,7 @@ router = APIRouter()
 
 
 @router.get("/freight")
-async def get_freight():
+def get_freight():
     """운임 지수"""
     rows = fetch_all("""
         SELECT DISTINCT ON (index_name, route)
@@ -18,7 +18,7 @@ async def get_freight():
 
 
 @router.get("/oil")
-async def get_oil_prices():
+def get_oil_prices():
     """유가 (WTI, Brent)"""
     rows = fetch_all("""
         SELECT DISTINCT ON (series_id)
@@ -31,7 +31,7 @@ async def get_oil_prices():
 
 
 @router.get("/logistics")
-async def get_logistics():
+def get_logistics():
     """물류 추적"""
     rows = fetch_all("""
         SELECT DISTINCT ON (shipment_id)
@@ -46,7 +46,7 @@ async def get_logistics():
 
 
 @router.get("/trade")
-async def get_trade_stats():
+def get_trade_stats():
     """무역 통계"""
     rows = fetch_all("""
         SELECT

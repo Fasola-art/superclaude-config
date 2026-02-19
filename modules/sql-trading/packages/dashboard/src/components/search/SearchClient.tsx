@@ -1,18 +1,23 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Card, Badge } from '@/components/ui';
 
 const popularKeywords = ['삼성전자', '비트코인', '금리', '환율', '유가'];
 
 export function SearchClient() {
   const [query, setQuery] = useState('');
-  const [recentSearches, setRecentSearches] = useState<string[]>([]);
-
-  useEffect(() => {
+  const [recentSearches, setRecentSearches] = useState<string[]>(() => {
+    if (typeof window === 'undefined') return [];
     const stored = localStorage.getItem('recentSearches');
-    if (stored) setRecentSearches(JSON.parse(stored));
-  }, []);
+    if (!stored) return [];
+    try {
+      const parsed = JSON.parse(stored);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  });
 
   const handleSearch = (term: string) => {
     if (!term.trim()) return;

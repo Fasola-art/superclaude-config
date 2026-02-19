@@ -49,12 +49,30 @@ export interface Stock {
   name: string;
 }
 
+export interface StockQuote {
+  symbol: string;
+  price: number;
+  change_pct: number;
+  volume: number;
+  timestamp: string;
+  name: string | null;
+}
+
 export interface NewsMetadata {
   positive?: number;
   negative?: number;
   neutral?: number;
   recommendation?: string;
   rec_key?: string;
+  original_title?: string;
+  original_summary?: string;
+}
+
+export interface SummaryDetail {
+  table: string;
+  label: string;
+  count: number;
+  latest: string | null;
 }
 
 export interface NewsItem {

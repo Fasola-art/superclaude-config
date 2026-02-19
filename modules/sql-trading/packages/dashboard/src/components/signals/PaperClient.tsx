@@ -1,7 +1,7 @@
 'use client';
 
 import { usePaperTrades } from '@/hooks';
-import { Card, Badge, CardSkeleton } from '@/components/ui';
+import { Card, CardSkeleton } from '@/components/ui';
 import { TradeTable } from './TradeTable';
 
 export function PaperClient() {

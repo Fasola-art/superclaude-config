@@ -6,7 +6,7 @@ router = APIRouter()
 
 
 @router.get("/indices")
-async def get_indices():
+def get_indices():
     """매매/전세 지수"""
     rows = fetch_all("""
         SELECT DISTINCT ON (region, index_type)
@@ -18,7 +18,7 @@ async def get_indices():
 
 
 @router.get("/rates")
-async def get_rates():
+def get_rates():
     """기준금리/주담대 금리"""
     rows = fetch_all("""
         SELECT DISTINCT ON (rate_type)
@@ -30,7 +30,7 @@ async def get_rates():
 
 
 @router.get("/regions")
-async def get_by_region():
+def get_by_region():
     """지역별 부동산 시세"""
     rows = fetch_all("""
         SELECT region,

@@ -19,15 +19,15 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark');
-  const [senior, setSenior] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('theme') as Theme;
-    if (saved) setTheme(saved);
-    const savedSenior = localStorage.getItem('senior') === 'true';
-    setSenior(savedSenior);
-  }, []);
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return 'dark';
+    const saved = localStorage.getItem('theme') as Theme | null;
+    return saved ?? 'dark';
+  });
+  const [senior, setSenior] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem('senior') === 'true';
+  });
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);

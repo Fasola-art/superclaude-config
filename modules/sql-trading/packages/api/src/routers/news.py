@@ -5,14 +5,14 @@ from db import fetch_all
 router = APIRouter()
 
 # 프론트엔드 → DB 카테고리 매핑 (호환성)
-CATEGORY_MAP = {"macro": "economy", "commodities": "realestate"}
+CATEGORY_MAP = {"macro": "economy", "commodities": "commodities"}
 
 COLS = """title, summary, url, source, category,
        sentiment, symbols, timestamp, metadata"""
 
 
 @router.get("/")
-async def get_news(
+def get_news(
     category: str | None = Query(None, description="all, stocks, crypto, economy, realestate"),
     limit: int = Query(20, le=50),
 ):

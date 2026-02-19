@@ -6,7 +6,7 @@ router = APIRouter()
 
 
 @router.get("/indices")
-async def get_indices():
+def get_indices():
     """글로벌 주요 지수 (8개)"""
     indices = ["^GSPC", "^IXIC", "^DJI", "^KS11", "^KQ11", "^N225", "000001.SS", "^STOXX50E"]
     placeholders = ",".join([f"'{s}'" for s in indices])
@@ -22,7 +22,7 @@ async def get_indices():
 
 
 @router.get("/top-movers")
-async def get_top_movers():
+def get_top_movers():
     """등락 상위 종목"""
     rows = fetch_all("""
         SELECT DISTINCT ON (symbol)
@@ -39,7 +39,7 @@ async def get_top_movers():
 
 
 @router.get("/sectors")
-async def get_sectors():
+def get_sectors():
     """섹터별 현황"""
     rows = fetch_all("""
         SELECT
@@ -52,4 +52,21 @@ async def get_sectors():
         GROUP BY metadata->>'sector'
         ORDER BY AVG(change_pct) DESC
     """)
+    return rows
+
+
+@router.get("/quotes")
+def get_quotes(symbols: str):
+    """심볼별 최신 시세"""
+    symbol_list = [s.strip().upper() for s in symbols.split(",") if s.strip()]
+    if not symbol_list:
+        return []
+    rows = fetch_all("""
+        SELECT DISTINCT ON (symbol)
+            symbol, price, change_pct, volume, timestamp,
+            metadata->>'name' as name
+        FROM market_snapshots
+        WHERE symbol = ANY(%s)
+        ORDER BY symbol, timestamp DESC
+    """, (symbol_list,))
     return rows

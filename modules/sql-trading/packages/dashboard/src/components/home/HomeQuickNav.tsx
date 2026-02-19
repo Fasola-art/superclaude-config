@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import {
-  TrendingUp, Bitcoin, Building2, Package, Signal, Newspaper,
+  TrendingUp, Bitcoin, Building2, Package, Signal, Newspaper, DollarSign,
 } from 'lucide-react';
 
 const sections = [
   { href: '/stocks', icon: TrendingUp, label: '주식', desc: '글로벌 인덱스, 등락 상위', color: '#3b82f6' },
   { href: '/crypto', icon: Bitcoin, label: '코인', desc: 'BTC, ETH, 김프', color: '#f59e0b' },
+  { href: '/fx', icon: DollarSign, label: '외환', desc: '달러, 유로, 엔, 위안', color: '#22c55e' },
   { href: '/realestate', icon: Building2, label: '부동산', desc: '매매/전세 지수, 금리', color: '#10b981' },
   { href: '/commodities', icon: Package, label: '원자재', desc: '유가, 운임, 물류', color: '#8b5cf6' },
   { href: '/signals', icon: Signal, label: '시그널', desc: '트레이딩 시그널, 전략', color: '#ef4444' },

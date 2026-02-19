@@ -5,6 +5,7 @@
 데이터 소스: FRED API
 대상 테이블: interest_rates
 """
+from __future__ import annotations
 
 import json
 import subprocess

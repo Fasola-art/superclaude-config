@@ -2,6 +2,7 @@
 
 import { useBacktest } from '@/hooks';
 import { Card, Badge, ConfidenceGauge, CardSkeleton } from '@/components/ui';
+import type { BacktestResult } from '@/types/signals';
 
 export function BacktestClient() {
   const { data: results, isLoading } = useBacktest();
@@ -15,7 +16,7 @@ export function BacktestClient() {
     winRate: 55,
   };
 
-  const checkApproval = (result: any) => {
+  const checkApproval = (result: BacktestResult) => {
     return (
       result.sharpe_ratio >= APPROVAL_CRITERIA.sharpe &&
       result.max_drawdown <= APPROVAL_CRITERIA.mdd &&

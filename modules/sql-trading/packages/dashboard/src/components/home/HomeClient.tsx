@@ -1,14 +1,17 @@
 'use client';
 
 import { Badge, CardSkeleton } from '@/components/ui';
-import { useSummary } from '@/hooks';
+import { useSummary, useLatestSignals } from '@/hooks';
+import { HomeDailyPerformance } from './HomeDailyPerformance';
 import { HomeQuickNav } from './HomeQuickNav';
 import { HomeMarketPreview } from './HomeMarketPreview';
 import { HomeSignalPreview } from './HomeSignalPreview';
-import { SectionHeader } from './SectionHeader';
+import { SignalPopover } from './SignalPopover';
+import { DataOverviewPopover } from './DataOverviewPopover';
 
 export function HomeClient() {
   const { data: summary, isLoading } = useSummary();
+  const { data: signals } = useLatestSignals();
 
   return (
     <div className="space-y-6">
@@ -22,18 +25,9 @@ export function HomeClient() {
             <Badge variant="info">{summary.server_time.slice(11, 16)}</Badge>
           </div>
           <div className="grid grid-cols-4 gap-3 text-sm">
-            <div>
-              <div className="text-[var(--text-muted)]">전체 데이터</div>
-              <div className="text-[var(--text)] font-mono">{summary.total_records.toLocaleString()}</div>
-            </div>
-            <div>
-              <div className="text-[var(--text-muted)]">매수 신호</div>
-              <div className="text-[var(--up)] font-mono">{summary.buy_signals.toLocaleString()}</div>
-            </div>
-            <div>
-              <div className="text-[var(--text-muted)]">매도 신호</div>
-              <div className="text-[var(--down)] font-mono">{summary.sell_signals.toLocaleString()}</div>
-            </div>
+            <DataOverviewPopover count={summary.total_records} />
+            <SignalPopover signals={signals || []} filter="buy" count={summary.buy_signals} />
+            <SignalPopover signals={signals || []} filter="sell" count={summary.sell_signals} />
             <div>
               <div className="text-[var(--text-muted)]">업데이트</div>
               <div className="text-[var(--text)] font-mono text-xs">
@@ -43,6 +37,8 @@ export function HomeClient() {
           </div>
         </div>
       ) : null}
+
+      <HomeDailyPerformance />
 
       {/* 빠른 이동 */}
       <HomeQuickNav />

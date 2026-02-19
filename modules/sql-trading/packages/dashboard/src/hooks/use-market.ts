@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import type { SummaryData, MarketIndex, TopMover, SectorData } from '@/types/api';
+import type { SummaryData, SummaryDetail, MarketIndex, TopMover, SectorData, StockQuote } from '@/types/api';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
@@ -14,6 +14,14 @@ export function useSummary() {
     queryKey: ['summary'],
     queryFn: () => fetchApi<SummaryData>('/api/summary'),
     staleTime: 30_000,
+  });
+}
+
+export function useSummaryDetail() {
+  return useQuery({
+    queryKey: ['summary', 'detail'],
+    queryFn: () => fetchApi<SummaryDetail[]>('/api/summary/detail'),
+    staleTime: 60_000,
   });
 }
 
@@ -38,5 +46,15 @@ export function useSectors() {
     queryKey: ['stocks', 'sectors'],
     queryFn: () => fetchApi<SectorData[]>('/api/stocks/sectors'),
     staleTime: 30_000,
+  });
+}
+
+export function useStockQuotes(symbols: string[]) {
+  const query = symbols.join(',');
+  return useQuery({
+    queryKey: ['stocks', 'quotes', query],
+    queryFn: () => fetchApi<StockQuote[]>(`/api/stocks/quotes?symbols=${query}`),
+    staleTime: 30_000,
+    enabled: symbols.length > 0,
   });
 }

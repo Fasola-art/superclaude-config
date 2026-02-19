@@ -1,11 +1,17 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { Search, Share2, Star, Moon, Sun } from 'lucide-react';
 import { useTheme } from '@/lib/theme-provider';
 
 export function Header() {
   const { theme, toggle } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 bg-[var(--bg)]/80 backdrop-blur-sm border-b border-[var(--border)]">
@@ -25,9 +31,13 @@ export function Header() {
             <Star size={20} className="text-[var(--text-muted)]" />
           </Link>
           <button onClick={toggle} className="p-2 hover:opacity-80" aria-label="테마 변경">
-            {theme === 'dark'
-              ? <Sun size={20} className="text-[var(--text-muted)]" />
-              : <Moon size={20} className="text-[var(--text-muted)]" />}
+            {mounted ? (
+              theme === 'dark'
+                ? <Sun size={20} className="text-[var(--text-muted)]" />
+                : <Moon size={20} className="text-[var(--text-muted)]" />
+            ) : (
+              <span className="block w-[20px] h-[20px]" />
+            )}
           </button>
         </div>
       </div>

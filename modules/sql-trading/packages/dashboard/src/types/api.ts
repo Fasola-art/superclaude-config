@@ -6,3 +6,4 @@ export * from './realestate';
 export * from './legacy';
 export * from './signals';
 export * from './commodities';
+export * from './fx';

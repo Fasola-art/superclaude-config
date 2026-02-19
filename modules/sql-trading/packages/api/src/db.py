@@ -25,6 +25,7 @@ def get_pool() -> pool.ThreadedConnectionPool:
             maxconn=10,
             dbname=os.getenv("DB_NAME", "claude_mcp"),
             user=os.getenv("DB_USER", "reim"),
+            password=os.getenv("DB_PASSWORD"),
             host=os.getenv("DB_HOST", "localhost"),
             port=int(os.getenv("DB_PORT", "5432")),
         )

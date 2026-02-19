@@ -5,9 +5,16 @@ import { Card, Badge, CardSkeleton } from '@/components/ui';
 import { QuartileChart, SessionTimeline, EMAStatusBar } from '@/components/charts';
 
 export function StrategyClient() {
-  const { data: strategies, isLoading } = useStrategy();
+  const { data: strategies, isLoading, error } = useStrategy();
 
   if (isLoading) return <CardSkeleton />;
+  if (error) {
+    return (
+      <Card>
+        <div className="text-[var(--down)]">전략 데이터를 불러오지 못했습니다.</div>
+      </Card>
+    );
+  }
 
   // Mock 데이터 (실제 API 연동 필요)
   const priceData = {

@@ -14,4 +14,4 @@ cd "$HOME/.claude/modules/sql-trading/collectors"
 /usr/bin/python3 realtime_collector.py --quiet
 
 # 타임스탬프 기록
-echo "$(date '+%Y-%m-%d %H:%M:%S') - 수집 완료" >> "$LOG_DIR/sql-trading-collector.log"
+echo "$(date '+%Y-%m-%d %H:%M:%S') - market 수집 완료" >> "$LOG_DIR/sql-trading-collector.log"

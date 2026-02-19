@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Card, Badge } from '@/components/ui';
 
 interface FavoriteItem {
@@ -10,12 +10,17 @@ interface FavoriteItem {
 }
 
 export function FavoritesClient() {
-  const [favorites, setFavorites] = useState<string[]>([]);
-
-  useEffect(() => {
+  const [favorites, setFavorites] = useState<string[]>(() => {
+    if (typeof window === 'undefined') return [];
     const stored = localStorage.getItem('favorites');
-    if (stored) setFavorites(JSON.parse(stored));
-  }, []);
+    if (!stored) return [];
+    try {
+      const parsed = JSON.parse(stored);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  });
 
   const removeFavorite = (symbol: string) => {
     const updated = favorites.filter(s => s !== symbol);

@@ -65,10 +65,10 @@ def collect_and_save(verbose: bool = True) -> int:
                 if a["url"] in known:
                     continue
                 known.add(a["url"])
-                t = escape_sql(a["title"][:500])
-                s = escape_sql(a["summary"][:1000])
-                u = escape_sql(a["url"][:500])
-                src = escape_sql(a["source"][:100])
+                t = escape_sql(a["title"])
+                s = escape_sql(a["summary"])
+                u = escape_sql(a["url"])
+                src = escape_sql(a["source"])
                 values.append(
                     f"(NOW(), '{t}', '{s}', '{u}', '{src}', '{category}')")
                 new_count += 1

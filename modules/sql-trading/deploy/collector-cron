@@ -1,0 +1,3 @@
+# 매 시간 정각에 수집기 실행
+0 * * * * root /usr/bin/env bash -c 'source /app/env.sh && cd /app/collectors && python3 collect_all.py >> /var/log/collector.log 2>&1'
+# 빈 줄 필수 (cron 요구사항)

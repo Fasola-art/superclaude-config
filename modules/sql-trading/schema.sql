@@ -184,6 +184,7 @@ CREATE INDEX IF NOT EXISTS idx_indicators_date ON economic_indicators(date);
 
 -- 트레이딩 신호 인덱스
 CREATE INDEX IF NOT EXISTS idx_signals_symbol ON trading_signals(symbol, timestamp);
+CREATE INDEX IF NOT EXISTS idx_signals_timestamp ON trading_signals(timestamp);
 CREATE INDEX IF NOT EXISTS idx_signals_type ON trading_signals(signal_type);
 CREATE INDEX IF NOT EXISTS idx_signals_strategy ON trading_signals(strategy);
 
@@ -427,6 +428,7 @@ CREATE TABLE IF NOT EXISTS trading_paper_trades (
 CREATE INDEX IF NOT EXISTS idx_crypto_symbol ON crypto_prices(symbol, timestamp);
 CREATE INDEX IF NOT EXISTS idx_crypto_timestamp ON crypto_prices(timestamp);
 CREATE INDEX IF NOT EXISTS idx_kimchi_symbol ON kimchi_premium(symbol, timestamp);
+CREATE INDEX IF NOT EXISTS idx_kimchi_timestamp ON kimchi_premium(timestamp);
 CREATE INDEX IF NOT EXISTS idx_realestate_date ON realestate_indices(date);
 CREATE INDEX IF NOT EXISTS idx_realestate_region ON realestate_indices(region);
 CREATE INDEX IF NOT EXISTS idx_rates_date ON interest_rates(date);
@@ -435,6 +437,7 @@ CREATE INDEX IF NOT EXISTS idx_news_category ON market_news(category);
 CREATE INDEX IF NOT EXISTS idx_portfolio_symbol ON portfolio_items(symbol);
 CREATE INDEX IF NOT EXISTS idx_exec_timestamp ON trading_execution_orders(timestamp);
 CREATE INDEX IF NOT EXISTS idx_risk_timestamp ON trading_risk_events(timestamp);
+CREATE INDEX IF NOT EXISTS idx_backtest_created_at ON trading_backtest_results(created_at);
 CREATE INDEX IF NOT EXISTS idx_paper_timestamp ON trading_paper_trades(timestamp);
 
 -- 확장 뷰

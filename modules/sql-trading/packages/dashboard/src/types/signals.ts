@@ -2,7 +2,7 @@
 
 export interface TradingSignal {
   symbol: string;
-  signal_type: 'BUY' | 'SELL' | 'HOLD';
+  signal_type: 'BUY' | 'STRONG_BUY' | 'SELL' | 'STRONG_SELL' | 'HOLD';
   confidence: number;
   price: number;
   target_price: number | null;
@@ -55,6 +55,36 @@ export interface PaperTrade {
   pnl_pct: number | null;
   strategy: string;
   timestamp: string;
+}
+
+export interface DailyPerformanceItem {
+  symbol: string;
+  signal_type: 'BUY' | 'SELL' | 'STRONG_BUY' | 'STRONG_SELL';
+  entry_time: string;
+  entry_price: number;
+  exit_time: string;
+  exit_price: number;
+  pct_change: number;
+  outcome: 'win' | 'loss' | 'flat';
+}
+
+export interface DailyPerformanceSummary {
+  total: number;
+  wins: number;
+  losses: number;
+  flats: number;
+  win_rate: number;
+}
+
+export interface DailyPerformanceWindow {
+  start_kst: string;
+  end_kst: string;
+}
+
+export interface DailyPerformance {
+  window: DailyPerformanceWindow;
+  summary: DailyPerformanceSummary;
+  items: DailyPerformanceItem[];
 }
 
 export interface AgentConfidence {

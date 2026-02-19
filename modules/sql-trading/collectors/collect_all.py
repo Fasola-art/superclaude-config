@@ -25,6 +25,7 @@ COLLECTORS = [
     ("seed_backtest_risk", "백테스트/리스크 시드", "seed"),
     ("seed_paper_trade", "트레이드/무역 시드", "seed"),
     ("analyze_news", "FinBERT 감정분석", "api"),
+    ("signal_generator", "트레이딩 신호 생성", "api"),
     ("telegram_briefing", "텔레그램 브리핑", "api"),
 ]
 
@@ -33,18 +34,25 @@ TABLES = [
     "crypto_prices", "kimchi_premium", "interest_rates",
     "realestate_indices", "market_news", "trading_backtest_results",
     "trading_risk_events", "trading_paper_trades", "trade_statistics",
+    "trading_signals",
 ]
 
 
-def run_collector(module_name: str, desc: str) -> tuple[bool, int]:
-    """개별 수집기 실행"""
-    try:
-        mod = __import__(module_name)
-        count = mod.collect_and_save(verbose=True)
-        return True, count
-    except Exception as e:
-        print(f"  ❌ {desc} 실패: {e}")
-        return False, 0
+def run_collector(module_name: str, desc: str, retries: int = 3) -> tuple[bool, int]:
+    """개별 수집기 실행 (실패 시 재시도)"""
+    for attempt in range(1, retries + 1):
+        try:
+            mod = __import__(module_name)
+            count = mod.collect_and_save(verbose=True)
+            return True, count
+        except Exception as e:
+            if attempt == retries:
+                print(f"  ❌ {desc} 실패: {e}")
+                return False, 0
+            wait_s = 2 ** attempt
+            print(f"  ⚠️ {desc} 실패: {e} (재시도 {attempt}/{retries}, {wait_s}s 대기)")
+            time.sleep(wait_s)
+    return False, 0
 
 
 def main() -> int:

@@ -1,12 +1,18 @@
 """트레이딩 시그널 API 라우터"""
+from __future__ import annotations
+
+from typing import Any
+
 from fastapi import APIRouter
 from db import fetch_all, fetch_one
+from routers.signals_daily import router as daily_router
 
 router = APIRouter()
+router.include_router(daily_router)
 
 
 @router.get("/latest")
-async def get_latest_signals():
+def get_latest_signals() -> list[dict[str, Any]]:
     """최근 시그널"""
     rows = fetch_all("""
         SELECT symbol, signal_type, confidence, price,
@@ -20,7 +26,7 @@ async def get_latest_signals():
 
 
 @router.get("/strategy")
-async def get_strategy_status():
+def get_strategy_status() -> list[dict[str, Any]]:
     """전략별 성과"""
     rows = fetch_all("""
         SELECT strategy,
@@ -37,7 +43,7 @@ async def get_strategy_status():
 
 
 @router.get("/backtest")
-async def get_backtest_results():
+def get_backtest_results() -> list[dict[str, Any]]:
     """백테스팅 결과"""
     rows = fetch_all("""
         SELECT strategy, start_date, end_date, total_trades,
@@ -50,7 +56,7 @@ async def get_backtest_results():
 
 
 @router.get("/risk")
-async def get_risk_status():
+def get_risk_status() -> dict[str, Any]:
     """리스크 현황"""
     latest = fetch_one("""
         SELECT level, event_type, description,
@@ -60,7 +66,7 @@ async def get_risk_status():
         LIMIT 1
     """)
     events = fetch_all("""
-        SELECT level, event_type, daily_pnl_pct, timestamp
+        SELECT level, event_type, description, daily_pnl_pct, timestamp
         FROM trading_risk_events
         WHERE timestamp > NOW() - INTERVAL '7 days'
         ORDER BY timestamp DESC
@@ -70,7 +76,7 @@ async def get_risk_status():
 
 
 @router.get("/paper")
-async def get_paper_trades():
+def get_paper_trades() -> list[dict[str, Any]]:
     """페이퍼 트레이딩"""
     rows = fetch_all("""
         SELECT symbol, side, quantity, entry_price, exit_price,

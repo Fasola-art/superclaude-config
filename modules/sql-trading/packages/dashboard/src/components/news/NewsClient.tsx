@@ -95,7 +95,11 @@ export function NewsClient() {
                   >
                     {item.title}
                   </a>
-                  <p className="text-sm text-[var(--text-muted)] mt-1">{item.summary}</p>
+                  <p className="text-sm text-[var(--text-muted)] mt-1 whitespace-pre-wrap">
+                    {(item.metadata?.original_summary && item.summary && item.metadata.original_summary.length > item.summary.length)
+                      ? item.metadata.original_summary
+                      : item.summary}
+                  </p>
                   <div className="flex items-center gap-4 mt-3 text-xs text-[var(--text-muted)]">
                     <span>{item.source}</span>
                     <span>{new Date(item.timestamp).toLocaleString('ko-KR')}</span>
@@ -106,6 +110,14 @@ export function NewsClient() {
                         ))}
                       </span>
                     )}
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ml-auto inline-flex items-center px-2 py-1 rounded-md border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:border-[var(--accent)] transition-colors"
+                    >
+                      출처 링크
+                    </a>
                   </div>
                 </div>
               </div>

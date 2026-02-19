@@ -1,0 +1,13 @@
+# 도메인이 있으면: yourdomain.com 으로 교체
+# 도메인 없으면: :80 으로 HTTP만 사용
+{$DOMAIN:localhost} {
+	# 대시보드 (메인)
+	handle {
+		reverse_proxy dashboard:3000
+	}
+
+	# API
+	handle /api/* {
+		reverse_proxy api:8080
+	}
+}

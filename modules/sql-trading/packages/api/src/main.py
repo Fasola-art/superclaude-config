@@ -7,12 +7,14 @@ from contextlib import asynccontextmanager
 from datetime import datetime
 from pathlib import Path
 
-from fastapi import FastAPI
+import os
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from db import close_pool
-from routers import stocks, crypto, realestate, commodities, signals, news, portfolio
+from routers import stocks, crypto, realestate, commodities, signals, news, portfolio, fx
 
 
 @asynccontextmanager
@@ -28,10 +30,28 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+
+@app.exception_handler(HTTPException)
+def http_exception_handler(_: Request, exc: HTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"error": {"message": exc.detail, "type": "http_error"}},
+    )
+
+
+@app.exception_handler(Exception)
+def unhandled_exception_handler(_: Request, exc: Exception):
+    return JSONResponse(
+        status_code=500,
+        content={"error": {"message": "Internal Server Error", "type": "server_error"}},
+    )
+
 # CORS
+cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:8080")
+allow_origins = [o.strip() for o in cors_origins.split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allow_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -50,10 +70,11 @@ app.include_router(commodities.router, prefix="/api/commodities", tags=["commodi
 app.include_router(signals.router, prefix="/api/signals", tags=["signals"])
 app.include_router(news.router, prefix="/api/news", tags=["news"])
 app.include_router(portfolio.router, prefix="/api/portfolio", tags=["portfolio"])
+app.include_router(fx.router, prefix="/api/fx", tags=["fx"])
 
 
 @app.get("/api/summary")
-async def get_summary():
+def get_summary():
     """전체 시장 요약"""
     from db import fetch_one, fetch_all
 
@@ -63,7 +84,7 @@ async def get_summary():
     signal_rows = fetch_all("""
         SELECT signal_type, COUNT(*) as cnt
         FROM trading_signals
-        WHERE timestamp > NOW() - INTERVAL '2 hours'
+        WHERE timestamp > NOW() - INTERVAL '24 hours'
         GROUP BY signal_type
     """)
     sigs = {r["signal_type"]: r["cnt"] for r in signal_rows}
@@ -77,6 +98,32 @@ async def get_summary():
         "last_update": latest["ts"] if latest else None,
         "server_time": datetime.now().isoformat(),
     }
+
+
+@app.get("/api/summary/detail")
+async def get_summary_detail():
+    """테이블별 데이터 현황 상세"""
+    from db import fetch_all
+    tables = [
+        ("market_snapshots", "시장 스냅샷", "24 hours", "timestamp"),
+        ("trading_signals", "트레이딩 신호", "24 hours", "timestamp"),
+        ("market_news", "시장 뉴스", "24 hours", "timestamp"),
+        ("crypto_prices", "암호화폐 시세", "24 hours", "timestamp"),
+        ("interest_rates", "금리 데이터", "7 days", "date"),
+        ("freight_indices", "운임 지수", "30 days", "date"),
+        ("economic_indicators", "경제 지표", "30 days", "date"),
+    ]
+    result = []
+    for table, label, interval, col in tables:
+        rows = fetch_all(f"""
+            SELECT COUNT(*) as cnt,
+                   MAX({col}) as latest
+            FROM {table}
+            WHERE {col} > NOW() - INTERVAL '{interval}'
+        """)
+        r = rows[0] if rows else {"cnt": 0, "latest": None}
+        result.append({"table": table, "label": label, "count": r["cnt"], "latest": r["latest"]})
+    return result
 
 
 if __name__ == "__main__":

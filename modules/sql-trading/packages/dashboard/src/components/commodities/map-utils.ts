@@ -30,7 +30,7 @@ export function buildSeaRoute(origin: string, dest: string): Coord[] | null {
   const wps = ROUTE_WAYPOINTS[key];
 
   /* 태평양 경도 보정 */
-  let adjStart: Coord = [...start];
+  const adjStart: Coord = [...start];
   let adjEnd: Coord = [...end];
   if (ASIAN_PORTS.includes(origin) && US_PORTS.includes(dest) && end[1] < 0) {
     adjEnd = [end[0], end[1] + 360];

@@ -6,7 +6,7 @@ router = APIRouter()
 
 
 @router.get("/prices")
-async def get_crypto_prices():
+def get_crypto_prices():
     """주요 코인 시세"""
     rows = fetch_all("""
         SELECT DISTINCT ON (symbol)
@@ -20,7 +20,7 @@ async def get_crypto_prices():
 
 
 @router.get("/kimchi")
-async def get_kimchi_premium():
+def get_kimchi_premium():
     """김치프리미엄"""
     rows = fetch_all("""
         SELECT DISTINCT ON (symbol)
@@ -33,7 +33,7 @@ async def get_kimchi_premium():
 
 
 @router.get("/dominance")
-async def get_dominance():
+def get_dominance():
     """비트코인 도미넌스 (market_cap 비율 계산)"""
     rows = fetch_all("""
         SELECT DISTINCT ON (symbol)

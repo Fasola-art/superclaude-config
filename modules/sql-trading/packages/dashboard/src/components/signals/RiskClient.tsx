@@ -11,6 +11,8 @@ export function RiskClient() {
 
   const currentRisk = riskStatus?.current;
   const recentEvents = riskStatus?.recent_events || [];
+  const dailyPnl = currentRisk?.daily_pnl_pct;
+  const maxDrawdown = currentRisk?.total_drawdown_pct;
 
   // 서킷브레이커 레벨 매핑
   const getCircuitBreakerLevel = () => {
@@ -24,8 +26,8 @@ export function RiskClient() {
       <Card title="서킷브레이커 현재 상태">
         <CircuitBreakerStatus
           level={getCircuitBreakerLevel()}
-          dailyPnl={currentRisk?.daily_pnl_pct || 0}
-          maxDrawdown={currentRisk?.total_drawdown_pct || 0}
+          dailyPnl={dailyPnl ?? 0}
+          maxDrawdown={maxDrawdown ?? 0}
         />
 
         {currentRisk && (
@@ -44,9 +46,11 @@ export function RiskClient() {
         <div className="grid md:grid-cols-2 gap-4">
           <Card title="일일 손익">
             <div className="text-center p-6">
-              <div className="text-4xl font-bold" style={{ color: currentRisk.daily_pnl_pct! >= 0 ? 'var(--up)' : 'var(--down)' }}>
-                {currentRisk.daily_pnl_pct! > 0 ? '+' : ''}
-                {currentRisk.daily_pnl_pct?.toFixed(2)}%
+              <div
+                className="text-4xl font-bold"
+                style={{ color: (dailyPnl ?? 0) >= 0 ? 'var(--up)' : 'var(--down)' }}
+              >
+                {dailyPnl != null ? `${dailyPnl > 0 ? '+' : ''}${dailyPnl.toFixed(2)}%` : '-'}
               </div>
               <div className="text-sm text-muted mt-2">Daily P&L</div>
             </div>
@@ -55,7 +59,7 @@ export function RiskClient() {
           <Card title="최대 낙폭 (MDD)">
             <div className="text-center p-6">
               <div className="text-4xl font-bold text-down">
-                {currentRisk.total_drawdown_pct?.toFixed(2)}%
+                {maxDrawdown != null ? `${maxDrawdown.toFixed(2)}%` : '-'}
               </div>
               <div className="text-sm text-muted mt-2">Max Drawdown</div>
             </div>
@@ -88,7 +92,7 @@ export function RiskClient() {
                 <div className="text-sm text-muted mb-2">{event.description}</div>
                 <div className="flex justify-between text-xs text-muted">
                   <span>{new Date(event.timestamp).toLocaleString()}</span>
-                  {event.daily_pnl_pct && (
+                  {event.daily_pnl_pct != null && (
                     <span className={event.daily_pnl_pct >= 0 ? 'text-up' : 'text-down'}>
                       P&L: {event.daily_pnl_pct > 0 ? '+' : ''}
                       {event.daily_pnl_pct.toFixed(2)}%

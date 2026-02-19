@@ -1,12 +1,23 @@
 'use client';
 
-import { MetricCard, CardSkeleton, ChangeIndicator, ConfidenceGauge } from '@/components/ui';
-import { useCryptoPrices, useKimchiPremium, useDominance } from '@/hooks';
+import { MetricCard, CardSkeleton, ChangeIndicator, ConfidenceGauge, Card } from '@/components/ui';
+import { useCryptoPrices, useKimchiPremium, useDominance, useStockQuotes } from '@/hooks';
 
 export function CryptoClient() {
   const { data: prices, isLoading: pricesLoading } = useCryptoPrices();
   const { data: kimchi, isLoading: kimchiLoading } = useKimchiPremium();
   const { data: dominance, isLoading: domLoading } = useDominance();
+  const { data: relatedStocks } = useStockQuotes(['BMNR', 'DFDV']);
+
+  const excludedCoins = new Set(['ADA', 'AVAX']);
+  const preferredOrder = ['BTC', 'XRP', 'SOL', 'ETH', 'BNB', 'DOGE'];
+  const coins = (prices || []).filter((c) => !excludedCoins.has(c.symbol));
+  const orderedCoins = [
+    ...preferredOrder
+      .map((sym) => coins.find((c) => c.symbol === sym))
+      .filter((c): c is NonNullable<typeof c> => Boolean(c)),
+    ...coins.filter((c) => !preferredOrder.includes(c.symbol)),
+  ];
 
   return (
     <div className="space-y-6">
@@ -17,9 +28,9 @@ export function CryptoClient() {
           <div className="grid grid-cols-2 gap-3">
             {Array.from({ length: 4 }).map((_, i) => <CardSkeleton key={i} />)}
           </div>
-        ) : prices && prices.length > 0 ? (
+        ) : orderedCoins.length > 0 ? (
           <div className="grid grid-cols-2 gap-3">
-            {prices.slice(0, 6).map((coin) => (
+            {orderedCoins.map((coin) => (
               <MetricCard
                 key={coin.symbol}
                 label={coin.symbol}
@@ -31,6 +42,27 @@ export function CryptoClient() {
         ) : (
           <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-lg p-4 text-center text-[var(--text-muted)]">
             데이터가 없습니다
+          </div>
+        )}
+      </section>
+
+      {/* 연관 주식 */}
+      <section>
+        <h2 className="text-sm font-semibold text-[var(--text-muted)] mb-3">연관 주식</h2>
+        {!relatedStocks || relatedStocks.length === 0 ? (
+          <Card>
+            <div className="text-[var(--text-muted)]">데이터가 없습니다</div>
+          </Card>
+        ) : (
+          <div className="grid grid-cols-2 gap-3">
+            {relatedStocks.map((stock) => (
+              <MetricCard
+                key={stock.symbol}
+                label={stock.symbol}
+                value={`$${stock.price.toFixed(2)}`}
+                change={stock.change_pct}
+              />
+            ))}
           </div>
         )}
       </section>
