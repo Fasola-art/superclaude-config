@@ -16,6 +16,7 @@
 | research | 1.0.0 | Active | General deep research |
 | error-search | 1.0.0 | Active | Search Error KB |
 | recover | 1.0.0 | Active | Session recovery |
+| workflow | 1.0.0 | Active | Claude-Codex collaboration workflow |
 
 ---
 

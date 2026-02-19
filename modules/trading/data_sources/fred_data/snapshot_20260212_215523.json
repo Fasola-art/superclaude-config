@@ -1,0 +1,283 @@
+{
+  "timestamp": "20260212_215523",
+  "categories": {
+    "inflation": {
+      "category": "inflation",
+      "indicators": [
+        {
+          "series_id": "CPIAUCSL",
+          "name": "CPI (소비자물가지수)",
+          "value": 326.03,
+          "date": "2025-12-01",
+          "change": 0.9989999999999668,
+          "change_percent": 0.30735529841767917,
+          "importance": "critical"
+        },
+        {
+          "series_id": "PCEPI",
+          "name": "PCE 물가지수",
+          "value": 128.093,
+          "date": "2025-11-01",
+          "change": 0.26499999999998636,
+          "change_percent": 0.20730982257407324,
+          "importance": "critical"
+        },
+        {
+          "series_id": "CPILFESL",
+          "name": "Core CPI (식품/에너지 제외)",
+          "value": 331.86,
+          "date": "2025-12-01",
+          "change": 0.79200000000003,
+          "change_percent": 0.2392257783899471,
+          "importance": "high"
+        },
+        {
+          "series_id": "T10YIE",
+          "name": "10년 기대 인플레이션",
+          "value": 2.32,
+          "date": "2026-02-11",
+          "change": 0.0,
+          "change_percent": 0.0,
+          "importance": "high"
+        }
+      ],
+      "updated_at": "2026-02-12T21:55:23.956909"
+    },
+    "employment": {
+      "category": "employment",
+      "indicators": [
+        {
+          "series_id": "UNRATE",
+          "name": "실업률",
+          "value": 4.3,
+          "date": "2026-01-01",
+          "change": -0.10000000000000053,
+          "change_percent": -2.2727272727272845,
+          "importance": "critical"
+        },
+        {
+          "series_id": "PAYEMS",
+          "name": "비농업 고용",
+          "value": 158627.0,
+          "date": "2026-01-01",
+          "change": 130.0,
+          "change_percent": 0.0820204798829,
+          "importance": "critical"
+        },
+        {
+          "series_id": "ICSA",
+          "name": "신규 실업수당 청구",
+          "value": 231000.0,
+          "date": "2026-01-31",
+          "change": 22000.0,
+          "change_percent": 10.526315789473683,
+          "importance": "high"
+        },
+        {
+          "series_id": "JTSJOL",
+          "name": "구인건수 (JOLTS)",
+          "value": 6542.0,
+          "date": "2025-12-01",
+          "change": -386.0,
+          "change_percent": -5.571593533487298,
+          "importance": "high"
+        }
+      ],
+      "updated_at": "2026-02-12T21:55:25.698260"
+    },
+    "gdp": {
+      "category": "gdp",
+      "indicators": [
+        {
+          "series_id": "GDP",
+          "name": "GDP",
+          "value": 31098.027,
+          "date": "2025-07-01",
+          "change": 612.2979999999989,
+          "change_percent": 2.0084741945977376,
+          "importance": "critical"
+        },
+        {
+          "series_id": "GDPC1",
+          "name": "실질 GDP",
+          "value": 24026.834,
+          "date": "2025-07-01",
+          "change": 255.85800000000017,
+          "change_percent": 1.0763462131298278,
+          "importance": "critical"
+        },
+        {
+          "series_id": "A191RL1Q225SBEA",
+          "name": "GDP 성장률",
+          "value": 4.4,
+          "date": "2025-07-01",
+          "change": 0.6000000000000005,
+          "change_percent": 15.789473684210542,
+          "importance": "critical"
+        }
+      ],
+      "updated_at": "2026-02-12T21:55:27.128997"
+    },
+    "interest_rate": {
+      "category": "interest_rate",
+      "indicators": [
+        {
+          "series_id": "FEDFUNDS",
+          "name": "연방기금금리",
+          "value": 3.64,
+          "date": "2026-01-01",
+          "change": -0.08000000000000007,
+          "change_percent": -2.1505376344086042,
+          "importance": "critical"
+        },
+        {
+          "series_id": "DGS10",
+          "name": "10년 국채 수익률",
+          "value": 4.16,
+          "date": "2026-02-10",
+          "change": -0.05999999999999961,
+          "change_percent": -1.4218009478672893,
+          "importance": "critical"
+        },
+        {
+          "series_id": "DGS2",
+          "name": "2년 국채 수익률",
+          "value": 3.45,
+          "date": "2026-02-10",
+          "change": -0.029999999999999805,
+          "change_percent": -0.8620689655172358,
+          "importance": "high"
+        },
+        {
+          "series_id": "T10Y2Y",
+          "name": "10Y-2Y 스프레드 (역전 지표)",
+          "value": 0.66,
+          "date": "2026-02-11",
+          "change": -0.04999999999999993,
+          "change_percent": -7.042253521126751,
+          "importance": "critical"
+        },
+        {
+          "series_id": "MORTGAGE30US",
+          "name": "30년 모기지 금리",
+          "value": 6.11,
+          "date": "2026-02-05",
+          "change": 0.010000000000000675,
+          "change_percent": 0.1639344262295193,
+          "importance": "high"
+        }
+      ],
+      "updated_at": "2026-02-12T21:55:28.358840"
+    },
+    "money_supply": {
+      "category": "money_supply",
+      "indicators": [
+        {
+          "series_id": "M2SL",
+          "name": "M2 통화량",
+          "value": 22411.0,
+          "date": "2025-12-01",
+          "change": 88.90000000000146,
+          "change_percent": 0.3982600203385947,
+          "importance": "high"
+        },
+        {
+          "series_id": "WALCL",
+          "name": "연준 총자산",
+          "value": 6605909.0,
+          "date": "2026-02-04",
+          "change": 18341.0,
+          "change_percent": 0.2784183783757526,
+          "importance": "high"
+        }
+      ],
+      "updated_at": "2026-02-12T21:55:30.406041"
+    },
+    "housing": {
+      "category": "housing",
+      "indicators": [
+        {
+          "series_id": "HOUST",
+          "name": "주택착공건수",
+          "value": 1246.0,
+          "date": "2025-10-01",
+          "change": -60.0,
+          "change_percent": -4.594180704441041,
+          "importance": "medium"
+        },
+        {
+          "series_id": "CSUSHPINSA",
+          "name": "케이스-쉴러 주택가격지수",
+          "value": 328.149,
+          "date": "2025-11-01",
+          "change": -0.3569999999999709,
+          "change_percent": -0.10867381417690115,
+          "importance": "medium"
+        }
+      ],
+      "updated_at": "2026-02-12T21:55:31.225073"
+    },
+    "consumer": {
+      "category": "consumer",
+      "indicators": [
+        {
+          "series_id": "UMCSENT",
+          "name": "미시간 소비자심리지수",
+          "value": 52.9,
+          "date": "2025-12-01",
+          "change": 1.8999999999999986,
+          "change_percent": 3.7254901960784284,
+          "importance": "high"
+        },
+        {
+          "series_id": "PCE",
+          "name": "개인소비지출",
+          "value": 21409.7,
+          "date": "2025-11-01",
+          "change": 108.70000000000073,
+          "change_percent": 0.5103046805314339,
+          "importance": "high"
+        },
+        {
+          "series_id": "RSXFS",
+          "name": "소매판매 (자동차 제외)",
+          "value": 634738.0,
+          "date": "2025-12-01",
+          "change": 27.0,
+          "change_percent": 0.004253904532929159,
+          "importance": "medium"
+        }
+      ],
+      "updated_at": "2026-02-12T21:55:32.044442"
+    },
+    "manufacturing": {
+      "category": "manufacturing",
+      "indicators": [
+        {
+          "series_id": "INDPRO",
+          "name": "산업생산지수",
+          "value": 102.325,
+          "date": "2025-12-01",
+          "change": 0.3722000000000065,
+          "change_percent": 0.3650708955516735,
+          "importance": "medium"
+        },
+        {
+          "series_id": "DGORDER",
+          "name": "내구재 주문",
+          "value": 323764.0,
+          "date": "2025-11-01",
+          "change": 16194.0,
+          "change_percent": 5.265142894300484,
+          "importance": "medium"
+        }
+      ],
+      "updated_at": "2026-02-12T21:55:33.273354"
+    },
+    "trade": {
+      "category": "trade",
+      "indicators": [],
+      "updated_at": "2026-02-12T21:55:34.092198"
+    }
+  }
+}
