@@ -36,6 +36,7 @@ chrome/
 projects/
 *.jsonl
 plugins/marketplaces/
+plugins/known_marketplaces.json
 
 # Node.js
 node_modules/
@@ -62,6 +63,8 @@ statsig/
 telemetry/
 sessions/
 todos/
+HANDOFF.md
+handoff-archive/
 
 # DB 파일 (런타임 생성)
 *.db

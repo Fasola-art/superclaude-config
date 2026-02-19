@@ -115,19 +115,11 @@
           },
           {
             "type": "command",
-            "command": "python3 ~/.claude/hooks/UserPromptSubmit/keyword-detector.py"
-          },
-          {
-            "type": "command",
             "command": "python3 ~/.claude/hooks/UserPromptSubmit/context-cleaner.py"
           },
           {
             "type": "command",
             "command": "python3 ~/.claude/hooks/UserPromptSubmit/auto-context-manager.py"
-          },
-          {
-            "type": "command",
-            "command": "python3 ~/.claude/hooks/UserPromptSubmit/plan-mode-analyzer.py"
           },
           {
             "type": "command",
@@ -144,6 +136,24 @@
           {
             "type": "command",
             "command": "python3 ~/.claude/hooks/UserPromptSubmit/intent-clarifier.py"
+          }
+        ]
+      },
+      {
+        "matcher": "PRD|prd|requirements|spec|specification|create project|create app|create service|build|develop|implement|\\.prd\\.md|PRD\\.md|requirements\\.md|spec\\.md",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/UserPromptSubmit/plan-mode-analyzer.py"
+          }
+        ]
+      },
+      {
+        "matcher": "quick|qk|fast|experiment|exp|parallel|para|fix|undo|rollback|continue|cont|verify|chk|check|test|tst|deploy|dep|cleanup|clean|performance|perf|plan|analyze|map|ultrawork|ulw|deepsearch|ds|strategic|str|visual|vis",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/UserPromptSubmit/keyword-detector.py"
           }
         ]
       }
@@ -280,5 +290,6 @@
         ]
       }
     ]
-  }
+  },
+  "skipDangerousModePermissionPrompt": true
 }
