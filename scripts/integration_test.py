@@ -116,10 +116,10 @@ def _extract_hook_command_paths() -> List[Path]:
                     continue
                 if cmd.startswith("python "):
                     path_str = cmd[len("python "):].strip().strip('"')
-                    paths.append(Path(path_str))
+                    paths.append(Path(path_str).expanduser())
                 elif cmd.startswith("python3 "):
                     path_str = cmd[len("python3 "):].strip().strip('"')
-                    paths.append(Path(path_str))
+                    paths.append(Path(path_str).expanduser())
     return paths
 
 
