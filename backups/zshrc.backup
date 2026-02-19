@@ -1,0 +1,45 @@
+export PATH="$HOME/.local/bin:$PATH"
+
+# opencode
+export PATH=/Users/reim/.opencode/bin:$PATH
+
+# Added by Antigravity
+export PATH="/Users/reim/.antigravity/antigravity/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+
+# Claude Code API Keys — macOS Keychain 기반
+alias claude1='ANTHROPIC_API_KEY="$(security find-generic-password -s anthropic-api-key-1 -w)" claude --dangerously-skip-permissions'
+alias claude2='ANTHROPIC_API_KEY="여기에_두번째_API_키_입력" claude --dangerously-skip-permissions'
+alias claude3='ANTHROPIC_API_KEY="여기에_세번째_API_키_입력" claude --dangerously-skip-permissions'
+
+# Claude Code 단축 앨리어스 (YOLO 모드: 권한 프롬프트 제거)
+alias claude='claude --dangerously-skip-permissions'
+alias c='claude --dangerously-skip-permissions'
+alias cc='claude --dangerously-skip-permissions --continue'
+alias cr='claude --dangerously-skip-permissions --resume'
+alias cj='claude --dangerously-skip-permissions -p'
+alias cplan='claude --dangerously-skip-permissions -p "/plan"'
+alias cw='claude --dangerously-skip-permissions --resume work'
+alias ct='claude --dangerously-skip-permissions --resume trading'
+
+# MCP 크리덴셜 (Keychain → 환경변수)
+export GITHUB_PAT="$(security find-generic-password -s github-pat -w 2>/dev/null)"
+export SLACK_BOT_TOKEN="$(security find-generic-password -s slack-bot -w 2>/dev/null)"
+export BRAVE_API_KEY="$(security find-generic-password -s brave-api-key -w 2>/dev/null)"
+export SENTRY_ACCESS_TOKEN="$(security find-generic-password -s sentry-token -w 2>/dev/null)"
+export LINEAR_API_KEY="$(security find-generic-password -s linear-api-key -w 2>/dev/null)"
+export EXA_API_KEY="$(security find-generic-password -s exa-api-key -w 2>/dev/null)"
+export KIE_API_KEY="$(security find-generic-password -s kie-api-key -w 2>/dev/null)"
+export NOTION_TOKEN="$(security find-generic-password -s notion-token -w 2>/dev/null)"
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+alias trade="~/.claude/modules/sql-trading/trade"
+alias claude-safe="~/.claude/scripts/claude-safe.sh"
+alias rollback="~/.claude/scripts/rollback.sh"
+alias cdocker="~/.claude/scripts/claude-container.sh"
+
+# Codex: skip approvals + full sandbox access
+alias codex='codex -a never -s danger-full-access'
+
+# JDK 25 (OpenJDK via Homebrew)
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export JAVA_HOME="/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
