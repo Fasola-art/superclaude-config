@@ -1,23 +1,28 @@
-# Windows 호환: 자동 줄바꿈 변환
+# Normalize text files in repo
 * text=auto
 
-# Python: LF 유지
+# Keep source/config/docs consistently with LF
 *.py text eol=lf
-
-# Shell: LF 유지
 *.sh text eol=lf
+*.ps1 text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.txt text eol=lf
 
-# Markdown/JSON/YAML: 자동 변환
-*.md text
-*.json text
-*.yaml text
-*.yml text
-*.toml text
+# Windows-native scripts can stay CRLF if needed
+*.bat text eol=crlf
+*.cmd text eol=crlf
 
-# Binary: 변환 안 함
+# Binary files
 *.db binary
 *.sqlite binary
 *.png binary
 *.jpg binary
+*.jpeg binary
 *.gif binary
 *.ico binary
+*.pdf binary
+*.zip binary
