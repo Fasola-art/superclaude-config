@@ -12,7 +12,7 @@ import sys
 jarvis_root = Path(__file__).parent.parent
 sys.path.insert(0, str(jarvis_root))
 
-from memory.manager import CalendarManager
+from jarvis.memory.manager import CalendarManager
 
 
 def handle_add_event(command: str) -> Dict[str, Any]:

@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from memory.db import init_database
+from jarvis.memory.db import init_database
 from actions import (
     save_context,
     save_quick_context,

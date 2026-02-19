@@ -10,7 +10,7 @@ import sys
 jarvis_root = Path(__file__).parent.parent
 sys.path.insert(0, str(jarvis_root))
 
-from memory.manager import ContextManager
+from jarvis.memory.manager import ContextManager
 
 
 def handle_remember(command: str) -> Dict[str, Any]:

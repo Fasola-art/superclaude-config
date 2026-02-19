@@ -12,7 +12,7 @@ import sys
 jarvis_root = Path(__file__).parent.parent
 sys.path.insert(0, str(jarvis_root))
 
-from memory.manager import TaskManager
+from jarvis.memory.manager import TaskManager
 
 
 def handle_add_task(command: str) -> Dict[str, Any]:

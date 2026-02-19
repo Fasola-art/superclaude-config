@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from typing import Optional
-from memory.db import get_db
+from jarvis.memory.db import get_db
 
 
 def _init_bookings_table():

@@ -62,6 +62,12 @@ def extract_keywords(text: str) -> set[str]:
     return {w for w in words if len(w) >= 2 and w not in STOPWORDS}
 
 
+def get_todo_title(todo: dict) -> str:
+    """todo 항목에서 제목 추출 (스키마 통일)
+    Claude TaskCreate는 'subject', 커스텀 todo는 'title', 기타 'content' 사용"""
+    return todo.get("subject") or todo.get("title") or todo.get("content") or "Untitled"
+
+
 def jaccard_similarity(set1: set, set2: set) -> float:
     """Jaccard 유사도 계산"""
     if not set1 or not set2:

@@ -8,9 +8,9 @@ from pathlib import Path
 # JARVIS 모듈 경로 추가
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from memory.db import init_database
-from actions.remember import save_context, save_quick_context
-from actions.recall import (
+from jarvis.memory.db import init_database
+from jarvis.actions.remember import save_context, save_quick_context
+from jarvis.actions.recall import (
     get_last_context,
     get_contexts_by_tag,
     get_recent_contexts,

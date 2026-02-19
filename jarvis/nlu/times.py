@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from utils.patterns import extract_time_match
+from jarvis.utils.patterns import extract_time_match
 from .types import Entity
 
 

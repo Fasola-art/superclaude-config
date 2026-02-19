@@ -8,7 +8,7 @@ import subprocess
 from pathlib import Path
 from typing import Optional
 
-from memory.db import get_db
+from jarvis.memory.db import get_db
 
 
 def search_web(query: str) -> str:

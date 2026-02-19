@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 # 현재 디렉토리를 sys.path에 추가
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from actions.book import book_reservation, get_bookings, cancel_booking
+from jarvis.actions.book import book_reservation, get_bookings, cancel_booking
 
 
 def test_book():

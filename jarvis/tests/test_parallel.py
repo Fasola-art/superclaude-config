@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import asyncio
 import time
 import pytest
-from core.parallel import run_parallel, run_with_timeout, TaskPool, parallel_sync
+from jarvis.core.parallel import run_parallel, run_with_timeout, TaskPool, parallel_sync
 
 
 def slow_task(n: int) -> int:

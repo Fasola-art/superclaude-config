@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from modules.github import GitHubClient, GitHubMonitor
+from jarvis.modules.github import GitHubClient, GitHubMonitor
 
 
 def test_client_basic():

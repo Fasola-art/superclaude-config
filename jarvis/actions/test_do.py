@@ -10,7 +10,7 @@ from pathlib import Path
 jarvis_root = Path(__file__).parent.parent
 sys.path.insert(0, str(jarvis_root))
 
-from actions.do import execute_command
+from jarvis.actions.do import execute_command
 
 
 def test_do_commands():

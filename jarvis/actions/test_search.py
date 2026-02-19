@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from actions.search import search_local, search_memory, search_all
+from jarvis.actions.search import search_local, search_memory, search_all
 
 
 def test_search():

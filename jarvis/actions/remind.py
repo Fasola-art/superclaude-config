@@ -10,7 +10,7 @@ from typing import Optional
 
 # 절대 경로 설정
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from memory.db import get_db
+from jarvis.memory.db import get_db
 
 
 def add_reminder(

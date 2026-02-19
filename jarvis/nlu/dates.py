@@ -7,8 +7,8 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from utils.datetime_helpers import get_tomorrow_str, get_date_n_days_later, format_datetime, get_next_weekday
-from utils.patterns import extract_date_match, NEXT_WEEK_PATTERN, WEEKDAY_MAP
+from jarvis.utils.datetime_helpers import get_tomorrow_str, get_date_n_days_later, format_datetime, get_next_weekday
+from jarvis.utils.patterns import extract_date_match, NEXT_WEEK_PATTERN, WEEKDAY_MAP
 from .types import Entity
 
 

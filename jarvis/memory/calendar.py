@@ -7,8 +7,8 @@ from __future__ import annotations
 
 from typing import List, Dict
 
-from utils.db_helpers import execute_insert, execute_query_all
-from utils.datetime_helpers import get_today_str, get_date_n_days_later
+from jarvis.utils.db_helpers import execute_insert, execute_query_all
+from jarvis.utils.datetime_helpers import get_today_str, get_date_n_days_later
 
 
 class CalendarManager:

@@ -2,10 +2,14 @@
 """Session End State Saver + HANDOFF.md Generator"""
 
 import os
+import sys
 import json
 import subprocess
 from pathlib import Path
 from datetime import datetime
+
+sys.path.insert(0, str(Path.home() / ".claude" / "hooks"))
+from _shared.hook_utils import get_todo_title
 
 CLAUDE_DIR = Path.home() / ".claude"
 SESSION_STATE_DIR = CLAUDE_DIR / "session-env"
@@ -65,7 +69,7 @@ def generate_handoff(state: dict) -> None:
         lines.extend(["", "## 미완료 작업"])
         for t in todos[:10]:
             icon = "🔄" if t.get("status") == "in_progress" else "⬜"
-            lines.append(f"- {icon} {t.get('content', t.get('subject', 'N/A'))}")
+            lines.append(f"- {icon} {get_todo_title(t)}")
 
     lines.extend(["", "## 다음 단계", "- `cc` (--continue) 또는 `cr` (--resume)로 재개"])
     HANDOFF_FILE.write_text("\n".join(lines) + "\n")

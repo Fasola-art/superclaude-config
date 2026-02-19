@@ -6,8 +6,8 @@ from __future__ import annotations
 from typing import Optional
 from pathlib import Path
 
-from memory.db import get_db
-from memory.context import ContextManager
+from jarvis.memory.db import get_db
+from jarvis.memory.context import ContextManager
 
 
 def get_last_context(project_path: Optional[str] = None) -> Optional[dict]:

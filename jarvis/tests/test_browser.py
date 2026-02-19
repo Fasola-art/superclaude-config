@@ -5,7 +5,7 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from automation.browser import BrowserAutomation, PLAYWRIGHT_AVAILABLE
+from jarvis.automation.browser import BrowserAutomation, PLAYWRIGHT_AVAILABLE
 
 
 def test_browser_init():

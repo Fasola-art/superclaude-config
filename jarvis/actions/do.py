@@ -13,7 +13,7 @@ jarvis_root = Path(__file__).parent.parent
 if str(jarvis_root) not in sys.path:
     sys.path.insert(0, str(jarvis_root))
 
-from automation.intent_analyzer import IntentAnalyzer
+from jarvis.automation.intent_analyzer import IntentAnalyzer
 from .do_handlers import (
     handle_add_task,
     handle_list_tasks,

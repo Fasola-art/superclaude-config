@@ -7,8 +7,8 @@ import os
 from typing import Optional
 from pathlib import Path
 
-from memory.db import get_db
-from memory.context import ContextManager
+from jarvis.memory.db import get_db
+from jarvis.memory.context import ContextManager
 
 
 def save_context(

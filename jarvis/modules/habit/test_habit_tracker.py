@@ -13,7 +13,7 @@ _root = str(Path(__file__).parent.parent.parent)
 if _root not in sys.path:
     sys.path.insert(0, _root)
 
-from modules.habit import HabitTracker, HabitAnalytics, HabitSummary, HabitFrequency
+from jarvis.modules.habit import HabitTracker, HabitAnalytics, HabitSummary, HabitFrequency
 
 
 def test_basic_workflow() -> None:

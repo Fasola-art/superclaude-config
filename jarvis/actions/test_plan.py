@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from actions.plan import create_plan, add_plan_item, get_plan
+from jarvis.actions.plan import create_plan, add_plan_item, get_plan
 
 
 def test_plan():

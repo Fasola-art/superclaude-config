@@ -3,7 +3,7 @@
 
 from datetime import date, datetime
 from memory import init_database, WorkSessionManager, TaskManager, CalendarManager
-from memory.ml_predictor import get_predictor
+from jarvis.memory.ml_predictor import get_predictor
 
 
 def get_detailed_briefing() -> str:

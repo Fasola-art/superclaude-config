@@ -6,8 +6,12 @@ Todo Persistence Verification Hook
 """
 
 import os
+import sys
 import json
 from pathlib import Path
+
+sys.path.insert(0, str(Path.home() / ".claude" / "hooks"))
+from _shared.hook_utils import get_todo_title
 from datetime import datetime
 
 TODO_FILE = Path.home() / ".claude" / "todos" / "active.json"
@@ -42,12 +46,12 @@ def main():
         if high_priority:
             print(f"  High priority: {len(high_priority)}")
             for t in high_priority[:3]:
-                print(f"     - {t.get('title', 'Untitled')}")
+                print(f"     - {get_todo_title(t)}")
 
         if normal and len(high_priority) < 3:
             remaining = 3 - len(high_priority)
             for t in normal[:remaining]:
-                print(f"  - {t.get('title', 'Untitled')}")
+                print(f"  - {get_todo_title(t)}")
 
     # Save state
     STATE_FILE.parent.mkdir(parents=True, exist_ok=True)

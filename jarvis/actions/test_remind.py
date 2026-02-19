@@ -8,8 +8,8 @@ from datetime import datetime, timedelta
 # 모듈 경로 추가
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from memory.db import init_database
-from actions.remind import (
+from jarvis.memory.db import init_database
+from jarvis.actions.remind import (
     add_reminder,
     get_pending_reminders,
     dismiss_reminder,

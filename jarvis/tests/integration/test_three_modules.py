@@ -9,14 +9,14 @@ from datetime import datetime
 
 import pytest
 
-from modules.github.monitor import GitHubMonitor
-from modules.project.monitor import ProjectMonitor
-from memory.manager import (
+from jarvis.modules.github.monitor import GitHubMonitor
+from jarvis.modules.project.monitor import ProjectMonitor
+from jarvis.memory.manager import (
     WorkSessionManager,
     TaskManager,
     ContextManager,
 )
-from memory.db import init_database
+from jarvis.memory.db import init_database
 
 
 @pytest.fixture

@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from typing import Optional, Dict
 
-from utils.db_helpers import execute_query
+from jarvis.utils.db_helpers import execute_query
 from .db import get_db
 
 
