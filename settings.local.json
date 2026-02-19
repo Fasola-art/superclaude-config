@@ -25,7 +25,8 @@
       "Bash(python3:*)",
       "Bash(test:*)",
       "Bash(test -f:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git config:*)"
     ]
   }
 }
