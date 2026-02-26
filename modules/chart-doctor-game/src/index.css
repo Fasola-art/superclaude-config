@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background:
+    linear-gradient(45deg, rgba(55, 101, 121, 0.08) 25%, transparent 25%, transparent 75%, rgba(55, 101, 121, 0.08) 75%),
+    linear-gradient(45deg, rgba(55, 101, 121, 0.08) 25%, transparent 25%, transparent 75%, rgba(55, 101, 121, 0.08) 75%),
+    #f3feff;
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+  font-family: 'DungGeunMo', 'Press Start 2P', 'Pretendard', 'Noto Sans KR', sans-serif;
+}
+
+h1,
+h2,
+h3,
+p {
+  word-break: keep-all;
+}
