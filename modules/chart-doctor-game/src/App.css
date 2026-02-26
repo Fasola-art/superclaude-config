@@ -39,6 +39,10 @@
   font-size: 13px;
 }
 
+.exportBtn {
+  margin-top: 8px;
+}
+
 .mascots {
   display: flex;
   gap: 10px;
@@ -95,6 +99,37 @@
 .tab.active {
   background: #1d4f5f;
   color: #fff;
+}
+
+.livePanel {
+  padding: 12px;
+  background: linear-gradient(180deg, #f7fcff 0%, #e7f2ff 100%);
+  margin-bottom: 12px;
+}
+
+.livePanel h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.liveGrid {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px 10px;
+}
+
+.liveGrid p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.liveOn {
+  color: #1f7d45;
+}
+
+.liveOff {
+  color: #a63737;
 }
 
 .card {
@@ -211,6 +246,22 @@
   margin-top: 8px;
   padding: 10px;
   border-radius: 8px;
+}
+
+.records {
+  margin-top: 10px;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.records h3 {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.records p {
+  margin: 4px 0;
+  font-size: 12px;
 }
 
 .grid {
@@ -424,5 +475,9 @@ button:disabled {
 
   .doctorBox {
     grid-template-columns: 1fr;
+  }
+
+  .liveGrid {
+    grid-template-columns: 1fr 1fr;
   }
 }

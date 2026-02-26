@@ -71,3 +71,9 @@ export default defineConfig([
   },
 ])
 ```
+
+## Dashboard Quick Start
+
+- `./scripts/start_dashboard.sh`
+- open `http://127.0.0.1:4173/`
+- troubleshooting: `RUNBOOK.md`

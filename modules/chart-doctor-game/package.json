@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "preview:local": "vite preview --host 127.0.0.1 --port 4173",
+    "capture:dashboard": "playwright screenshot --wait-for-timeout=1200 http://127.0.0.1:4173 ./test-results/dashboard.png"
   },
   "dependencies": {
     "jspdf": "^4.2.0",

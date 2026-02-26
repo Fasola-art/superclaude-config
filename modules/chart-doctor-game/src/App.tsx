@@ -45,6 +45,41 @@ interface OverlayComment {
   tone: 'bull' | 'bear' | 'warn'
 }
 
+interface QuizSessionRecord {
+  time: string
+  score: number
+  solved: number
+  accuracy: number
+  pass: boolean
+}
+
+interface HealthRecord {
+  time: string
+  score: number
+  action: string
+}
+
+interface NewsSessionRecord {
+  time: string
+  difficulty: Difficulty
+  score: number
+  coins: number
+  success: boolean
+}
+
+interface LiveOrderflow {
+  connected: boolean
+  symbol: string
+  lastPrice: number
+  buyVolume: number
+  sellVolume: number
+  delta: number
+  cvd: number
+  vwap: number
+  trades: number
+  updatedAt: string
+}
+
 const modeTitle: Record<Mode, string> = {
   quiz: '차트 이미지 퀴즈',
   health: '차트 종합건강검진',
@@ -132,6 +167,20 @@ function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n))
 }
 
+function parseStoredList<T>(raw: string | null): T[] {
+  if (!raw) return []
+  try {
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}
+
+function limitRecords<T>(items: T[], max = 20) {
+  return items.slice(0, max)
+}
+
 function randomQuizIndex(prev: number) {
   if (quizItems.length <= 1) return 0
   let next = prev
@@ -154,6 +203,7 @@ function App() {
 
   const [uploadSrc, setUploadSrc] = useState<string | null>(null)
   const [croppedSrc, setCroppedSrc] = useState<string | null>(null)
+  const [imageInsight, setImageInsight] = useState<string>('')
   const [crop, setCrop] = useState<CropRect>({ x: 8, y: 8, w: 84, h: 72 })
   const [draggingCrop, setDraggingCrop] = useState(false)
   const [dragStart, setDragStart] = useState<{ x: number; y: number } | null>(null)
@@ -182,6 +232,21 @@ function App() {
   const [bossTurns, setBossTurns] = useState(7)
   const [newsSessions, setNewsSessions] = useState(0)
   const [newsCompleted, setNewsCompleted] = useState(0)
+  const [quizRecords, setQuizRecords] = useState<QuizSessionRecord[]>([])
+  const [healthRecords, setHealthRecords] = useState<HealthRecord[]>([])
+  const [newsRecords, setNewsRecords] = useState<NewsSessionRecord[]>([])
+  const [live, setLive] = useState<LiveOrderflow>({
+    connected: false,
+    symbol: 'BTCUSDT',
+    lastPrice: 0,
+    buyVolume: 0,
+    sellVolume: 0,
+    delta: 0,
+    cvd: 0,
+    vwap: 0,
+    trades: 0,
+    updatedAt: '',
+  })
 
   const currentQuiz = quizItems[quizIndex]
   const cut = Math.floor(currentQuiz.points.length * 0.65)
@@ -233,16 +298,24 @@ function App() {
     : newsDeck[(newsRound - 1) % newsDeck.length]
 
   const completionRate = newsSessions ? Math.round((newsCompleted / newsSessions) * 100) : 0
+  const quizTop3 = [...quizRecords].sort((a, b) => b.accuracy - a.accuracy).slice(0, 3)
+  const newsTop3 = [...newsRecords].sort((a, b) => b.coins - a.coins).slice(0, 3)
 
   useEffect(() => {
     const acc = Number(localStorage.getItem('odf_best_acc') ?? '0')
     const coins = Number(localStorage.getItem('odf_best_coins') ?? '0')
     const sessions = Number(localStorage.getItem('odf_news_sessions') ?? '0')
     const completed = Number(localStorage.getItem('odf_news_completed') ?? '0')
+    const quizHistory = parseStoredList<QuizSessionRecord>(localStorage.getItem('odf_quiz_records'))
+    const healthHistory = parseStoredList<HealthRecord>(localStorage.getItem('odf_health_records'))
+    const newsHistory = parseStoredList<NewsSessionRecord>(localStorage.getItem('odf_news_records'))
     setBestAccuracy(acc)
     setBestCoins(coins)
     setNewsSessions(sessions)
     setNewsCompleted(completed)
+    setQuizRecords(quizHistory)
+    setHealthRecords(healthHistory)
+    setNewsRecords(newsHistory)
   }, [])
 
   useEffect(() => {
@@ -263,8 +336,180 @@ function App() {
     }
   }, [uploadSrc, crop])
 
+  useEffect(() => {
+    let socket: WebSocket | null = null
+    let reconnectTimer: number | null = null
+    let buyVolume = 0
+    let sellVolume = 0
+    let pvSum = 0
+    let vSum = 0
+    let cvd = 0
+    let trades = 0
+
+    function connect() {
+      socket = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@aggTrade')
+
+      socket.onopen = () => {
+        setLive((prev) => ({ ...prev, connected: true }))
+      }
+
+      socket.onmessage = (event) => {
+        try {
+          const payload = JSON.parse(event.data as string) as { p: string; q: string; m: boolean; T: number }
+          const price = Number(payload.p)
+          const qty = Number(payload.q)
+          if (!Number.isFinite(price) || !Number.isFinite(qty)) return
+
+          const isSellAggressor = payload.m
+          if (isSellAggressor) sellVolume += qty
+          else buyVolume += qty
+          cvd += isSellAggressor ? -qty : qty
+          pvSum += price * qty
+          vSum += qty
+          trades += 1
+
+          if (trades > 600) {
+            buyVolume *= 0.65
+            sellVolume *= 0.65
+            cvd *= 0.65
+            pvSum *= 0.65
+            vSum *= 0.65
+            trades = Math.round(trades * 0.65)
+          }
+
+          const delta = buyVolume - sellVolume
+          const vwap = vSum > 0 ? pvSum / vSum : price
+          setLive({
+            connected: true,
+            symbol: 'BTCUSDT',
+            lastPrice: price,
+            buyVolume,
+            sellVolume,
+            delta,
+            cvd,
+            vwap,
+            trades,
+            updatedAt: new Date(payload.T).toLocaleTimeString(),
+          })
+        } catch {
+          return
+        }
+      }
+
+      socket.onerror = () => {
+        setLive((prev) => ({ ...prev, connected: false }))
+      }
+
+      socket.onclose = () => {
+        setLive((prev) => ({ ...prev, connected: false }))
+        reconnectTimer = window.setTimeout(connect, 2500)
+      }
+    }
+
+    connect()
+    return () => {
+      if (reconnectTimer) window.clearTimeout(reconnectTimer)
+      if (socket && socket.readyState < 2) socket.close()
+    }
+  }, [])
+
+  function saveQuizRecord(score: number, solved: number, accuracy: number) {
+    const record: QuizSessionRecord = {
+      time: new Date().toISOString(),
+      score,
+      solved,
+      accuracy,
+      pass: accuracy >= 60,
+    }
+    const next = limitRecords([record, ...quizRecords])
+    setQuizRecords(next)
+    localStorage.setItem('odf_quiz_records', JSON.stringify(next))
+  }
+
+  function saveHealthRecord() {
+    const record: HealthRecord = {
+      time: new Date().toISOString(),
+      score: healthScore,
+      action: healthAction,
+    }
+    const next = limitRecords([record, ...healthRecords])
+    setHealthRecords(next)
+    localStorage.setItem('odf_health_records', JSON.stringify(next))
+  }
+
+  function saveNewsRecord(success: boolean, finalScore: number, finalCoins: number) {
+    const record: NewsSessionRecord = {
+      time: new Date().toISOString(),
+      difficulty,
+      score: finalScore,
+      coins: finalCoins,
+      success,
+    }
+    const next = limitRecords([record, ...newsRecords])
+    setNewsRecords(next)
+    localStorage.setItem('odf_news_records', JSON.stringify(next))
+  }
+
+  async function analyzeUploadedImage() {
+    if (!croppedSrc) return
+    const img = new Image()
+    await new Promise<void>((resolve, reject) => {
+      img.onload = () => resolve()
+      img.onerror = () => reject(new Error('이미지 로드 실패'))
+      img.src = croppedSrc
+    })
+    const canvas = document.createElement('canvas')
+    canvas.width = 120
+    canvas.height = 80
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data
+    let sum = 0
+    let sumSq = 0
+    let left = 0
+    let right = 0
+    const pixels = canvas.width * canvas.height
+    for (let y = 0; y < canvas.height; y += 1) {
+      for (let x = 0; x < canvas.width; x += 1) {
+        const i = (y * canvas.width + x) * 4
+        const g = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]
+        sum += g
+        sumSq += g * g
+        if (x < canvas.width / 2) left += g
+        else right += g
+      }
+    }
+    const mean = sum / pixels
+    const variance = sumSq / pixels - mean * mean
+    const contrast = Math.sqrt(Math.max(0, variance))
+    const bias = (right - left) / pixels
+    const inferred: Direction = bias > 2 ? 'up' : bias < -2 ? 'down' : 'side'
+    const text = `밝기 ${mean.toFixed(1)} / 대비 ${contrast.toFixed(1)} / 우측편향 ${bias.toFixed(1)} → 추정 ${inferred === 'up' ? '상승' : inferred === 'down' ? '하락' : '횡보'}`
+    setImageInsight(text)
+  }
+
+  function exportProgressJson() {
+    const payload = {
+      exportedAt: new Date().toISOString(),
+      bestAccuracy,
+      bestCoins,
+      quizRecords,
+      healthRecords,
+      newsRecords,
+    }
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `odf-progress-${Date.now()}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   function onUploadFile(file: File | null) {
     if (!file) return
+    setImageInsight('')
     const reader = new FileReader()
     reader.onload = () => {
       if (typeof reader.result === 'string') setUploadSrc(reader.result)
@@ -328,6 +573,7 @@ function App() {
 
     if (nextSolved >= QUIZ_TARGET) {
       setQuizSessionDone(true)
+      saveQuizRecord(nextScore, nextSolved, nextAcc)
     }
   }
 
@@ -385,9 +631,10 @@ function App() {
       setBestCoins(nextCoins)
       localStorage.setItem('odf_best_coins', String(nextCoins))
     }
+    return nextCoins
   }
 
-  function closeNewsSession(success: boolean, message: string) {
+  function closeNewsSession(success: boolean, message: string, finalScore: number, finalCoins: number) {
     setNewsEnded(true)
     setNewsResult(message)
     const nextSessions = newsSessions + 1
@@ -396,11 +643,13 @@ function App() {
     setNewsCompleted(nextCompleted)
     localStorage.setItem('odf_news_sessions', String(nextSessions))
     localStorage.setItem('odf_news_completed', String(nextCompleted))
+    saveNewsRecord(success, finalScore, finalCoins)
   }
 
   function playNews(move: NewsMove) {
     if (newsEnded) return
     const ok = move === currentNews.realMove
+    const nextScore = ok ? newsScore + 1 : newsScore
 
     if (!isBossRound) {
       const nextCombo = ok ? combo + 1 : 0
@@ -437,15 +686,15 @@ function App() {
     setCombo(nextCombo)
     setBossHp(nextHp)
     setBossTurns(nextTurns)
-    applyNewsDelta(ok, nextCombo)
+    const nextCoins = applyNewsDelta(ok, nextCombo)
 
     if (nextHp <= 0) {
-      closeNewsSession(true, '보스 격파 성공!')
+      closeNewsSession(true, '보스 격파 성공!', nextScore, nextCoins)
       return
     }
 
     if (nextTurns <= 0) {
-      closeNewsSession(false, '보스전 시간 종료!')
+      closeNewsSession(false, '보스전 시간 종료!', nextScore, nextCoins)
     }
   }
 
@@ -470,6 +719,7 @@ function App() {
         <div>
           <h1>Orderflow Doctor Arena</h1>
           <p>도트 감성 오더플로우 트레이딩 게임</p>
+          <button className="exportBtn" onClick={exportProgressJson}>진행기록 JSON 저장</button>
         </div>
       </header>
 
@@ -480,6 +730,25 @@ function App() {
           </button>
         ))}
       </nav>
+
+      <section className="livePanel pixelCard" data-testid="live-orderflow-panel">
+        <div className="row between">
+          <h3>실시간 오더플로우 ({live.symbol})</h3>
+          <strong className={live.connected ? 'liveOn' : 'liveOff'}>
+            {live.connected ? 'LIVE 연결됨' : '재연결 중'}
+          </strong>
+        </div>
+        <div className="liveGrid">
+          <p>가격: <strong>{live.lastPrice ? live.lastPrice.toFixed(2) : '-'}</strong></p>
+          <p>VWAP: <strong>{live.vwap ? live.vwap.toFixed(2) : '-'}</strong></p>
+          <p>Delta: <strong>{live.delta.toFixed(3)}</strong></p>
+          <p>CVD: <strong>{live.cvd.toFixed(3)}</strong></p>
+          <p>매수체결량: <strong>{live.buyVolume.toFixed(3)}</strong></p>
+          <p>매도체결량: <strong>{live.sellVolume.toFixed(3)}</strong></p>
+          <p>체결수: <strong>{live.trades}</strong></p>
+          <p>업데이트: <strong>{live.updatedAt || '-'}</strong></p>
+        </div>
+      </section>
 
       {mode === 'quiz' && (
         <section className="card pixelCard" data-testid="quiz-mode">
@@ -507,6 +776,10 @@ function App() {
               <div className="previewWrap">
                 <span>크롭 미리보기</span>
                 <img src={croppedSrc} alt="크롭 미리보기" className="previewImage" />
+                <div className="row">
+                  <button onClick={analyzeUploadedImage}>이미지 특징 추출</button>
+                </div>
+                {imageInsight && <p className="subtle">{imageInsight}</p>}
               </div>
             )}
           </div>
@@ -556,6 +829,14 @@ function App() {
               <p>최종 정확도 {quizAccuracy}% ({quizAccuracy >= 60 ? '목표 달성' : '재도전 필요'})</p>
             </div>
           )}
+
+          <div className="records pixelPanel">
+            <h3>퀴즈 리더보드 Top3</h3>
+            {quizTop3.length === 0 && <p className="subtle">아직 기록이 없습니다.</p>}
+            {quizTop3.map((r) => (
+              <p key={`${r.time}-${r.accuracy}`}>{new Date(r.time).toLocaleString()} · 정확도 {r.accuracy}%</p>
+            ))}
+          </div>
         </section>
       )}
 
@@ -566,6 +847,7 @@ function App() {
             <div className="row">
               <div className="badge">검진비 {healthFee}코인</div>
               <button data-testid="health-pdf" onClick={downloadHealthReport}>PDF 리포트 저장</button>
+              <button onClick={saveHealthRecord}>검진 결과 저장</button>
             </div>
           </div>
 
@@ -612,6 +894,14 @@ function App() {
               </div>
             ))}
           </div>
+
+          <div className="records pixelPanel">
+            <h3>최근 검진 기록</h3>
+            {healthRecords.length === 0 && <p className="subtle">저장된 검진 기록이 없습니다.</p>}
+            {healthRecords.slice(0, 5).map((r) => (
+              <p key={r.time}>{new Date(r.time).toLocaleString()} · {r.score}/100 · {r.action}</p>
+            ))}
+          </div>
         </section>
       )}
 
@@ -653,6 +943,16 @@ function App() {
           <p className="resultLine" data-testid="news-result">{newsResult}</p>
           <p className="subtle" data-testid="news-completion-rate">세션 완료율 {completionRate}% ({newsCompleted}/{newsSessions})</p>
           {newsEnded && <p className="subtle">세션 종료: 정답 {newsScore}</p>}
+
+          <div className="records pixelPanel">
+            <h3>뉴스 모드 코인 Top3</h3>
+            {newsTop3.length === 0 && <p className="subtle">아직 세션 기록이 없습니다.</p>}
+            {newsTop3.map((r) => (
+              <p key={`${r.time}-${r.coins}`}>
+                {new Date(r.time).toLocaleString()} · {r.difficulty} · 코인 {r.coins} · {r.success ? '클리어' : '실패'}
+              </p>
+            ))}
+          </div>
         </section>
       )}
     </div>
