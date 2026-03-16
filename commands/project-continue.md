@@ -1,5 +1,5 @@
 ---
-description: "Continue interrupted project"
+description: "중단된 프로젝트 재개 | Continue interrupted project"
 ---
 
 # Project Continue

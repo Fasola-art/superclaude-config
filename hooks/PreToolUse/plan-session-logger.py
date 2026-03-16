@@ -24,7 +24,7 @@ def get_project_name() -> str:
     pkg = cwd / "package.json"
     if pkg.exists():
         try:
-            return json.loads(pkg.read_text()).get("name", cwd.name)
+            return json.loads(pkg.read_text(encoding='utf-8')).get("name", cwd.name)
         except Exception:
             pass
     for marker in ["pyproject.toml", "go.mod", "Cargo.toml"]:
@@ -40,7 +40,8 @@ def init_file() -> None:
         SESSIONS_FILE.write_text(
             "# Session History\n\n"
             "| Date             | Project    | Path                | Type      |\n"
-            "|------------------|------------|---------------------|-----------|\n"
+            "|------------------|------------|---------------------|-----------|\n",
+            encoding='utf-8'
         )
 
 
@@ -50,18 +51,19 @@ def append_entry() -> None:
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
     project = get_project_name()
     cwd = os.getcwd()
-    with open(SESSIONS_FILE, "a") as f:
+    with open(SESSIONS_FILE, "a", encoding='utf-8') as f:
         f.write(f"| {now} | {project} | {cwd} | plan_mode |\n")
     trim_old()
 
 
 def trim_old() -> None:
     """MAX_ENTRIES 초과 시 오래된 기록 제거"""
-    lines = SESSIONS_FILE.read_text().splitlines()
+    lines = SESSIONS_FILE.read_text(encoding='utf-8').splitlines()
     header, data = lines[:4], lines[4:]
     if len(data) > MAX_ENTRIES:
         SESSIONS_FILE.write_text(
-            "\n".join(header + data[-MAX_ENTRIES:]) + "\n"
+            "\n".join(header + data[-MAX_ENTRIES:]) + "\n",
+            encoding='utf-8'
         )
 
 

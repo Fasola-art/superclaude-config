@@ -10,6 +10,7 @@ import json
 import os
 import re
 import hashlib
+import shutil
 from datetime import datetime
 from pathlib import Path
 import subprocess
@@ -21,8 +22,10 @@ ERROR_KB_DIR = CLAUDE_DIR / "error-kb"
 PENDING_DIR = ERROR_KB_DIR / "pending"
 RESOLVED_DIR = ERROR_KB_DIR / "resolved"
 LOG_FILE = CLAUDE_DIR / "logs" / "mcp-router" / "launchd.err"
-PSQL_PATH = "/opt/homebrew/Cellar/postgresql@16/16.11_1/bin/psql"
 DB_NAME = "claude_mcp"
+
+# PostgreSQL 경로: PATH에서 자동 탐색
+PSQL_PATH = shutil.which("psql") or "psql"
 
 # 폴더 생성
 PENDING_DIR.mkdir(parents=True, exist_ok=True)

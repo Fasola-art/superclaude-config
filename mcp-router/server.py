@@ -3,8 +3,8 @@
 MCP Router Server
 SuperClaude v2.0.9 MCP 라우터
 
-Mac Studio Ultra M2 최적화
-- 24 CPU 코어 활용
+크로스 플랫폼 (Windows/macOS/Linux)
+- Windows: TCP 소켓 (localhost:16789), macOS/Linux: Unix 소켓
 - 동적 로드 밸런싱
 - 서버 상태 모니터링
 - 실제 MCP 프로토콜 지원
@@ -19,15 +19,19 @@ from dataclasses import dataclass, asdict
 from enum import Enum
 import logging
 import signal
+import platform
 
 # MCP 프로토콜 임포트
 from mcp_protocol import MCPProtocolManager, create_manager_from_config
 
 # 설정
+IS_WINDOWS = platform.system() == "Windows"
 CLAUDE_DIR = Path.home() / '.claude'
 CONFIG_FILE = CLAUDE_DIR / 'mcp.json'
 ROUTER_LOG_DIR = CLAUDE_DIR / 'logs' / 'mcp-router'
 ROUTER_SOCKET = CLAUDE_DIR / 'mcp-router' / 'router.sock'
+ROUTER_TCP_HOST = "127.0.0.1"
+ROUTER_TCP_PORT = 16789
 
 # 로깅 설정
 ROUTER_LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -345,10 +349,10 @@ class LoadBalancer:
         )
 
 
-# ============ Unix 소켓 서버 ============
+# ============ 라우터 서버 (크로스 플랫폼) ============
 
 class RouterServer:
-    """Unix 소켓 기반 라우터 서버"""
+    """라우터 서버 (Windows: TCP, macOS/Linux: Unix 소켓)"""
 
     def __init__(self, router: MCPRouter):
         self.router = router
@@ -389,17 +393,24 @@ class RouterServer:
             await writer.wait_closed()
 
     async def start(self):
-        """서버 시작"""
-        # 기존 소켓 파일 제거
-        if ROUTER_SOCKET.exists():
-            ROUTER_SOCKET.unlink()
-
-        self.server = await asyncio.start_unix_server(
-            self.handle_client,
-            path=str(ROUTER_SOCKET)
-        )
-
-        logger.info(f"Unix 소켓 서버 시작: {ROUTER_SOCKET}")
+        """서버 시작 (플랫폼별 분기)"""
+        if IS_WINDOWS:
+            # Windows: TCP 소켓 사용
+            self.server = await asyncio.start_server(
+                self.handle_client,
+                host=ROUTER_TCP_HOST,
+                port=ROUTER_TCP_PORT
+            )
+            logger.info(f"TCP 서버 시작: {ROUTER_TCP_HOST}:{ROUTER_TCP_PORT}")
+        else:
+            # macOS/Linux: Unix 소켓 사용
+            if ROUTER_SOCKET.exists():
+                ROUTER_SOCKET.unlink()
+            self.server = await asyncio.start_unix_server(
+                self.handle_client,
+                path=str(ROUTER_SOCKET)
+            )
+            logger.info(f"Unix 소켓 서버 시작: {ROUTER_SOCKET}")
 
     async def stop(self):
         """서버 중지"""
@@ -407,7 +418,7 @@ class RouterServer:
             self.server.close()
             await self.server.wait_closed()
 
-        if ROUTER_SOCKET.exists():
+        if not IS_WINDOWS and ROUTER_SOCKET.exists():
             ROUTER_SOCKET.unlink()
 
 
@@ -426,8 +437,13 @@ async def main():
         logger.info("종료 시그널 수신")
         stop_event.set()
 
-    for sig in (signal.SIGINT, signal.SIGTERM):
-        loop.add_signal_handler(sig, signal_handler)
+    if IS_WINDOWS:
+        # Windows: signal 모듈로 직접 등록
+        signal.signal(signal.SIGINT, lambda s, f: signal_handler())
+        signal.signal(signal.SIGTERM, lambda s, f: signal_handler())
+    else:
+        for sig in (signal.SIGINT, signal.SIGTERM):
+            loop.add_signal_handler(sig, signal_handler)
 
     try:
         # 라우터 시작
@@ -437,7 +453,10 @@ async def main():
         await server.start()
 
         logger.info("MCP Router 실행 중...")
-        logger.info(f"소켓: {ROUTER_SOCKET}")
+        if IS_WINDOWS:
+            logger.info(f"TCP: {ROUTER_TCP_HOST}:{ROUTER_TCP_PORT}")
+        else:
+            logger.info(f"소켓: {ROUTER_SOCKET}")
 
         # 주기적 헬스체크
         while not stop_event.is_set():

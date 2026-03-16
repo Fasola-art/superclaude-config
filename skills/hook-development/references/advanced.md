@@ -355,7 +355,7 @@ tool_name=$(echo "$input" | jq -r '.tool_name')
 timestamp=$(date -Iseconds)
 
 # Append to audit log
-echo "$timestamp | $USER | $tool_name | $input" >> ~/.claude/audit.log
+echo "$timestamp | $USER | $tool_name | $input" >> C:/Users/MSI/.claude/audit.log
 
 exit 0
 ```

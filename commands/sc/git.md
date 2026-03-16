@@ -1,5 +1,5 @@
 ---
-description: "Git operations helper"
+description: "Git 작업 도우미 | Git operations helper"
 argument-hint: "[action]"
 ---
 

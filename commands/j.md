@@ -1,3 +1,7 @@
+---
+description: "JARVIS 브리핑 | JARVIS Briefing"
+---
+
 # JARVIS Briefing
 
 Display JARVIS morning briefing.

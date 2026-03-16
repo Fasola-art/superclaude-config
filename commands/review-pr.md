@@ -1,5 +1,5 @@
 ---
-description: "Comprehensive PR review using agents"
+description: "에이전트 기반 PR 리뷰 | Comprehensive PR review using agents"
 argument-hint: "[review-aspects]"
 allowed-tools: ["Bash", "Glob", "Grep", "Read", "Task"]
 ---

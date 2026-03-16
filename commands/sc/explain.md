@@ -1,5 +1,5 @@
 ---
-description: "Explain code or concept"
+description: "코드/개념 설명 | Explain code or concept"
 argument-hint: "[target]"
 ---
 

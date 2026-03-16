@@ -14,31 +14,31 @@ Display today's economic outlook report.
 
 ## Execution Script
 
-```bash
-cd /Users/reim/.claude/modules/trading
+```powershell
+cd C:/Users/MSI/.claude/modules/trading
 
 # Today's date
-TODAY=$(date +%Y-%m-%d)
+$TODAY = Get-Date -Format yyyy-MM-dd
 
 # Check outlook file
-OUTLOOK_FILE="reports/daily/outlook_${TODAY}.json"
+$OUTLOOK_FILE = "reports/daily/outlook_${TODAY}.json"
 
-if [ -f "$OUTLOOK_FILE" ]; then
-    echo "=== Economic Outlook ($TODAY) ==="
-    python3 -c "
+if (Test-Path $OUTLOOK_FILE) {
+    Write-Host "=== Economic Outlook ($TODAY) ==="
+    python -c "
 import json
 with open('$OUTLOOK_FILE', 'r') as f:
     data = json.load(f)
 print(data.get('text', 'No outlook available'))
 print()
-print(f\"Generated: {data.get('timestamp', 'N/A')}\")
-print(f\"Cost: \${data.get('cost', 0):.4f}\")
+print(f\"\"\"Generated: {data.get('timestamp', 'N/A')}\"\"\")
+print(f\"\"\"Cost: \${data.get('cost', 0):.4f}\"\"\")
 "
-else
-    echo "No outlook for today. Generating..."
-    export ANTHROPIC_API_KEY=$(grep -o '"sk-ant[^"]*"' /Users/reim/.claude/credentials/api-keys.json | tr -d '"')
-    python3 reports/market_outlook.py
-fi
+} else {
+    Write-Host "No outlook for today. Generating..."
+    $env:ANTHROPIC_API_KEY = (Get-Content C:/Users/MSI/.claude/credentials/api-keys.json | ConvertFrom-Json).'anthropic'
+    python reports/market_outlook.py
+}
 ```
 
 ## Output Example

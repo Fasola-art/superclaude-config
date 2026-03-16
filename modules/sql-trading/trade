@@ -2,7 +2,40 @@
 # SQL Trading CLI - 간단한 명령어 도구
 # Usage: trade [command]
 
-PSQL="/opt/homebrew/opt/postgresql@16/bin/psql -U reim -d claude_mcp -t"
+# psql 경로 자동 탐색
+find_psql() {
+    # PATH에서 먼저 검색
+    if command -v psql &>/dev/null; then
+        echo "psql"
+        return
+    fi
+    # 플랫폼별 후보 경로
+    local candidates
+    if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
+        candidates=(
+            "/c/Program Files/PostgreSQL/16/bin/psql"
+            "/c/Program Files/PostgreSQL/15/bin/psql"
+            "/c/Program Files/PostgreSQL/14/bin/psql"
+        )
+    else
+        candidates=(
+            "/opt/homebrew/opt/postgresql@16/bin/psql"
+            "/opt/homebrew/bin/psql"
+            "/usr/local/bin/psql"
+            "/usr/bin/psql"
+        )
+    fi
+    for p in "${candidates[@]}"; do
+        if [[ -f "$p" || -f "${p}.exe" ]]; then
+            echo "$p"
+            return
+        fi
+    done
+    echo "psql"  # 최후 fallback
+}
+
+PSQL_BIN="$(find_psql)"
+PSQL="$PSQL_BIN -U reim -d claude_mcp -t"
 MODULE_DIR="$HOME/.claude/modules/sql-trading"
 
 # 색상
@@ -161,7 +194,14 @@ open_dashboard() {
         sleep 2
     fi
     echo "🌐 대시보드 열기: http://localhost:8080"
-    open http://localhost:8080
+    # 크로스플랫폼 브라우저 열기
+    if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
+        start http://localhost:8080
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        open http://localhost:8080
+    else
+        xdg-open http://localhost:8080
+    fi
 }
 
 show_logs() {
@@ -180,16 +220,33 @@ show_status() {
     echo -e "${BLUE}⚙️ 서비스 상태${NC}"
     echo ""
 
-    if launchctl list | grep -q "sql-trading-collector"; then
-        echo -e "📦 데이터 수집: ${GREEN}✅ 활성${NC} (30분 주기)"
-    else
-        echo -e "📦 데이터 수집: ${RED}❌ 비활성${NC}"
-    fi
+    # 크로스플랫폼 서비스 상태 확인
+    if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
+        # Windows: schtasks로 예약 작업 확인
+        if schtasks /Query /TN "sql-trading-collector" &>/dev/null; then
+            echo -e "📦 데이터 수집: ${GREEN}✅ 활성${NC} (30분 주기)"
+        else
+            echo -e "📦 데이터 수집: ${RED}❌ 비활성${NC}"
+        fi
 
-    if launchctl list | grep -q "sql-trading-alert"; then
-        echo -e "🔔 신호 알림:   ${GREEN}✅ 활성${NC} (5분 주기)"
+        if schtasks /Query /TN "sql-trading-alert" &>/dev/null; then
+            echo -e "🔔 신호 알림:   ${GREEN}✅ 활성${NC} (5분 주기)"
+        else
+            echo -e "🔔 신호 알림:   ${RED}❌ 비활성${NC}"
+        fi
     else
-        echo -e "🔔 신호 알림:   ${RED}❌ 비활성${NC}"
+        # macOS: launchctl
+        if launchctl list | grep -q "sql-trading-collector"; then
+            echo -e "📦 데이터 수집: ${GREEN}✅ 활성${NC} (30분 주기)"
+        else
+            echo -e "📦 데이터 수집: ${RED}❌ 비활성${NC}"
+        fi
+
+        if launchctl list | grep -q "sql-trading-alert"; then
+            echo -e "🔔 신호 알림:   ${GREEN}✅ 활성${NC} (5분 주기)"
+        else
+            echo -e "🔔 신호 알림:   ${RED}❌ 비활성${NC}"
+        fi
     fi
 
     if curl -s http://localhost:8080/api/summary > /dev/null 2>&1; then

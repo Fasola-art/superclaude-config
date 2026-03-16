@@ -22,14 +22,29 @@ TABLE_ALT_BG = "#1a1a40"
 POSITIVE_COLOR = "#00ff88"
 NEGATIVE_COLOR = "#ff4757"
 
-# 폰트 설정 (시스템 폰트 사용)
+# 폰트 설정 (시스템 폰트 사용 - 크로스 플랫폼)
 def get_font(size, bold=False):
-    font_paths = [
-        "/System/Library/Fonts/AppleSDGothicNeo.ttc",  # macOS 한글
-        "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
-        "/usr/share/fonts/truetype/nanum/NanumGothic.ttf",  # Linux
-        "/usr/share/fonts/noto-cjk/NotoSansCJK-Regular.ttc",
-    ]
+    import platform
+    system = platform.system()
+    font_paths = []
+    if system == "Windows":
+        # Windows 한글 폰트 우선
+        font_paths = [
+            "C:/Windows/Fonts/malgun.ttf",      # 맑은 고딕
+            "C:/Windows/Fonts/malgunbd.ttf",     # 맑은 고딕 Bold
+            "C:/Windows/Fonts/msyh.ttc",         # Microsoft YaHei
+            "C:/Windows/Fonts/arial.ttf",         # Arial
+        ]
+    elif system == "Darwin":
+        font_paths = [
+            "/System/Library/Fonts/AppleSDGothicNeo.ttc",
+            "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
+        ]
+    else:
+        font_paths = [
+            "/usr/share/fonts/truetype/nanum/NanumGothic.ttf",
+            "/usr/share/fonts/noto-cjk/NotoSansCJK-Regular.ttc",
+        ]
     for path in font_paths:
         if os.path.exists(path):
             try:

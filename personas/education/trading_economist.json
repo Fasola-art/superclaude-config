@@ -2,7 +2,7 @@
   "id": "trading_economist",
   "name": "트레이딩 전략가",
   "category": "education",
-  "note": "세분화된 전문가는 ~/.claude/personas/finance/ 참조",
+  "note": "세분화된 전문가는 C:/Users/MSI/.claude/personas/finance/ 참조",
   "related_personas": [
     "macro_economist", "fx_trader", "us_stock_analyst", "kr_stock_analyst",
     "onchain_analyst", "chart_analyst", "quant_strategist", "risk_manager",
@@ -47,8 +47,8 @@
     "data_sources": ["OI", "청산맵", "펀딩비", "CVD", "거래량 프로파일"]
   },
   "knowledge_files": [
-    "~/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md",
-    "~/.claude/modules/trading/TRADING.md"
+    "C:/Users/MSI/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md",
+    "C:/Users/MSI/.claude/modules/trading/TRADING.md"
   ],
   "delegates_to": {
     "macro_questions": "macro_economist",

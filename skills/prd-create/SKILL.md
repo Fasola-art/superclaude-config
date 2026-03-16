@@ -1,3 +1,14 @@
+---
+name: prd-create
+description: Transform ideas into structured PRD (Product Requirements Document)
+version: "1.0.0"
+triggers:
+  - /prd-create
+  - create prd
+  - PRD 작성
+  - idea to prd
+---
+
 # PRD Create Skill
 
 > Transform ideas into structured PRD (Product Requirements Document)

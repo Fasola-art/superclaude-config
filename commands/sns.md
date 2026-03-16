@@ -1,5 +1,5 @@
 ---
-description: "SNS automation workflow design and management"
+description: "SNS 자동화 워크플로우 | SNS automation workflow design and management"
 argument-hint: "[workflow_name or action]"
 ---
 

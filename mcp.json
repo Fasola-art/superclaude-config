@@ -4,148 +4,199 @@
   "mcpServers": {
     "filesystem": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/reim/Documents", "/Users/reim/.claude", "/Users/reim/Desktop"],
-      "description": "파일시스템 접근",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:/Users/MSI/Documents",
+        "C:/Users/MSI/.claude",
+        "C:/Users/MSI/Desktop"
+      ],
+      "description": "?뚯씪?쒖뒪???묎렐",
       "enabled": true,
       "priority": 10
     },
     "memory": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
-      "description": "지식 그래프 메모리",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "description": "Memory MCP server",
       "enabled": true,
       "priority": 8
     },
     "fetch": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-fetch"],
-      "description": "웹 페이지 가져오기",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch"
+      ],
+      "description": "Fetch MCP server",
       "enabled": true,
       "priority": 7,
       "timeout": 60000,
-      "notes": "타임아웃 해결: npx 캐시 준비 완료, 60초 타임아웃 설정"
+      "notes": "??꾩븘???닿껐: npx 罹먯떆 以鍮??꾨즺, 60珥???꾩븘???ㅼ젙"
     },
     "time": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-time"],
-      "description": "시간/타임존 유틸리티",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-time"
+      ],
+      "description": "?쒓컙/??꾩〈 ?좏떥由ы떚",
       "enabled": true,
       "priority": 5,
       "timeout": 30000,
-      "notes": "타임아웃 해결: 경량 서버로 30초 타임아웃 충분"
+      "notes": "??꾩븘???닿껐: 寃쎈웾 ?쒕쾭濡?30珥???꾩븘??異⑸텇"
     },
     "sequential-thinking": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "description": "단계별 사고 프로세스",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "description": "?④퀎蹂??ш퀬 ?꾨줈?몄뒪",
       "enabled": true,
       "priority": 6
     },
     "puppeteer": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
-      "description": "브라우저 자동화 (Puppeteer)",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "description": "釉뚮씪?곗? ?먮룞??(Puppeteer)",
       "enabled": false,
       "priority": 4,
       "timeout": 120000,
-      "notes": "비활성 유지: Chromium 다운로드 필요, 필요시 수동 설치 후 활성화. 대안: WebFetch 도구 사용"
+      "notes": "鍮꾪솢???좎?: Chromium ?ㅼ슫濡쒕뱶 ?꾩슂, ?꾩슂???섎룞 ?ㅼ튂 ???쒖꽦?? ??? WebFetch ?꾧뎄 ?ъ슜"
     },
     "github": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "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"
       },
-      "description": "GitHub 연동",
+      "description": "GitHub ?곕룞",
       "enabled": true,
       "priority": 9
     },
     "slack": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-slack"
+      ],
       "env": {
         "SLACK_BOT_TOKEN": "xoxb-10382355262791-10394831205045-MlIs7EylLrlqg8NHCYYBeeZc",
         "SLACK_TEAM_ID": "T0AB8AF7QP9"
       },
-      "description": "Slack 연동 (Fasola-Art)",
+      "description": "Slack ?곕룞 (Fasola-Art)",
       "enabled": true,
       "priority": 6
     },
     "postgres": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://reim@localhost:5432/claude_mcp"],
-      "description": "PostgreSQL 연동 (claude_mcp DB)",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://MSI@localhost:5432/claude_mcp"
+      ],
+      "description": "PostgreSQL ?곕룞 (claude_mcp DB)",
       "enabled": true,
       "priority": 7
     },
     "brave-search": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
       "env": {
         "BRAVE_API_KEY": "BSABwW53C-tFFnpMHO3VYQOWVRVass4"
       },
-      "description": "Brave 검색",
+      "description": "Brave Search MCP server",
       "enabled": true,
       "priority": 8
     },
     "gdrive": {
       "command": "npx",
-      "args": ["-y", "@isaacphi/mcp-gdrive"],
+      "args": [
+        "-y",
+        "@isaacphi/mcp-gdrive"
+      ],
       "env": {
-        "GOOGLE_APPLICATION_CREDENTIALS": "/Users/reim/.claude/credentials/gcp-oauth.keys.json"
+        "GOOGLE_APPLICATION_CREDENTIALS": "C:\\Users\\MSI\\.claude\\credentials\\gcp-oauth.keys.json"
       },
-      "description": "Google Drive 연동",
+      "description": "Google Drive ?곕룞",
       "enabled": true,
       "priority": 7
     },
     "sentry": {
       "command": "npx",
-      "args": ["-y", "@sentry/mcp-server"],
+      "args": [
+        "-y",
+        "@sentry/mcp-server"
+      ],
       "env": {
         "SENTRY_ACCESS_TOKEN": "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"
       },
-      "description": "Sentry 에러 트래킹",
+      "description": "Sentry MCP server",
       "enabled": true,
       "priority": 5
     },
     "linear": {
       "command": "npx",
-      "args": ["-y", "mcp-linear"],
+      "args": [
+        "-y",
+        "mcp-linear"
+      ],
       "env": {
         "LINEAR_API_KEY": "lin_api_6q87SQZ9eYlCiecpmcByKy8XjGRQt9P861LGCN8z"
       },
-      "description": "Linear 이슈 트래킹",
+      "description": "Linear MCP server",
       "enabled": true,
       "priority": 5
     },
     "notion": {
       "command": "npx",
-      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "args": [
+        "-y",
+        "@notionhq/notion-mcp-server"
+      ],
       "env": {
         "OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer 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\", \"Notion-Version\": \"2022-06-28\"}"
       },
-      "description": "Notion 연동",
+      "description": "Notion ?곕룞",
       "enabled": true,
       "priority": 5
     },
     "exa": {
       "command": "npx",
-      "args": ["-y", "exa-mcp-server"],
+      "args": [
+        "-y",
+        "exa-mcp-server"
+      ],
       "env": {
         "EXA_API_KEY": "f60c9a09-3ad0-422c-b6d8-5954eea6c808"
       },
-      "description": "Exa AI 검색 (의미론적 웹 검색, 논문/연구 특화)",
+      "description": "Exa AI 寃??(?섎?濡좎쟻 ??寃?? ?쇰Ц/?곌뎄 ?뱁솕)",
       "enabled": true,
       "priority": 9,
       "timeout": 60000
     },
     "kie-ai": {
-      "command": "python3",
-      "args": ["/Users/reim/.claude/mcp-servers/kie-ai/server.py"],
+      "command": "python",
+      "args": [
+        "C:/Users/MSI/.claude/mcp-servers/kie-ai/server.py"
+      ],
       "env": {
         "KIE_API_KEY": "09044bf1be5d44ce8c576869421b155b"
       },
-      "description": "Kie.ai 통합 API (영상/이미지/음악 생성)",
+      "description": "Kie.ai ?듯빀 API (?곸긽/?대?吏/?뚯븙 ?앹꽦)",
       "enabled": true,
       "priority": 8,
       "timeout": 120000
@@ -221,3 +272,4 @@
     ]
   }
 }
+

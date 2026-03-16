@@ -24,7 +24,7 @@ def check_language_setting():
 
     # Save state
     state_file.parent.mkdir(parents=True, exist_ok=True)
-    with open(state_file, 'w') as f:
+    with open(state_file, 'w', encoding='utf-8') as f:
         json.dump({"reminded": True}, f)
 
 if __name__ == "__main__":

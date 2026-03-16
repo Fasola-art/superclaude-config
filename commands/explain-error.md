@@ -1,5 +1,5 @@
 ---
-description: Explain Stripe error codes with solutions
+description: "Stripe 에러 코드 설명 | Explain Stripe error codes with solutions"
 argument-hint: [error_code or error_message]
 ---
 

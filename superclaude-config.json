@@ -1,7 +1,7 @@
 {
   "$schema": "SuperClaude Configuration v2.0.9",
   "version": "2.0.9",
-  "platform": "macOS M2 Ultra",
+  "platform": "Windows RTX 4090 Laptop",
 
   "parallelExecution": {
     "enabled": true,
@@ -17,7 +17,7 @@
       "decrement": 3,
       "condition": "1 failure"
     },
-    "optimization": "M2 Ultra CPU cores (24 cores)"
+    "optimization": "RTX 4090 Laptop GPU (16GB VRAM, 32GB RAM)"
   },
 
   "personas": {

@@ -18,13 +18,13 @@ triggers:
 
 ### Single File Processing
 ```bash
-python ~/.claude/modules/music-lesson/pipeline.py /path/to/lesson.mp3
-python ~/.claude/modules/music-lesson/pipeline.py /path/to/lesson.mp3 2026-02-01
+python C:/Users/MSI/.claude/modules/music-lesson/pipeline.py /path/to/lesson.mp3
+python C:/Users/MSI/.claude/modules/music-lesson/pipeline.py /path/to/lesson.mp3 2026-02-01
 ```
 
 ### Folder Watch (Auto-processing)
 ```bash
-python ~/.claude/modules/music-lesson/watcher.py
+python C:/Users/MSI/.claude/modules/music-lesson/watcher.py
 ```
 
 ### Direct Python Usage
@@ -42,15 +42,14 @@ print(result.notion_url)
 ## Execution Instructions
 
 1. **On recording file processing request**:
-   - Execute `~/.claude/modules/music-lesson/pipeline.py`
+   - Execute `C:/Users/MSI/.claude/modules/music-lesson/pipeline.py`
    - Return result URL
 
 2. **On folder watch request**:
-   - Run `~/.claude/modules/music-lesson/watcher.py` in background
-   - Clova Note folder: `~/Library/CloudStorage/GoogleDrive-.../My Drive/ClovaNote`
+   - Run `C:/Users/MSI/.claude/modules/music-lesson/watcher.py` in background
 
 3. **On settings change**:
-   - Modify `~/.claude/modules/music-lesson/config.json`
+   - Modify `C:/Users/MSI/.claude/modules/music-lesson/config.json`
 
 ---
 

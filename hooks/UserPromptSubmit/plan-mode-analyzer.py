@@ -88,9 +88,10 @@ def determine_analysis_depth(prompt: str, detection: dict) -> str:
 
 def main():
     try:
-        input_data = sys.stdin.read()
-        data = json.loads(input_data) if input_data.strip() else {}
-        prompt = data.get('prompt', data.get('message', ''))
+        import os
+        prompt = os.environ.get('PROMPT', '')
+        if not prompt and not sys.stdin.isatty():
+            prompt = sys.stdin.read()
 
         detection = detect_prd_document(prompt)
 

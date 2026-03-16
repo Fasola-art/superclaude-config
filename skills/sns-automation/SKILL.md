@@ -1,11 +1,20 @@
+---
+name: sns-automation
+description: Design and implement SNS automation system for influencers/content creators
+version: "1.2.0"
+created: "2026-01-30"
+triggers:
+  - /sns
+  - SNS 자동화
+  - social media automation
+  - influencer automation
+---
+
 # SNS Automation Workflow Skill
 
-> **Version**: 1.2.0
-> **Created**: 2026-01-30
-> **Last Updated**: 2026-01-30
-> **Purpose**: Design and implement SNS automation system for influencers/content creators
-> **Module Path**: `~/.claude/modules/sns-automation/`
-> **Command**: `/sns`
+> Design and implement SNS automation system for influencers/content creators
+
+**Module Path**: `~/.claude/modules/sns-automation/`
 
 ---
 
@@ -23,7 +32,7 @@ docker run -d --name n8n -p 5678:5678 n8nio/n8n
 
 # 2. Import Workflows
 # n8n UI (localhost:5678) → Workflows → Import from File
-# ~/.claude/modules/sns-automation/n8n-workflows/*.json
+# C:/Users/MSI/.claude/modules/sns-automation/n8n-workflows/*.json
 
 # 3. Configure Credentials
 # Settings → Credentials → Enter API keys for each service

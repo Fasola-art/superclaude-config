@@ -1,5 +1,5 @@
 ---
-description: Clean up local branches tracking deleted remote branches
+description: "삭제된 원격 브랜치 정리 | Clean up deleted remote branches"
 ---
 
 ## Your Task

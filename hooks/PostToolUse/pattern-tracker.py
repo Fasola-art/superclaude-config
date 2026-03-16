@@ -18,7 +18,7 @@ def load_patterns() -> dict:
     """Load saved patterns"""
     if PATTERNS_FILE.exists():
         try:
-            with open(PATTERNS_FILE, 'r') as f:
+            with open(PATTERNS_FILE, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except:
             pass
@@ -27,7 +27,7 @@ def load_patterns() -> dict:
 def save_patterns(patterns: dict):
     """Save patterns"""
     PATTERNS_DIR.mkdir(parents=True, exist_ok=True)
-    with open(PATTERNS_FILE, 'w') as f:
+    with open(PATTERNS_FILE, 'w', encoding='utf-8') as f:
         json.dump(patterns, f, indent=2)
 
 def record_pattern(tool_name: str, success: bool, context: dict = None):

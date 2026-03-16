@@ -7,7 +7,7 @@
 ## Overview
 
 Trading module provides financial market analysis, strategy backtesting, and real-time alerts.
-Leverages Mac Studio Ultra M2 performance for large-scale data processing and parallel analysis.
+Leverages Windows RTX 4090 Laptop performance for large-scale data processing and GPU-accelerated analysis.
 
 ---
 
@@ -112,7 +112,7 @@ backtesting:
 
   parallel_execution:
     enabled: true
-    max_concurrent: 24  # M2 Ultra optimized
+    max_concurrent: 16  # RTX 4090 Laptop optimized
 ```
 
 ### 4. Alert System

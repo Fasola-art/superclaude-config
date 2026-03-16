@@ -1,0 +1,12 @@
+{
+  "id": "31252ec83ac3",
+  "type": "bun_canary_segfault",
+  "tool": "runtime",
+  "message": "https://bun.report/1.3.9/e_26d2fefbmgkgEuhogCgm+2W88outB4s+mqC49uiqC6ssiqCy7sqXozg0U23wN2/tgUm17jOimsjOw0vxvDCYKERNEL32.DLLut0LCSntdll.dll4gijBA2DD",
+  "exitCode": 139,
+  "timestamp": "2026-02-24T17:19:04.437091",
+  "raw_log": "RSS: 1.06GB | Peak: 1.15GB | Commit: 1.59GB | Faults: 3898926 | Machine: 34.04GB\n\npanic(main thread): Segmentation fault at address 0xFFFFFFFFFFFFFFFF\noh no: Bun has crashed. This indicates a bug in Bun, not your code.\n\nTo send a redacted crash report to Bun's team,\nplease file a GitHub issue using the link below:\n\n https://bun.report/1.3.9/e_26d2fefbmgkgEuhogCgm+2W88outB4s+mqC49uiqC6ssiqCy7sqXozg0U23wN2/tgUm17jOimsjOw0vxvDCYKERNEL32.DLLut0LCSntdll.dll4gijBA2DD\n\nPS C:\\WINDOWS\\System32>\n",
+  "resolved": false,
+  "resolution": null,
+  "source": "C:\\Users\\MSI\\.claude\\paste-cache\\1dcaf6a96ce2096b.txt"
+}

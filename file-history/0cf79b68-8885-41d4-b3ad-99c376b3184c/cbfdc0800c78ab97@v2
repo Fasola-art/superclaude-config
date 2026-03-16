@@ -1,2 +1,0 @@
-# Homebrew 설정 (Apple Silicon Mac)
-eval "$(/opt/homebrew/bin/brew shellenv)"

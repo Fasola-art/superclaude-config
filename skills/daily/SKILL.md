@@ -10,40 +10,40 @@ Quick reference for frequently used paths.
 
 | Purpose | Path |
 |---------|------|
-| **Economic Outlook** | `/Users/reim/.claude/modules/trading/reports/daily/` |
-| **Trading Module** | `/Users/reim/.claude/modules/trading/` |
-| **News Module** | `/Users/reim/.claude/modules/news-collector/` |
-| **Telegram Module** | `/Users/reim/.claude/modules/telegram/` |
-| **Personas** | `/Users/reim/.claude/personas/` |
-| **Skills** | `/Users/reim/.claude/skills/` |
-| **API Keys** | `/Users/reim/.claude/credentials/api-keys.json` |
-| **Settings** | `/Users/reim/.claude/settings.json` |
+| **Economic Outlook** | `C:/Users/MSI/.claude/modules/trading/reports/daily/` |
+| **Trading Module** | `C:/Users/MSI/.claude/modules/trading/` |
+| **News Module** | `C:/Users/MSI/.claude/modules/news-collector/` |
+| **Telegram Module** | `C:/Users/MSI/.claude/modules/telegram/` |
+| **Personas** | `C:/Users/MSI/.claude/personas/` |
+| **Skills** | `C:/Users/MSI/.claude/skills/` |
+| **API Keys** | `C:/Users/MSI/.claude/credentials/api-keys.json` |
+| **Settings** | `C:/Users/MSI/.claude/settings.json` |
 
 ## Quick Open
 
 ```bash
 # Economic outlook folder
-open /Users/reim/.claude/modules/trading/reports/daily/
+explorer C:/Users/MSI/.claude/modules/trading/reports/daily/
 
 # Trading module
-open /Users/reim/.claude/modules/trading/
+explorer C:/Users/MSI/.claude/modules/trading/
 
 # Personas folder
-open /Users/reim/.claude/personas/
+explorer C:/Users/MSI/.claude/personas/
 
 # Skills folder
-open /Users/reim/.claude/skills/
+explorer C:/Users/MSI/.claude/skills/
 
 # API keys file
-open /Users/reim/.claude/credentials/api-keys.json
+explorer C:/Users/MSI/.claude/credentials/api-keys.json
 ```
 
 ## Today's Outlook File
 
-```bash
+```powershell
 # Today's outlook
-cat /Users/reim/.claude/modules/trading/reports/daily/outlook_$(date +%Y-%m-%d).json
+type C:/Users/MSI/.claude/modules/trading/reports/daily/outlook_$(Get-Date -Format yyyy-MM-dd).json
 
 # Latest outlook
-ls -t /Users/reim/.claude/modules/trading/reports/daily/outlook_*.json | head -1
+Get-ChildItem C:/Users/MSI/.claude/modules/trading/reports/daily/outlook_*.json | Sort-Object LastWriteTime -Descending | Select-Object -First 1
 ```

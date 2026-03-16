@@ -67,7 +67,7 @@ def check_and_alert():
     elif usage >= THRESHOLDS["warning"]:
         state["threshold_hit"] = "warning"
 
-    with open(STATE_FILE, 'w') as f:
+    with open(STATE_FILE, 'w', encoding='utf-8') as f:
         json.dump(state, f)
 
 if __name__ == "__main__":

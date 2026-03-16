@@ -41,7 +41,7 @@ LLM 4-Agent → RL Agent (PPO/SAC) → Rule-Based 폴백
 
 | 디바이스 | 역할 | 24h |
 |---------|------|-----|
-| Mac Studio M2 Ultra | LLM 분석, 오케스트레이션, DB | ✅ |
+| Windows RTX 4090 Laptop | LLM 분석, 오케스트레이션, DB | ✅ |
 | 4090 Laptop | RL 학습 (야간), 대형 LLM | ❌ |
 | Jetson Orin Nano | YOLO 차트 패턴, TensorRT | ✅ |
 | RPi5 + Hailo8 | 뉴스 필터링, 감성 분류 | ✅ |

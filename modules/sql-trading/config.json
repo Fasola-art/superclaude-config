@@ -63,7 +63,7 @@
       "fred": {
         "enabled": true,
         "base_url": "https://api.stlouisfed.org/fred/",
-        "api_key_path": "~/.claude/credentials/api-keys.json",
+        "api_key_path": "C:/Users/MSI/.claude/credentials/api-keys.json",
         "description": "Federal Reserve Economic Data"
       }
     }
@@ -88,12 +88,12 @@
     "output_format": "markdown"
   },
 
-  "queries_path": "~/.claude/modules/sql-trading/queries/",
-  "collectors_path": "~/.claude/modules/sql-trading/collectors/",
+  "queries_path": "C:/Users/MSI/.claude/modules/sql-trading/queries/",
+  "collectors_path": "C:/Users/MSI/.claude/modules/sql-trading/collectors/",
 
   "logging": {
     "level": "INFO",
-    "file": "~/.claude/logs/sql-trading.log",
+    "file": "C:/Users/MSI/.claude/logs/sql-trading.log",
     "max_size_mb": 10,
     "backup_count": 5
   }

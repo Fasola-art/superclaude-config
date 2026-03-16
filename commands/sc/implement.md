@@ -1,5 +1,5 @@
 ---
-description: "Implement feature"
+description: "기능 구현 | Implement feature"
 argument-hint: "[feature]"
 ---
 

@@ -326,8 +326,15 @@ def export_to_image(report: Dict, outlook: Dict = None) -> str:
     - 2페이지~: 시황 (섹션별 분할)
     """
     import matplotlib.pyplot as plt
+    import platform
 
-    plt.rcParams['font.family'] = 'AppleGothic'
+    # 플랫폼별 한글 폰트 설정
+    if platform.system() == "Windows":
+        plt.rcParams['font.family'] = 'Malgun Gothic'
+    elif platform.system() == "Darwin":
+        plt.rcParams['font.family'] = 'AppleGothic'
+    else:
+        plt.rcParams['font.family'] = 'NanumGothic'
     plt.rcParams['axes.unicode_minus'] = False
 
     date = report.get('date', datetime.now().strftime('%Y-%m-%d'))
@@ -446,17 +453,17 @@ def export_to_image(report: Dict, outlook: Dict = None) -> str:
                 if line.startswith('## '):
                     # 대제목: 굵게, 크게 (16→24)
                     ax.text(0.03, y, line[3:], fontsize=24, ha='left', va='top',
-                            transform=ax.transAxes, family='AppleGothic', fontweight='bold', color='#1a1a2e')
+                            transform=ax.transAxes, family=plt.rcParams['font.family'], fontweight='bold', color='#1a1a2e')
                     y -= line_height * 1.4
                 elif line.startswith('### '):
                     # 소제목: 굵게 (14→22)
                     ax.text(0.05, y, line[4:], fontsize=22, ha='left', va='top',
-                            transform=ax.transAxes, family='AppleGothic', fontweight='bold', color='#16213e')
+                            transform=ax.transAxes, family=plt.rcParams['font.family'], fontweight='bold', color='#16213e')
                     y -= line_height * 1.3
                 elif line.strip():
                     # 일반 텍스트 (13→21)
                     ax.text(0.03, y, line, fontsize=21, ha='left', va='top',
-                            transform=ax.transAxes, family='AppleGothic', fontweight='normal', color='#333')
+                            transform=ax.transAxes, family=plt.rcParams['font.family'], fontweight='normal', color='#333')
                     y -= line_height
                 else:
                     # 빈 줄
@@ -522,13 +529,28 @@ def export_to_pdf(report: Dict, outlook: Dict = None) -> str:
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
 
-    # 한글 폰트 등록
-    font_path = "/System/Library/Fonts/AppleSDGothicNeo.ttc"
-    try:
-        pdfmetrics.registerFont(TTFont('AppleGothic', font_path, subfontIndex=0))
-        font_name = 'AppleGothic'
-    except:
-        font_name = 'Helvetica'
+    # 한글 폰트 등록 (크로스 플랫폼)
+    import platform
+    font_name = 'Helvetica'  # 기본값
+    font_candidates = []
+    if platform.system() == "Windows":
+        font_candidates = [
+            ("MalgunGothic", "C:/Windows/Fonts/malgun.ttf", None),
+        ]
+    elif platform.system() == "Darwin":
+        font_candidates = [
+            ("AppleGothic", "/System/Library/Fonts/AppleSDGothicNeo.ttc", 0),
+        ]
+    for name, path, idx in font_candidates:
+        try:
+            if idx is not None:
+                pdfmetrics.registerFont(TTFont(name, path, subfontIndex=idx))
+            else:
+                pdfmetrics.registerFont(TTFont(name, path))
+            font_name = name
+            break
+        except Exception:
+            continue
 
     date = report.get('date', datetime.now().strftime('%Y-%m-%d'))
     pdf_file = EXPORT_DIR / f"daily_report_{date}.pdf"

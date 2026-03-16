@@ -10,25 +10,25 @@ Telegram group message monitoring and summarization.
 
 ### Run Bot
 ```bash
-cd /Users/reim/.claude/modules/telegram
-python3 monitor.py
+cd C:/Users/MSI/.claude/modules/telegram
+python monitor.py
 ```
 
 ### Message Summary
 ```bash
-cd /Users/reim/.claude/modules/telegram
+cd C:/Users/MSI/.claude/modules/telegram
 
 # List chat rooms
-python3 summarizer.py list
+python summarizer.py list
 
 # Full summary (24 hours)
-python3 summarizer.py summary
+python summarizer.py summary
 
 # Full summary (48 hours)
-python3 summarizer.py summary 48
+python summarizer.py summary 48
 
 # Specific chat room summary
-python3 summarizer.py chat <CHAT_ID>
+python summarizer.py chat <CHAT_ID>
 ```
 
 ## Bot Commands (In Telegram)
@@ -47,7 +47,7 @@ Add bot to group to automatically start message collection.
 
 ## File Locations
 
-- Monitor: `/Users/reim/.claude/modules/telegram/monitor.py`
-- Summarizer: `/Users/reim/.claude/modules/telegram/summarizer.py`
-- Messages: `/Users/reim/.claude/modules/telegram/data/messages.json`
-- Summaries: `/Users/reim/.claude/modules/telegram/data/summaries/`
+- Monitor: `C:/Users/MSI/.claude/modules/telegram/monitor.py`
+- Summarizer: `C:/Users/MSI/.claude/modules/telegram/summarizer.py`
+- Messages: `C:/Users/MSI/.claude/modules/telegram/data/messages.json`
+- Summaries: `C:/Users/MSI/.claude/modules/telegram/data/summaries/`

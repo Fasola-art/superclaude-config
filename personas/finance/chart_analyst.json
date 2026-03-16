@@ -34,7 +34,7 @@
   },
   "tools": ["TradingView", "MetaTrader", "트레이딩뷰"],
   "knowledge_files": [
-    "~/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md"
+    "C:/Users/MSI/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md"
   ],
   "prompt_prefix": "기술적 분석 전문가입니다. 차트 패턴, 지표 분석, 피보나치, 다이버전스를 활용한 매매 타점을 제시합니다. M1 다중 EMA(360/720/1440/2880)와 멀티타임프레임 분석이 핵심입니다."
 }

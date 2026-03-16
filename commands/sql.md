@@ -1,5 +1,5 @@
 ---
-description: SQL 쿼리 실행 및 대체 데이터 분석
+description: "SQL 쿼리 실행 및 대체 데이터 분석 | SQL query execution and alt-data analysis"
 argument-hint: "[query|analysis-type] [options]"
 allowed-tools: ["Read", "Bash", "Write", "Edit", "Grep", "Glob", "WebFetch", "Task", "TodoWrite", "AskUserQuestion"]
 ---

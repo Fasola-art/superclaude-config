@@ -11,6 +11,9 @@ Version: 2.0.0
 """
 
 import json
+import os
+import platform
+import shutil
 import subprocess
 import sys
 from datetime import datetime
@@ -321,23 +324,40 @@ ON CONFLICT (series_id, date) DO UPDATE SET
 value = EXCLUDED.value, change_pct = EXCLUDED.change_pct;"""
 
 
+def _find_psql() -> Optional[str]:
+    """psql 바이너리 경로 탐색 (크로스플랫폼)"""
+    # PATH에서 먼저 검색
+    found = shutil.which("psql")
+    if found:
+        return found
+
+    # 플랫폼별 후보 경로
+    if platform.system() == "Windows":
+        candidates = [
+            r"C:\Program Files\PostgreSQL\16\bin\psql.exe",
+            r"C:\Program Files\PostgreSQL\15\bin\psql.exe",
+            r"C:\Program Files\PostgreSQL\14\bin\psql.exe",
+        ]
+    else:
+        candidates = [
+            "/opt/homebrew/opt/postgresql@16/bin/psql",
+            "/opt/homebrew/bin/psql",
+            "/usr/local/bin/psql",
+            "/usr/bin/psql",
+        ]
+
+    for path in candidates:
+        if Path(path).exists():
+            return path
+    return None
+
+
 def save_to_db(sql: str) -> bool:
     """psql로 DB에 저장"""
     if not sql:
         return False
 
-    psql_paths = [
-        "/opt/homebrew/opt/postgresql@16/bin/psql",
-        "/opt/homebrew/bin/psql",
-        "/usr/local/bin/psql",
-        "psql",
-    ]
-
-    psql_cmd = None
-    for path in psql_paths:
-        if Path(path).exists() or path == "psql":
-            psql_cmd = path
-            break
+    psql_cmd = _find_psql()
 
     if not psql_cmd:
         print("❌ psql을 찾을 수 없습니다")

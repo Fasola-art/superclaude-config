@@ -144,11 +144,8 @@ def load_watcher_config() -> dict:
     """감시 설정 로드"""
     config_path = Path(__file__).parent / "config.json"
 
-    # 클로바노트 기본 경로 (구글 드라이브)
-    default_watch_path = str(
-        Path.home() / "Library" / "CloudStorage" /
-        "GoogleDrive-comp4709@gmail.com" / "내 드라이브" / "클로바노트"
-    )
+    # Windows Google Drive 기본 경로 (환경에 따라 G: 드라이브 문자 조정 필요)
+    default_watch_path = str(Path("G:/내 드라이브/클로바노트"))
 
     if not config_path.exists():
         return {

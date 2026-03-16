@@ -1,0 +1,12 @@
+{
+  "id": "df3b2f19e777",
+  "type": "mcp-protocol",
+  "message": "서버 시작 실패: kie-ai",
+  "timestamp": "2026-01-30 20:23:51,030",
+  "raw_log": "2026-01-30 20:23:51,030 [ERROR] mcp-protocol: 서버 시작 실패: kie-ai",
+  "created_at": "2026-01-30T20:26:31.650069",
+  "resolved": true,
+  "resolution": "kie-ai MCP 서버 시작 실패. 서버 설정 제거로 해결.",
+  "context": {},
+  "resolved_at": "2026-02-11T01:15:41.089758"
+}

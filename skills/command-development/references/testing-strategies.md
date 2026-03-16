@@ -149,7 +149,7 @@ claude --debug
 # Verify expected behavior
 
 # 5. Check debug logs
-tail -f ~/.claude/debug-logs/latest
+Get-Content C:/Users/MSI/.claude/debug-logs/latest -Wait
 # Look for errors or warnings
 ```
 

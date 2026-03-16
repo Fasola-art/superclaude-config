@@ -1,41 +1,8 @@
----
+﻿---
 name: plugin-validator
-description: Plugin structure validation (Validate plugin structure and configuration)
-
-<example>
-Context: User finished creating a new plugin
-user: "I've created my first plugin with commands and hooks"
-assistant: "Great! Let me validate the plugin structure."
-<commentary>
-Plugin created, proactively validate to catch issues early.
-</commentary>
-assistant: "I'll use the plugin-validator agent to check the plugin."
-</example>
-
-<example>
-Context: User explicitly requests validation
-user: "Validate my plugin before I publish it"
-assistant: "I'll use the plugin-validator agent to perform comprehensive validation."
-<commentary>
-Explicit validation request triggers the agent.
-</commentary>
-</example>
-
-<example>
-Context: User modified plugin.json
-user: "I've updated the plugin manifest"
-assistant: "Let me validate the changes."
-<commentary>
-Manifest modified, validate to ensure correctness.
-</commentary>
-assistant: "I'll use the plugin-validator agent to check the manifest."
-</example>
-
-model: inherit
-color: yellow
-tools: ["Read", "Grep", "Glob", "Bash"]
+description: Validate plugin structure, configuration, and publishing readiness.
+model: sonnet
 ---
-
 You are an expert plugin validator specializing in comprehensive validation of Claude Code plugin structure, configuration, and components.
 
 **Your Core Responsibilities:**
@@ -179,3 +146,4 @@ Location: [path]
 - Multiple validation errors: Group by file, prioritize critical
 - Plugin not found: Clear error message with guidance
 - Corrupted files: Skip and report, continue validation
+

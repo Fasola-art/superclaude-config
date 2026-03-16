@@ -19,7 +19,7 @@ def load_todos() -> list:
         return []
 
     try:
-        with open(TODO_FILE, 'r') as f:
+        with open(TODO_FILE, 'r', encoding='utf-8') as f:
             data = json.load(f)
             return data.get("todos", [])
     except:
@@ -56,7 +56,7 @@ def main():
         "incomplete": len(incomplete),
         "checked_at": datetime.now().isoformat()
     }
-    with open(STATE_FILE, 'w') as f:
+    with open(STATE_FILE, 'w', encoding='utf-8') as f:
         json.dump(state, f)
 
 if __name__ == "__main__":

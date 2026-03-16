@@ -1,3 +1,7 @@
+---
+description: "리서치 오케스트레이터 | Research Orchestrator"
+---
+
 # Research Orchestrator
 
 Conduct systematic research on complex topics and generate comprehensive reports.

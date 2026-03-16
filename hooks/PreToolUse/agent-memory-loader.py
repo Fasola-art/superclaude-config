@@ -22,7 +22,7 @@ def load_config() -> dict:
     """agentMemory 설정 로드"""
     default = {"enabled": True, "maxPerAgent": 50, "retentionDays": 30, "topK": 5}
     try:
-        with open(CONFIG_PATH) as f:
+        with open(CONFIG_PATH, encoding='utf-8') as f:
             return json.load(f).get("agentMemory", default)
     except (FileNotFoundError, json.JSONDecodeError):
         return default

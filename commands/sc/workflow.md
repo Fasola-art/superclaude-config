@@ -1,5 +1,5 @@
 ---
-description: "Execute workflow"
+description: "워크플로우 실행 | Execute workflow"
 argument-hint: "[workflow_name]"
 ---
 

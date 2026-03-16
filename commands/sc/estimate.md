@@ -1,5 +1,5 @@
 ---
-description: "Estimate task scope"
+description: "작업 범위 추정 | Estimate task scope"
 argument-hint: "[task]"
 ---
 

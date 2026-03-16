@@ -1,5 +1,5 @@
 ---
-description: Daily economic report generation
+description: "일일 경제 리포트 생성 | Daily economic report generation"
 ---
 
 # /report Command

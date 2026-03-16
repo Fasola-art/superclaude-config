@@ -1,0 +1,12 @@
+{
+  "id": "32cb5a7c9637",
+  "type": "mcp-protocol",
+  "message": "서버 시작 실패: notion",
+  "timestamp": "2026-02-01 16:33:22,566",
+  "raw_log": "2026-02-01 16:33:22,566 [ERROR] mcp-protocol: 서버 시작 실패: notion",
+  "created_at": "2026-02-01T16:35:26.748897",
+  "resolved": true,
+  "resolution": "notion MCP 서버 설정 제거됨. 필요시 servers.json에 재등록.",
+  "context": {},
+  "resolved_at": "2026-02-11T01:15:41.086912"
+}

@@ -5,58 +5,161 @@
       "command": "npx",
       "args": ["-y", "@benborber/mcp-server-mysql"],
       "env": {
-        "MYSQL_HOST": "localhost",
-        "MYSQL_PORT": "3306",
-        "MYSQL_USER": "root",
-        "MYSQL_PASSWORD": "",
-        "MYSQL_DATABASE": "claude_mcp"
+        "MYSQL_HOST": "${MYSQL_HOST}",
+        "MYSQL_PORT": "${MYSQL_PORT}",
+        "MYSQL_USER": "${MYSQL_USER}",
+        "MYSQL_PASSWORD": "${MYSQL_PASSWORD}",
+        "MYSQL_DATABASE": "${MYSQL_DATABASE}"
       },
       "description": "MySQL 데이터베이스 연결",
-      "enabled": true
+      "enabled": true,
+      "timeout": 30000
     },
     "postgresql": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-postgres"],
       "env": {
-        "POSTGRES_CONNECTION_STRING": "postgresql://reim@localhost:5432/claude_mcp"
+        "POSTGRES_CONNECTION_STRING": "${POSTGRES_CONNECTION_STRING}"
       },
       "description": "PostgreSQL 데이터베이스 연결",
-      "enabled": true
+      "enabled": true,
+      "timeout": 30000
     },
     "github": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "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"
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
       },
       "description": "GitHub API 연동",
-      "enabled": true
+      "enabled": true,
+      "timeout": 45000
     },
     "local-llm": {
-      "command": "python3",
-      "args": ["-m", "local_llm.mcp_wrapper"],
+      "command": "python",
+      "args": ["C:/Users/MSI/.claude/modules/local-llm/mcp_wrapper.py"],
       "env": {
-        "PYTHONPATH": "~/.claude/modules/local-llm",
-        "MLX_MODEL_PATH": "~/.claude/modules/local-llm/models/",
-        "DEFAULT_MODEL": "qwen2.5-7b"
+        "PYTHONPATH": "C:/Users/MSI/.claude/modules/local-llm",
+        "DEFAULT_MODEL": "qwen2.5:7b-instruct-q5_K_M",
+        "CUDA_VISIBLE_DEVICES": "0",
+        "LLM_BACKEND": "ollama",
+        "MAX_GPU_MEMORY_GB": "14"
       },
-      "description": "로컬 LLM 서브에이전트 (MLX/Ollama)",
-      "enabled": true
+      "description": "로컬 LLM 서브에이전트 (CUDA/Ollama)",
+      "enabled": true,
+      "timeout": 90000
     },
     "ollama": {
       "command": "npx",
       "args": ["-y", "@anthropics/mcp-server-ollama"],
       "env": {
-        "OLLAMA_HOST": "http://localhost:11434"
+        "OLLAMA_HOST": "${OLLAMA_HOST}"
       },
       "description": "Ollama 로컬 LLM 서버",
-      "enabled": true
+      "enabled": true,
+      "timeout": 60000
     },
     "playwright": {
       "command": "npx",
-      "args": ["@playwright/mcp@latest"],
+      "args": ["-y", "@playwright/mcp@latest"],
       "description": "Playwright 브라우저 자동화 (웹 탐색/테스트)",
-      "enabled": true
+      "enabled": true,
+      "timeout": 45000
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"],
+      "description": "웹 페이지 가져오기",
+      "enabled": true,
+      "timeout": 60000
+    },
+    "time": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-time"],
+      "description": "시간/타임존 유틸리티",
+      "enabled": true,
+      "timeout": 30000
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": {
+        "OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer ${NOTION_API_KEY}\", \"Notion-Version\": \"2022-06-28\"}"
+      },
+      "description": "Notion 연동",
+      "enabled": true,
+      "timeout": 60000
+    },
+    "kie-ai": {
+      "command": "python",
+      "args": ["C:/Users/MSI/.claude/mcp-servers/kie-ai/server.py"],
+      "env": {
+        "KIE_API_KEY": "${KIE_API_KEY}"
+      },
+      "description": "Kie.ai 통합 API (영상/이미지/음악 생성)",
+      "enabled": true,
+      "timeout": 120000
+    },
+    "slack": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {
+        "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}",
+        "SLACK_TEAM_ID": "${SLACK_TEAM_ID}"
+      },
+      "description": "Slack 연동 (Fasola-Art)",
+      "enabled": true,
+      "timeout": 30000
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      },
+      "description": "Brave 검색",
+      "enabled": true,
+      "timeout": 45000
+    },
+    "gdrive": {
+      "command": "npx",
+      "args": ["-y", "@isaacphi/mcp-gdrive"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}"
+      },
+      "description": "Google Drive 연동",
+      "enabled": true,
+      "timeout": 45000
+    },
+    "sentry": {
+      "command": "npx",
+      "args": ["-y", "@sentry/mcp-server"],
+      "env": {
+        "SENTRY_ACCESS_TOKEN": "${SENTRY_ACCESS_TOKEN}"
+      },
+      "description": "Sentry 에러 트래킹",
+      "enabled": true,
+      "timeout": 30000
+    },
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "mcp-linear"],
+      "env": {
+        "LINEAR_API_KEY": "${LINEAR_API_KEY}"
+      },
+      "description": "Linear 이슈 트래킹",
+      "enabled": true,
+      "timeout": 30000
+    },
+    "exa": {
+      "command": "npx",
+      "args": ["-y", "exa-mcp-server"],
+      "env": {
+        "EXA_API_KEY": "${EXA_API_KEY}"
+      },
+      "description": "Exa AI 검색 (의미론적 웹 검색, 논문/연구 특화)",
+      "enabled": true,
+      "timeout": 60000
     }
   }
 }

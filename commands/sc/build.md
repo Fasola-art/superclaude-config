@@ -1,5 +1,5 @@
 ---
-description: "Build project"
+description: "프로젝트 빌드 | Build project"
 argument-hint: "[options]"
 ---
 

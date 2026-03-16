@@ -1,5 +1,5 @@
 ---
-description: "Cleanup code"
+description: "코드 정리 | Cleanup code"
 argument-hint: "[target]"
 ---
 

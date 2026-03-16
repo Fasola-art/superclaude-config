@@ -1,5 +1,5 @@
 ---
-description: "Load context"
+description: "컨텍스트 로드 | Load context"
 argument-hint: "[source]"
 ---
 

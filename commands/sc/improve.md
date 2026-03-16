@@ -1,5 +1,5 @@
 ---
-description: "Improve code"
+description: "코드 개선 | Improve code"
 argument-hint: "[target]"
 ---
 

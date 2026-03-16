@@ -1,5 +1,5 @@
 ---
-description: "Check and set session vibe"
+description: "세션 분위기 확인/설정 | Check and set session vibe"
 argument-hint: "[vibe_name]"
 ---
 

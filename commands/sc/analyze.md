@@ -1,5 +1,5 @@
 ---
-description: "Analyze code or project"
+description: "코드/프로젝트 분석 | Analyze code or project"
 argument-hint: "[target]"
 ---
 

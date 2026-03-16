@@ -1,5 +1,5 @@
 ---
-description: "Generate documentation"
+description: "문서 생성 | Generate documentation"
 argument-hint: "[target]"
 ---
 

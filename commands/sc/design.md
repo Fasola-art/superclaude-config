@@ -1,5 +1,5 @@
 ---
-description: "Design system or component"
+description: "시스템/컴포넌트 설계 | Design system or component"
 argument-hint: "[feature]"
 ---
 

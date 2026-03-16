@@ -1,0 +1,12 @@
+{
+  "id": "384a1abf1a7f",
+  "type": "mcp-protocol",
+  "message": "MCP 서버 시작 실패 [fetch]: 요청 타임아웃: initialize",
+  "timestamp": "2026-01-30 11:50:27,263",
+  "raw_log": "2026-01-30 11:50:27,263 [ERROR] mcp-protocol: MCP 서버 시작 실패 [fetch]: 요청 타임아웃: initialize",
+  "created_at": "2026-01-30T11:54:46.229203",
+  "resolved": true,
+  "resolution": "fetch MCP 서버 initialize 타임아웃. 서버 설정 제거로 해결.",
+  "context": {},
+  "resolved_at": "2026-02-11T01:15:41.088120"
+}

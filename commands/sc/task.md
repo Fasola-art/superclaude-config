@@ -1,5 +1,5 @@
 ---
-description: "Manage tasks"
+description: "작업 관리 | Manage tasks"
 argument-hint: "[action]"
 ---
 

@@ -1,5 +1,5 @@
 ---
-description: Plugin creation workflow with design and validation
+description: "플러그인 생성 워크플로우 | Plugin creation workflow"
 argument-hint: Optional plugin description
 allowed-tools: ["Read", "Write", "Grep", "Glob", "Bash", "TodoWrite", "AskUserQuestion", "Skill", "Task"]
 ---

@@ -44,7 +44,7 @@
     "규칙 준수 (시스템 트레이딩)"
   ],
   "knowledge_files": [
-    "~/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md"
+    "C:/Users/MSI/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md"
   ],
   "prompt_prefix": "리스크 관리 전문가입니다. 포지션 사이징, 손절 전략, 포트폴리오 헤지, VaR/MDD 분석을 통해 자본 보존을 최우선으로 합니다. '승률 50% 수렴'을 전제로 리스크 대비 수익을 최적화합니다."
 }

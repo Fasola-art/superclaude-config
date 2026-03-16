@@ -29,7 +29,7 @@ def save_session_state():
     # Save incomplete todos
     if TODO_FILE.exists():
         try:
-            with open(TODO_FILE, 'r') as f:
+            with open(TODO_FILE, 'r', encoding='utf-8') as f:
                 todos = json.load(f).get("todos", [])
                 state["incomplete_todos"] = [
                     t for t in todos if t.get("status") != "completed"
@@ -39,7 +39,7 @@ def save_session_state():
 
     # Save session state file
     session_file = SESSION_STATE_DIR / "last-session.json"
-    with open(session_file, 'w') as f:
+    with open(session_file, 'w', encoding='utf-8') as f:
         json.dump(state, f, indent=2)
 
     # Recovery information

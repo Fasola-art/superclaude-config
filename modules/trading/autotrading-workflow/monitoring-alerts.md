@@ -60,7 +60,7 @@
 
 | 디바이스 | 체크 항목 | 주기 | 장애 시 |
 |---------|---------|------|--------|
-| Mac Studio | CPU, RAM, Disk, Ollama | 30초 | CRITICAL |
+| RTX 4090 Laptop | CPU, RAM, GPU, Ollama | 30초 | CRITICAL |
 | 사무용 데스크탑 | 브로커 API 연결 | 10초 | EMERGENCY |
 | 젯슨 오린 | YOLO 추론, GPU 온도 | 30초 | WARNING |
 | RPi5 + Hailo | 뉴스 수집, MQTT | 30초 | WARNING |

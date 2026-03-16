@@ -1,5 +1,5 @@
 ---
-description: "Search similar errors in Error KB"
+description: "Error KB에서 유사 에러 검색 | Search similar errors in Error KB"
 argument-hint: "[error_message]"
 ---
 

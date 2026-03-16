@@ -47,7 +47,7 @@ def process_completion(data: Dict[str, Any]) -> Dict[str, Any]:
     now = datetime.now()
     today = now.date().isoformat()
 
-    if comp.get('lastCompletedAt', '')[:10] != today:
+    if (comp.get('lastCompletedAt') or '')[:10] != today:
         comp['todayCompleted'] = 0
 
     comp['totalCompleted'] += 1

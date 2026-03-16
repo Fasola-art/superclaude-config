@@ -108,8 +108,8 @@ When `trading_economist` detects the following keywords, delegate to the corresp
 ## Knowledge File Connections
 
 All trading-related personas reference these knowledge files:
-- `~/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md`
-- `~/.claude/modules/trading/TRADING.md`
+- `C:/Users/MSI/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md`
+- `C:/Users/MSI/.claude/modules/trading/TRADING.md`
 
 ---
 
@@ -117,9 +117,9 @@ All trading-related personas reference these knowledge files:
 
 | Module            | Path                                      | Description       |
 |-------------------|-------------------------------------------|-------------------|
-| Trading           | `~/.claude/modules/trading/`              | Core strategies   |
-| News Collector    | `~/.claude/modules/news-collector/`       | News/Events       |
-| Realtime Analysis | `~/.claude/modules/realtime-analysis/`    | Realtime data     |
+| Trading           | `C:/Users/MSI/.claude/modules/trading/`              | Core strategies   |
+| News Collector    | `C:/Users/MSI/.claude/modules/news-collector/`       | News/Events       |
+| Realtime Analysis | `C:/Users/MSI/.claude/modules/realtime-analysis/`    | Realtime data     |
 
 ---
 

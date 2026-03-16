@@ -1,5 +1,5 @@
 ---
-description: News collection and summary
+description: "뉴스 수집 및 요약 | News collection and summary"
 ---
 
 # /news Command

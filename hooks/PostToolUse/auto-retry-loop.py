@@ -14,6 +14,10 @@ import os
 import sys
 from pathlib import Path
 
+# Windows UTF-8 출력 강제
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
+
 sys.path.insert(0, str(Path.home() / ".claude" / "jarvis"))
 
 CONFIG_PATH = Path.home() / ".claude" / "superclaude-config.json"
@@ -25,7 +29,7 @@ def load_config() -> dict:
     default = {"enabled": True, "maxRetries": 5, "passThreshold": 0.90,
                "skipPatterns": [".json", ".md", ".env", ".yaml"]}
     try:
-        with open(CONFIG_PATH) as f:
+        with open(CONFIG_PATH, encoding='utf-8') as f:
             return json.load(f).get("autoRetry", default)
     except (FileNotFoundError, json.JSONDecodeError):
         return default
@@ -34,7 +38,7 @@ def load_config() -> dict:
 def load_state() -> dict:
     """현재 재시도 상태 로드"""
     try:
-        with open(STATE_FILE) as f:
+        with open(STATE_FILE, encoding='utf-8') as f:
             return json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         return {}
@@ -43,7 +47,7 @@ def load_state() -> dict:
 def save_state(state: dict) -> None:
     """재시도 상태 저장"""
     STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with open(STATE_FILE, "w") as f:
+    with open(STATE_FILE, "w", encoding='utf-8') as f:
         json.dump(state, f, indent=2)
 
 
@@ -100,7 +104,7 @@ def main() -> None:
             # 통과 → 상태 리셋
             reset_state()
             if attempt > 1:
-                print(f"✅ Auto-Retry 성공 ({attempt}회차, 점수: {result.score:.0%})")
+                print(f"[OK] Auto-Retry 성공 ({attempt}회차, 점수: {result.score:.0%})")
             return
 
         # 실패 → 상태 저장 + 피드백 출력

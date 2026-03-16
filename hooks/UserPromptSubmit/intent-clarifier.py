@@ -14,6 +14,10 @@ import os
 import sys
 from pathlib import Path
 
+# Windows UTF-8 출력 강제
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
+
 # jarvis 모듈 경로 추가
 sys.path.insert(0, str(Path.home() / ".claude" / "jarvis"))
 
@@ -24,7 +28,7 @@ def load_config() -> dict:
     """설정에서 intentDetection 섹션 로드"""
     default = {"enabled": True, "ambiguityThreshold": 0.60, "minKeywords": 2}
     try:
-        with open(CONFIG_PATH) as f:
+        with open(CONFIG_PATH, encoding='utf-8') as f:
             config = json.load(f)
         return config.get("intentDetection", default)
     except (FileNotFoundError, json.JSONDecodeError):
@@ -61,7 +65,7 @@ def main() -> None:
         return
 
     # 모호성 감지됨 → 명확화 유도 출력
-    parts = [f"❓ 의도 확인 (모호성: {result.score:.0%})"]
+    parts = [f"[?] 의도 확인 (모호성: {result.score:.0%})"]
 
     if result.suggestions:
         parts.append(f"   → {result.suggestions[0]}")

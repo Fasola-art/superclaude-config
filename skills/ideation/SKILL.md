@@ -1,3 +1,15 @@
+---
+name: ideation
+description: Multi-persona idea discussion skill - Review ideas from 27 expert perspectives
+version: "1.0.0"
+triggers:
+  - /ideation
+  - idea discussion
+  - multi-persona review
+  - 아이디어 토론
+  - persona discussion
+---
+
 # Ideation Skill
 
 > Multi-persona idea discussion skill - Review ideas from 27 expert perspectives

@@ -141,7 +141,7 @@ class COTCollector:
     def __init__(self):
         ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
         self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
         }
         self.historical_data: Dict[str, List[COTPosition]] = {}
 

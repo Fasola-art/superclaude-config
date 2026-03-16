@@ -18,6 +18,10 @@ import json
 import os
 import sys
 from datetime import datetime
+
+# Windows UTF-8 출력 강제
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
 from pathlib import Path
 
 
@@ -109,12 +113,12 @@ def display_alerts(alerts: list[dict]) -> None:
         return
 
     print("\n" + "=" * 50)
-    print("🚨 SQL Trading 알림")
+    print("[ALERT] SQL Trading 알림")
     print("=" * 50)
 
     for alert in alerts:
-        priority_emoji = "🔴" if alert["priority"] == "high" else "🟡"
-        print(f"{priority_emoji} [{alert['type']}] {alert['message']}")
+        priority_tag = "[HIGH]" if alert["priority"] == "high" else "[MED]"
+        print(f"{priority_tag} [{alert['type']}] {alert['message']}")
 
     print("=" * 50 + "\n")
 

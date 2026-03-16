@@ -39,16 +39,16 @@ allowed_tools:
 
 ```bash
 # 상세 브리핑 (기본)
-cd ~/.claude/jarvis && python3 briefing.py
+cd C:/Users/MSI/.claude/jarvis && python briefing.py
 
 # 간단 브리핑
-cd ~/.claude/jarvis && python3 briefing.py --simple
+cd C:/Users/MSI/.claude/jarvis && python briefing.py --simple
 ```
 
 ### 작업 관리
 
 ```python
-import sys; sys.path.insert(0, "/Users/reim/.claude/jarvis")
+import sys; sys.path.insert(0, "C:/Users/MSI/.claude/jarvis")
 from memory import TaskManager
 
 TaskManager.add_task("작업 제목", priority=2)  # 추가
@@ -80,5 +80,5 @@ events = CalendarManager.get_today_events()
 |--------|------|
 | 액션 상세 | [j-actions.md](j-actions.md) |
 | 고급 기능 | [j-advanced.md](j-advanced.md) |
-| 소스 코드 | `~/.claude/jarvis/` |
-| 데이터베이스 | `~/.claude/jarvis/memory/jarvis.db` |
+| 소스 코드 | `C:/Users/MSI/.claude/jarvis/` |
+| 데이터베이스 | `C:/Users/MSI/.claude/jarvis/memory/jarvis.db` |

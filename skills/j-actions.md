@@ -8,7 +8,7 @@
 
 ```python
 import sys
-sys.path.insert(0, "/Users/reim/.claude/jarvis")
+sys.path.insert(0, "C:/Users/MSI/.claude/jarvis")
 
 from actions.remember import remember_context
 
@@ -112,7 +112,7 @@ if result['success']:
 
 ```python
 import sys
-sys.path.insert(0, "/Users/reim/.claude/jarvis")
+sys.path.insert(0, "C:/Users/MSI/.claude/jarvis")
 
 from modules.project.monitor import ProjectMonitor
 
@@ -257,6 +257,6 @@ tracker.stop_work()  # 자동으로 시간 계산
 
 ## Reference
 
-- 구현: `~/.claude/jarvis/actions/`
+- 구현: `C:/Users/MSI/.claude/jarvis/actions/`
 - 메인: [j.md](j.md)
 - 고급: [j-advanced.md](j-advanced.md)

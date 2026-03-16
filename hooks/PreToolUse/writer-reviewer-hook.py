@@ -66,7 +66,7 @@ def load_settings() -> dict:
     """Load settings"""
     try:
         if SETTINGS_FILE.exists():
-            data = json.loads(SETTINGS_FILE.read_text())
+            data = json.loads(SETTINGS_FILE.read_text(encoding='utf-8'))
             return data.get('writerReviewer', DEFAULT_CONFIG)
     except Exception:
         pass

@@ -1,5 +1,5 @@
 ---
-description: "List SC commands"
+description: "SC 커맨드 목록 | List SC commands"
 ---
 
 # SC Command List

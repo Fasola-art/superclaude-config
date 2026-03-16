@@ -1,0 +1,12 @@
+{
+  "id": "ff7701bbdf0c",
+  "type": "tool_failure",
+  "tool": "",
+  "message": "unknown failure",
+  "exitCode": "",
+  "timestamp": "2026-02-24T17:18:58.580620",
+  "raw_log": "",
+  "resolved": false,
+  "resolution": null,
+  "source": "PostToolUseFailure/error-collector.py"
+}

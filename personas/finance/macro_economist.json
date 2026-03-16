@@ -41,7 +41,7 @@
     "growth": ["GDP", "GDI", "잠재성장률", "산출갭"]
   },
   "knowledge_files": [
-    "~/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md"
+    "C:/Users/MSI/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md"
   ],
   "delegates_from": ["trading_economist"],
   "delegation_triggers": ["금리 전망", "인플레 분석", "FOMC 해석", "통화정책 방향"],

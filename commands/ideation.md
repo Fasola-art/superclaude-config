@@ -1,5 +1,5 @@
 ---
-description: "Multi-persona ideation discussion"
+description: "멀티 페르소나 아이디어 토론 | Multi-persona ideation discussion"
 argument-hint: "[idea or topic]"
 ---
 

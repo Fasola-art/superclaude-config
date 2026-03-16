@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 # Yahoo Finance API 엔드포인트
 YAHOO_QUOTE_URL = "https://query1.finance.yahoo.com/v7/finance/quote"
-USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
 
 
 @dataclass

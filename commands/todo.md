@@ -1,3 +1,7 @@
+---
+description: "TODO 리스트 관리 | TODO list management"
+---
+
 # TODO 리스트
 
 TODO 리스트를 확인하고 관리합니다.

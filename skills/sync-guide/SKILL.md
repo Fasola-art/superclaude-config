@@ -25,19 +25,19 @@ Synchronize English instruction files to localized user guides.
 ### Full Synchronization
 
 ```bash
-python3 ~/.claude/scripts/sync_user_guide.py
+python C:/Users/MSI/.claude/scripts/sync_user_guide.py
 ```
 
 ### Single File Synchronization
 
 ```bash
-python3 ~/.claude/scripts/sync_user_guide.py --file ~/.claude/docs/HOOKS-SYSTEM.md
+python C:/Users/MSI/.claude/scripts/sync_user_guide.py --file C:/Users/MSI/.claude/docs/HOOKS-SYSTEM.md
 ```
 
 ### List Files
 
 ```bash
-python3 ~/.claude/scripts/sync_user_guide.py --list
+python C:/Users/MSI/.claude/scripts/sync_user_guide.py --list
 ```
 
 ## Output Path

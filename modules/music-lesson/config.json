@@ -4,9 +4,9 @@
   "auto_upload": false,
   "save_markdown": true,
   "save_transcript": true,
-  "transcript_dir": "~/.claude/modules/music-lesson/transcripts",
-  "watch_path": "~/Library/CloudStorage/GoogleDrive-comp4709@gmail.com/내 드라이브/클로바노트",
-  "text_watch_path": "~/Library/CloudStorage/GoogleDrive-comp4709@gmail.com/내 드라이브/클로바노트",
+  "transcript_dir": "C:/Users/MSI/.claude/modules/music-lesson/transcripts",
+  "watch_path": "G:/내 드라이브/클로바노트",
+  "text_watch_path": "G:/내 드라이브/클로바노트",
   "processed_dir": null,
   "recursive": true
 }

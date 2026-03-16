@@ -30,7 +30,7 @@ def create_snapshot(tool_name: str, file_path: str = None):
 
     # Save snapshot metadata
     snapshot_file = SNAPSHOT_DIR / f"{snapshot_name}.json"
-    with open(snapshot_file, 'w') as f:
+    with open(snapshot_file, 'w', encoding='utf-8') as f:
         json.dump(snapshot_data, f, indent=2)
 
     # Backup file (for Edit/Write)

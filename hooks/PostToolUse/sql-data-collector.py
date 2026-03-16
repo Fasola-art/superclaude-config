@@ -18,6 +18,10 @@ import os
 import subprocess
 import sys
 from datetime import datetime, timedelta
+
+# Windows UTF-8 출력 강제
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
 from pathlib import Path
 
 
@@ -43,7 +47,7 @@ def get_last_collection_time() -> datetime | None:
     state_file = Path.home() / ".claude" / "modules" / "sql-trading" / ".collection_state.json"
 
     if state_file.exists():
-        with open(state_file) as f:
+        with open(state_file, encoding='utf-8') as f:
             state = json.load(f)
             last_time_str = state.get("last_collection")
             if last_time_str:
@@ -59,7 +63,7 @@ def update_collection_time() -> None:
 
     state = {"last_collection": datetime.now().isoformat()}
 
-    with open(state_file, 'w') as f:
+    with open(state_file, 'w', encoding='utf-8') as f:
         json.dump(state, f)
 
 
@@ -116,17 +120,17 @@ def main():
     # 마지막 수집 시간 확인 (1시간 이내면 스킵)
     last_time = get_last_collection_time()
     if last_time and datetime.now() - last_time < timedelta(hours=1):
-        print(f"📊 최근 수집 완료 ({last_time.strftime('%H:%M')}), 스킵")
+        print(f"[INFO] 최근 수집 완료 ({last_time.strftime('%H:%M')}), 스킵")
         return 0
 
     # 데이터 수집 실행
-    print("📦 SQL Trading 데이터 자동 수집 시작...")
+    print("[COLLECT] SQL Trading 데이터 자동 수집 시작...")
     result = run_collection()
 
     if result["success"]:
-        print(f"✅ 데이터 수집 완료: {result['collected_at']}")
+        print(f"[OK] 데이터 수집 완료: {result['collected_at']}")
     else:
-        print(f"❌ 데이터 수집 실패: {result.get('error', 'Unknown error')}")
+        print(f"[FAIL] 데이터 수집 실패: {result.get('error', 'Unknown error')}")
 
     return 0 if result["success"] else 1
 

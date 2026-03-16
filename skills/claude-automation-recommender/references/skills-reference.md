@@ -177,7 +177,7 @@ Create a migration for: $ARGUMENTS
 
 1. Generate migration file in `migrations/` with timestamp prefix
 2. Include up and down functions
-3. Run validation: `bash ~/.claude/skills/create-migration/scripts/validate-migration.sh`
+3. Run validation: `bash C:/Users/MSI/.claude/skills/create-migration/scripts/validate-migration.sh`
 4. Report any issues found
 ```
 

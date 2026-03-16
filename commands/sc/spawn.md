@@ -1,5 +1,5 @@
 ---
-description: "Spawn agent"
+description: "에이전트 생성 | Spawn agent"
 argument-hint: "[agent_type]"
 ---
 

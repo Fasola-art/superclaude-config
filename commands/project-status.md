@@ -1,5 +1,5 @@
 ---
-description: "Check project status"
+description: "프로젝트 상태 확인 | Check project status"
 ---
 
 # Project Status

@@ -5,24 +5,40 @@
 기능:
 - 신규 매수/매도 신호 감지
 - 급등/급락 종목 알림
-- macOS 알림 센터 연동
+- 크로스플랫폼 알림 (Windows toast / macOS 알림 센터)
 
 Version: 1.0.0
 """
 
 import json
+import os
+import platform
+import shutil
 import subprocess
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+
+def _get_psql_paths() -> list[str]:
+    """플랫폼별 psql 후보 경로 반환"""
+    if platform.system() == "Windows":
+        return [
+            r"C:\Program Files\PostgreSQL\16\bin\psql.exe",
+            r"C:\Program Files\PostgreSQL\15\bin\psql.exe",
+            r"C:\Program Files\PostgreSQL\14\bin\psql.exe",
+        ]
+    return [
+        "/opt/homebrew/opt/postgresql@16/bin/psql",
+        "/opt/homebrew/bin/psql",
+        "/usr/local/bin/psql",
+        "/usr/bin/psql",
+    ]
+
+
 # psql 경로
-PSQL_PATHS = [
-    "/opt/homebrew/opt/postgresql@16/bin/psql",
-    "/opt/homebrew/bin/psql",
-    "/usr/local/bin/psql",
-]
+PSQL_PATHS = _get_psql_paths()
 
 # 알림 임계값
 THRESHOLDS = {
@@ -36,7 +52,12 @@ STATE_FILE = Path.home() / ".claude" / "modules" / "sql-trading" / ".alert_state
 
 
 def get_psql_path() -> Optional[str]:
-    """psql 경로 찾기"""
+    """psql 경로 찾기 (크로스플랫폼)"""
+    # PATH에서 먼저 검색
+    found = shutil.which("psql")
+    if found:
+        return found
+    # 플랫폼별 후보 경로
     for path in PSQL_PATHS:
         if Path(path).exists():
             return path
@@ -72,20 +93,65 @@ def run_query(sql: str) -> List[Dict[str, Any]]:
 
 
 def send_notification(title: str, message: str, sound: bool = True) -> bool:
-    """macOS 알림 센터로 알림 전송"""
-    script = f'''
-    display notification "{message}" with title "{title}" sound name "Glass"
-    '''
-    if not sound:
-        script = f'''
-        display notification "{message}" with title "{title}"
-        '''
+    """크로스플랫폼 알림 전송 (Windows toast / macOS 알림 센터)"""
+    system = platform.system()
 
-    try:
-        subprocess.run(["osascript", "-e", script], capture_output=True, timeout=5)
-        return True
-    except Exception:
-        return False
+    if system == "Windows":
+        # PowerShell을 사용한 Windows toast 알림
+        # 특수문자 이스케이프 처리
+        safe_title = title.replace("'", "''").replace('"', '`"')
+        safe_message = message.replace("'", "''").replace('"', '`"')
+        ps_script = (
+            "[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, "
+            "ContentType = WindowsRuntime] > $null; "
+            "$template = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent("
+            "[Windows.UI.Notifications.ToastTemplateType]::ToastText02); "
+            "$textNodes = $template.GetElementsByTagName('text'); "
+            f"$textNodes.Item(0).AppendChild($template.CreateTextNode('{safe_title}')) > $null; "
+            f"$textNodes.Item(1).AppendChild($template.CreateTextNode('{safe_message}')) > $null; "
+            "$toast = [Windows.UI.Notifications.ToastNotification]::new($template); "
+            "[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("
+            "'SQL Trading').Show($toast)"
+        )
+        try:
+            subprocess.run(
+                ["powershell", "-Command", ps_script],
+                capture_output=True, timeout=10
+            )
+            return True
+        except Exception:
+            # fallback: 간단한 PowerShell BalloonTip
+            fallback_script = (
+                "Add-Type -AssemblyName System.Windows.Forms; "
+                "$n = New-Object System.Windows.Forms.NotifyIcon; "
+                "$n.Icon = [System.Drawing.SystemIcons]::Information; "
+                "$n.Visible = $true; "
+                f"$n.ShowBalloonTip(5000, '{safe_title}', '{safe_message}', "
+                "'Info'); Start-Sleep -Seconds 5; $n.Dispose()"
+            )
+            try:
+                subprocess.run(
+                    ["powershell", "-Command", fallback_script],
+                    capture_output=True, timeout=15
+                )
+                return True
+            except Exception:
+                return False
+
+    else:
+        # macOS: osascript
+        script = f'''
+        display notification "{message}" with title "{title}" sound name "Glass"
+        '''
+        if not sound:
+            script = f'''
+            display notification "{message}" with title "{title}"
+            '''
+        try:
+            subprocess.run(["osascript", "-e", script], capture_output=True, timeout=5)
+            return True
+        except Exception:
+            return False
 
 
 def load_state() -> Dict[str, Any]:

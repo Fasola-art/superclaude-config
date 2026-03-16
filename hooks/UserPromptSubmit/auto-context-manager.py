@@ -70,7 +70,7 @@ def load_state() -> dict:
     """상태 파일 로드"""
     if STATE_FILE.exists():
         try:
-            with open(STATE_FILE) as f:
+            with open(STATE_FILE, encoding='utf-8') as f:
                 return json.load(f)
         except (json.JSONDecodeError, IOError):
             pass
@@ -89,7 +89,7 @@ def save_state(state: dict) -> None:
     state_copy = state.copy()
     if isinstance(state_copy.get("current_topic_keywords"), set):
         state_copy["current_topic_keywords"] = list(state_copy["current_topic_keywords"])
-    with open(STATE_FILE, "w") as f:
+    with open(STATE_FILE, "w", encoding='utf-8') as f:
         json.dump(state_copy, f)
 
 
@@ -156,11 +156,11 @@ def main():
 
     # 1. 명시적 키워드 감지 (우선)
     if is_new_feature_request(prompt):
-        messages.append("💡 New feature keyword → /clear recommended")
+        messages.append("[TIP] New feature keyword -> /clear recommended")
         should_reset = True
     # 2. 주제 변화 감지 (키워드 없을 때)
     elif detect_topic_change(current_keywords, state):
-        messages.append("🔄 Topic change detected → /clear recommended")
+        messages.append("[TOPIC] Topic change detected -> /clear recommended")
         should_reset = True
 
     if should_reset:
@@ -182,7 +182,7 @@ def main():
             except (ValueError, TypeError):
                 pass
         if should_suggest:
-            messages.append(f"📊 CTX:{usage}% ({duration}min) → /compact")
+            messages.append(f"[CTX] CTX:{usage}% ({duration}min) -> /compact")
             state["last_compact_suggestion"] = datetime.now().isoformat()
 
     # 키워드 히스토리 업데이트

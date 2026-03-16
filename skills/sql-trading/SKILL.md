@@ -17,8 +17,8 @@ SQL을 활용한 대체 데이터(위성, 물류, 지리) 분석 및 트레이�
 
 ### 실행 방법
 ```bash
-cd ~/.claude/modules/sql-trading/dashboard
-python3 api_server.py
+cd C:/Users/MSI/.claude/modules/sql-trading/dashboard
+python api_server.py
 # 브라우저: http://localhost:8080
 ```
 
@@ -37,11 +37,8 @@ python3 api_server.py
 - **plist**: `~/Library/LaunchAgents/com.claude.sql-trading-collector.plist`
 
 ```bash
-# 수집기 상태 확인
-launchctl list | grep sql-trading
-
 # 수동 실행
-~/.claude/modules/sql-trading/collectors/run_collector.sh
+python C:/Users/MSI/.claude/modules/sql-trading/collectors/realtime_collector.py
 ```
 
 ## 개요

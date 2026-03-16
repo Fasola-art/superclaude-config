@@ -8,7 +8,7 @@ ML 예측, GitHub 모니터링, 습관 추적 고급 기능
 
 ```python
 import sys
-sys.path.insert(0, "/Users/reim/.claude/jarvis")
+sys.path.insert(0, "C:/Users/MSI/.claude/jarvis")
 
 from memory.ml_predictor import get_predictor
 
@@ -305,4 +305,4 @@ playwright install
 
 - 메인: [j.md](j.md)
 - 액션: [j-actions.md](j-actions.md)
-- 소스: `~/.claude/jarvis/modules/`
+- 소스: `C:/Users/MSI/.claude/jarvis/modules/`

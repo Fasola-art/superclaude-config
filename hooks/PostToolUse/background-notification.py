@@ -2,21 +2,42 @@
 """
 Background Task Notification Hook
 - Detect background task completion
-- Send macOS notification
+- Send desktop notification (Windows / macOS)
 """
 
 import os
+import platform
 import subprocess
-from pathlib import Path
+
 
 def send_notification(title: str, message: str):
-    """Send macOS notification"""
+    """Send desktop notification (cross-platform)"""
     try:
-        script = f'''
-        display notification "{message}" with title "{title}" sound name "Glass"
-        '''
-        subprocess.run(["osascript", "-e", script], capture_output=True)
-    except:
+        system = platform.system()
+        if system == "Darwin":
+            script = f'display notification "{message}" with title "{title}" sound name "Glass"'
+            subprocess.run(["osascript", "-e", script], capture_output=True)
+        elif system == "Windows":
+            ps_script = f'''
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
+[Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
+$template = @"
+<toast>
+    <visual>
+        <binding template="ToastGeneric">
+            <text>{title}</text>
+            <text>{message}</text>
+        </binding>
+    </visual>
+</toast>
+"@
+$xml = New-Object Windows.Data.Xml.Dom.XmlDocument
+$xml.LoadXml($template)
+$toast = [Windows.UI.Notifications.ToastNotification]::new($xml)
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("Claude Code").Show($toast)
+'''
+            subprocess.run(["powershell", "-Command", ps_script], capture_output=True)
+    except Exception:
         pass
 
 def main():

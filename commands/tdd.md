@@ -1,5 +1,5 @@
 ---
-description: TDD workflow - write tests first, code second
+description: "TDD 워크플로우 (테스트 우선) | TDD workflow - write tests first, code second"
 argument-hint: "[feature-description]"
 allowed-tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep", "TodoWrite", "AskUserQuestion"]
 ---

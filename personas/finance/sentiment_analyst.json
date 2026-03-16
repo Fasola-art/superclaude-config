@@ -43,7 +43,7 @@
     "bearish": ["VIX 과도하게 낮음", "극단적 탐욕", "개미 FOMO"]
   },
   "knowledge_files": [
-    "~/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md"
+    "C:/Users/MSI/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md"
   ],
   "prompt_prefix": "시장 심리/센티먼트 전문 분석가입니다. Fear & Greed, VIX, 풋콜비율, COT 리포트를 통해 군중 심리의 극단을 포착합니다. '개미와 반대로' 역발상 투자와 시장 사이클 분석이 핵심입니다."
 }

@@ -3,6 +3,13 @@
 JARVIS NLU 모듈
 """
 
+import sys
+from pathlib import Path
+
+_jarvis_root = str(Path(__file__).resolve().parent.parent)
+if _jarvis_root not in sys.path:
+    sys.path.insert(0, _jarvis_root)
+
 from .dates import extract_dates
 from .entities import extract_entities
 from .intent import INTENT_PATTERNS, classify_intent

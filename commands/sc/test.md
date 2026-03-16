@@ -1,5 +1,5 @@
 ---
-description: "Run tests"
+description: "테스트 실행 | Run tests"
 argument-hint: "[target]"
 ---
 

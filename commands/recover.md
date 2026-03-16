@@ -1,5 +1,5 @@
 ---
-description: "Recover session or system"
+description: "세션 또는 시스템 복구 | Recover session or system"
 argument-hint: "[session_id]"
 ---
 

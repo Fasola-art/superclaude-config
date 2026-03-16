@@ -1,5 +1,5 @@
 ---
-description: Display Stripe test card numbers
+description: "Stripe 테스트 카드번호 표시 | Display Stripe test card numbers"
 argument-hint: [scenario]
 ---
 

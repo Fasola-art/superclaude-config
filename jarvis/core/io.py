@@ -1,11 +1,32 @@
-"""jarvis/core/io.py - 파일 I/O 유틸리티 (70줄)"""
+"""jarvis/core/io.py - 파일 I/O 유틸리티 (크로스 플랫폼)"""
 import json
 import os
-import fcntl
+import sys
 import tempfile
 import logging
 from pathlib import Path
 from typing import Any, Dict, Optional
+
+# 크로스 플랫폼 파일 잠금
+if sys.platform == 'win32':
+    import msvcrt
+
+    def _lock_file(f: Any) -> None:
+        msvcrt.locking(f.fileno(), msvcrt.LK_LOCK, 1)
+
+    def _unlock_file(f: Any) -> None:
+        try:
+            msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+        except OSError:
+            pass
+else:
+    import fcntl
+
+    def _lock_file(f: Any) -> None:
+        fcntl.flock(f.fileno(), fcntl.LOCK_EX)
+
+    def _unlock_file(f: Any) -> None:
+        fcntl.flock(f.fileno(), fcntl.LOCK_UN)
 
 logger = logging.getLogger(__name__)
 
@@ -59,11 +80,11 @@ def atomic_write_json(
         )
         try:
             with os.fdopen(fd, 'w', encoding='utf-8') as f:
-                fcntl.flock(f.fileno(), fcntl.LOCK_EX)
+                _lock_file(f)
                 try:
                     json.dump(data, f, indent=2, ensure_ascii=False)
                 finally:
-                    fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+                    _unlock_file(f)
             os.chmod(temp_path, mode)
             os.replace(temp_path, path)
             return True

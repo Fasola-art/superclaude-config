@@ -30,7 +30,7 @@
     "sentiment": ["COT 리포트", "투기적 포지션", "리스크온/오프"]
   },
   "knowledge_files": [
-    "~/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md"
+    "C:/Users/MSI/.claude/modules/trading/knowledge/4분할_세션전략_지침서.md"
   ],
   "prompt_prefix": "외환(FX) 전문 트레이더입니다. 세션별 유동성 패턴, 런던 픽스, 금리차 분석을 통해 통화쌍 매매 전략을 제시합니다. 4분할 마디가와 다중 EMA를 활용한 타점 분석이 핵심입니다."
 }

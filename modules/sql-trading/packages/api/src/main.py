@@ -12,6 +12,8 @@ Version: 1.0.0
 """
 
 import json
+import platform
+import shutil
 import subprocess
 from datetime import datetime
 from pathlib import Path
@@ -38,8 +40,35 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# psql 경로
-PSQL_PATH = "/opt/homebrew/opt/postgresql@16/bin/psql"
+
+def _find_psql() -> str:
+    """psql 바이너리 경로 탐색 (크로스플랫폼)"""
+    found = shutil.which("psql")
+    if found:
+        return found
+
+    if platform.system() == "Windows":
+        candidates = [
+            r"C:\Program Files\PostgreSQL\16\bin\psql.exe",
+            r"C:\Program Files\PostgreSQL\15\bin\psql.exe",
+            r"C:\Program Files\PostgreSQL\14\bin\psql.exe",
+        ]
+    else:
+        candidates = [
+            "/opt/homebrew/opt/postgresql@16/bin/psql",
+            "/opt/homebrew/bin/psql",
+            "/usr/local/bin/psql",
+            "/usr/bin/psql",
+        ]
+
+    for path in candidates:
+        if Path(path).exists():
+            return path
+    return "psql"  # fallback
+
+
+# psql 경로 (시작 시 1회 탐색)
+PSQL_PATH = _find_psql()
 
 
 def run_query(sql: str) -> List[Dict[str, Any]]:

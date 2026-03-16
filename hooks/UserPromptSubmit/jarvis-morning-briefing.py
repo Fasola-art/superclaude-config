@@ -22,7 +22,7 @@ def is_first_execution_today() -> bool:
     if not MARKER_FILE.exists():
         return True
     try:
-        return MARKER_FILE.read_text().strip() != date.today().isoformat()
+        return MARKER_FILE.read_text(encoding='utf-8').strip() != date.today().isoformat()
     except (PermissionError, OSError):
         return True
 
@@ -30,7 +30,7 @@ def is_first_execution_today() -> bool:
 def update_marker() -> None:
     try:
         MARKER_FILE.parent.mkdir(parents=True, exist_ok=True)
-        MARKER_FILE.write_text(date.today().isoformat())
+        MARKER_FILE.write_text(date.today().isoformat(), encoding='utf-8')
     except OSError:
         pass
 
@@ -40,7 +40,7 @@ def get_token_stats() -> str:
     if not stats_file.exists():
         return "Today 0 tokens"
     try:
-        data = json.loads(stats_file.read_text())
+        data = json.loads(stats_file.read_text(encoding='utf-8'))
         for day in data.get('dailyModelTokens', []):
             if day.get('date') == date.today().isoformat():
                 tokens = sum(day.get('tokensByModel', {}).values())

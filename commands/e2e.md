@@ -1,5 +1,5 @@
 ---
-description: E2E test creation for user workflows
+description: "E2E 테스트 생성 | E2E test creation for user workflows"
 argument-hint: "[flow-description]"
 allowed-tools: ["Read", "Write", "Edit", "Bash", "Glob", "Grep", "TodoWrite", "AskUserQuestion"]
 ---

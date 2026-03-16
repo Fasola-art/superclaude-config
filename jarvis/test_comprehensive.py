@@ -97,19 +97,19 @@ def test_actions_remember_recall():
     try:
         from actions import save_context, get_last_context
 
-        # Save context
+        # Save context (project_path, summary 필수)
         save_context(
-            workspace="/test",
-            file_path="test.py",
-            action="test",
-            description="자동 테스트"
+            project_path="/test",
+            summary="자동 테스트",
+            last_file="test.py",
+            last_action="test"
         )
         print("✓ Context saved")
 
         # Recall
         context = get_last_context()
         if context:
-            print(f"✓ Context recalled: {context['action']}")
+            print(f"✓ Context recalled: {context['last_action']}")
         else:
             print("○ No context found (expected on first run)")
 

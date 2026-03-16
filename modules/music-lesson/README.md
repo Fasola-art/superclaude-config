@@ -7,7 +7,7 @@
 ## Installation
 
 ```bash
-cd ~/.claude/modules/music-lesson
+cd C:\Users\MSI\.claude\modules\music-lesson
 pip install anthropic requests watchdog
 ```
 
@@ -62,8 +62,8 @@ print(result.summary.main_points)  # Main points
   "notion_parent_page_id": null, // Notion parent page (null uses api-keys.json)
   "auto_upload": true,           // Auto Notion upload
   "save_transcript": true,       // Save transcript
-  "transcript_dir": "~/.claude/modules/music-lesson/transcripts",
-  "watch_path": "~/Library/CloudStorage/GoogleDrive-.../CLOVA Note",
+  "transcript_dir": "C:/Users/MSI/.claude/modules/music-lesson/transcripts",
+  "watch_path": "G:/내 드라이브/클로바노트",
   "processed_dir": null,         // Move processed files here (null = don't move)
   "recursive": false             // Include subfolders
 }
@@ -73,7 +73,7 @@ print(result.summary.main_points)  # Main points
 
 ## API Key Setup
 
-Required keys in `~/.claude/credentials/api-keys.json`:
+Required keys in `C:\Users\MSI\.claude\credentials\api-keys.json`:
 
 ```json
 {

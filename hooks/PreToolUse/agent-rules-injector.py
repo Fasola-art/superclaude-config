@@ -23,7 +23,7 @@ def get_module_rules(prompt: str) -> str:
     if any(kw in prompt_lower for kw in trading_keywords):
         rules.append("""
 [TRADING MODULE]
-- 기존 구조: ~/.claude/modules/trading/
+- 기존 구조: C:/Users/MSI/.claude/modules/trading/
   - strategies/: 전략 파일 (base_strategy.py 상속 필수)
   - indicators/: 기술 지표
   - data_sources/: 데이터 소스
@@ -36,7 +36,7 @@ def get_module_rules(prompt: str) -> str:
         rules.append("""
 [SQL-TRADING MODULE]
 - DB: claude_mcp (PostgreSQL)
-- 스키마: ~/.claude/modules/sql-trading/schema.sql
+- 스키마: C:/Users/MSI/.claude/modules/sql-trading/schema.sql
 - 쿼리: queries/ 폴더, 대시보드: dashboard/ 폴더""")
 
     return '\n'.join(rules)
@@ -65,7 +65,7 @@ def main():
 ═══════════════════════════════════════════════════════
 1. 파일 생성 시 50~120줄 범위 유지 (초과 시 분할, 미달 시 병합)
 2. Python: 타입 힌트 필수, docstring 필수
-3. 기존 코드 참조: ~/.claude/modules/
+3. 기존 코드 참조: C:/Users/MSI/.claude/modules/
 4. 응답 언어: 한국어
 5. No stub/placeholder code - 완전한 구현만
 ═══════════════════════════════════════════════════════"""

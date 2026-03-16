@@ -1,5 +1,5 @@
 ---
-description: "Troubleshoot issues"
+description: "문제 해결 | Troubleshoot issues"
 argument-hint: "[issue]"
 ---
 

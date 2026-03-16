@@ -3,6 +3,13 @@
 JARVIS Memory 모듈
 """
 
+import sys
+from pathlib import Path
+
+_jarvis_root = str(Path(__file__).resolve().parent.parent)
+if _jarvis_root not in sys.path:
+    sys.path.insert(0, _jarvis_root)
+
 from .db import get_connection, get_db, init_database, DB_PATH
 from .session import WorkSessionManager
 from .task import TaskManager

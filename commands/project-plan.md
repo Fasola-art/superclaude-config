@@ -1,5 +1,5 @@
 ---
-description: "Create project plan"
+description: "프로젝트 계획 생성 | Create project plan"
 argument-hint: "[project_name or PRD_path]"
 ---
 

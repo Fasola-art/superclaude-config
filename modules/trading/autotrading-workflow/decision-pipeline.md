@@ -57,7 +57,7 @@ final_confidence = (
 ## 에스컬레이션 패턴
 
 ```
-Mac Studio (Qwen 3B/7B)
+RTX 4090 Laptop (Qwen 3B/7B)
     │
     ├── confidence ≥ 0.6 → 시그널 발행
     │

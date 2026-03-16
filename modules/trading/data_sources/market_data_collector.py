@@ -79,7 +79,7 @@ class MarketDataCollector:
     def __init__(self) -> None:
         """수집기 초기화."""
         self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         }
 
         # 심볼 매핑
@@ -441,7 +441,7 @@ class AsyncMarketDataCollector:
     def __init__(self) -> None:
         """비동기 수집기 초기화."""
         self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         }
         self.symbols: dict[str, dict[str, str]] = {
             'VIX': {'name': 'VIX (공포지수)', 'yahoo': '^VIX'},

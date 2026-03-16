@@ -1,5 +1,5 @@
 ---
-description: Economic indicator release calendar
+description: "경제 지표 발표 일정 | Economic indicator release calendar"
 ---
 
 # /calendar Command

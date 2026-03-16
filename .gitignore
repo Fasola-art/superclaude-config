@@ -70,3 +70,5 @@ todos/
 *.sst
 .alert_state.json
 tasks/
+.credentials.json
+nul

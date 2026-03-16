@@ -1,0 +1,12 @@
+{
+  "id": "ce1dcbce3001",
+  "type": "mcp-protocol",
+  "message": "[notion] 응답 읽기 오류: Separator is found, but chunk is longer than limit",
+  "timestamp": "2026-02-01 16:32:52,576",
+  "raw_log": "2026-02-01 16:32:52,576 [ERROR] mcp-protocol: [notion] 응답 읽기 오류: Separator is found, but chunk is longer than limit",
+  "created_at": "2026-02-01T16:35:26.719110",
+  "resolved": true,
+  "resolution": "notion 서버 응답 오버플로우. 서버 설정 제거로 해결.",
+  "context": {},
+  "resolved_at": "2026-02-11T01:15:41.087408"
+}
